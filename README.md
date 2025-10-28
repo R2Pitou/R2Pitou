@@ -8,7 +8,7 @@ https://r2p2.link/hellob 👋++ Graphic designer, AI nerd, Digital Transformatio
 - I hate Google Cloud’s UI. It’s as intuitive as a Yamaha surround sound amp’s remote — a mishmash of rectangles in a random order, and one of them is orange just for fun.
 - Currently learning **JS** properly, wiring up **API automations**, and finding ways to make Google Workspace behave for entire schools without losing my sanity.
 - Interested in collaborations where the tech is lean, the scope is realistic, and the end result isn’t a white elephant.
-- Reach me at [r2p2.at/mobilebio](https://r2p2.at/mobilebio).
+- Reach me: [info+github@atp2.stream](mailto:info+github@atp2.stream).
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
 
