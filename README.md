@@ -12,6 +12,11 @@ https://r2p2.link/hellob 👋++ Graphic designer, AI nerd, Digital Transformatio
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
 
+
+https://github.com/user-attachments/assets/51e948a8-dae7-49c1-b401-95c3e3ed6696
+
+
+
 <!---
 R2Pitou/R2Pitou is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
