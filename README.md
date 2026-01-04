@@ -14,6 +14,9 @@ https://r2p2.link/hellob 👋++ Graphic designer, AI nerd, Digital Transformatio
 
 I got my first ever PR merge in Dec 2025 and it felt like a milestone! I know I wasn't contributing any code (Unless we count hex code), but I managed to follow the steps, and gave a compelling enough reason for it, that made me the proud father of [Alien Conspiracy Pink (#f023bc)!](https://github.com/meodai/color-names/pull/234)
 
+I make noise using AI tools:
+[Bandcamp](https://atp2-music.bandcamp.com/follow_me)
+
 https://github.com/user-attachments/assets/51e948a8-dae7-49c1-b401-95c3e3ed6696
 
 
