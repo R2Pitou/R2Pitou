@@ -3,20 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="R2Pitou's project hub: a compact index of public GitHub repositories and working drafts.">
-    <meta name="theme-color" content="#121318">
-    <title>R2Pitou | Project Hub</title>
+    <meta name="description" content="Working Draft: R2Pitou's cute, noisy little project hub for public GitHub repositories.">
+    <meta name="theme-color" content="#f09abc">
+    <title>Working Draft | R2Pitou</title>
     <link rel="preconnect" href="https://api.github.com">
     <link rel="preconnect" href="https://github.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Bungee&family=Public+Sans:wght@400;650;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="https://github.com/R2Pitou" aria-label="R2Pitou on GitHub">
-        <img src="https://github.com/R2Pitou.png" alt="" width="56" height="56">
+      <a class="brand" href="/" aria-label="Working Draft home">
+        <img src="assets/working-draft-no-flower.png" alt="" width="216" height="99">
         <span>
-          <strong>R2Pitou</strong>
-          <small>Project hub</small>
+          <strong>Working Draft</strong>
+          <small>repo shelf</small>
         </span>
       </a>
       <nav aria-label="Primary">
@@ -26,27 +29,38 @@
     </header>
 
     <main>
-      <section class="intro" aria-labelledby="intro-title">
-        <div>
+      <section class="hero" aria-labelledby="intro-title">
+        <div class="hero-copy">
           <p class="eyebrow">working-draft.org</p>
-          <h1 id="intro-title">A quiet index of public repos, experiments, and useful scraps.</h1>
+          <h1 id="intro-title">Tiny tools, loud drafts, and links with attitude.</h1>
+          <p class="intro-copy">
+            A cute little hub for public repos, almost-finished ideas, useful scraps, and experiments that made it out of the folder.
+          </p>
         </div>
-        <p class="intro-copy">
-          Small tools, design-adjacent experiments, GitHub Pages sites, and whatever survived long enough to be pushed.
-        </p>
+        <div class="hero-art" aria-hidden="true">
+          <img class="hero-logo" src="assets/working-draft-flower.png" alt="">
+          <img class="corner-art" src="assets/working-draft-lo-right-corner.png" alt="">
+        </div>
+      </section>
+
+      <section class="attitude-strip" aria-label="Site mood">
+        <span>pink ink</span>
+        <span>public repos</span>
+        <span>working drafts</span>
+        <span>useful nonsense</span>
       </section>
 
       <section class="toolbar" aria-label="Repository filters">
         <label class="search-box">
-          <span>Search repositories</span>
-          <input id="repo-search" type="search" autocomplete="off" placeholder="Search by name, topic, or description">
+          <span>Find a draft</span>
+          <input id="repo-search" type="search" autocomplete="off" placeholder="Repo name, topic, language...">
         </label>
-        <a class="github-link" href="https://github.com/R2Pitou?tab=repositories">All repos on GitHub</a>
+        <a class="github-link" href="https://github.com/R2Pitou?tab=repositories">Full GitHub shelf</a>
       </section>
 
       <section class="repo-section" aria-labelledby="repo-title">
         <div class="section-heading">
-          <h2 id="repo-title">Repositories</h2>
+          <h2 id="repo-title">Repo Shelf</h2>
           <p id="repo-count">Loading public repositories...</p>
         </div>
         <div id="repo-grid" class="repo-grid" aria-live="polite"></div>
@@ -54,8 +68,8 @@
     </main>
 
     <footer>
-      <span>Hosted on GitHub Pages.</span>
-      <span>Profile README stays in this same repository.</span>
+      <span>Working Draft, with questionable polish.</span>
+      <span>Profile README still lives next door.</span>
     </footer>
 
     <script src="site.js" defer></script>

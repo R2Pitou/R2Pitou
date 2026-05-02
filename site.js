@@ -102,7 +102,7 @@ function renderRepos(term = "") {
             <div class="repo-topics" aria-label="Repository topics">${topicMarkup}</div>
             <div class="repo-actions">
               <span class="repo-meta">${escapeHtml(language)} · Updated ${formatDate(repo.pushed_at)}</span>
-              <a class="repo-link" href="${repo.html_url}">Open</a>
+              <a class="repo-link" href="${repo.html_url}">Peek</a>
             </div>
           </div>
         </article>
