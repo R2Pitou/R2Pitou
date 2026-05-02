@@ -193,12 +193,12 @@ p {
 }
 
 h1 {
-  max-width: 680px;
+  max-width: 600px;
   margin-bottom: 20px;
   color: var(--white);
   font-family: "Bungee", "Arial Black", sans-serif;
-  font-size: 4.9rem;
-  line-height: 0.96;
+  font-size: clamp(2.25rem, 4.5vw, 3.4rem);
+  line-height: 1.05;
   text-wrap: balance;
 }
 
@@ -475,7 +475,7 @@ footer {
 
 @media (max-width: 1000px) {
   h1 {
-    font-size: 3.7rem;
+    font-size: 2.7rem;
   }
 
   .hero {
@@ -545,7 +545,7 @@ footer {
   }
 
   h1 {
-    font-size: 2.55rem;
+    font-size: 2.1rem;
   }
 
   .intro-copy {
@@ -567,7 +567,7 @@ footer {
 
 @media (max-width: 460px) {
   h1 {
-    font-size: 2.05rem;
+    font-size: 1.75rem;
   }
 
   .focus-strip {
