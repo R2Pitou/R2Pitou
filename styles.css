@@ -1,17 +1,15 @@
 :root {
-  color-scheme: light;
-  --paper: #fff6fb;
-  --paper-strong: #ffffff;
-  --ink: #0d0b0d;
-  --ink-soft: #4f454d;
+  color-scheme: dark;
+  --black: #050505;
+  --panel: #111111;
+  --panel-strong: #181818;
+  --white: #f8f8f8;
+  --muted: #d6c8cf;
   --pink: #ec99b9;
-  --pink-hot: #f05aa8;
-  --mint: #84ead1;
-  --butter: #ffe56d;
-  --blue: #79b9ff;
-  --line: #171015;
-  --shadow: 8px 8px 0 #171015;
-  --soft-shadow: 0 18px 44px rgba(23, 16, 21, 0.16);
+  --pink-hot: #ff4fa8;
+  --pink-dark: #5b1d3b;
+  --line: #ec99b9;
+  --shadow: 8px 8px 0 #ec99b9;
 }
 
 * {
@@ -26,11 +24,13 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, rgba(23, 16, 21, 0.05) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(23, 16, 21, 0.05) 1px, transparent 1px),
-    var(--paper);
-  background-size: 34px 34px;
-  color: var(--ink);
+    radial-gradient(circle at 18% 8%, rgba(236, 153, 185, 0.24), transparent 28rem),
+    radial-gradient(circle at 88% 22%, rgba(255, 79, 168, 0.16), transparent 25rem),
+    linear-gradient(90deg, rgba(236, 153, 185, 0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(236, 153, 185, 0.07) 1px, transparent 1px),
+    var(--black);
+  background-size: auto, auto, 34px 34px, 34px 34px, auto;
+  color: var(--white);
   font-family: "Public Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
 }
@@ -41,13 +41,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      -8deg,
-      transparent 0 18px,
-      rgba(236, 153, 185, 0.18) 18px 24px,
-      transparent 24px 48px
-    );
+  background: linear-gradient(135deg, transparent 0 62%, rgba(236, 153, 185, 0.2) 62% 66%, transparent 66%);
 }
 
 a {
@@ -72,8 +66,9 @@ footer {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   min-width: 0;
+  color: var(--white);
   text-decoration: none;
 }
 
@@ -81,12 +76,12 @@ footer {
   width: 168px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(3px 3px 0 rgba(13, 11, 13, 0.55));
+  filter: drop-shadow(4px 4px 0 rgba(236, 153, 185, 0.72));
 }
 
 .brand span {
   display: grid;
-  gap: 0;
+  gap: 1px;
   min-width: 0;
 }
 
@@ -94,7 +89,6 @@ footer {
 h1,
 h2,
 .repo-card h3,
-.repo-badge,
 .github-link,
 nav a,
 .repo-link {
@@ -108,7 +102,7 @@ nav a,
 }
 
 .brand small {
-  color: var(--ink-soft);
+  color: var(--pink);
   font-family: "Atma", cursive;
   font-size: 1.05rem;
   font-weight: 700;
@@ -125,25 +119,24 @@ nav {
 nav a,
 .github-link,
 .repo-link {
-  border: 2px solid var(--line);
+  border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 10px 13px;
-  background: var(--paper-strong);
-  box-shadow: 4px 4px 0 var(--line);
+  background: var(--black);
+  box-shadow: 4px 4px 0 var(--pink);
+  color: var(--white);
   text-decoration: none;
   font-weight: 800;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-}
-
-nav a:nth-child(2) {
-  background: var(--butter);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease;
 }
 
 nav a:hover,
 .github-link:hover,
 .repo-link:hover {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--line);
+  box-shadow: 2px 2px 0 var(--pink);
+  background: var(--pink);
+  color: var(--black);
 }
 
 main {
@@ -157,13 +150,13 @@ main {
   gap: 28px;
   align-items: center;
   min-height: 560px;
-  border: 3px solid var(--line);
+  border: 3px solid var(--pink);
   border-radius: 8px;
   padding: 38px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(255, 229, 109, 0.5) 0 24%, transparent 24% 100%),
-    var(--pink);
+    linear-gradient(135deg, rgba(236, 153, 185, 0.2) 0 23%, transparent 23% 100%),
+    linear-gradient(180deg, var(--panel-strong), var(--black));
   box-shadow: var(--shadow);
 }
 
@@ -173,10 +166,11 @@ main {
   right: 28px;
   top: 20px;
   transform: rotate(7deg);
-  border: 3px solid var(--line);
+  border: 3px solid var(--pink);
   border-radius: 8px;
   padding: 5px 14px;
-  background: var(--mint);
+  background: var(--pink);
+  color: var(--black);
   font-family: "Atma", cursive;
   font-size: 2rem;
   font-weight: 700;
@@ -191,11 +185,12 @@ main {
 .eyebrow {
   display: inline-flex;
   margin: 0 0 14px;
-  border: 2px solid var(--line);
+  border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 7px 10px;
-  background: var(--paper-strong);
-  box-shadow: 4px 4px 0 var(--line);
+  background: var(--black);
+  box-shadow: 4px 4px 0 var(--pink);
+  color: var(--pink);
   font-family: "Atma", cursive;
   font-size: 1.08rem;
   font-weight: 700;
@@ -210,19 +205,21 @@ p {
 h1 {
   max-width: 680px;
   margin-bottom: 20px;
+  color: var(--white);
   font-family: "Bungee", "Arial Black", sans-serif;
   font-size: 4.9rem;
   line-height: 0.96;
   text-wrap: balance;
+  text-shadow: 4px 4px 0 var(--pink-dark);
 }
 
 .intro-copy {
   max-width: 520px;
   margin-bottom: 0;
-  border-left: 8px solid var(--line);
+  border-left: 8px solid var(--pink);
   padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.8);
-  color: var(--ink);
+  background: rgba(0, 0, 0, 0.66);
+  color: var(--muted);
   font-size: 1.12rem;
   font-weight: 650;
 }
@@ -239,7 +236,7 @@ h1 {
   width: min(100%, 720px);
   height: auto;
   transform: rotate(-2deg);
-  filter: drop-shadow(10px 10px 0 rgba(13, 11, 13, 0.56));
+  filter: drop-shadow(10px 10px 0 rgba(236, 153, 185, 0.5));
 }
 
 .corner-art {
@@ -248,8 +245,9 @@ h1 {
   bottom: -100px;
   width: min(58%, 360px);
   height: auto;
-  opacity: 0.94;
+  opacity: 0.95;
   transform: rotate(1deg);
+  filter: drop-shadow(6px 6px 0 rgba(0, 0, 0, 0.82));
 }
 
 .attitude-strip {
@@ -261,27 +259,21 @@ h1 {
 
 .attitude-strip span {
   min-height: 54px;
-  border: 2px solid var(--line);
+  border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 12px 10px;
-  background: var(--paper-strong);
-  box-shadow: 5px 5px 0 var(--line);
+  background: var(--black);
+  box-shadow: 5px 5px 0 var(--pink);
+  color: var(--white);
   font-family: "Atma", cursive;
   font-size: 1.22rem;
   font-weight: 700;
   text-align: center;
 }
 
-.attitude-strip span:nth-child(2) {
-  background: var(--mint);
-}
-
-.attitude-strip span:nth-child(3) {
-  background: var(--butter);
-}
-
-.attitude-strip span:nth-child(4) {
-  background: var(--blue);
+.attitude-strip span:nth-child(even) {
+  background: var(--pink);
+  color: var(--black);
 }
 
 .toolbar {
@@ -303,10 +295,11 @@ h1 {
 .repo-description,
 .repo-topics,
 footer {
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .search-box span {
+  color: var(--pink);
   font-family: "Atma", cursive;
   font-size: 1.15rem;
   font-weight: 700;
@@ -315,19 +308,23 @@ footer {
 input {
   width: 100%;
   min-height: 50px;
-  border: 2px solid var(--line);
+  border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 12px 14px;
-  background: var(--paper-strong);
-  color: var(--ink);
+  background: var(--black);
+  color: var(--white);
   font: inherit;
   font-weight: 650;
   outline: none;
-  box-shadow: 5px 5px 0 var(--line);
+  box-shadow: 5px 5px 0 var(--pink);
+}
+
+input::placeholder {
+  color: rgba(248, 248, 248, 0.58);
 }
 
 input:focus {
-  background: #ffffff;
+  background: #160b11;
   box-shadow: 5px 5px 0 var(--pink-hot);
 }
 
@@ -345,6 +342,7 @@ input:focus {
 
 h2 {
   margin-bottom: 0;
+  color: var(--white);
   font-family: "Bungee", "Arial Black", sans-serif;
   font-size: 2rem;
 }
@@ -366,27 +364,15 @@ h2 {
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 236px;
-  border: 2px solid var(--line);
+  border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 18px;
-  background: var(--paper-strong);
+  background: linear-gradient(180deg, var(--panel-strong), var(--panel));
   box-shadow: var(--shadow);
 }
 
-.repo-card:nth-child(4n + 2) {
-  background: #fffdf0;
-}
-
-.repo-card:nth-child(4n + 3) {
-  background: #f2fffb;
-}
-
-.repo-card:nth-child(4n + 4) {
-  background: #f4f9ff;
-}
-
 .repo-card.featured {
-  background: #ffe0ee;
+  background: linear-gradient(180deg, #25111c, var(--panel));
 }
 
 .repo-card.featured::before {
@@ -396,8 +382,8 @@ h2 {
   top: -10px;
   width: 72px;
   height: 20px;
-  border: 2px solid var(--line);
-  background: var(--butter);
+  border: 2px solid var(--pink);
+  background: var(--pink);
   transform: rotate(4deg);
 }
 
@@ -411,6 +397,7 @@ h2 {
 .repo-card h3 {
   margin: 0;
   overflow-wrap: anywhere;
+  color: var(--white);
   font-family: "Bungee", "Arial Black", sans-serif;
   font-size: 1.02rem;
   line-height: 1.25;
@@ -418,11 +405,11 @@ h2 {
 
 .repo-badge {
   flex: 0 0 auto;
-  border: 2px solid var(--line);
+  border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 4px 8px;
-  background: var(--mint);
-  color: var(--ink);
+  background: var(--pink);
+  color: var(--black);
   font-family: "Atma", cursive;
   font-size: 0.9rem;
   font-weight: 700;
@@ -448,10 +435,11 @@ h2 {
 }
 
 .repo-topics span {
-  border: 1px solid var(--line);
+  border: 1px solid var(--pink);
   border-radius: 999px;
   padding: 3px 8px;
-  background: #ffffff;
+  background: var(--black);
+  color: var(--pink);
 }
 
 .repo-actions {
@@ -472,15 +460,21 @@ h2 {
   justify-content: center;
   min-height: 40px;
   background: var(--pink);
+  color: var(--black);
+}
+
+.repo-link:hover {
+  background: var(--black);
+  color: var(--white);
 }
 
 .empty {
   grid-column: 1 / -1;
-  border: 2px dashed var(--line);
+  border: 2px dashed var(--pink);
   border-radius: 8px;
   padding: 28px;
-  background: rgba(255, 255, 255, 0.76);
-  color: var(--ink-soft);
+  background: rgba(0, 0, 0, 0.76);
+  color: var(--muted);
   text-align: center;
   font-weight: 800;
 }
@@ -490,7 +484,7 @@ footer {
   justify-content: space-between;
   gap: 16px;
   padding: 28px 0 38px;
-  border-top: 2px solid var(--line);
+  border-top: 2px solid var(--pink);
   font-size: 0.9rem;
   font-weight: 800;
 }
@@ -558,7 +552,7 @@ footer {
 
   .hero {
     padding: 22px;
-    box-shadow: 5px 5px 0 var(--line);
+    box-shadow: 5px 5px 0 var(--pink);
   }
 
   .hero::after {
