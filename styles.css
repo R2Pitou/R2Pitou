@@ -20,8 +20,10 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   min-height: 100vh;
+  padding-bottom: clamp(110px, 18vw, 190px);
   overflow-x: hidden;
   background:
     linear-gradient(90deg, rgba(236, 153, 185, 0.07) 1px, transparent 1px),
@@ -454,19 +456,18 @@ footer {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 28px 0 clamp(150px, 23vw, 250px);
+  padding: 28px 0 24px;
   border-top: 2px solid var(--pink);
   font-size: 0.9rem;
   font-weight: 800;
 }
 
 .page-signoff {
-  position: fixed;
+  position: absolute;
   right: 0;
   bottom: 0;
-  z-index: 5;
-  width: min(42vw, 520px);
-  max-width: 86vw;
+  width: clamp(150px, 28vw, 300px);
+  max-width: 72vw;
   height: auto;
   pointer-events: none;
 }
