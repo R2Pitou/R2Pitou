@@ -464,7 +464,7 @@ footer {
 
 .page-signoff {
   position: absolute;
-  right: 0;
+  right: -20px;
   bottom: 0;
   width: clamp(150px, 28vw, 300px);
   max-width: 72vw;
