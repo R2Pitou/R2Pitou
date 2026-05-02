@@ -4,6 +4,7 @@ const fallbackRepos = [
   {
     name: "working-draft",
     html_url: "https://github.com/R2Pitou/working-draft",
+    page_url: "https://r2pitou.github.io/working-draft/",
     description: "Public working drafts and deploy experiments.",
     language: "HTML",
     stargazers_count: 0,
@@ -14,6 +15,7 @@ const fallbackRepos = [
   {
     name: "chatgpt-bingo",
     html_url: "https://github.com/R2Pitou/chatgpt-bingo",
+    page_url: "https://r2pitou.github.io/chatgpt-bingo/",
     description: "A small browser game built around familiar AI chat habits.",
     language: "JavaScript",
     stargazers_count: 0,
@@ -24,6 +26,7 @@ const fallbackRepos = [
   {
     name: "cv",
     html_url: "https://github.com/R2Pitou/cv",
+    page_url: "https://r2pitou.github.io/cv/",
     description: "CV and profile site materials.",
     language: "HTML",
     stargazers_count: 0,
@@ -34,6 +37,7 @@ const fallbackRepos = [
   {
     name: "R2Pitou",
     html_url: "https://github.com/R2Pitou/R2Pitou",
+    page_url: "https://working-draft.org/",
     description: "Profile README and this project hub.",
     language: "Markdown",
     stargazers_count: 0,
@@ -72,6 +76,14 @@ function repoMatches(repo, term) {
   return haystack.includes(term.toLowerCase());
 }
 
+function pageUrlFor(repo) {
+  if (repo.page_url) return repo.page_url;
+  if (repo.name === USER) return "https://working-draft.org/";
+  if (repo.homepage) return repo.homepage;
+  if (repo.has_pages) return `https://${USER.toLowerCase()}.github.io/${repo.name}/`;
+  return "";
+}
+
 function renderRepos(term = "") {
   const visible = repos.filter((repo) => repoMatches(repo, term));
   count.textContent = `${visible.length} ${visible.length === 1 ? "repo" : "repos"} shown`;
@@ -87,6 +99,10 @@ function renderRepos(term = "") {
       const description = repo.description || "No description yet.";
       const language = repo.language || "Mixed";
       const featured = featuredRepos.has(repo.name);
+      const pageUrl = pageUrlFor(repo);
+      const pageLink = pageUrl
+        ? `<a class="repo-link repo-link-secondary" href="${escapeHtml(pageUrl)}">View page</a>`
+        : "";
       const topicMarkup = topics.length
         ? topics.map((topic) => `<span>${escapeHtml(topic)}</span>`).join("")
         : `<span>${escapeHtml(language)}</span>`;
@@ -101,8 +117,11 @@ function renderRepos(term = "") {
           <div class="repo-footer">
             <div class="repo-topics" aria-label="Repository topics">${topicMarkup}</div>
             <div class="repo-actions">
-              <span class="repo-meta">${escapeHtml(language)} · Updated ${formatDate(repo.pushed_at)}</span>
-              <a class="repo-link" href="${repo.html_url}">Open</a>
+              <span class="repo-meta">${escapeHtml(language)} &middot; Updated ${formatDate(repo.pushed_at)}</span>
+              <span class="repo-links">
+                <a class="repo-link" href="${escapeHtml(repo.html_url)}">View repo</a>
+                ${pageLink}
+              </span>
             </div>
           </div>
         </article>

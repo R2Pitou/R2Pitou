@@ -423,6 +423,13 @@ h2 {
   gap: 12px;
 }
 
+.repo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .repo-meta {
   font-size: 0.82rem;
   font-weight: 650;
@@ -440,6 +447,16 @@ h2 {
 .repo-link:hover {
   background: var(--black);
   color: var(--white);
+}
+
+.repo-link-secondary {
+  background: var(--black);
+  color: var(--white);
+}
+
+.repo-link-secondary:hover {
+  background: var(--pink);
+  color: var(--black);
 }
 
 .empty {
@@ -577,5 +594,13 @@ footer {
   .repo-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .repo-links {
+    justify-content: stretch;
+  }
+
+  .repo-link {
+    flex: 1 1 auto;
   }
 }
