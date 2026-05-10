@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Arttu Pitou At | អាតពិទូ</title>
+    <meta
+      name="description"
+      content="Google Workspace Administrator, Cybersecurity & IT Systems Lead, and school systems governance consultant based in Phnom Penh, Cambodia."
+    />
+    <link rel="alternate" href="arttu-pitou-at.vcf" type="text/vcard" title="Arttu Pitou At vCard" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("arttu-theme");
+        if (savedTheme === "light") {
+          document.documentElement.dataset.theme = "light";
+        }
+      } catch (error) {
+        document.documentElement.removeAttribute("data-theme");
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: dark light;
+        --ink: #f5f1e8;
+        --muted: #b8b0a5;
+        --paper: #0d0d0d;
+        --panel: #151515;
+        --line: #38342f;
+        --accent: #f5f1e8;
+        --accent-strong: #ffffff;
+        --soft: #1d1d1a;
+        --shadow: rgba(0, 0, 0, 0.34);
+        --button-bg: #f5f1e8;
+        --button-ink: #111111;
+      }
+
+      html[data-theme="light"] {
+        color-scheme: light;
+        --ink: #111111;
+        --muted: #5f5f5a;
+        --paper: #f4f4f0;
+        --panel: #ffffff;
+        --line: #d8d8d2;
+        --accent: #111111;
+        --accent-strong: #111111;
+        --soft: #ecece6;
+        --shadow: rgba(0, 0, 0, 0.08);
+        --button-bg: #111111;
+        --button-ink: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 32px));
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 32px 0 40px;
+        display: grid;
+        align-items: center;
+      }
+
+      .page {
+        display: grid;
+        grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+        gap: clamp(28px, 5vw, 72px);
+        align-items: center;
+      }
+
+      .identity-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 18px 54px var(--shadow);
+      }
+
+      .identity-card::before {
+        content: "";
+        display: block;
+        height: 8px;
+        background: var(--ink);
+      }
+
+      .profile-photo {
+        display: block;
+        width: min(76%, 300px);
+        height: auto;
+        margin: 24px auto 2px;
+        border-radius: 50%;
+        background: transparent;
+      }
+
+      .card-body {
+        padding: 22px clamp(22px, 5vw, 34px) 32px;
+      }
+
+      .name {
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 3.35rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .khmer-name {
+        display: block;
+        margin-top: 0.5rem;
+        color: var(--ink);
+        font-size: clamp(1.55rem, 5vw, 2.45rem);
+        font-weight: 650;
+      }
+
+      .roles {
+        margin: 28px 0 0;
+        display: grid;
+        gap: 8px;
+        color: var(--ink);
+        font-size: 1.02rem;
+        font-weight: 700;
+      }
+
+      .location {
+        margin: 22px 0 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .link-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      .link-grid a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px 12px;
+        background: var(--paper);
+        color: var(--ink);
+        font-size: 0.92rem;
+        font-weight: 720;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .link-grid a:focus,
+      .link-grid a:hover {
+        border-color: var(--ink);
+        color: var(--ink);
+        outline: none;
+      }
+
+      .link-grid a:first-child {
+        grid-column: 1 / -1;
+        background: var(--button-bg);
+        border-color: var(--button-bg);
+        color: var(--button-ink);
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 2;
+        min-width: 72px;
+        min-height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        color: var(--ink);
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .theme-toggle:focus,
+      .theme-toggle:hover {
+        border-color: var(--ink);
+        outline: none;
+      }
+
+      .content {
+        max-width: 690px;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--ink);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .headline {
+        margin: 0;
+        max-width: 12ch;
+        font-size: clamp(2.65rem, 7vw, 6.4rem);
+        line-height: 0.92;
+        letter-spacing: 0;
+      }
+
+      .summary {
+        margin: clamp(22px, 4vw, 34px) 0 0;
+        max-width: 640px;
+        color: #2e2a26;
+        font-size: clamp(1.09rem, 2vw, 1.32rem);
+      }
+
+      .profile {
+        margin: 22px 0 0;
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .section-title {
+        margin: 34px 0 14px;
+        color: var(--ink);
+        font-size: 0.82rem;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .fit-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .fit-list li {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px 11px;
+        background: rgba(255, 255, 255, 0.68);
+        color: #302c28;
+        font-size: 0.94rem;
+        font-weight: 650;
+      }
+
+      .availability {
+        margin: 30px 0 0;
+        border-left: 4px solid var(--ink);
+        padding: 12px 0 12px 18px;
+        color: #3c352f;
+        font-size: 1rem;
+        font-weight: 650;
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .contact a {
+        color: var(--ink);
+        font-weight: 720;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+      }
+
+      @media (max-width: 820px) {
+        .shell {
+          align-items: start;
+          padding-top: 18px;
+        }
+
+        .page {
+          grid-template-columns: 1fr;
+        }
+
+        .identity-card {
+          order: -1;
+        }
+
+        .headline {
+          max-width: 10ch;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .shell {
+          width: min(100% - 22px, 1120px);
+          padding-top: 72px;
+        }
+
+        .card-body {
+          padding-inline: 18px;
+        }
+
+        .link-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .link-grid a:first-child {
+          grid-column: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="theme-toggle" type="button" aria-pressed="true">Light</button>
+    <main class="shell">
+      <div class="page">
+        <section class="identity-card" aria-label="Arttu Pitou At profile card">
+          <img class="profile-photo" src="arttu-circle-transparent.png" alt="Arttu Pitou At" />
+          <div class="card-body">
+            <h1 class="name">
+              Arttu Pitou At
+              <span class="khmer-name">អាតពិទូ</span>
+            </h1>
+            <div class="roles" aria-label="Primary roles">
+              <span>Google Workspace Administrator</span>
+              <span>Cybersecurity &amp; IT Systems Lead</span>
+            </div>
+            <p class="location">Phnom Penh, Cambodia</p>
+            <nav class="link-grid" aria-label="Profile links">
+              <a href="arttu-pitou-at.vcf" type="text/vcard" download="Arttu-Pitou-At.vcf">Add contact</a>
+              <a href="https://r2pitou.github.io/cv/">CV/background</a>
+              <a href="https://www.linkedin.com/in/atp2kh/">LinkedIn</a>
+              <a href="https://drive.google.com/drive/folders/1XhvHyb2zgHdI7LC5qxP2kC1C53-e3_PI">Security Works</a>
+              <a href="https://t.me/atpitou">Telegram</a>
+            </nav>
+          </div>
+        </section>
+
+        <section class="content" aria-label="Professional positioning">
+          <p class="eyebrow">School Systems Governance | Infrastructure | AI Implementation</p>
+          <h2 class="headline">What I do</h2>
+          <p class="summary">
+            I turn messy school and organizational technology environments into documented, governed,
+            safer systems that leadership can understand and staff can actually use.
+          </p>
+          <p class="profile">
+            I help schools and organizations make their digital systems safer, clearer, and easier to
+            operate. My work sits across Google Workspace administration, identity and access
+            governance, cybersecurity response, infrastructure documentation, AI/digital literacy
+            implementation, and leadership-readable systems improvement.
+          </p>
+
+          <h3 class="section-title">Best Fit</h3>
+          <ul class="fit-list">
+            <li>School systems governance</li>
+            <li>Google Workspace administration</li>
+            <li>ICT infrastructure and documentation</li>
+            <li>Cybersecurity hardening and incident response</li>
+            <li>AI literacy and responsible implementation</li>
+            <li>Digital operations and technical leadership</li>
+          </ul>
+
+          <p class="availability">
+            Available for technical leadership, school systems governance, Google Workspace
+            administration, cybersecurity review, and responsible AI implementation work.
+          </p>
+          <p class="contact">
+            <span>Phnom Penh, Cambodia</span>
+            <a href="mailto:arttu@working-draft.org">arttu@working-draft.org</a>
+            <a href="https://t.me/atpitou">t.me/atpitou</a>
+            <a href="arttu-pitou-at.vcf" type="text/vcard" download="Arttu-Pitou-At.vcf">Add contact</a>
+          </p>
+        </section>
+      </div>
+    </main>
+    <script>
+      const toggle = document.querySelector(".theme-toggle");
+      const setTheme = (theme) => {
+        const isLight = theme === "light";
+        if (isLight) {
+          document.documentElement.dataset.theme = "light";
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+        try {
+          localStorage.setItem("arttu-theme", isLight ? "light" : "dark");
+        } catch (error) {
+          document.documentElement.dataset.storage = "unavailable";
+        }
+        toggle.textContent = isLight ? "Dark" : "Light";
+        toggle.setAttribute("aria-pressed", String(!isLight));
+      };
+
+      setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+      toggle.addEventListener("click", () => {
+        setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
+      });
+    </script>
+  </body>
+</html>

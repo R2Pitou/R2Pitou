@@ -1,0 +1,21 @@
+BEGIN:VCARD
+VERSION:3.0
+N:At;Arttu;Pitou;;
+FN:Arttu Pitou At
+NICKNAME:អាតពិទូ
+TITLE:Google Workspace Administrator | Cybersecurity & IT Systems Lead
+ORG:Working Draft
+EMAIL;TYPE=INTERNET,WORK:arttu@working-draft.org
+ADR;TYPE=WORK:;;Phnom Penh;;;Cambodia
+URL;TYPE=WORK:https://working-draft.org/arttu/
+item1.URL:https://r2pitou.github.io/cv/
+item1.X-ABLabel:CV/background
+item2.URL:https://www.linkedin.com/in/atp2kh/
+item2.X-ABLabel:LinkedIn
+item3.URL:https://drive.google.com/drive/folders/1XhvHyb2zgHdI7LC5qxP2kC1C53-e3_PI
+item3.X-ABLabel:Security Works
+item4.URL:https://t.me/atpitou
+item4.X-ABLabel:Telegram
+PHOTO;VALUE=URI:https://working-draft.org/arttu/arttu-circle-transparent.png
+NOTE:Available for technical leadership, school systems governance, Google Workspace administration, cybersecurity review, and responsible AI implementation work.
+END:VCARD
