@@ -26,41 +26,38 @@ description: A public notebook, portfolio, and publishing hub for work that is s
 </section>
 
 <section id="articles" class="section posts-section articles-section" aria-labelledby="articles-title">
-  <span id="posts" class="anchor-compat" aria-hidden="true"></span>
-
   <div class="section-heading">
     <h2 id="articles-title">Articles</h2>
     <p>Canonical articles published first on Working-Draft.org.</p>
   </div>
 
-  {% assign markdown_articles = site.pages | where_exp: "page", "page.path contains 'articles/' and page.name == 'index.md'" %}
-  {% assign html_articles = site.pages | where_exp: "page", "page.path contains 'articles/' and page.name == 'index.html'" %}
-  {% assign all_articles = markdown_articles | concat: html_articles | sort: "date" | reverse %}
-  {% assign featured_articles = all_articles | where: "featured", true %}
-  {% assign featured_urls = featured_articles | map: "url" %}
+  {% assign article_pages = site.pages | where_exp: "page", "page.path contains 'articles/'" | sort: "date" | reverse %}
 
-  {% if featured_articles.size > 0 %}
-    <div class="post-grid featured-articles">
-      {% for article in featured_articles limit: 3 %}
-        {% include post-card.html post=article %}
-      {% endfor %}
-    </div>
-  {% endif %}
+  <div class="post-grid featured-articles">
+    {% assign featured_count = 0 %}
+    {% for article in article_pages %}
+      {% if article.featured == true and featured_count < 3 %}
+        {% if article.name == "index.md" or article.name == "index.html" %}
+          {% include article-card.html article=article %}
+          {% assign featured_count = featured_count | plus: 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
 
-  {% assign regular_count = 0 %}
+  <div class="post-grid">
+    {% assign regular_count = 0 %}
+    {% for article in article_pages %}
+      {% if article.featured != true and regular_count < 6 %}
+        {% if article.name == "index.md" or article.name == "index.html" %}
+          {% include article-card.html article=article %}
+          {% assign regular_count = regular_count | plus: 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
 
-  {% if all_articles.size > 0 %}
-    <div class="post-grid">
-      {% for article in all_articles %}
-        {% unless featured_urls contains article.url %}
-          {% if regular_count < 6 %}
-            {% include post-card.html post=article %}
-            {% assign regular_count = regular_count | plus: 1 %}
-          {% endif %}
-        {% endunless %}
-      {% endfor %}
-    </div>
-  {% else %}
+  {% if article_pages.size == 0 %}
     <p>No articles published yet.</p>
   {% endif %}
 </section>
