@@ -13,7 +13,7 @@ tags:
 image: hero.png
 image_alt: It's a bloody image.
 ---
-# This is a fcking title
+# This is a fucking title
 
 ![Alt text for screen readers](hero.png)
 Working Draft is set up as a GitHub-native POSSE site: publish on the owned domain first, then syndicate outward.
