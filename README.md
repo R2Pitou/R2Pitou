@@ -1,6 +1,6 @@
 # 👋 Hi, I’m @R2Pitou
 
-https://r2p2.link/hellob 👋++ Graphic designer, AI nerd, Digital Transformation Supervisor, charity thespian, artist, and antijovial introvert.
+https://working-draft.org Graphic designer, AI nerd, Digital Transformation Supervisor, charity thespian, artist, and antijovial introvert.
 
 -   Digital Transformation Supervisor, serial tinkerer, part-time chaos wrangler.
 -   I mess with **JavaScript**, **Python**, Firebase, **serverless/headless/stateless** cloud deployments, and AI/ML projects that actually get used.
