@@ -694,3 +694,67 @@ h2 {
     max-width: 100%;
   }
 }
+/* SLEDGEHAMMER: article hero image must fit inside the hero box */
+.article-page .hero {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 420px);
+  align-items: center;
+  min-height: 0;
+}
+
+.article-page .hero-art,
+.article-page .article-hero-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.article-page .hero-art figure,
+.article-page .article-hero-art figure {
+  margin: 0;
+  width: 100%;
+  max-width: 420px;
+  max-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article-page .hero-art img,
+.article-page .article-hero-art img,
+.article-page .article-hero-image {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 420px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border-radius: 18px;
+}
+
+@media (max-width: 1000px) {
+  .article-page .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .article-page .hero-art,
+  .article-page .article-hero-art {
+    justify-content: flex-start;
+  }
+
+  .article-page .hero-art figure,
+  .article-page .article-hero-art figure {
+    max-width: 520px;
+    max-height: none;
+  }
+
+  .article-page .hero-art img,
+  .article-page .article-hero-art img,
+  .article-page .article-hero-image {
+    max-width: 100% !important;
+    max-height: none !important;
+  }
+}
