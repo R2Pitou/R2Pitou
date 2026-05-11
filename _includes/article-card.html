@@ -1,4 +1,30 @@
+{% assign article_image_src = nil %}
+
+{% if include.article.image %}
+  {% assign card_image = include.article.image %}
+
+  {% if card_image contains '://' %}
+    {% assign article_image_src = card_image %}
+  {% elsif card_image contains '/' %}
+    {% assign article_image_src = card_image | relative_url %}
+  {% else %}
+    {% assign article_source_image_path = include.article.path | replace: include.article.name, card_image %}
+    {% assign article_image_src = '/' | append: article_source_image_path | relative_url %}
+  {% endif %}
+{% endif %}
+
 <article class="post-card article-card{% if include.article.featured %} featured{% endif %}">
+  {% if article_image_src %}
+    <a class="article-card-image-link" href="{{ include.article.url | relative_url }}" aria-label="Read {{ include.article.title | default: 'article' | escape }}">
+      <img
+        class="article-card-image"
+        src="{{ article_image_src }}"
+        alt="{{ include.article.image_alt | default: include.article.title | escape }}"
+        loading="lazy"
+      >
+    </a>
+  {% endif %}
+
   <header>
     {% if include.article.date %}
       <p class="post-card-date article-card-date">
