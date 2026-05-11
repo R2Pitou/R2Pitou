@@ -216,6 +216,44 @@
         color: var(--button-ink);
       }
 
+      .link-grid a:nth-child(2) {
+        grid-column: 1 / -1;
+      }
+
+      .contact-priority {
+        margin: 24px 0 0;
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        padding: 16px;
+        background: var(--chip-bg);
+      }
+
+      .contact-priority p {
+        margin: 0 0 12px;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .telegram-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        padding: 10px 14px;
+        background: var(--button-bg);
+        color: var(--button-ink);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .telegram-link:focus,
+      .telegram-link:hover {
+        outline: none;
+        filter: brightness(1.06);
+      }
+
       .theme-toggle {
         position: fixed;
         top: 18px;
@@ -389,11 +427,11 @@
             </div>
             <p class="location">Phnom Penh, Cambodia</p>
             <nav class="link-grid" aria-label="Profile links">
+              <a href="https://t.me/AtPitou">Message on Telegram</a>
               <a href="arttu-pitou-at.vcf" type="text/vcard" download="Arttu-Pitou-At.vcf">Add contact</a>
               <a href="https://r2pitou.github.io/cv/">CV/background</a>
               <a href="https://www.linkedin.com/in/atp2kh/">LinkedIn</a>
               <a href="https://drive.google.com/drive/folders/1XhvHyb2zgHdI7LC5qxP2kC1C53-e3_PI">Security Works</a>
-              <a href="https://t.me/atpitou">Telegram</a>
             </nav>
           </div>
         </section>
@@ -411,6 +449,10 @@
             governance, cybersecurity response, infrastructure documentation, AI/digital literacy
             implementation, and leadership-readable systems improvement.
           </p>
+          <div class="contact-priority">
+            <p>Preferred contact method in Cambodia: Telegram.</p>
+            <a class="telegram-link" href="https://t.me/AtPitou">t.me/AtPitou</a>
+          </div>
 
           <h3 class="section-title">Best Fit</h3>
           <ul class="fit-list">
@@ -429,7 +471,7 @@
           <p class="contact">
             <span>Phnom Penh, Cambodia</span>
             <a href="mailto:arttu@working-draft.org">arttu@working-draft.org</a>
-            <a href="https://t.me/atpitou">t.me/atpitou</a>
+            <a href="https://t.me/AtPitou">t.me/AtPitou</a>
             <a href="arttu-pitou-at.vcf" type="text/vcard" download="Arttu-Pitou-At.vcf">Add contact</a>
           </p>
         </section>
