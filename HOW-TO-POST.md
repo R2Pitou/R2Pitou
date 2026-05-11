@@ -141,13 +141,13 @@ Do not use spaces, parentheses, punctuation, or mixed case in article or image f
 
 Parentheses such as `(3)` can exist in URLs technically, but do not use them here. They are easy to encode incorrectly and make links uglier.
 
-Before committing, you can auto-normalize article and image filenames:
+If you are editing locally, you can auto-normalize article and image filenames:
 
 ```powershell
 python scripts\normalize_articles.py
 ```
 
-The same script runs in GitHub Actions check mode and fails the build if filenames or canonical URLs need normalization.
+If you edit in the GitHub web browser, GitHub Actions runs the same script after you commit and pushes a follow-up normalization commit when needed.
 
 ## Checklist Before Committing
 

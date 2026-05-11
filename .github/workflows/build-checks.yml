@@ -17,8 +17,8 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Check URL-safe article and image filenames
-        run: python scripts/normalize_articles.py --check
+      - name: Normalize article and image filenames in build workspace
+        run: python scripts/normalize_articles.py
 
       - name: Check flat article image folder
         shell: bash
@@ -31,12 +31,24 @@ jobs:
             exit 1
           fi
 
+      - name: Verify protected paths stayed untouched
+        shell: bash
+        run: |
+          if ! git diff --quiet -- cv/ arttu/; then
+            echo "::error::Build normalization attempted to change protected cv/ or arttu/ paths."
+            git diff -- cv/ arttu/
+            exit 1
+          fi
+
   jekyll-build:
     runs-on: ubuntu-latest
     needs: validate
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Normalize article and image filenames in build workspace
+        run: python scripts/normalize_articles.py
 
       - name: Build with GitHub Pages Jekyll
         uses: actions/jekyll-build-pages@v1

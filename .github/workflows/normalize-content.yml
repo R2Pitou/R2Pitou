@@ -1,0 +1,54 @@
+name: Normalize content
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "_articles/**"
+      - "assets/images/**"
+      - "scripts/normalize_articles.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: normalize-content-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  normalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Normalize article and image filenames
+        run: python scripts/normalize_articles.py
+
+      - name: Verify protected paths stayed untouched
+        shell: bash
+        run: |
+          if ! git diff --quiet -- cv/ arttu/; then
+            echo "::error::Normalizer attempted to change protected cv/ or arttu/ paths."
+            git diff -- cv/ arttu/
+            exit 1
+          fi
+
+      - name: Commit normalization changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No normalization changes needed."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Normalize article and image filenames"
+          git push

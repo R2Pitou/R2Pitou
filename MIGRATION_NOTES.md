@@ -41,6 +41,6 @@ No redirects from typo paths were created.
 - Added `assets/images/` as the single flat folder for article images.
 - Self-hosted site fonts under `assets/fonts/` instead of linking to third-party font CDNs.
 - Added an explicit canonical lowercase permalink for the example article and a compatibility redirect from the mixed-case URL.
-- Added automatic article permalink/canonical and image filename checks through GitHub Actions.
+- Added automatic article permalink/canonical and image filename normalization through GitHub Actions.
 - Kept `README.md` intact for the GitHub profile README.
 - Kept `CNAME` as `working-draft.org`.
