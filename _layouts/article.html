@@ -1,0 +1,65 @@
+---
+layout: default
+---
+
+{% assign article_image_src = nil %}
+
+{% if page.image %}
+  {% if page.image contains '://' %}
+    {% assign article_image_src = page.image %}
+  {% elsif page.image contains '/' %}
+    {% assign article_image_src = page.image | relative_url %}
+  {% else %}
+    {% assign article_image_src = page.url | append: page.image | relative_url %}
+  {% endif %}
+{% endif %}
+
+<article class="article-page">
+  <section class="hero article-hero-section" aria-labelledby="article-title">
+    <div class="hero-copy">
+      <p class="eyebrow">Working-Draft.org</p>
+
+      <h1 id="article-title">{{ page.title }}</h1>
+
+      {% if page.date %}
+        <p class="byline">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+        </p>
+      {% endif %}
+
+      {% if page.summary %}
+        <p class="intro-copy">{{ page.summary }}</p>
+      {% endif %}
+
+      {% if page.tags %}
+        <div class="tag-list article-tag-list" aria-label="Article tags">
+          {% for tag in page.tags %}
+            <span>{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="hero-actions">
+        <a href="{{ '/' | relative_url }}#articles">All articles</a>
+        <a href="{{ '/' | relative_url }}">Home</a>
+      </div>
+    </div>
+
+    {% if article_image_src %}
+      <div class="hero-art article-hero-art">
+        <figure>
+          <img class="article-hero-image" src="{{ article_image_src }}" alt="{{ page.image_alt | default: page.title | escape }}">
+          {% if page.image_caption %}
+            <figcaption>{{ page.image_caption }}</figcaption>
+          {% endif %}
+        </figure>
+      </div>
+    {% endif %}
+  </section>
+
+  <section class="section article-content-section">
+    <div class="article-content">
+      {{ content }}
+    </div>
+  </section>
+</article>
