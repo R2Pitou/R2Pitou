@@ -1,0 +1,31 @@
+<article class="post-card article-card{% if include.article.featured %} featured{% endif %}">
+  <header>
+    {% if include.article.date %}
+      <p class="post-card-date article-card-date">
+        <time datetime="{{ include.article.date | date_to_xmlschema }}">
+          {{ include.article.date | date: "%Y-%m-%d" }}
+        </time>
+      </p>
+    {% endif %}
+
+    <h3>
+      <a href="{{ include.article.url | relative_url }}">
+        {{ include.article.title | default: "Untitled article" }}
+      </a>
+    </h3>
+  </header>
+
+  {% if include.article.summary %}
+    <p>{{ include.article.summary }}</p>
+  {% endif %}
+
+  {% if include.article.tags %}
+    <div class="tag-list" aria-label="Article tags">
+      {% for tag in include.article.tags %}
+        <span>{{ tag }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <a class="text-link" href="{{ include.article.url | relative_url }}">Read</a>
+</article>
