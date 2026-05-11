@@ -38,5 +38,6 @@ No redirects from typo paths were created.
 ## Other Changes
 
 - Added Jekyll configuration, layouts, includes, article collection, JSON Feed, robots.txt, posting guide, and syndication dry-run workflow.
+- Added `assets/images/` as the single flat folder for article images.
 - Kept `README.md` intact for the GitHub profile README.
 - Kept `CNAME` as `working-draft.org`.

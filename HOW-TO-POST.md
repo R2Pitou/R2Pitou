@@ -87,6 +87,37 @@ https://working-draft.org/architecture/github-native-posse-setup/
 - Drafts do not publish by default.
 - To publish, move the draft into `_articles/` and make sure it has a `date`.
 
+## Images
+
+Use one flat image folder:
+
+```text
+assets/images/
+```
+
+Do not create per-article image folders.
+
+Name article images with the article slug as the prefix:
+
+```text
+assets/images/article-slug-hero.webp
+assets/images/article-slug-01.webp
+assets/images/article-slug-02.webp
+assets/images/article-slug-og.webp
+```
+
+Use these meanings:
+
+- `article-slug-hero.webp` is the main hero image.
+- `article-slug-01.webp`, `article-slug-02.webp`, etc. are inline images.
+- `article-slug-og.webp` is an optional social preview image.
+
+Reference images with root-relative paths:
+
+```markdown
+![Image description](/assets/images/article-slug-hero.webp)
+```
+
 ## Checklist Before Committing
 
 - File ends with `.md`.
@@ -98,3 +129,5 @@ https://working-draft.org/architecture/github-native-posse-setup/
 - `title` is quoted if it contains punctuation.
 - `date` includes `+0700`.
 - `summary` exists.
+- Article images, if any, are in `assets/images/`.
+- Article image filenames start with the article slug.
