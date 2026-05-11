@@ -1,4 +1,4 @@
-title: Working Draft
+title: Working-Draft.org
 description: A public notebook, portfolio, and publishing hub by Arttu Pitou At.
 url: "https://working-draft.org"
 baseurl: ""
@@ -9,33 +9,20 @@ author:
   url: "https://working-draft.org"
 
 timezone: Asia/Phnom_Penh
-
-permalink: /:categories/:title/
+future: true
 
 markdown: kramdown
 highlighter: rouge
 
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
 
-collections:
-  articles:
-    output: true
-    permalink: /:categories/:title/
-
-feed:
-  collections:
-    articles:
-      path: "/feed.xml"
-
 defaults:
   - scope:
-      path: ""
-      type: "articles"
+      path: "articles"
     values:
-      layout: post
+      layout: article
 
 exclude:
   - Gemfile
@@ -43,3 +30,8 @@ exclude:
   - node_modules
   - vendor
   - README-dev.md
+  - .obsidian
+  - .trash
+  - _site
+  - .jekyll-cache
+  - .jekyll-metadata
