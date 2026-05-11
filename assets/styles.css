@@ -750,3 +750,45 @@ h2 {
     height: 180px;
   }
 }
+/* 404 page */
+
+.not-found-page {
+  display: grid;
+  gap: 28px;
+}
+
+.not-found-header {
+  border: 3px solid var(--pink);
+  border-radius: 8px;
+  padding: 28px;
+  background:
+    linear-gradient(135deg, rgba(236, 153, 185, 0.2) 0 23%, transparent 23% 100%),
+    var(--panel);
+}
+
+.not-found-frame-wrap {
+  overflow: hidden;
+  border: 3px solid var(--pink);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.not-found-frame {
+  display: block;
+  width: 100%;
+  height: min(78vh, 900px);
+  min-height: 560px;
+  border: 0;
+  background: var(--black);
+}
+
+@media (max-width: 720px) {
+  .not-found-header {
+    padding: 22px;
+  }
+
+  .not-found-frame {
+    height: 76vh;
+    min-height: 460px;
+  }
+}
