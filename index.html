@@ -1,83 +1,74 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Working Draft: R2Pitou's project hub for public GitHub repositories, experiments, and selected work.">
-    <meta name="theme-color" content="#050505">
-    <title>Working Draft | R2Pitou</title>
-    <link rel="preconnect" href="https://api.github.com">
-    <link rel="preconnect" href="https://github.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Bungee&family=Public+Sans:wght@400;650;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260512-business-card">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="/" aria-label="Working Draft home">
-        <img src="assets/working-draft-no-flower.png" alt="" width="216" height="99">
-        <span>
-          <strong>Working Draft</strong>
-          <small>project index</small>
-        </span>
-      </a>
-      <nav aria-label="Primary">
-        <a href="/arttu/">Arttu</a>
-        <a href="https://github.com/R2Pitou">GitHub</a>
-        <a href="https://working-draft.org/cv">CV</a>
-        <a href="mailto:arttu@working-draft.org">Contact</a>
-      </nav>
-    </header>
+---
+layout: default
+title: Working Draft
+description: A public notebook, portfolio, and publishing hub for work that is still being made, tested, revised, and argued with.
+---
 
-    <main>
-      <section class="hero" aria-labelledby="intro-title">
-        <div class="hero-copy">
-          <p class="eyebrow">working-draft.org</p>
-          <h1 id="intro-title">Selected repositories, experiments, and working drafts.</h1>
-          <p class="intro-copy">
-            A focused index of public work: small tools, interface experiments, deployment notes, and practical systems built in the open.
-          </p>
-          <div class="hero-actions" aria-label="Featured links">
-            <a class="profile-link" href="/arttu/">Virtual business card</a>
-          </div>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <img class="hero-logo" src="assets/working-draft-flower.png" alt="">
-        </div>
-      </section>
+<section class="hero" aria-labelledby="intro-title">
+  <div class="hero-copy">
+    <p class="eyebrow">working-draft.org</p>
+    <h1 id="intro-title">Working Draft</h1>
+    <p class="intro-copy">
+      A public notebook, portfolio, and publishing hub for work that is still being made, tested, revised, and argued with.
+    </p>
+    <p class="byline">By Arttu Pitou At / អាតពិទូ</p>
+    <div class="hero-actions">
+      <a href="#posts">Read posts</a>
+      <a href="#repositories">View repositories</a>
+      <a href="{{ '/cv/' | relative_url }}">View CV</a>
+      <a href="{{ '/arttu/' | relative_url }}">About Arttu</a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <img class="hero-logo" src="{{ '/assets/working-draft-flower.png' | relative_url }}" alt="">
+  </div>
+</section>
 
-      <section class="focus-strip" aria-label="Work focus">
-        <span>systems</span>
-        <span>interfaces</span>
-        <span>automation</span>
-        <span>working drafts</span>
-      </section>
+<section id="posts" class="section posts-section" aria-labelledby="posts-title">
+  <div class="section-heading">
+    <h2 id="posts-title">Posts</h2>
+    <p>Canonical articles published first on working-draft.org.</p>
+  </div>
 
-      <section class="toolbar" aria-label="Repository filters">
-        <label class="search-box">
-          <span>Find a draft</span>
-          <input id="repo-search" type="search" autocomplete="off" placeholder="Repo name, topic, language...">
-        </label>
-        <a class="github-link" href="https://github.com/R2Pitou?tab=repositories">Full GitHub shelf</a>
-      </section>
+  {% assign all_articles = site.articles | sort: "date" | reverse %}
+  {% assign featured_posts = all_articles | where: "featured", true %}
+  {% assign featured_urls = featured_posts | map: "url" %}
 
-      <section class="repo-section" aria-labelledby="repo-title">
-        <div class="section-heading">
-          <h2 id="repo-title">Repo Shelf</h2>
-          <p id="repo-count">Loading public repositories...</p>
-        </div>
-        <div id="repo-grid" class="repo-grid" aria-live="polite"></div>
-      </section>
-    </main>
+  {% if featured_posts.size > 0 %}
+    <div class="post-grid featured-posts">
+      {% for post in featured_posts limit: 3 %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  {% endif %}
 
-    <footer>
-      <span>Working Draft by R2Pitou.</span>
-      <span>Profile README stays in this repository.</span>
-    </footer>
+  <div class="post-grid">
+    {% for post in all_articles limit: 6 %}
+      {% unless featured_urls contains post.url %}
+        {% include post-card.html post=post %}
+      {% endunless %}
+    {% endfor %}
+  </div>
+</section>
 
-    <img class="page-signoff" src="assets/working-draft-lo-right-corner.png" alt="" width="581" height="407" aria-hidden="true">
+<section id="repositories" class="section repo-section" aria-labelledby="repo-title">
+  <div class="section-heading">
+    <h2 id="repo-title">Public repositories</h2>
+    <p id="repo-count">Loading public repositories...</p>
+  </div>
+  <div id="repo-grid" class="repo-grid" aria-live="polite"></div>
+</section>
 
-    <script src="site.js?v=20260502-card-actions" defer></script>
-  </body>
-</html>
+<section id="architecture" class="section architecture-section" aria-labelledby="architecture-title">
+  <div class="section-heading">
+    <h2 id="architecture-title">GitHub-Native Architecture</h2>
+  </div>
+  <div class="architecture-copy">
+    <p>This site is edited in GitHub and built by GitHub Pages with Jekyll. Articles are Markdown files, and working-draft.org is the canonical source.</p>
+    <p>Feeds and future social syndication point back to owned URLs. Public repositories appear as proof of work. Private repositories stay private.</p>
+  </div>
+</section>
+
+<script type="application/json" id="featured-repos-data">
+  {{ site.data.featured_repos | jsonify }}
+</script>

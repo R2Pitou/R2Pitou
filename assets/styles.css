@@ -7,8 +7,6 @@
   --muted: #d6c8cf;
   --pink: #ec99b9;
   --pink-hot: #ff4fa8;
-  --pink-dark: #5b1d3b;
-  --line: #ec99b9;
 }
 
 * {
@@ -33,11 +31,7 @@ body {
   background-size: 34px 34px, 34px 34px, auto;
   color: var(--white);
   font-family: "Public Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.5;
-}
-
-body::before {
-  content: none;
+  line-height: 1.55;
 }
 
 a {
@@ -46,7 +40,7 @@ a {
 
 .site-header,
 main,
-footer {
+.site-footer {
   width: min(1160px, calc(100% - 32px));
   margin: 0 auto;
 }
@@ -83,15 +77,23 @@ footer {
 .brand strong,
 h1,
 h2,
+.post-card h3,
 .repo-card h3,
-.github-link,
 nav a,
+.hero-actions a,
 .repo-link {
   letter-spacing: 0;
 }
 
-.brand strong {
+.brand strong,
+h1,
+h2,
+.post-card h3,
+.repo-card h3 {
   font-family: "Bungee", "Arial Black", sans-serif;
+}
+
+.brand strong {
   font-size: 1rem;
   line-height: 1;
 }
@@ -112,8 +114,9 @@ nav {
 }
 
 nav a,
-.github-link,
-.repo-link {
+.hero-actions a,
+.repo-link,
+.text-link {
   border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 10px 13px;
@@ -125,8 +128,9 @@ nav a,
 }
 
 nav a:hover,
-.github-link:hover,
-.repo-link:hover {
+.hero-actions a:hover,
+.repo-link:hover,
+.text-link:hover {
   background: var(--pink);
   color: var(--black);
 }
@@ -136,12 +140,11 @@ main {
 }
 
 .hero {
-  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(330px, 1.08fr);
   gap: 28px;
   align-items: center;
-  min-height: 560px;
+  min-height: 480px;
   border: 3px solid var(--pink);
   border-radius: 8px;
   padding: 38px;
@@ -149,28 +152,6 @@ main {
   background:
     linear-gradient(135deg, rgba(236, 153, 185, 0.2) 0 23%, transparent 23% 100%),
     var(--panel);
-}
-
-.hero::after {
-  content: "draft";
-  position: absolute;
-  right: 28px;
-  top: 20px;
-  transform: rotate(7deg);
-  border: 3px solid var(--pink);
-  border-radius: 8px;
-  padding: 5px 14px;
-  background: var(--pink);
-  color: var(--black);
-  font-family: "Atma", cursive;
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-.hero-copy {
-  position: relative;
-  z-index: 2;
-  align-self: end;
 }
 
 .eyebrow {
@@ -188,150 +169,57 @@ main {
 
 h1,
 h2,
+h3,
 p {
   margin-top: 0;
 }
 
 h1 {
   max-width: 600px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   color: var(--white);
-  font-family: "Bungee", "Arial Black", sans-serif;
   font-size: clamp(2.25rem, 4.5vw, 3.4rem);
   line-height: 1.05;
   text-wrap: balance;
 }
 
-.intro-copy {
-  max-width: 520px;
-  margin-bottom: 0;
+.intro-copy,
+.post-summary {
+  max-width: 660px;
+  margin-bottom: 14px;
   border-left: 8px solid var(--pink);
   padding: 14px 16px;
   background: rgba(0, 0, 0, 0.66);
   color: var(--muted);
-  font-size: 1.12rem;
+  font-size: 1.08rem;
   font-weight: 650;
+}
+
+.byline {
+  color: var(--pink);
+  font-weight: 800;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.profile-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  border: 2px solid var(--pink);
-  border-radius: 8px;
-  padding: 12px 16px;
-  background: var(--pink);
-  color: var(--black);
-  font-weight: 800;
-  text-decoration: none;
-  transition: background 160ms ease, color 160ms ease;
-}
-
-.profile-link:hover {
-  background: var(--black);
-  color: var(--white);
+  gap: 10px;
+  margin-top: 22px;
 }
 
 .hero-art {
-  position: relative;
-  z-index: 1;
   display: grid;
-  min-height: 430px;
   align-items: center;
 }
 
 .hero-logo {
-  width: min(100%, 720px);
+  width: min(100%, 520px);
   height: auto;
-  transform: rotate(-2deg);
+  transform: rotate(-1deg);
 }
 
-.focus-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin: 28px 0;
-}
-
-.focus-strip span {
-  min-height: 54px;
-  border: 2px solid var(--pink);
-  border-radius: 8px;
-  padding: 12px 10px;
-  background: var(--black);
-  color: var(--white);
-  font-family: "Atma", cursive;
-  font-size: 1.22rem;
-  font-weight: 700;
-  text-align: center;
-}
-
-.focus-strip span:nth-child(even) {
-  background: var(--pink);
-  color: var(--black);
-}
-
-.toolbar {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: end;
-  margin: 28px 0;
-}
-
-.search-box {
-  display: grid;
-  gap: 7px;
-}
-
-.search-box span,
-.section-heading p,
-.repo-meta,
-.repo-description,
-.repo-topics,
-footer {
-  color: var(--muted);
-}
-
-.search-box span {
-  color: var(--pink);
-  font-family: "Atma", cursive;
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-input {
-  width: 100%;
-  min-height: 50px;
-  border: 2px solid var(--pink);
-  border-radius: 8px;
-  padding: 12px 14px;
-  background: var(--black);
-  color: var(--white);
-  font: inherit;
-  font-weight: 650;
-  outline: none;
-}
-
-input::placeholder {
-  color: rgba(248, 248, 248, 0.58);
-}
-
-input:focus {
-  background: #160b11;
-  border-color: var(--pink-hot);
-}
-
-.repo-section {
-  padding-bottom: 18px;
+.section {
+  padding: 52px 0 0;
 }
 
 .section-heading {
@@ -339,108 +227,87 @@ input:focus {
   justify-content: space-between;
   gap: 16px;
   align-items: baseline;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 h2 {
   margin-bottom: 0;
-  color: var(--white);
-  font-family: "Bungee", "Arial Black", sans-serif;
   font-size: 2rem;
 }
 
-.section-heading p {
-  margin-bottom: 0;
-  text-align: right;
-  font-weight: 800;
+.section-heading p,
+.post-card-date,
+.repo-meta,
+.repo-description,
+.site-footer {
+  color: var(--muted);
 }
 
+.post-grid,
 .repo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr));
   gap: 18px;
 }
 
+.featured-posts {
+  margin-bottom: 18px;
+}
+
+.post-card,
 .repo-card {
-  position: relative;
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 236px;
+  gap: 14px;
+  align-content: start;
+  min-height: 230px;
   border: 2px solid var(--pink);
   border-radius: 8px;
   padding: 18px;
   background: var(--panel);
 }
 
+.post-card.featured,
 .repo-card.featured {
   background: #180d13;
 }
 
-.repo-card.featured::before {
-  content: "";
-  position: absolute;
-  right: 18px;
-  top: -10px;
-  width: 72px;
-  height: 20px;
-  border: 2px solid var(--pink);
-  background: var(--pink);
-  transform: rotate(4deg);
-}
-
-.repo-card header {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: flex-start;
-}
-
+.post-card h3,
 .repo-card h3 {
-  margin: 0;
+  margin-bottom: 0;
   overflow-wrap: anywhere;
-  color: var(--white);
-  font-family: "Bungee", "Arial Black", sans-serif;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   line-height: 1.25;
 }
 
-.repo-badge {
-  flex: 0 0 auto;
-  border: 2px solid var(--pink);
-  border-radius: 8px;
-  padding: 4px 8px;
-  background: var(--pink);
-  color: var(--black);
-  font-family: "Atma", cursive;
-  font-size: 0.9rem;
-  font-weight: 700;
+.post-card h3 a {
+  text-decoration: none;
 }
 
-.repo-description {
-  margin: 15px 0 18px;
-  font-weight: 650;
+.post-card p,
+.repo-card p {
+  margin-bottom: 0;
 }
 
-.repo-footer {
-  display: grid;
-  gap: 12px;
-}
-
+.tag-list,
 .repo-topics {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  min-height: 27px;
-  font-size: 0.8rem;
-  font-weight: 800;
 }
 
+.tag-list span,
 .repo-topics span {
   border: 1px solid var(--pink);
   border-radius: 999px;
   padding: 3px 8px;
   background: var(--black);
   color: var(--pink);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.text-link {
+  justify-self: start;
 }
 
 .repo-actions {
@@ -457,11 +324,6 @@ h2 {
   justify-content: flex-end;
 }
 
-.repo-meta {
-  font-size: 0.82rem;
-  font-weight: 650;
-}
-
 .repo-link {
   display: inline-flex;
   align-items: center;
@@ -471,19 +333,22 @@ h2 {
   color: var(--black);
 }
 
-.repo-link:hover {
-  background: var(--black);
-  color: var(--white);
-}
-
 .repo-link-secondary {
   background: var(--black);
   color: var(--white);
 }
 
-.repo-link-secondary:hover {
+.repo-badge {
+  display: inline-flex;
+  width: fit-content;
+  border: 2px solid var(--pink);
+  border-radius: 8px;
+  padding: 4px 8px;
   background: var(--pink);
   color: var(--black);
+  font-family: "Atma", cursive;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .empty {
@@ -497,7 +362,38 @@ h2 {
   font-weight: 800;
 }
 
-footer {
+.architecture-copy,
+.post-content {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.post {
+  max-width: 860px;
+}
+
+.post-header {
+  padding: 42px 0 28px;
+}
+
+.post-meta {
+  color: var(--pink);
+  font-weight: 800;
+}
+
+.post-content h2,
+.post-content h3 {
+  margin-top: 2rem;
+  color: var(--white);
+}
+
+.post-content a {
+  color: var(--pink);
+  font-weight: 800;
+}
+
+.site-footer {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -527,32 +423,21 @@ footer {
     min-height: 0;
   }
 
-  .hero-art {
-    min-height: 320px;
-  }
-
   .hero-logo {
-    width: min(100%, 620px);
+    width: min(100%, 420px);
   }
 }
 
 @media (max-width: 720px) {
   .site-header,
   main,
-  footer {
+  .site-footer {
     width: min(100% - 24px, 1160px);
   }
 
   .site-header,
-  .toolbar,
   .section-heading,
-  footer {
-    grid-template-columns: 1fr;
-  }
-
-  .site-header,
-  footer,
-  .section-heading {
+  .site-footer {
     align-items: stretch;
   }
 
@@ -569,23 +454,17 @@ footer {
   }
 
   nav,
-  footer {
+  .site-footer {
     justify-content: flex-start;
   }
 
   nav a,
-  .github-link {
+  .hero-actions a {
     text-align: center;
   }
 
   .hero {
     padding: 22px;
-  }
-
-  .hero::after {
-    right: 18px;
-    top: 16px;
-    font-size: 1.45rem;
   }
 
   h1 {
@@ -596,26 +475,14 @@ footer {
     font-size: 1rem;
   }
 
-  .hero-art {
-    min-height: 230px;
-  }
-
-  .focus-strip {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .section-heading p {
-    text-align: left;
+  .section-heading {
+    flex-direction: column;
   }
 }
 
 @media (max-width: 460px) {
   h1 {
     font-size: 1.75rem;
-  }
-
-  .focus-strip {
-    grid-template-columns: 1fr;
   }
 
   .repo-actions {

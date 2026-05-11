@@ -1,0 +1,60 @@
+name: Syndication dry run
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - pages-build-deployment
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed articles
+        id: changed
+        shell: bash
+        run: |
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --name-only HEAD^ HEAD -- '_articles/*.md' > changed_articles.txt
+          else
+            find _articles -name '*.md' -print > changed_articles.txt
+          fi
+          cat changed_articles.txt
+
+      - name: Syndication dry run
+        shell: bash
+        run: |
+          if [ ! -s changed_articles.txt ]; then
+            echo "No changed articles detected."
+            exit 0
+          fi
+
+          while IFS= read -r file; do
+            echo "Article candidate: $file"
+            if grep -q '^syndicate: true' "$file"; then
+              title=$(sed -n 's/^title: "\(.*\)"/\1/p' "$file" | head -n 1)
+              summary=$(sed -n 's/^summary: "\(.*\)"/\1/p' "$file" | head -n 1)
+              category=$(sed -n 's/^categories: //p' "$file" | head -n 1)
+              slug=$(basename "$file" .md | tr '[:upper:]' '[:lower:]')
+              slug=${slug// /-}
+              url="https://working-draft.org/${category}/${slug}/"
+              echo "Would syndicate:"
+              echo "  title: $title"
+              echo "  url: $url"
+              echo "  summary: $summary"
+              echo "  targets: see syndication front matter"
+            else
+              echo "Skipping because syndicate is not true."
+            fi
+          done < changed_articles.txt

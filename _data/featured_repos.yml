@@ -1,0 +1,9 @@
+- name: cv
+  label: CV / professional background
+  page_url: https://r2pitou.github.io/cv/
+  featured: true
+
+- name: R2Pitou
+  label: Working Draft site source
+  page_url: https://working-draft.org/
+  featured: true

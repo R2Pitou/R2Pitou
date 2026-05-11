@@ -1,0 +1,45 @@
+title: Working Draft
+description: A public notebook, portfolio, and publishing hub by Arttu Pitou At.
+url: "https://working-draft.org"
+baseurl: ""
+
+author:
+  name: "Arttu Pitou At"
+  khmer_name: "អាតពិទូ"
+  url: "https://working-draft.org"
+
+timezone: Asia/Phnom_Penh
+
+permalink: /:categories/:title/
+
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+collections:
+  articles:
+    output: true
+    permalink: /:categories/:title/
+
+feed:
+  collections:
+    articles:
+      path: "/feed.xml"
+
+defaults:
+  - scope:
+      path: ""
+      type: "articles"
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README-dev.md

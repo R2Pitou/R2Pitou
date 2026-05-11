@@ -1,0 +1,19 @@
+{% if page.collection == "articles" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.summary | default: site.description | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.modified_date | default: page.date | date_to_xmlschema }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ site.author.name | jsonify }},
+    "url": {{ site.author.url | jsonify }}
+  },
+  "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }}
+}
+</script>
+{% endif %}

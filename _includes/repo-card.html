@@ -1,0 +1,19 @@
+<article class="repo-card">
+  <header>
+    <h3>{{ include.name }}</h3>
+    {% if include.label %}
+      <span class="repo-badge">{{ include.label }}</span>
+    {% endif %}
+  </header>
+  {% if include.description %}
+    <p class="repo-description">{{ include.description }}</p>
+  {% endif %}
+  <div class="repo-actions">
+    {% if include.repo_url %}
+      <a class="repo-link" href="{{ include.repo_url }}">View repo</a>
+    {% endif %}
+    {% if include.page_url %}
+      <a class="repo-link repo-link-secondary" href="{{ include.page_url }}">View page</a>
+    {% endif %}
+  </div>
+</article>
