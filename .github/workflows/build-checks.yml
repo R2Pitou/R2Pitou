@@ -1,0 +1,45 @@
+name: Build checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check URL-safe article and image filenames
+        run: python scripts/normalize_articles.py --check
+
+      - name: Check flat article image folder
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if find assets/images -mindepth 1 -type d | grep -q .; then
+            echo "::error::assets/images must stay flat. Do not create nested image folders."
+            find assets/images -mindepth 1 -type d
+            exit 1
+          fi
+
+  jekyll-build:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build with GitHub Pages Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: .
+          destination: ./_site

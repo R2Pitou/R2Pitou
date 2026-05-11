@@ -40,5 +40,7 @@ No redirects from typo paths were created.
 - Added Jekyll configuration, layouts, includes, article collection, JSON Feed, robots.txt, posting guide, and syndication dry-run workflow.
 - Added `assets/images/` as the single flat folder for article images.
 - Self-hosted site fonts under `assets/fonts/` instead of linking to third-party font CDNs.
+- Added an explicit canonical lowercase permalink for the example article and a compatibility redirect from the mixed-case URL.
+- Added automatic article permalink/canonical and image filename checks through GitHub Actions.
 - Kept `README.md` intact for the GitHub profile README.
 - Kept `CNAME` as `working-draft.org`.

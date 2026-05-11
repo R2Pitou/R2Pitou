@@ -24,6 +24,8 @@ layout: post
 title: "POST TITLE HERE"
 date: 2026-05-12 09:00:00 +0700
 categories: notes
+permalink: /notes/post-title-here/
+canonical_url: https://working-draft.org/notes/post-title-here/
 featured: false
 summary: "One or two sentence summary."
 tags:
@@ -44,6 +46,8 @@ Start writing here.
 
 - `categories` controls the URL shelf.
 - The filename controls the post slug.
+- `permalink` must be lowercase and should match the category plus filename slug.
+- `canonical_url` must be the full `https://working-draft.org/.../` version of `permalink`.
 - `tags` are labels.
 - `featured: true` puts the article in the featured area.
 - `syndicate: true` allows future outward posting.
@@ -79,6 +83,14 @@ becomes:
 
 ```text
 https://working-draft.org/architecture/github-native-posse-setup/
+```
+
+Use lowercase URLs. Filenames may use title case for readability, but canonical article URLs should be lowercase.
+
+Automatic GitHub checks fail if an article permalink is missing, mixed-case, or does not match:
+
+```text
+/<category>/<lowercase-filename-slug>/
 ```
 
 ## Drafting
@@ -118,6 +130,25 @@ Reference images with root-relative paths:
 ![Image description](/assets/images/article-slug-hero.webp)
 ```
 
+Keep image filenames URL-safe:
+
+- lowercase letters
+- numbers
+- hyphens
+- normal file extensions such as `.webp`, `.jpg`, `.png`
+
+Do not use spaces, parentheses, punctuation, or mixed case in article or image filenames.
+
+Parentheses such as `(3)` can exist in URLs technically, but do not use them here. They are easy to encode incorrectly and make links uglier.
+
+Before committing, you can auto-normalize article and image filenames:
+
+```powershell
+python scripts\normalize_articles.py
+```
+
+The same script runs in GitHub Actions check mode and fails the build if filenames or canonical URLs need normalization.
+
 ## Checklist Before Committing
 
 - File ends with `.md`.
@@ -126,8 +157,11 @@ Reference images with root-relative paths:
 - Front matter starts at line 1.
 - Front matter begins and ends with `---`.
 - `categories` has one value.
+- `permalink` is lowercase.
+- `canonical_url` starts with `https://working-draft.org`.
 - `title` is quoted if it contains punctuation.
 - `date` includes `+0700`.
 - `summary` exists.
 - Article images, if any, are in `assets/images/`.
 - Article image filenames start with the article slug.
+- Article and image filenames are lowercase kebab-case.
