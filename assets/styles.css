@@ -717,3 +717,36 @@ h2 {
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.22em;
 }
+.article-card {
+  overflow: hidden;
+}
+
+.article-card-image-link {
+  display: block;
+  margin: -18px -18px 0;
+  border-bottom: 2px solid var(--pink);
+  background: var(--black);
+  text-decoration: none;
+}
+
+.article-card-image {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: contain;
+  object-position: center;
+  background:
+    linear-gradient(135deg, rgba(236, 153, 185, 0.12) 0 28%, transparent 28% 100%),
+    var(--panel-strong);
+}
+
+.article-card.featured .article-card-image {
+  height: 220px;
+}
+
+@media (max-width: 720px) {
+  .article-card-image,
+  .article-card.featured .article-card-image {
+    height: 180px;
+  }
+}
