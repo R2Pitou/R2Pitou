@@ -3,6 +3,7 @@ layout: article
 title: GitHub-native POSSE publishing
 date: 2026-05-12 04:00:00 +0700
 canonical_url: https://working-draft.org/architecture/github-native-posse-publishing/
+permalink: /articles/architecture/github-native-posse-publishing/
 featured: true
 summary: A short note on making working-draft.org the canonical source for articles, with syndication treated as an outward layer.
 tags:
