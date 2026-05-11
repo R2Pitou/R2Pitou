@@ -1,0 +1,53 @@
+# Obsidian local app state
+.obsidian/
+.trash/
+
+# Obsidian plugin leftovers / cache-ish files
+.obsidian.vimrc
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.obsidian/plugins/
+
+# macOS junk
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Jekyll build output
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby / Bundler local junk
+.bundle/
+vendor/
+Gemfile.lock
+
+# Node junk, only relevant if some tooling sneaks in later
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local editor junk
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
