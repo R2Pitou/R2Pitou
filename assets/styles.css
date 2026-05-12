@@ -792,3 +792,33 @@ h2 {
     min-height: 460px;
   }
 }
+.tabs {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 1em 0;
+}
+
+.tab-button {
+  padding: 8px 12px;
+  margin-right: 6px;
+  cursor: pointer;
+  border: none;
+  background: #eee;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.tab-button.active {
+  background: #222;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+  margin-top: 12px;
+}
+
+.tab-content.active {
+  display: block;
+}
