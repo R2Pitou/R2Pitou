@@ -32,9 +32,9 @@ Imagine a world where machines not only compute but ‘think’, learn, and even
 
 _My first AI-generated image from June 2022. It looks absolutely horrendous now, but at the time it felt like magic._
 
->[!note]
->![[asian-man-eating-a-banana-under-a-rainbow-may-2026.png]]
->For comparison here is the same prompt in May 2026 with ChatGPT Image generator
+![Asian man eating a banan under a rainbow May 2026](asian-man-eating-a-banana-under-a-rainbow-may-2026.png)
+
+_For comparison here is the same prompt in May 2026 with ChatGPT Image generator_
 
 My first dibble dabble in AI was my first ever AI generated image in June 2022 (Asian man eating a banana under a rainbow) which looks absolutely horrendous looking at it now, but back then it was like magic. My first deep dive with AI happened when [teaching Grade 5 in AY 2022–2023](https://medium.com/educreation/embracing-ai-cost-me-my-teaching-job-8fbd625bfe9a). It was a bold experiment integrating AI tools into the classroom, which, while enhancing the learning experience, also led to a clash with traditional educational norms and eventually cost me my job. This personal encounter with AI’s disruptive potential in education mirrors the transformative journey AI began in the mid-20th century.
 
@@ -152,17 +152,6 @@ function openTab(evt, tabId) {
   document.getElementById(tabId).classList.add("active");
   evt.currentTarget.classList.add("active");
 }
-</script>
-function openTab(evt, tabId) {  
-const contents = document.querySelectorAll(".tab-content");  
-const buttons = document.querySelectorAll(".tab-button");  
-  
-contents.forEach(c => c.classList.remove("active"));  
-buttons.forEach(b => b.classList.remove("active"));  
-  
-document.getElementById(tabId).classList.add("active");  
-evt.currentTarget.classList.add("active");  
-}  
 </script>
 
 
