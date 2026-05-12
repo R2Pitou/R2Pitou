@@ -1,7 +1,22 @@
-# What is Artificial Intelligence (AI)?
+---
+title: What is Artificial Intelligence (AI)?
+date: 2023-11-22 09:00 +0700
+layout: article
+featured: false
+summary: |-
+  A Journey Through the Latest Paradigm Shift
 
-![Hero image](hero.png)
-
+  Originally published on R2P2.at in November 2023.  
+  Rebuilt and archived for Working-Draft.org
+image: hero.png
+image_alt: an illustration of people gathering around a futuristic looking glass cylinder with colourful shapes dancing inside it.
+tags:
+  - technology
+  - ArtificialIntelligence
+  - ChatGPT
+syndicate: true
+permalink:
+---
 _A Journey Through the Latest Paradigm Shift_
 
 Originally published on R2P2.at in November 2023.  
