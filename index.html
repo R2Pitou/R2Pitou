@@ -31,33 +31,24 @@ description: A public notebook, portfolio, and publishing hub for work that is s
     <p>Canonical articles published first on Working-Draft.org.</p>
   </div>
 
-  {% assign article_pages = site.pages | where_exp: "page", "page.path contains 'articles/'" | sort: "date" | reverse %}
+  {% assign article_count = 0 %}
 
   <div class="post-grid featured-articles">
-    {% assign featured_count = 0 %}
-    {% for article in article_pages %}
-      {% if article.featured == true and featured_count < 3 %}
+    {% for article in site.pages %}
+      {% if article.path contains 'articles/' %}
         {% if article.name == "index.md" or article.name == "index.html" %}
-          {% include article-card.html article=article %}
-          {% assign featured_count = featured_count | plus: 1 %}
+          {% if article.featured == true %}
+            {% if article_count < 6 %}
+              {% include article-card.html article=article %}
+              {% assign article_count = article_count | plus: 1 %}
+            {% endif %}
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endfor %}
   </div>
 
-  <div class="post-grid">
-    {% assign regular_count = 0 %}
-    {% for article in article_pages %}
-      {% if article.featured != true and regular_count < 6 %}
-        {% if article.name == "index.md" or article.name == "index.html" %}
-          {% include article-card.html article=article %}
-          {% assign regular_count = regular_count | plus: 1 %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </div>
-
-  {% if article_pages.size == 0 %}
+  {% if article_count == 0 %}
     <p>No articles published yet.</p>
   {% endif %}
 </section>
