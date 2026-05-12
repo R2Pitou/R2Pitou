@@ -3,7 +3,7 @@ title: "Please Don’t Just Write “Hello Bong”"
 date: 2025-01-14 09:00 +0700
 featured: true
 summary: "A bilingual Khmer-English note about why vague opening messages interrupt deep focus, waste time, and can cost creative workers real opportunities."
-image: hero.jpeg
+image: hero.png
 image_alt: "A comic-style illustration of a designer at a desk being interrupted by vague Hello Bong messages while working on a design project."
 tags:
   - communication
