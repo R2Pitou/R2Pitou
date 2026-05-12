@@ -31,16 +31,19 @@ description: A public notebook, portfolio, and publishing hub for work that is s
     <p>Canonical articles published first on Working-Draft.org.</p>
   </div>
 
-  {% assign article_count = 0 %}
+  {% assign total_articles_rendered = 0 %}
+  {% assign featured_articles_rendered = 0 %}
+  {% assign regular_articles_rendered = 0 %}
 
   <div class="post-grid featured-articles">
     {% for article in site.pages %}
       {% if article.path contains 'articles/' %}
         {% if article.name == "index.md" or article.name == "index.html" %}
           {% if article.featured == true %}
-            {% if article_count < 6 %}
+            {% if featured_articles_rendered < 3 %}
               {% include article-card.html article=article %}
-              {% assign article_count = article_count | plus: 1 %}
+              {% assign featured_articles_rendered = featured_articles_rendered | plus: 1 %}
+              {% assign total_articles_rendered = total_articles_rendered | plus: 1 %}
             {% endif %}
           {% endif %}
         {% endif %}
@@ -48,7 +51,23 @@ description: A public notebook, portfolio, and publishing hub for work that is s
     {% endfor %}
   </div>
 
-  {% if article_count == 0 %}
+  <div class="post-grid">
+    {% for article in site.pages %}
+      {% if article.path contains 'articles/' %}
+        {% if article.name == "index.md" or article.name == "index.html" %}
+          {% unless article.featured == true %}
+            {% if regular_articles_rendered < 6 %}
+              {% include article-card.html article=article %}
+              {% assign regular_articles_rendered = regular_articles_rendered | plus: 1 %}
+              {% assign total_articles_rendered = total_articles_rendered | plus: 1 %}
+            {% endif %}
+          {% endunless %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if total_articles_rendered == 0 %}
     <p>No articles published yet.</p>
   {% endif %}
 </section>
