@@ -8,7 +8,7 @@ https://working-draft.org [Ar|Au]tistic nerd, Digital Transformation Supervisor,
 -   I hate Google Cloud’s UI. It’s as intuitive as a Yamaha surround sound amp’s remote — a mishmash of rectangles in a random order, and one of them is orange just for fun.
 -   Currently learning **Nothing** properly thanks to vibing, building small SysOps tools with AI, and finding ways to make Google Workspace (and now, a LAMP stack) behave for entire schools without losing my sanity.
 -   Interested in collaborations where the tech is lean, the scope is realistic, and the end result isn’t a white elephant? (I'm not your guy.)
--   Reach me: [info+github@atp2.stream](mailto:info+github@atp2.stream). (I fail to see why you would)
+-   Reach me: [arttu@working-draft.org](mailto:arttu+github@working-draft.org). (I fail to see why you would)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
 
