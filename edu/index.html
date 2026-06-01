@@ -1,0 +1,352 @@
+---
+layout: default
+title: K-12 School Systems Governance & Security Hardening (APAC)
+description: Scalable systems governance, Google Workspace security auditing, BYOD policies, and infrastructure hardening for AACS / WASC-focused international school systems.
+---
+
+<style>
+  .funnel-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 38px;
+    align-items: center;
+    border: 3px solid var(--pink);
+    border-radius: 12px;
+    padding: clamp(24px, 4vw, 42px);
+    background: 
+      linear-gradient(135deg, rgba(236, 153, 185, 0.15) 0%, transparent 100%),
+      var(--panel);
+    margin-bottom: 54px;
+    overflow: hidden;
+  }
+
+  .funnel-hero-copy {
+    max-width: 620px;
+  }
+
+  .funnel-hero h1 {
+    font-family: "Kdam Thmor Pro", sans-serif;
+    color: var(--white);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+
+  .funnel-hero-copy .intro-sub {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--pink);
+    margin-bottom: 24px;
+    border-left: 6px solid var(--pink);
+    padding-left: 14px;
+    line-height: 1.5;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 54px;
+  }
+
+  .value-card {
+    border: 2px solid var(--line);
+    border-radius: 8px;
+    padding: 24px;
+    background: var(--panel-strong);
+    transition: border-color 150ms ease;
+  }
+
+  .value-card:hover {
+    border-color: var(--pink);
+  }
+
+  .value-card h3 {
+    margin: 0 0 12px;
+    font-family: "Kdam Thmor Pro", sans-serif;
+    color: var(--pink);
+    font-size: 1.2rem;
+  }
+
+  .value-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.5;
+  }
+
+  /* Form Styling inside Landing Page */
+  .landing-form-card {
+    border: 3px solid var(--pink);
+    border-radius: 12px;
+    padding: clamp(24px, 5vw, 38px);
+    background: var(--black);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  }
+
+  .form-title-wrap {
+    text-align: center;
+    margin-bottom: 28px;
+    border-bottom: 2px solid var(--pink);
+    padding-bottom: 12px;
+  }
+
+  .form-title-wrap h2 {
+    margin: 0 0 6px;
+    font-family: "Kdam Thmor Pro", sans-serif;
+    color: var(--white);
+    font-size: 1.6rem;
+  }
+
+  .form-title-wrap p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+
+  /* Shared Intake Form styles from contact page */
+  .intake-form { display: grid; gap: 20px; }
+  .form-group { display: grid; gap: 8px; }
+  .form-row-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-label { font-size: 0.88rem; font-weight: 600; color: var(--pink); text-transform: uppercase; letter-spacing: 0.05em; }
+  .form-input, .form-select, .form-textarea { width: 100%; border: 2px solid var(--pink); border-radius: 8px; padding: 11px 14px; background: var(--black); color: var(--white); font-family: "Kantumruy Pro", sans-serif; font-size: 1rem; transition: all 160ms ease; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--pink-hot); box-shadow: 0 0 12px rgba(236, 153, 185, 0.25); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+  .checkbox-group { display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+  .checkbox-group input { width: 18px; height: 18px; accent-color: var(--pink); cursor: pointer; }
+  .checkbox-label { font-size: 0.94rem; color: var(--muted); font-weight: 600; }
+  .submit-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; border: 2px solid var(--pink); border-radius: 8px; padding: 0 24px; background: var(--pink); color: var(--black); font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 160ms ease; }
+  .submit-btn:hover:not(:disabled) { background: var(--pink-hot); border-color: var(--pink-hot); box-shadow: 0 0 15px rgba(236, 153, 185, 0.45); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(0, 0, 0, 0.15); border-top: 3px solid var(--black); border-radius: 50%; animation: spin 800ms linear infinite; margin-right: 10px; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Dynamic States */
+  .state-card { display: none; text-align: center; padding: 24px 0; animation: fadeIn 300ms ease forwards; }
+  .state-icon { font-size: 3.5rem; margin-bottom: 16px; display: inline-block; }
+  .state-title { margin: 0 0 12px; font-family: "Kdam Thmor Pro", sans-serif; color: var(--pink); font-size: 1.8rem; }
+  .state-text { color: var(--muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 24px; }
+  .state-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border: 2px solid var(--pink); border-radius: 8px; padding: 0 20px; background: var(--pink); color: var(--black); font-weight: 700; text-decoration: none; transition: all 160ms ease; }
+  .state-cta:hover { background: var(--pink-hot); border-color: var(--pink-hot); box-shadow: 0 0 15px rgba(236, 153, 185, 0.45); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 960px) {
+    .funnel-hero {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .value-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-row-2col {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+</style>
+
+<section class="funnel-hero" aria-label="Education sector hero section">
+  <div class="funnel-hero-copy">
+    <p class="eyebrow">APAC School IT Governance</p>
+    <h1>A School Environment Outgrows "Ad Hoc" IT.</h1>
+    <p class="intro-sub">
+      Providing WASC-aligned digital strategies, Google Workspace lifecycle automation, and student data privacy shielding for international educational systems.
+    </p>
+    <p class="post-summary" style="margin-left: 0; background: rgba(0,0,0,0.4);">
+      Serving as a Fractional Systems Architect, I help multi-campus K-12 systems secure account directory states, execute robust DNS malware filtering, automate student account lifecycles, and implement governance structures that school boards can audit and rely on.
+    </p>
+  </div>
+  
+  <div class="hero-art" aria-hidden="true" style="text-align: center;">
+    <img class="hero-logo" src="{{ '/assets/working-draft-flower.png' | relative_url }}" alt="" style="max-width: 310px;">
+  </div>
+</section>
+
+<!-- Values / Pillars Grid -->
+<section class="section" aria-labelledby="pillars-title">
+  <div class="section-heading">
+    <h2 id="pillars-title">Operational Capabilities</h2>
+    <p>Targeted capabilities to transition school ICT from reactive troubleshooting to structured security.</p>
+  </div>
+
+  <div class="value-grid">
+    <div class="value-card">
+      <h3>1. Workspace Directory Automation</h3>
+      <p>Hardening directories of 3,000+ active student and staff accounts. Implementing automated onboarding, offboarding, and Shared Drive governance via GAM scripting, eliminating manual admin bottlenecks by 60%.</p>
+    </div>
+    
+    <div class="value-card">
+      <h3>2. CIS-Aligned Security Strategy</h3>
+      <p>Mapping campus infrastructure directly to CIS Critical Security Controls IG1. Rolling out strict multi-campus MFA enforcement, segmented routing, and Cloudflare-based malware filtering.</p>
+    </div>
+
+    <div class="value-card">
+      <h3>3. Privacy &amp; Governance Policy</h3>
+      <p>Drafting robust COPPA-compliant data governance frameworks, BYOD policies, student account lifecycle guidelines, and AI safety charters approved by leadership boards.</p>
+    </div>
+
+    <div class="value-card">
+      <h3>4. Forensic Incident Response</h3>
+      <p>Swift disaster mitigation and server rebuilding following ransomware, malicious deletions, or credential leaks. Full logging setup to translate network signals into clean executive audits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Embedded Intake Form -->
+<section id="book-consult" class="landing-form-card" aria-label="School systems intake card">
+  
+  <div id="form-state">
+    <header class="form-title-wrap">
+      <h2>Request a Systems &amp; Security Audit</h2>
+      <p>Submit details below to schedule an initial consultation, coordinated directly to your time zone.</p>
+    </header>
+
+    <form id="intake-form" class="intake-form" novalidate>
+      <input type="hidden" name="source" value="edu_landing" />
+      <input type="hidden" id="timezone" name="timezone" value="" />
+
+      <div class="form-row-2col">
+        <div class="form-group">
+          <label class="form-label" for="full-name">Full Name *</label>
+          <input type="text" id="full-name" name="name" class="form-input" required placeholder="Arttu K." />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="org-name">School / Institution Name *</label>
+          <input type="text" id="org-name" name="organization" class="form-input" required placeholder="International Academy of Bangkok" />
+        </div>
+      </div>
+
+      <div class="form-row-2col">
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address *</label>
+          <input type="email" id="email" name="email" class="form-input" required placeholder="administrator@school.edu.sg" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="telegram">Telegram @Username / Phone *</label>
+          <input type="text" id="telegram" name="telegram" class="form-input" required placeholder="@AtPitou or +855..." />
+        </div>
+      </div>
+
+      <div class="form-row-2col">
+        <div class="form-group">
+          <label class="form-label" for="location">School Location / Timezone *</label>
+          <input type="text" id="location" name="location" class="form-input" required placeholder="e.g. Bangkok, Singapore, Tokyo" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="interest">Core Requirement *</label>
+          <select id="interest" name="interest" class="form-select" required>
+            <option value="Workspace Admin & Hardening" selected>Google Workspace Directory Audit &amp; Hardening</option>
+            <option value="Systems & IT Governance">Multi-Campus Infrastructure &amp; Governance Audit</option>
+            <option value="Fractional CTO Engagement">Fractional CTO / IT Director Consultation</option>
+            <option value="AI Workflow Systems">Custom Educational AI &amp; Admin Tool Deployment</option>
+            <option value="General Technical Query">Other Security / Systems Requirement</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">Current Challenges / Directory Size *</label>
+        <textarea id="message" name="message" class="form-textarea" required placeholder="Detail your campus directory size (staff/students), current systems structure, and primary pain points or vulnerabilities..."></textarea>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="urgency" name="urgency" value="Urgent" />
+        <label for="urgency" class="checkbox-label">This audit is urgent / currently experiencing systems failure or security incident</label>
+      </div>
+
+      <button type="submit" id="submit-btn" class="submit-btn">
+        <span class="spinner" id="btn-spinner"></span>
+        <span id="btn-text">Schedule School Intake Audit</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div id="success-state" class="state-card">
+    <span class="state-icon">🏫</span>
+    <h2 class="state-title">Intake Initialized</h2>
+    <p class="state-text">
+      Thank you for submitting your school's technical details. The intake has been captured and appended to my Workspace Sheet. An alert notification has reached my secure mobile terminal.
+      <br><br>
+      As an expert in K-12 systems resilience, I will review your directory parameters and reach out via **Telegram or Email** within **24 hours** to schedule a formal video consultation.
+    </p>
+    <a href="{{ '/' | relative_url }}" class="state-cta">Return to Hub</a>
+  </div>
+
+  <!-- ERROR STATE -->
+  <div id="error-state" class="state-card">
+    <span class="state-icon" style="color: #f0a3bc;">⚠️</span>
+    <h2 class="state-title">Submission Interrupted</h2>
+    <p class="state-text">
+      The API connection timed out. Don't let your school's security audit wait—contact me directly on Telegram and I will initiate the intake parameters manually.
+    </p>
+    <a href="https://t.me/AtPitou" target="_blank" class="state-cta">Contact on Telegram Immediately</a>
+  </div>
+
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const formState = document.getElementById("form-state");
+    const successState = document.getElementById("success-state");
+    const errorState = document.getElementById("error-state");
+    const form = document.getElementById("intake-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const spinner = document.getElementById("btn-spinner");
+    const btnText = document.getElementById("btn-text");
+
+    // Auto-detect timezone
+    try {
+      const detectedTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+      const offsetMinutes = new Date().getTimezoneOffset();
+      const offsetHours = -offsetMinutes / 60;
+      const offsetSign = offsetHours >= 0 ? "+" : "";
+      document.getElementById("timezone").value = `${detectedTz} (UTC${offsetSign}${offsetHours})`;
+    } catch (e) {
+      document.getElementById("timezone").value = "Unknown/Not Detected";
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      spinner.style.display = "block";
+      btnText.textContent = "Connecting Secure Backend...";
+
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_s0R3W4K4XnK5c0k5c0k5c0k5c0k5c0k/exec"; 
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams(data)
+        });
+
+        formState.style.display = "none";
+        successState.style.display = "block";
+      } catch (err) {
+        console.error("Submission failed:", err);
+        formState.style.display = "none";
+        errorState.style.display = "block";
+      } finally {
+        submitBtn.disabled = false;
+        spinner.style.display = "none";
+        btnText.textContent = "Schedule School Intake Audit";
+      }
+    });
+  });
+</script>

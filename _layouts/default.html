@@ -55,26 +55,7 @@
   </head>
 
   <body>
-    <header class="site-header">
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Working-Draft.org home">
-        <img src="{{ '/assets/working-draft-no-flower.png' | relative_url }}" alt="" width="216" height="99">
-        <span>
-          <strong>Working-Draft.org</strong>
-          <small>project index</small>
-        </span>
-      </a>
-
-      <nav aria-label="Primary">
-        <a href="{{ '/#articles' | relative_url }}">Articles</a>
-        <a href="{{ '/#repositories' | relative_url }}">Repositories</a>
-        <a href="{{ '/security/' | relative_url }}">Security &amp; IR</a>
-        <a href="{{ '/googleworkspaceadmin/' | relative_url }}">Workspace Admin</a>
-        <a href="{{ '/cv/' | relative_url }}">CV</a>
-        <a href="{{ '/arttu/' | relative_url }}">Arttu</a>
-        <a href="https://github.com/R2Pitou">GitHub</a>
-        <a href="{{ '/contact/' | relative_url }}">Contact</a>
-      </nav>
-    </header>
+    {% include site-header.html %}
 
     <main>
       {{ content }}

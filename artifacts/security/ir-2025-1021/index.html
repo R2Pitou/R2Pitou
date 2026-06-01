@@ -4,37 +4,37 @@ title: "Incident Report IR-2025-1021: Access Governance and Privilege Containmen
 description: "Incident investigation, root cause analysis, and access control remediation following unauthorized Shared Drive modifications."
 ---
 
-<div class="article-content">
+<div class="article-content doc-layout">
   <header class="article-header">
     <span class="post-meta">Case Study &bull; Incident Report</span>
-    <h1>Incident Report IR-2025-1021: Access Governance & Privilege Containment</h1>
+    <h1>Incident Report IR-2025-1021: Access Governance &amp; Privilege Containment</h1>
     
-    <div class="byline" style="margin-top: 8px; font-size: 0.95rem;">
+    <div class="byline">
       <strong>Lead Investigator:</strong> Arttu Pitou At<br>
       <strong>Incident Reference:</strong> IR-2025-1021 &bull; <strong>Classification:</strong> Major Non-conformity
     </div>
   </header>
 
-  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 24px 0; opacity: 0.3;">
+  <hr>
 
   <section aria-labelledby="section-metadata">
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 0.95rem; background: var(--panel); border: 1px solid var(--pink); border-radius: 6px;">
+    <table class="metadata-table">
       <tbody>
         <tr>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white); width: 30%;">Date of Incident</td>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">October 21, 2025</td>
+          <td>Date of Incident</td>
+          <td>October 21, 2025</td>
         </tr>
         <tr>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Impacted CIA Component</td>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">Integrity and Availability</td>
+          <td>Impacted CIA Component</td>
+          <td>Integrity and Availability</td>
         </tr>
         <tr>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Primary Gaps Identified</td>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">ISO 27001 Annex A 8.2 (Privileged Access Rights), Annex A 8.15 (Logging and Monitoring)</td>
+          <td>Primary Gaps Identified</td>
+          <td>ISO 27001 Annex A 8.2 (Privileged Access Rights), Annex A 8.15 (Logging and Monitoring)</td>
         </tr>
         <tr>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Status</td>
-          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); color: #ec99b9; font-weight: bold;">Remediated & Closed</td>
+          <td>Status</td>
+          <td style="color: var(--pink); font-weight: bold;">Remediated &amp; Closed</td>
         </tr>
       </tbody>
     </table>
@@ -75,21 +75,17 @@ description: "Incident investigation, root cause analysis, and access control re
   </section>
 
   <section aria-labelledby="section-findings">
-    <h2 id="section-findings">Findings & Root Cause Analysis</h2>
+    <h2 id="section-findings">Findings &amp; Root Cause Analysis</h2>
     <p>
       The investigation identified two critical security control failures:
     </p>
-    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel);">
-      <p style="margin: 0; font-weight: bold; color: var(--white);">Primary Failure: ISO 27001 Annex A 8.2 (Privileged Access Rights)</p>
-      <p style="margin: 6px 0 0; font-size: 0.95rem;">
-        The actor maintained excessive permissions that exceeded their operational requirements. They held full "Manager" or "Editor" access on Shared Drives that should have been restricted to read-only or comment-only, permitting mass deletion and settings overrides.
-      </p>
+    <blockquote>
+      <strong>Primary Failure: ISO 27001 Annex A 8.2 (Privileged Access Rights)</strong><br>
+      The actor maintained excessive permissions that exceeded their operational requirements. They held full "Manager" or "Editor" access on Shared Drives that should have been restricted to read-only or comment-only, permitting mass deletion and settings overrides.
     </blockquote>
-    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel);">
-      <p style="margin: 0; font-weight: bold; color: var(--white);">Secondary Failure: ISO 27001 Annex A 8.15 (Logging and Monitoring)</p>
-      <p style="margin: 6px 0 0; font-size: 0.95rem;">
-        While comprehensive audit logs were captured, no automated real-time alert triggers existed to flag or automatically halt mass-deletion actions, delaying initial detection.
-      </p>
+    <blockquote>
+      <strong>Secondary Failure: ISO 27001 Annex A 8.15 (Logging and Monitoring)</strong><br>
+      While comprehensive audit logs were captured, no automated real-time alert triggers existed to flag or automatically halt mass-deletion actions, delaying initial detection.
     </blockquote>
   </section>
 
@@ -123,9 +119,9 @@ description: "Incident investigation, root cause analysis, and access control re
     </p>
   </section>
 
-  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 34px 0; opacity: 0.3;">
+  <hr>
 
-  <footer style="display: flex; justify-content: space-between; font-size: 0.92rem;">
+  <footer style="display: flex; justify-content: space-between; font-size: 0.92rem; margin-bottom: 24px;">
     <a href="{{ '/security/' | relative_url }}">&larr; Back to Security &amp; Governance</a>
     <a href="{{ '/cv/' | relative_url }}">View CV &amp; Professional Background &rarr;</a>
   </footer>

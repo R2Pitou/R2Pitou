@@ -13,15 +13,59 @@ description: A public notebook, portfolio, and publishing hub for work that is s
     </p>
     <p class="byline">By Arttu Pitou At / អាតពិទូ</p>
     <div class="hero-actions">
-      <a href="#articles">Read articles</a>
-      <a href="#repositories">View repositories</a>
+      <a href="{{ '/security/' | relative_url }}">Security &amp; IR Portfolio</a>
+      <a href="{{ '/googleworkspaceadmin/' | relative_url }}">Workspace Admin Portfolio</a>
       <a href="{{ '/cv/' | relative_url }}">View CV</a>
       <a href="{{ '/arttu/' | relative_url }}">About Arttu</a>
+      <a href="#articles">Articles</a>
     </div>
   </div>
 
   <div class="hero-art" aria-hidden="true">
     <img class="hero-logo" src="{{ '/assets/working-draft-flower.png' | relative_url }}" alt="">
+  </div>
+</section>
+
+<section class="section showcase-section" aria-labelledby="showcase-title" style="padding-top: 38px;">
+  <div class="section-heading">
+    <h2 id="showcase-title">Technical Portfolios</h2>
+    <p>Operational evidence, case studies, and incident investigations across enterprise systems.</p>
+  </div>
+  
+  <div class="technical-panel-grid">
+    <!-- Security Panel -->
+    <div class="technical-panel">
+      <div>
+        <p class="eyebrow" style="margin-bottom: 10px;">Security, Governance &amp; IR</p>
+        <h3>Security &amp; Incident Response</h3>
+        <p>
+          Practical information security work focused on access control parameters, threat modeling, active incident response, and ISO 27001-aligned corrective recommendations.
+        </p>
+        <ul style="padding-left: 18px; margin: 12px 0 20px; font-size: 0.94rem; color: var(--muted); line-height: 1.6;">
+          <li>Incident investigations &amp; containment logs</li>
+          <li>Employee offboarding lifecycle analysis</li>
+          <li>AI governance &amp; acceptable use policies</li>
+        </ul>
+      </div>
+      <a href="{{ '/security/' | relative_url }}" class="repo-link" style="align-self: flex-start;">Explore Security &rarr;</a>
+    </div>
+
+    <!-- Workspace Panel -->
+    <div class="technical-panel">
+      <div>
+        <p class="eyebrow" style="margin-bottom: 10px;">Enterprise Directory Scale</p>
+        <h3>Google Workspace Admin</h3>
+        <p>
+          System administration at scale across distributed multi-campus educational environments, managing directories, credentials, automation, and identity parameters.
+        </p>
+        <ul style="padding-left: 18px; margin: 12px 0 20px; font-size: 0.94rem; color: var(--muted); line-height: 1.6;">
+          <li>3,000+ active user directory governance</li>
+          <li>GAM command-line automation script pipelines</li>
+          <li>Role-Based Access Control (RBAC) &amp; MFA rollouts</li>
+        </ul>
+      </div>
+      <a href="{{ '/googleworkspaceadmin/' | relative_url }}" class="repo-link" style="align-self: flex-start;">Explore Workspace &rarr;</a>
+    </div>
   </div>
 </section>
 

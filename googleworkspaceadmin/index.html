@@ -4,38 +4,37 @@ title: "Google Workspace Administration at Scale"
 description: "Real-world administration, governance, security, and operations across multi-campus educational environments."
 ---
 
-<div class="article-content">
+<div class="article-content doc-layout">
   <!-- Hero Section -->
-  <header class="article-header" style="margin-bottom: 30px;">
+  <header class="article-header">
     <p class="eyebrow">Enterprise Directories &bull; Identity Management &bull; Scaled Operations</p>
-    <h1 style="margin-top: 12px; margin-bottom: 8px;">Google Workspace Administration at Scale</h1>
-    <p class="intro-copy" style="margin-top: 16px; border-left-color: var(--pink);">
+    <h1>Google Workspace Administration at Scale</h1>
+    <p class="intro-copy">
       Real-world administration, governance, security, and operations across multi-campus environments.
     </p>
   </header>
 
   <!-- Environment Statistics -->
-  <section aria-label="Environment Statistics" style="margin-bottom: 34px; background: var(--panel); border: 2px solid var(--pink); border-radius: 8px; padding: 22px;">
-    <h2 style="font-family: 'Kdam Thmor Pro', sans-serif; font-size: 1rem; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; letter-spacing: 0.05em;">Environment Scale</h2>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
-      <div style="background: var(--panel-strong); padding: 16px; border-radius: 6px; border: 1px solid rgba(236, 153, 185, 0.15);">
-        <span style="display: block; font-family: 'Kdam Thmor Pro', sans-serif; font-size: 2rem; font-weight: bold; color: var(--white); line-height: 1.1;">3,000+</span>
-        <span style="font-size: 0.88rem; color: var(--muted); font-weight: 500; margin-top: 4px; display: block;">Active Users</span>
+  <section aria-label="Environment Statistics" style="margin-bottom: 34px;">
+    <div class="metrics-grid">
+      <div class="metrics-panel">
+        <span class="metric-number">3,000+</span>
+        <span class="metric-label">Active Users</span>
       </div>
-      <div style="background: var(--panel-strong); padding: 16px; border-radius: 6px; border: 1px solid rgba(236, 153, 185, 0.15);">
-        <span style="display: block; font-family: 'Kdam Thmor Pro', sans-serif; font-size: 2rem; font-weight: bold; color: var(--white); line-height: 1.1;">400+</span>
-        <span style="font-size: 0.88rem; color: var(--muted); font-weight: 500; margin-top: 4px; display: block;">Active Staff</span>
+      <div class="metrics-panel">
+        <span class="metric-number">400+</span>
+        <span class="metric-label">Active Staff</span>
       </div>
-      <div style="background: var(--panel-strong); padding: 16px; border-radius: 6px; border: 1px solid rgba(236, 153, 185, 0.15);">
-        <span style="display: block; font-family: 'Kdam Thmor Pro', sans-serif; font-size: 2rem; font-weight: bold; color: var(--white); line-height: 1.1;">5</span>
-        <span style="font-size: 0.88rem; color: var(--muted); font-weight: 500; margin-top: 4px; display: block;">Distributed Campuses</span>
+      <div class="metrics-panel">
+        <span class="metric-number">5</span>
+        <span class="metric-label">Distributed Campuses</span>
       </div>
     </div>
   </section>
 
   <!-- Audience -->
-  <section style="margin-bottom: 34px; font-size: 0.95rem; color: var(--muted); background: var(--panel-strong); padding: 16px 20px; border-radius: 8px; border: 1px solid rgba(236, 153, 185, 0.15);">
-    <strong style="color: var(--white);">Audience:</strong> Google Workspace hiring managers, MSPs, Google partners, internal IT leaders, and organizations operating Google Workspace at scale.
+  <section class="info-callout">
+    <strong>Audience:</strong> Google Workspace hiring managers, MSPs, Google partners, internal IT leaders, and organizations operating Google Workspace at scale.
   </section>
 
   <!-- Overview -->
@@ -52,13 +51,13 @@ description: "Real-world administration, governance, security, and operations ac
     <p>
       These initiatives represent examples of operational activities and projects executed to harden, clean, and automate Google Workspace directories:
     </p>
-    <ul style="padding-left: 20px; display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px;">
-      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">Multi-campus account governance review:</strong> Conducted a complete domain-wide audit of active user directories across all 5 campuses, consolidating organizational units (OUs), identifying shadow accounts, and deactivating orphaned credentials (Performed).</li>
-      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">MFA rollout and account hardening initiative:</strong> Authored and executed a staged rollout of mandatory Multi-Factor Authentication (MFA) / 2-Step Verification for all staff, implementing backup code protocols and restricting session duration settings (Performed).</li>
-      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">Shared Drive ownership and permissions review:</strong> Re-structured broad, legacy Shared Drives into restricted departmental repositories, enforcing least-privilege defaults and blocking external sharing permissions on sensitive folders (Performed).</li>
-      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">OAuth application audit and remediation:</strong> Analyzed third-party API integrations, revoked access for unverified or high-risk applications, and established an approval workflow for domain-wide API access (Performed).</li>
-      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">Standardized onboarding/offboarding workflow design:</strong> Analyzed offboarding latency and proposed automated deprovisioning integrations between HR contract databases and active directories (Recommended; not implemented during tenure).</li>
-      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">GAM-based reporting and administrative automation:</strong> Developed custom command-line pipelines using Google Apps Manager (GAM) to handle bulk user creation, reporting audits, and bulk permissions changes (Performed).</li>
+    <ul class="two-column-list">
+      <li><strong>Multi-campus account governance review:</strong> Conducted a complete domain-wide audit of active user directories across all 5 campuses, consolidating organizational units (OUs), identifying shadow accounts, and deactivating orphaned credentials (Performed).</li>
+      <li><strong>MFA rollout and account hardening initiative:</strong> Authored and executed a staged rollout of mandatory Multi-Factor Authentication (MFA) / 2-Step Verification for all staff, implementing backup code protocols and restricting session duration settings (Performed).</li>
+      <li><strong>Shared Drive ownership and permissions review:</strong> Re-structured broad, legacy Shared Drives into restricted departmental repositories, enforcing least-privilege defaults and blocking external sharing permissions on sensitive folders (Performed).</li>
+      <li><strong>OAuth application audit and remediation:</strong> Analyzed third-party API integrations, revoked access for unverified or high-risk applications, and established an approval workflow for domain-wide API access (Performed).</li>
+      <li><strong>Standardized onboarding/offboarding workflow design:</strong> Analyzed offboarding latency and proposed automated deprovisioning integrations between HR contract databases and active directories (Recommended; not implemented during tenure).</li>
+      <li><strong>GAM-based reporting and administrative automation:</strong> Developed custom command-line pipelines using Google Apps Manager (GAM) to handle bulk user creation, reporting audits, and bulk permissions changes (Performed).</li>
     </ul>
   </section>
 
@@ -94,7 +93,7 @@ description: "Real-world administration, governance, security, and operations ac
     <p>
       Using the graphical Admin Console is inefficient at scale. To manage thousands of directories, I utilize command-line administration via Google Apps Manager (GAM):
     </p>
-    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel-strong); font-size: 1.02rem; font-style: italic;">
+    <blockquote>
       "Reduced repetitive administrative effort through automation and bulk management tooling."
     </blockquote>
     <p>
@@ -133,14 +132,14 @@ description: "Real-world administration, governance, security, and operations ac
     </ul>
   </section>
 
-  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 34px 0; opacity: 0.3;">
+  <hr style="border: 0; border-top: 1px solid rgba(236, 153, 185, 0.15); margin: 34px 0;">
 
   <!-- Cross-Links & Navigation -->
-  <section aria-label="Professional profiles and CV" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px;">
-    <a href="{{ '/cv/' | relative_url }}" class="repo-link" style="display: inline-flex; align-items: center; border-radius: 8px;">View CV</a>
-    <a href="https://drive.google.com/drive/folders/1XhvHyb2zgHdI7LC5qxP2kC1C53-e3_PI" target="_blank" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">Security Works Portfolio</a>
-    <a href="https://github.com/R2Pitou" target="_blank" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">GitHub Profile</a>
-    <a href="https://linkedin.com/in/atp2kh/" target="_blank" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">LinkedIn Profile</a>
-    <a href="{{ '/contact/' | relative_url }}" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">Contact &amp; Inquiry</a>
+  <section aria-label="Professional profiles and CV" class="action-links">
+    <a href="{{ '/cv/' | relative_url }}" class="repo-link">View CV</a>
+    <a href="https://drive.google.com/drive/folders/1XhvHyb2zgHdI7LC5qxP2kC1C53-e3_PI" target="_blank" class="repo-link repo-link-secondary">Security Works Portfolio</a>
+    <a href="https://github.com/R2Pitou" target="_blank" class="repo-link repo-link-secondary">GitHub Profile</a>
+    <a href="https://linkedin.com/in/atp2kh/" target="_blank" class="repo-link repo-link-secondary">LinkedIn Profile</a>
+    <a href="{{ '/contact/' | relative_url }}" class="repo-link repo-link-secondary">Contact &amp; Inquiry</a>
   </section>
 </div>
