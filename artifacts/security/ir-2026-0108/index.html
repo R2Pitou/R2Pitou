@@ -1,0 +1,137 @@
+---
+layout: default
+title: "Incident Report IR-2026-0108: Offboarding Governance and Data Exfiltration Audit"
+description: "Analysis and systemic offboarding remediation following a high-volume data exfiltration event by a terminated employee."
+---
+
+<div class="article-content">
+  <header class="article-header">
+    <span class="post-meta">Case Study &bull; Incident Report</span>
+    <h1>Incident Report IR-2026-0108: Offboarding Governance & Data Exfiltration Audit</h1>
+    
+    <div class="byline" style="margin-top: 8px; font-size: 0.95rem;">
+      <strong>Lead Investigator:</strong> Arttu Pitou At<br>
+      <strong>Incident Reference:</strong> IR-2026-0108 &bull; <strong>Classification:</strong> Critical Breach of Confidentiality
+    </div>
+  </header>
+
+  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 24px 0; opacity: 0.3;">
+
+  <section aria-labelledby="section-metadata">
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 0.95rem; background: var(--panel); border: 1px solid var(--pink); border-radius: 6px;">
+      <tbody>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white); width: 30%;">Date of Incident Discovery</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">January 6, 2026 (Activity spans Dec 25, 2025 - Jan 6, 2026)</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Impacted CIA Component</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">Confidentiality</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Primary Gaps Identified</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">ISO 27001 Annex A 6.4 (Termination/Change of Employment), Annex A 8.12 (Data Leakage Prevention), Clause 7.2 (Competence / Checklist Gap)</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Status</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); color: #ec99b9; font-weight: bold;">Remediated & Closed</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="section-summary">
+    <h2 id="section-summary">Executive Summary</h2>
+    <p>
+      Following the termination of an employee on December 25, 2025, a directory audit log review identified a high-volume data exfiltration event involving more than 20,000 files. Due to a failure in the offboarding workflow, the subject's active credentials were not deactivated on their last working day. This permitted unauthorized after-hours downloads of proprietary curriculum resources, management schedules, and staff personal records. Immediate deactivation and credential rotations were executed, and automated HR-to-IT offboarding integrations were recommended to eliminate future deprovisioning latency.
+    </p>
+  </section>
+
+  <section aria-labelledby="section-context">
+    <h2 id="section-context">Context</h2>
+    <p>
+      The environment operates across 5 campuses, accommodating approximately 3,000 active directories. Given the seasonal turnover of instructional and administrative staff typical of academic institutions, the employee lifecycle (onboarding, adjustments, and offboarding) is a significant vector of operational risk. Coordination between Human Resources (HR) and the IT department historically relied on ad-hoc manual notification.
+    </p>
+  </section>
+
+  <section aria-labelledby="section-challenge">
+    <h2 id="section-challenge">Challenge</h2>
+    <p>
+      A routine administrative security review flagged anomalous directory access patterns originating after normal business hours. An account belonging to an employee whose contract had ended on December 25, 2025, was actively accessing the directory from multiple external IP addresses. The challenge was to trace the complete timeline of the access, determine the specific scope of the files downloaded, immediately sever the persistent connection, and resolve the structural failure that allowed a terminated employee's account to remain active.
+    </p>
+  </section>
+
+  <section aria-labelledby="section-investigation">
+    <h2 id="section-investigation">Investigation</h2>
+    <p>
+      A log analysis was performed on the Google Workspace directory audit trails, establishing the following timeline and observations:
+    </p>
+    <ul>
+      <li><strong>Persistence:</strong> The subject's credentials remained active post-employment, permitting sustained access via multiple distinct external IP addresses.</li>
+      <li><strong>Peak Exfiltration (January 6, 2026):</strong> A high-volume download session occurred. The subject targeted curriculum pacing guides, lesson resources, and folders containing sensitive personal records (PII) of other staff.</li>
+      <li><strong>Targeted Files:</strong> Deep-dive analysis confirmed that key management schedules ("O8 Management Schedules") and official exam directories ("O9 Official Group") were accessed and downloaded.</li>
+      <li><strong>Behavioral Pattern:</strong> Log timestamps showed the downloads occurred primarily after-hours (specifically around 20:00 ICT), indicating a deliberate attempt to evade real-time administrative scrutiny.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="section-findings">
+    <h2 id="section-findings">Findings & Root Cause Analysis</h2>
+    <p>
+      The investigation identified three failures within the Information Security Management System (ISMS):
+    </p>
+    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel);">
+      <p style="margin: 0; font-weight: bold; color: var(--white);">Primary Failure: ISO 27001 Annex A 6.4 (Termination or Change of Employment Responsibilities)</p>
+      <p style="margin: 6px 0 0; font-size: 0.95rem;">
+        The system failed to trigger a mandatory account deactivation on the employee's documented last working day, leaving active credentials active.
+      </p>
+    </blockquote>
+    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel);">
+      <p style="margin: 0; font-weight: bold; color: var(--white);">Procedural Gap: ISO 27001 Clause 7.2 (Competence & Checklist Coordination)</p>
+      <p style="margin: 6px 0 0; font-size: 0.95rem;">
+        No formalized or shared offboarding checklist existed between HR and IT. Changes in contract status were not systematically communicated to directory administrators, creating "shadow accounts."
+      </p>
+    </blockquote>
+    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel);">
+      <p style="margin: 0; font-weight: bold; color: var(--white);">Technical Gap: ISO 27001 Annex A 8.12 (Data Leakage Prevention)</p>
+      <p style="margin: 6px 0 0; font-size: 0.95rem;">
+        The system lacked egress controls or download monitoring thresholds to flag and block high-volume bulk file downloads from a single user profile.
+      </p>
+    </blockquote>
+  </section>
+
+  <section aria-labelledby="section-actions">
+    <h2 id="section-actions">Actions Taken</h2>
+    <p>
+      Mitigations and proposed long-term fixes were established:
+    </p>
+    <ol>
+      <li><strong>Immediate Containment (Performed):</strong>
+        <ul>
+          <li>Revoked the credentials and suspended the former employee's directory account immediately to stop ongoing exfiltration.</li>
+          <li>Rotated access keys and updated sharing parameters for the affected Shared Drives to eliminate secondary access persistence.</li>
+        </ul>
+      </li>
+      <li><strong>Corrective Action Recommendations (Recommended):</strong>
+        <ul>
+          <li><strong>Joint Offboarding Framework:</strong> Recommended establishing a joint HR-IT Offboarding Policy defining SLAs for contract termination alerts and shared checklists to eliminate "shadow accounts" (Recommended).</li>
+          <li><strong>Automated Account Suspension:</strong> Proposed integrating directory suspension triggers directly with the HR database to automate account deactivation on the last working day and remove manual deprovisioning latency (Recommended; not implemented during tenure).</li>
+          <li><strong>Egress Threshold Monitoring:</strong> Proposed configuring automated egress monitoring to flag and block anomalous bulk file downloads from single user profiles (Recommended).</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="section-outcomes">
+    <h2 id="section-outcomes">Outcomes</h2>
+    <p>
+      The immediate threat was contained within hours of detection by severing all active credentials. Systemically, the immediate deactivation of the compromised account halted the exfiltration event. The investigation clearly exposed the manual deprovisioning gap, establishing the strategic case for automated HR-to-IT offboarding integrations to resolve departure-to-deactivation latency in the future.
+    </p>
+  </section>
+
+  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 34px 0; opacity: 0.3;">
+
+  <footer style="display: flex; justify-content: space-between; font-size: 0.92rem;">
+    <a href="{{ '/security/' | relative_url }}">&larr; Back to Security &amp; Governance</a>
+    <a href="{{ '/cv/' | relative_url }}">View CV &amp; Professional Background &rarr;</a>
+  </footer>
+</div>

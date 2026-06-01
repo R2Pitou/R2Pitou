@@ -1,0 +1,146 @@
+---
+layout: default
+title: "Google Workspace Administration at Scale"
+description: "Real-world administration, governance, security, and operations across multi-campus educational environments."
+---
+
+<div class="article-content">
+  <!-- Hero Section -->
+  <header class="article-header" style="margin-bottom: 30px;">
+    <p class="eyebrow">Enterprise Directories &bull; Identity Management &bull; Scaled Operations</p>
+    <h1 style="margin-top: 12px; margin-bottom: 8px;">Google Workspace Administration at Scale</h1>
+    <p class="intro-copy" style="margin-top: 16px; border-left-color: var(--pink);">
+      Real-world administration, governance, security, and operations across multi-campus environments.
+    </p>
+  </header>
+
+  <!-- Environment Statistics -->
+  <section aria-label="Environment Statistics" style="margin-bottom: 34px; background: var(--panel); border: 2px solid var(--pink); border-radius: 8px; padding: 22px;">
+    <h2 style="font-family: 'Kdam Thmor Pro', sans-serif; font-size: 1rem; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; letter-spacing: 0.05em;">Environment Scale</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
+      <div style="background: var(--panel-strong); padding: 16px; border-radius: 6px; border: 1px solid rgba(236, 153, 185, 0.15);">
+        <span style="display: block; font-family: 'Kdam Thmor Pro', sans-serif; font-size: 2rem; font-weight: bold; color: var(--white); line-height: 1.1;">3,000+</span>
+        <span style="font-size: 0.88rem; color: var(--muted); font-weight: 500; margin-top: 4px; display: block;">Active Users</span>
+      </div>
+      <div style="background: var(--panel-strong); padding: 16px; border-radius: 6px; border: 1px solid rgba(236, 153, 185, 0.15);">
+        <span style="display: block; font-family: 'Kdam Thmor Pro', sans-serif; font-size: 2rem; font-weight: bold; color: var(--white); line-height: 1.1;">400+</span>
+        <span style="font-size: 0.88rem; color: var(--muted); font-weight: 500; margin-top: 4px; display: block;">Active Staff</span>
+      </div>
+      <div style="background: var(--panel-strong); padding: 16px; border-radius: 6px; border: 1px solid rgba(236, 153, 185, 0.15);">
+        <span style="display: block; font-family: 'Kdam Thmor Pro', sans-serif; font-size: 2rem; font-weight: bold; color: var(--white); line-height: 1.1;">5</span>
+        <span style="font-size: 0.88rem; color: var(--muted); font-weight: 500; margin-top: 4px; display: block;">Distributed Campuses</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audience -->
+  <section style="margin-bottom: 34px; font-size: 0.95rem; color: var(--muted); background: var(--panel-strong); padding: 16px 20px; border-radius: 8px; border: 1px solid rgba(236, 153, 185, 0.15);">
+    <strong style="color: var(--white);">Audience:</strong> Google Workspace hiring managers, MSPs, Google partners, internal IT leaders, and organizations operating Google Workspace at scale.
+  </section>
+
+  <!-- Overview -->
+  <section aria-labelledby="section-overview" style="margin-bottom: 42px;">
+    <h2 id="section-overview">Overview</h2>
+    <p>
+      Managing a Google Workspace directory across multiple distributed campuses requires moving beyond manual, GUI-driven administration. My approach to Workspace administration combines structured identity management, standardized operational processes, automation where appropriate, and strong security controls. Operating as the primary systems administrator, I structure directory configurations to minimize security risks, simplify operational complexity, and reduce single-point-of-failure dependencies on individual staff members.
+    </p>
+  </section>
+
+  <!-- Examples of Operational Work & Projects -->
+  <section aria-labelledby="section-projects" style="margin-bottom: 42px;">
+    <h2 id="section-projects">Examples of Operational Work &amp; Projects (Representative)</h2>
+    <p>
+      These initiatives represent examples of operational activities and projects executed to harden, clean, and automate Google Workspace directories:
+    </p>
+    <ul style="padding-left: 20px; display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px;">
+      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">Multi-campus account governance review:</strong> Conducted a complete domain-wide audit of active user directories across all 5 campuses, consolidating organizational units (OUs), identifying shadow accounts, and deactivating orphaned credentials (Performed).</li>
+      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">MFA rollout and account hardening initiative:</strong> Authored and executed a staged rollout of mandatory Multi-Factor Authentication (MFA) / 2-Step Verification for all staff, implementing backup code protocols and restricting session duration settings (Performed).</li>
+      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">Shared Drive ownership and permissions review:</strong> Re-structured broad, legacy Shared Drives into restricted departmental repositories, enforcing least-privilege defaults and blocking external sharing permissions on sensitive folders (Performed).</li>
+      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">OAuth application audit and remediation:</strong> Analyzed third-party API integrations, revoked access for unverified or high-risk applications, and established an approval workflow for domain-wide API access (Performed).</li>
+      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">Standardized onboarding/offboarding workflow design:</strong> Analyzed offboarding latency and proposed automated deprovisioning integrations between HR contract databases and active directories (Recommended; not implemented during tenure).</li>
+      <li style="color: var(--muted); font-size: 0.98rem;"><strong style="color: var(--white);">GAM-based reporting and administrative automation:</strong> Developed custom command-line pipelines using Google Apps Manager (GAM) to handle bulk user creation, reporting audits, and bulk permissions changes (Performed).</li>
+    </ul>
+  </section>
+
+  <!-- Identity & Access Management -->
+  <section aria-labelledby="section-iam" style="margin-bottom: 42px;">
+    <h2 id="section-iam">Identity &amp; Access Management</h2>
+    <p>
+      Identity governance forms the perimeter of any SaaS architecture. In a high-volume campus setup, IAM is structured to prevent credential sprawl and unauthorized access:
+    </p>
+    <ul>
+      <li><strong>User Lifecycle Governance:</strong> Analyzing departure lag, deprovisioning latency, and detailing operational workflows to de-authorize terminated accounts, rotate Shared Drive access keys, and transfer document ownership (Performed).</li>
+      <li><strong>Role-Based Access Control (RBAC):</strong> Directory users are structured into clean Organizational Units (OUs). Permissions, service access, and device policies are inherited based on role, avoiding ad-hoc permission updates (Performed).</li>
+      <li><strong>Account Hardening &amp; MFA:</strong> Securing high-risk staff profiles against credential theft. This includes mandatory 2-Step Verification, blocking local password recoveries, and restricting sessions to prevent cookie-hijacking persistence (Performed).</li>
+    </ul>
+  </section>
+
+  <!-- Security & Governance -->
+  <section aria-labelledby="section-security" style="margin-bottom: 42px;">
+    <h2 id="section-security">Security &amp; Governance</h2>
+    <p>
+      My administration model uses native Google Workspace enterprise tools to verify and enforce data confidentiality:
+    </p>
+    <ul>
+      <li><strong>Audit Reviews &amp; Vault:</strong> Conducting search queries, maintaining litigation holds, and exporting audit data in Google Vault for internal investigations (Performed).</li>
+      <li><strong>OAuth Review:</strong> Analyzing third-party API tokens and restricting access to unverified applications (Performed).</li>
+      <li><strong>Data Protection &amp; Sharing Controls:</strong> Enforcing strict external sharing rules for Google Drive and Shared Drives. Sensitive units are logically isolated to prevent data leakage and public link generation (Performed).</li>
+    </ul>
+  </section>
+
+  <!-- Automation & Scale -->
+  <section aria-labelledby="section-automation" style="margin-bottom: 42px;">
+    <h2 id="section-automation">Automation &amp; Scale</h2>
+    <p>
+      Using the graphical Admin Console is inefficient at scale. To manage thousands of directories, I utilize command-line administration via Google Apps Manager (GAM):
+    </p>
+    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel-strong); font-size: 1.02rem; font-style: italic;">
+      "Reduced repetitive administrative effort through automation and bulk management tooling."
+    </blockquote>
+    <p>
+      By scripting complex operations, I handle bulk updates that would take hours to execute manually:
+    </p>
+    <ul>
+      <li><strong>Bulk Directory Restructuring:</strong> Performing bulk user moves across Organizational Units (OUs) using GAM and CSV lists (Performed).</li>
+      <li><strong>Permissions Auditing:</strong> Querying Shared Drive sharing states to identify external shares and revoking unauthorized links via GAM (Performed).</li>
+      <li><strong>Reporting &amp; Logs:</strong> Generating CSV reports of user 2SV status, account inactivity, and OAuth authorizations using GAM to support administrative reviews (Performed).</li>
+    </ul>
+  </section>
+
+  <!-- Multi-Campus Standardization -->
+  <section aria-labelledby="section-standardization" style="margin-bottom: 42px;">
+    <h2 id="section-standardization">Multi-Campus Standardization</h2>
+    <p>
+      In a distributed network of 5 campuses, consistency is the prerequisite for security. My work focuses on establishing predictable, documented systems that prevent operational degradation:
+    </p>
+    <ul>
+      <li><strong>Repeatable Systems:</strong> Designing clear, step-by-step Standard Operating Procedures (SOPs) for password resets, device enrollment, and basic hardware deprovisioning (Performed).</li>
+      <li><strong>Reducing Personnel Dependencies:</strong> Moving away from oral knowledge transfers. All administrative configurations, GAM scripts, and directory structures are thoroughly documented so that the IT department operates reliably regardless of individual staff changes (Performed).</li>
+      <li><strong>Policy Alignment:</strong> Ensuring that all campuses follow identical sharing and access controls, preventing "policy drift" where one campus maintains weaker security baselines than the others (Performed).</li>
+    </ul>
+  </section>
+
+  <!-- Operational Design Considerations -->
+  <section aria-labelledby="section-considerations" style="margin-bottom: 42px;">
+    <h2 id="section-considerations">Operational Design Considerations</h2>
+    <p>
+      When structuring the Google Workspace directory, my administrative choices are guided by structural stability and risk management rather than raw platform features:
+    </p>
+    <ul>
+      <li><strong>Identity Separation:</strong> Separating student and staff identities into strict root OUs to guarantee that policy parameters (such as email limits, external Drive sharing, and marketplace permissions) can never accidentally bleed between roles (Performed).</li>
+      <li><strong>Delegated Administration:</strong> Recommending custom delegated administrator roles with specific, limited rights (e.g. Helpdesk Admin) to reduce the number of Super Admin profiles (Recommended).</li>
+      <li><strong>Consistency Over Convenience:</strong> Enforcing strict session timeouts and blocking unmanaged device synchronization, prioritizing institutional data security over frictionless convenience (Performed).</li>
+    </ul>
+  </section>
+
+  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 34px 0; opacity: 0.3;">
+
+  <!-- Cross-Links & Navigation -->
+  <section aria-label="Professional profiles and CV" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px;">
+    <a href="{{ '/cv/' | relative_url }}" class="repo-link" style="display: inline-flex; align-items: center; border-radius: 8px;">View CV</a>
+    <a href="https://drive.google.com/drive/folders/1XhvHyb2zgHdI7LC5qxP2kC1C53-e3_PI" target="_blank" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">Security Works Portfolio</a>
+    <a href="https://github.com/R2Pitou" target="_blank" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">GitHub Profile</a>
+    <a href="https://linkedin.com/in/atp2kh/" target="_blank" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">LinkedIn Profile</a>
+    <a href="{{ '/contact/' | relative_url }}" class="repo-link repo-link-secondary" style="display: inline-flex; align-items: center; border-radius: 8px;">Contact &amp; Inquiry</a>
+  </section>
+</div>

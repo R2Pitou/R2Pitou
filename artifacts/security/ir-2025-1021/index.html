@@ -1,0 +1,132 @@
+---
+layout: default
+title: "Incident Report IR-2025-1021: Access Governance and Privilege Containment"
+description: "Incident investigation, root cause analysis, and access control remediation following unauthorized Shared Drive modifications."
+---
+
+<div class="article-content">
+  <header class="article-header">
+    <span class="post-meta">Case Study &bull; Incident Report</span>
+    <h1>Incident Report IR-2025-1021: Access Governance & Privilege Containment</h1>
+    
+    <div class="byline" style="margin-top: 8px; font-size: 0.95rem;">
+      <strong>Lead Investigator:</strong> Arttu Pitou At<br>
+      <strong>Incident Reference:</strong> IR-2025-1021 &bull; <strong>Classification:</strong> Major Non-conformity
+    </div>
+  </header>
+
+  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 24px 0; opacity: 0.3;">
+
+  <section aria-labelledby="section-metadata">
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 0.95rem; background: var(--panel); border: 1px solid var(--pink); border-radius: 6px;">
+      <tbody>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white); width: 30%;">Date of Incident</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">October 21, 2025</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Impacted CIA Component</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">Integrity and Availability</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Primary Gaps Identified</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2);">ISO 27001 Annex A 8.2 (Privileged Access Rights), Annex A 8.15 (Logging and Monitoring)</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); font-weight: bold; color: var(--white);">Status</td>
+          <td style="padding: 12px; border: 1px solid rgba(236, 153, 185, 0.2); color: #ec99b9; font-weight: bold;">Remediated & Closed</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="section-summary">
+    <h2 id="section-summary">Executive Summary</h2>
+    <p>
+      On October 21, 2025, an authorized user with excessive privileges performed unauthorized modification and deletion events across core institutional Shared Drives. The incident resulted in the moving and trashing of academic materials and the restructuring of directory hierarchies outside standard operational workflows. The account was suspended, containment via external gateway blocks was recommended, and availability was restored using Google Drive recovery and rollback functionality. Systemic remediation was performed to transition Shared Drive access rights to least-privilege defaults.
+    </p>
+  </section>
+
+  <section aria-labelledby="section-context">
+    <h2 id="section-context">Context</h2>
+    <p>
+      The environment consists of a distributed multi-campus directory serving approximately 3,000 active users and 400 staff members. Because of the size and geographical distribution of the campuses, administration relies heavily on delegated access control within Google Workspace Shared Drives to partition departments, administrative offices, and academic bodies.
+    </p>
+  </section>
+
+  <section aria-labelledby="section-challenge">
+    <h2 id="section-challenge">Challenge</h2>
+    <p>
+      At 11:03 AM on the day of the incident, administrative alerts and user reports indicated a sudden loss of access to files in shared academic directories. An actor was actively modifying folder titles, altering settings on folders belonging to senior leadership (such as "Office of the Principal" and "Foreign Teachers"), and executing mass-deletion commands, placing hundreds of files in the system trash. The immediate challenge was to identify the origin of the activity, stop the ongoing file modifications, assess the breadth of the impact, and restore access without data loss.
+    </p>
+  </section>
+
+  <section aria-labelledby="section-investigation">
+    <h2 id="section-investigation">Investigation</h2>
+    <p>
+      A log analysis was conducted using Google Workspace Admin Console audit logs. The investigation traced the actions chronologically:
+    </p>
+    <ul>
+      <li><strong>Vector:</strong> The activity was traced to two distinct IP addresses, including a sensitive external gateway.</li>
+      <li><strong>Containment Phase (11:03 – 11:19 AM):</strong> The actor executed mass "Trash" events targeting the "Teacher Drive" and "Pre Testing" repositories. Impacted files included <code>.pdf</code>, <code>.docx</code>, and <code>.ppt</code> academic materials.</li>
+      <li><strong>Unauthorized Modification (11:14 – 11:18 AM):</strong> Drive integrity was compromised via unauthorized renaming and settings overrides on core Shared Drives, including the principal's office and foreign educator repositories.</li>
+      <li><strong>Restructuring (11:19 – 11:27 AM):</strong> The actor created new folder hierarchies and began moving existing institutional data, representing an unauthorized administrative bypass.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="section-findings">
+    <h2 id="section-findings">Findings & Root Cause Analysis</h2>
+    <p>
+      The investigation identified two critical security control failures:
+    </p>
+    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel);">
+      <p style="margin: 0; font-weight: bold; color: var(--white);">Primary Failure: ISO 27001 Annex A 8.2 (Privileged Access Rights)</p>
+      <p style="margin: 6px 0 0; font-size: 0.95rem;">
+        The actor maintained excessive permissions that exceeded their operational requirements. They held full "Manager" or "Editor" access on Shared Drives that should have been restricted to read-only or comment-only, permitting mass deletion and settings overrides.
+      </p>
+    </blockquote>
+    <blockquote style="margin: 20px 0; border-left: 6px solid var(--pink); padding: 12px 20px; background: var(--panel);">
+      <p style="margin: 0; font-weight: bold; color: var(--white);">Secondary Failure: ISO 27001 Annex A 8.15 (Logging and Monitoring)</p>
+      <p style="margin: 6px 0 0; font-size: 0.95rem;">
+        While comprehensive audit logs were captured, no automated real-time alert triggers existed to flag or automatically halt mass-deletion actions, delaying initial detection.
+      </p>
+    </blockquote>
+  </section>
+
+  <section aria-labelledby="section-actions">
+    <h2 id="section-actions">Actions Taken</h2>
+    <p>
+      The response was executed in two phases:
+    </p>
+    <ol>
+      <li><strong>Immediate Containment &amp; Recovery:</strong>
+        <ul>
+          <li>Suspended the compromised user account to halt active modifications (Performed).</li>
+          <li>Initiated a bulk restoration of data using Google Drive trash and native recovery tools, successfully restoring file <strong>Availability</strong> and folder hierarchies to maintain <strong>Integrity</strong> (Performed).</li>
+          <li>Recommended blocking of the identified external gateway access points in subsequent containment discussions (Recommended).</li>
+        </ul>
+      </li>
+      <li><strong>Long-term Corrective Action (Performed):</strong>
+        <ul>
+          <li>Implemented <strong>Annex A 5.18 (Access rights)</strong> across the entire domain.</li>
+          <li>Transitioned all Shared Drive permissions to a "View/Comment" default for non-owner staff.</li>
+          <li>Established a mandatory, documented approval workflow for any staff requesting "Editor" or "Manager" permissions.</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="section-outcomes">
+    <h2 id="section-outcomes">Outcomes</h2>
+    <p>
+      The immediate recovery process resulted in the complete restoration of all affected directories without institutional data loss. The long-term policy adjustments eliminated excessive permissions across the directory, significantly decreasing the risk of subsequent modification or data destruction events by restricting administrative roles to verified, authorized personnel.
+    </p>
+  </section>
+
+  <hr style="border: 0; border-top: 1px solid var(--pink); margin: 34px 0; opacity: 0.3;">
+
+  <footer style="display: flex; justify-content: space-between; font-size: 0.92rem;">
+    <a href="{{ '/security/' | relative_url }}">&larr; Back to Security &amp; Governance</a>
+    <a href="{{ '/cv/' | relative_url }}">View CV &amp; Professional Background &rarr;</a>
+  </footer>
+</div>
