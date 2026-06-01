@@ -30,13 +30,13 @@ description: "Security audits, audit log tracing, incident containment procedure
   <section aria-labelledby="section-practice" style="margin-bottom: 42px;">
     <h2 id="section-practice">Security Work in Practice</h2>
     <ul class="two-column-list">
-      <li><strong>Directory audits:</strong> Regular reviews of group memberships, privileged access roles, and Google Workspace delegated administration (Performed).</li>
-      <li><strong>Offboarding audits:</strong> Tracing departure-to-deactivation latency and compiling offboarding SLA compliance logs (Performed).</li>
-      <li><strong>Incident investigations:</strong> Tracing Admin Console audit logs to identify anomalous IP addresses, external file shares, and unauthorized folder restructuring (Performed).</li>
-      <li><strong>Evidence compilation:</strong> Extracting logs and path metadata to verify access boundary containment for internal audits (Performed).</li>
-      <li><strong>Policy implementation:</strong> Drafting and enforcing Acceptable Use Policies (AUP) and student data protection charters (Performed).</li>
-      <li><strong>Threat mapping:</strong> Identifying exposed external Drive shares and mapping network segmentation gaps across distributed sites (Performed).</li>
-      <li><strong>SaaS configuration reviews:</strong> Auditing third-party OAuth app permissions, domain-wide email routing rules, and external sharing policies (Performed).</li>
+      <li><strong>Directory audits:</strong> Regular reviews of group memberships, privileged access roles, and Google Workspace delegated administration.</li>
+      <li><strong>Offboarding audits:</strong> Tracing departure-to-deactivation latency and compiling offboarding SLA compliance logs.</li>
+      <li><strong>Incident investigations:</strong> Tracing Admin Console audit logs to identify anomalous IP addresses, external file shares, and unauthorized folder restructuring.</li>
+      <li><strong>Evidence compilation:</strong> Extracting logs and path metadata to verify access boundary containment for internal audits.</li>
+      <li><strong>Policy implementation:</strong> Drafting and enforcing Acceptable Use Policies (AUP) and student data protection charters.</li>
+      <li><strong>Threat mapping:</strong> Identifying exposed external Drive shares and mapping network segmentation gaps across distributed sites.</li>
+      <li><strong>SaaS configuration reviews:</strong> Auditing third-party OAuth app permissions, domain-wide email routing rules, and external sharing policies.</li>
     </ul>
   </section>
 
@@ -53,7 +53,7 @@ description: "Security audits, audit log tracing, incident containment procedure
           <p>
             <strong>Challenge:</strong> A delegated account with excessive manager access renamed root folders and trashed academic directories on core Shared Drives.
             <br><br>
-            <strong>Mitigation:</strong> Suspended the user account, blocked the external gateway IP, and restored folder structures using Google Workspace restoration tools (Performed).
+            <strong>Mitigation:</strong> Suspended the user account, blocked the external gateway IP, and restored folder structures using Google Workspace restoration tools.
           </p>
         </div>
         <a href="{{ '/artifacts/security/ir-2025-1021/' | relative_url }}" class="repo-link" style="align-self: flex-start; font-size: 0.88rem; padding: 6px 12px; display: inline-flex; align-items: center; border-radius: 6px; font-weight: 600;">
@@ -69,7 +69,7 @@ description: "Security audits, audit log tracing, incident containment procedure
           <p>
             <strong>Challenge:</strong> A terminated instructor account remained active post-departure, permitting after-hours access and download of 20,000+ curriculum resources from external IPs.
             <br><br>
-            <strong>Mitigation:</strong> Suspended credentials, revoked OAuth tokens, rotated Shared Drive keys (Performed). Recommended automated HR-to-IT deprovisioning integration (Recommended).
+            <strong>Mitigation:</strong> Suspended credentials, revoked OAuth tokens, rotated Shared Drive keys. Recommended automated HR-to-IT deprovisioning integration.
           </p>
         </div>
         <a href="{{ '/artifacts/security/ir-2026-0108/' | relative_url }}" class="repo-link" style="align-self: flex-start; font-size: 0.88rem; padding: 6px 12px; display: inline-flex; align-items: center; border-radius: 6px; font-weight: 600;">
@@ -83,8 +83,8 @@ description: "Security audits, audit log tracing, incident containment procedure
   <section aria-labelledby="section-governance" style="margin-bottom: 42px;">
     <h2 id="section-governance">Security Governance</h2>
     <ul>
-      <li><strong>Least-privilege access:</strong> Deprecating shared admin accounts. Restricting Shared Drive permissions to comment/view-only by default and enforcing role-specific delegation (Performed).</li>
-      <li><strong>Lifecycle deprovisioning:</strong> Auditing account departure latency, identifying active orphaned credentials, and recommending automated HR-to-directory integrations (Recommended).</li>
+      <li><strong>Least-privilege access:</strong> Deprecating shared admin accounts. Restricting Shared Drive permissions to comment/view-only by default and enforcing role-specific delegation.</li>
+      <li><strong>Lifecycle deprovisioning:</strong> Auditing account departure latency, identifying active orphaned credentials, and recommending automated HR-to-directory integrations.</li>
       <li><strong>Auditing &amp; alerting:</strong> Configuring Admin Console alert thresholds to trigger notifications on bulk downloads or external file shares.</li>
     </ul>
   </section>
@@ -103,10 +103,10 @@ description: "Security audits, audit log tracing, incident containment procedure
 
   <!-- Cross-Links & Navigation -->
   <section aria-label="Professional profiles and CV" class="action-links">
-    <a href="https://r2pitou.github.io/cv/" class="repo-link">View CV</a>
+    <a href="https://r2pitou.github.io/cv/" target="_blank" class="repo-link">View CV</a>
     <a href="https://drive.google.com/drive/folders/1XhvHyb2zgHdI7LC5qxP2kC1C53-e3_PI" target="_blank" class="repo-link repo-link-secondary">Security Works Portfolio</a>
     <a href="https://github.com/R2Pitou" target="_blank" class="repo-link repo-link-secondary">GitHub Profile</a>
     <a href="https://linkedin.com/in/atp2kh/" target="_blank" class="repo-link repo-link-secondary">LinkedIn Profile</a>
-    <a href="{{ '/contact/' | relative_url }}" class="repo-link repo-link-secondary">Contact &amp; Inquiry</a>
+    <a href="{{ '/contact/' | relative_url }}" target="_blank" class="repo-link repo-link-secondary">Contact &amp; Inquiry</a>
   </section>
 </div>
