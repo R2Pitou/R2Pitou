@@ -1,58 +1,51 @@
 ---
 layout: default
 title: "Security, Governance & Incident Response"
-description: "Practical security work focused on reducing risk, improving operations, and protecting people rather than chasing compliance checklists."
+description: "Security audits, audit log tracing, incident containment procedures, and ISO 27001 access control mapping in a 3,000-user directory environment."
 ---
 
 <div class="article-content doc-layout">
   <!-- Hero Section -->
   <header class="article-header">
-    <p class="eyebrow">Governance &bull; Incident Response &bull; Risk Management</p>
     <h1>Security, Governance &amp; Incident Response</h1>
     <p class="intro-copy">
-      Practical security work focused on reducing risk, improving operations, and protecting people rather than chasing compliance checklists.
+      Directory audits, log analysis, incident response, and access governance controls under ISO 27001 frameworks.
     </p>
   </header>
 
   <!-- Audience -->
   <section class="info-callout">
-    <strong>Audience:</strong> Information Security Managers, CISOs, security recruiters, school leadership, operations leaders, and technical hiring managers.
+    <strong>Audience:</strong> Information Security Managers, CISOs, operations leads, and technical hiring managers.
   </section>
 
   <!-- Overview -->
   <section aria-labelledby="section-overview" style="margin-bottom: 42px;">
     <h2 id="section-overview">Overview</h2>
     <p>
-      As a systems administrator and security lead, my work focuses on translating risk management principles into operational controls. Rather than treating security as an isolated compliance activity, I integrate protection policies directly into everyday workflows. This includes constructing access control parameters, investigating security incidents, conducting root cause analyses, and proposing standardized offboarding controls.
+      I administer directory access permissions, analyze audit logs, investigate security incidents, and compile evidence for access governance reviews. This work is based on standard ISO 27001 control mappings across a 3,000-user multi-campus directory.
     </p>
     <p>
-      My hands-on experience covers directory deprovisioning audits, share access analysis, network segmentation, security awareness development, and the safe, risk-managed enablement of generative AI integrations.
+      My hands-on experience covers directory deprovisioning audits, Google Drive shared drive access reviews, network segmentation, security awareness development, and generative AI directory permissions.
     </p>
   </section>
 
   <!-- Security Work in Practice -->
   <section aria-labelledby="section-practice" style="margin-bottom: 42px;">
     <h2 id="section-practice">Security Work in Practice</h2>
-    <p>
-      My day-to-day operations and projects cover the implementation of security controls, audits, and response activities. Active areas of practice include:
-    </p>
     <ul class="two-column-list">
-      <li><strong>Access governance reviews:</strong> Regular audits of directory permissions, group memberships, and role delegation (Performed).</li>
-      <li><strong>Offboarding process analysis:</strong> Identifying latency in employee departures and proposing deprovisioning controls (Performed).</li>
-      <li><strong>Security incident investigation:</strong> Tracing audit logs, analyzing footprint events, and establishing containment (Performed).</li>
-      <li><strong>Audit evidence gathering:</strong> Compiling structural proof and documentation for reviews (Performed).</li>
-      <li><strong>Policy development:</strong> Authoring Acceptable Use Policies (AUP), student data policies, and technology usage charters (Performed).</li>
-      <li><strong>Risk identification:</strong> Performing asset threat modeling and drafting targeted risk remediation plans (Performed).</li>
-      <li><strong>Workspace configuration reviews:</strong> Auditing third-party OAuth app integrations, data shares, and domain security configurations (Performed).</li>
+      <li><strong>Directory audits:</strong> Regular reviews of group memberships, privileged access roles, and Google Workspace delegated administration (Performed).</li>
+      <li><strong>Offboarding audits:</strong> Tracing departure-to-deactivation latency and compiling offboarding SLA compliance logs (Performed).</li>
+      <li><strong>Incident investigations:</strong> Tracing Admin Console audit logs to identify anomalous IP addresses, external file shares, and unauthorized folder restructuring (Performed).</li>
+      <li><strong>Evidence compilation:</strong> Extracting logs and path metadata to verify access boundary containment for internal audits (Performed).</li>
+      <li><strong>Policy implementation:</strong> Drafting and enforcing Acceptable Use Policies (AUP) and student data protection charters (Performed).</li>
+      <li><strong>Threat mapping:</strong> Identifying exposed external Drive shares and mapping network segmentation gaps across distributed sites (Performed).</li>
+      <li><strong>SaaS configuration reviews:</strong> Auditing third-party OAuth app permissions, domain-wide email routing rules, and external sharing policies (Performed).</li>
     </ul>
   </section>
 
   <!-- Selected Incident Reports -->
   <section aria-labelledby="section-incidents" style="margin-bottom: 42px;">
     <h2 id="section-incidents">Selected Incident Reports</h2>
-    <p>
-      These case-study summaries represent active security incident investigations, containment procedures, and remediations performed in response to directory security incidents.
-    </p>
 
     <div class="technical-panel-grid">
       <!-- Incident Card 1 -->
@@ -61,9 +54,9 @@ description: "Practical security work focused on reducing risk, improving operat
           <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--pink); font-weight: bold; letter-spacing: 0.05em;">Incident Reference: IR-2025-1021</span>
           <h3>Shared Drive Privilege Containment</h3>
           <p>
-            <strong>Challenge:</strong> An authorized account with excessive privileges executed unauthorized modifications and file deletions across administrative directories.
+            <strong>Challenge:</strong> A delegated account with excessive manager access renamed root folders and trashed academic directories on core Shared Drives.
             <br><br>
-            <strong>Actions &amp; Recommendations:</strong> Suspended the account and recovered file hierarchies using Google Drive restoration tools (Performed). Recommended blocking the identified external gateways as part of the containment strategy (Recommended).
+            <strong>Mitigation:</strong> Suspended the user account, blocked the external gateway IP, and restored folder structures using Google Workspace restoration tools (Performed).
           </p>
         </div>
         <a href="{{ '/artifacts/security/ir-2025-1021/' | relative_url }}" class="repo-link" style="align-self: flex-start; font-size: 0.88rem; padding: 6px 12px; display: inline-flex; align-items: center; border-radius: 6px; font-weight: 600;">
@@ -77,9 +70,9 @@ description: "Practical security work focused on reducing risk, improving operat
           <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--pink); font-weight: bold; letter-spacing: 0.05em;">Incident Reference: IR-2026-0108</span>
           <h3>Offboarding Governance &amp; Exfiltration</h3>
           <p>
-            <strong>Challenge:</strong> A terminated employee's active credentials permitted post-employment access, resulting in the exfiltration of 20,000+ files after hours.
+            <strong>Challenge:</strong> A terminated instructor account remained active post-departure, permitting after-hours access and download of 20,000+ curriculum resources from external IPs.
             <br><br>
-            <strong>Actions &amp; Recommendations:</strong> Immediately revoked credentials and rotated access keys across impacted Shared Drives (Performed). Recommended the implementation of automated HR-to-IT offboarding workflows to eliminate account deprovisioning latency (Recommended; not implemented during tenure).
+            <strong>Mitigation:</strong> Suspended credentials, revoked OAuth tokens, rotated Shared Drive keys (Performed). Recommended automated HR-to-IT deprovisioning integration (Recommended).
           </p>
         </div>
         <a href="{{ '/artifacts/security/ir-2026-0108/' | relative_url }}" class="repo-link" style="align-self: flex-start; font-size: 0.88rem; padding: 6px 12px; display: inline-flex; align-items: center; border-radius: 6px; font-weight: 600;">
@@ -92,38 +85,21 @@ description: "Practical security work focused on reducing risk, improving operat
   <!-- Security Governance -->
   <section aria-labelledby="section-governance" style="margin-bottom: 42px;">
     <h2 id="section-governance">Security Governance</h2>
-    <p>
-      Effective security governance is built on the systematic enforcement of access structures and organizational habits. My approach transitions administrative operations from a reactive posture to structured governance:
-    </p>
     <ul>
-      <li><strong>Least-privilege access management:</strong> Eliminating generic administrator profiles and enforcing role-specific permission delegation. Transitioning directories from broad "Editor" access to restricted "Viewer/Commenter" profiles by default (Performed).</li>
-      <li><strong>Employee Lifecycle Alignment:</strong> Analyzing departure lag, highlighting offboarding gaps, and recommending automated HR-to-IT deprovisioning integrations to eliminate shadow accounts (Recommended; not implemented during tenure).</li>
-      <li><strong>Log Auditing and Alerting:</strong> Standardizing directory monitoring logs. Configuring explicit alert thresholds to detect anomalies, such as bulk document downloads or external OAuth shares, before they escalate.</li>
+      <li><strong>Least-privilege access:</strong> Deprecating shared admin accounts. Restricting Shared Drive permissions to comment/view-only by default and enforcing role-specific delegation (Performed).</li>
+      <li><strong>Lifecycle deprovisioning:</strong> Auditing account departure latency, identifying active orphaned credentials, and recommending automated HR-to-directory integrations (Recommended).</li>
+      <li><strong>Auditing &amp; alerting:</strong> Configuring Admin Console alert thresholds to trigger notifications on bulk downloads or external file shares.</li>
     </ul>
   </section>
 
   <!-- AI Governance -->
   <section aria-labelledby="section-ai-governance" style="margin-bottom: 42px;">
     <h2 id="section-ai-governance">AI Governance &amp; Enablement</h2>
-    <p>
-      Rather than enforcing outright prohibitions that users will bypass through personal devices (shadow IT), my approach establishes clear guardrails that enable safe productivity. When integrating generative AI tools, I structure governance around:
-    </p>
     <ul>
-      <li><strong>Responsible AI Adoption:</strong> Defining which datasets are permitted for LLM exposure and maintaining clear boundaries to protect proprietary information.</li>
-      <li><strong>Practical Guardrails:</strong> Restricting standard API keys from accessing production environments without administrative sandbox review. Integrating content filtering to block malicious or unvetted scripts.</li>
-      <li><strong>AI Literacy &amp; Enablement:</strong> Constructing Acceptable Use Policies and operational charters that educate staff on prompt engineering safety, checks for accuracy, and regulatory guidelines.</li>
+      <li><strong>Data filtering:</strong> REST API key validation to restrict LLMs from accessing production directories.</li>
+      <li><strong>Script sandboxing:</strong> Reviewing and vetting Apps Script integrations in developer sandboxes prior to domain authorization.</li>
+      <li><strong>Usage charters:</strong> Authoring Acceptable Use Policies defining restrictions on student record inputs in public LLMs.</li>
     </ul>
-  </section>
-
-  <!-- Security Philosophy -->
-  <section aria-labelledby="section-philosophy" style="margin-bottom: 42px;">
-    <h2 id="section-philosophy">Security Philosophy</h2>
-    <blockquote>
-      "Security exists to enable organizations to operate safely and confidently, not to block useful work."
-    </blockquote>
-    <p>
-      Absolutist security models that completely restrict user operations fail because they incentivize personnel to design unauthorized workarounds. A practical security model recognizes that the primary objective is risk reduction balanced with operational efficiency. My goal is to deliver secure, standardized, and fully documented directory operations that protect organizational continuity without creating friction for personnel.
-    </p>
   </section>
 
   <hr style="border: 0; border-top: 1px solid rgba(236, 153, 185, 0.15); margin: 34px 0;">

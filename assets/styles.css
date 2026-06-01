@@ -74,8 +74,10 @@ main,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 20px 0;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(236, 153, 185, 0.08);
+  margin-bottom: 24px;
 }
 
 .brand {
@@ -141,6 +143,12 @@ nav {
   gap: 10px;
   flex-wrap: wrap;
   justify-content: flex-end;
+}
+
+@media (min-width: 769px) {
+  nav {
+    flex-wrap: nowrap;
+  }
 }
 
 nav a,

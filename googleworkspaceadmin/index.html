@@ -1,16 +1,15 @@
 ---
 layout: default
 title: "Google Workspace Administration at Scale"
-description: "Real-world administration, governance, security, and operations across multi-campus educational environments."
+description: "Directory administration, GAM CLI bulk script pipelines, 2SV multi-campus deployments, and OU structural separation across a 3,000-user directory."
 ---
 
 <div class="article-content doc-layout">
   <!-- Hero Section -->
   <header class="article-header">
-    <p class="eyebrow">Enterprise Directories &bull; Identity Management &bull; Scaled Operations</p>
     <h1>Google Workspace Administration at Scale</h1>
     <p class="intro-copy">
-      Real-world administration, governance, security, and operations across multi-campus environments.
+      Technical administration of a 3,000-user directory across 5 distributed campuses.
     </p>
   </header>
 
@@ -41,94 +40,70 @@ description: "Real-world administration, governance, security, and operations ac
   <section aria-labelledby="section-overview" style="margin-bottom: 42px;">
     <h2 id="section-overview">Overview</h2>
     <p>
-      Managing a Google Workspace directory across multiple distributed campuses requires moving beyond manual, GUI-driven administration. My approach to Workspace administration combines structured identity management, standardized operational processes, automation where appropriate, and strong security controls. Operating as the primary systems administrator, I structure directory configurations to minimize security risks, simplify operational complexity, and reduce single-point-of-failure dependencies on individual staff members.
+      Administration of Google Workspace directories across distributed multi-campus networks. This work involves GAM command-line automation, Organizational Unit (OU) structures, 2-Step Verification (2SV) rollouts, Shared Drive permission hierarchies, and OAuth application audits.
     </p>
   </section>
 
   <!-- Examples of Operational Work & Projects -->
   <section aria-labelledby="section-projects" style="margin-bottom: 42px;">
-    <h2 id="section-projects">Examples of Operational Work &amp; Projects (Representative)</h2>
-    <p>
-      These initiatives represent examples of operational activities and projects executed to harden, clean, and automate Google Workspace directories:
-    </p>
+    <h2 id="section-projects">Operational Work &amp; Projects (Representative)</h2>
     <ul class="two-column-list">
-      <li><strong>Multi-campus account governance review:</strong> Conducted a complete domain-wide audit of active user directories across all 5 campuses, consolidating organizational units (OUs), identifying shadow accounts, and deactivating orphaned credentials (Performed).</li>
-      <li><strong>MFA rollout and account hardening initiative:</strong> Authored and executed a staged rollout of mandatory Multi-Factor Authentication (MFA) / 2-Step Verification for all staff, implementing backup code protocols and restricting session duration settings (Performed).</li>
-      <li><strong>Shared Drive ownership and permissions review:</strong> Re-structured broad, legacy Shared Drives into restricted departmental repositories, enforcing least-privilege defaults and blocking external sharing permissions on sensitive folders (Performed).</li>
-      <li><strong>OAuth application audit and remediation:</strong> Analyzed third-party API integrations, revoked access for unverified or high-risk applications, and established an approval workflow for domain-wide API access (Performed).</li>
-      <li><strong>Standardized onboarding/offboarding workflow design:</strong> Analyzed offboarding latency and proposed automated deprovisioning integrations between HR contract databases and active directories (Recommended; not implemented during tenure).</li>
-      <li><strong>GAM-based reporting and administrative automation:</strong> Developed custom command-line pipelines using Google Apps Manager (GAM) to handle bulk user creation, reporting audits, and bulk permissions changes (Performed).</li>
+      <li><strong>OU restructuring &amp; cleanup:</strong> Audited all 5 campus directories, consolidated legacy Organizational Units (OUs), and deactivated orphaned user accounts (Performed).</li>
+      <li><strong>2-Step Verification (2SV) rollout:</strong> Drafted and enforced mandatory 2SV for all staff members, established backup code procedures, and shortened session duration parameters (Performed).</li>
+      <li><strong>Shared Drive security audits:</strong> Re-structured multi-departmental Shared Drive permissions, blocked external domain sharing, and enforced viewer/commenter limits on core directories (Performed).</li>
+      <li><strong>OAuth application audit:</strong> Revoked unverified third-party API tokens, analyzed application permission scopes, and configured Admin Console API controls (Performed).</li>
+      <li><strong>Offboarding process audit:</strong> Analyzed deprovisioning latency and recommended API integration between the HR database and Google Workspace (Recommended).</li>
+      <li><strong>GAM script automation:</strong> Scripted Google Apps Manager (GAM) CLI commands to automate bulk user creation, audit user access states, and modify directory permissions via CSV inputs (Performed).</li>
     </ul>
   </section>
 
   <!-- Identity & Access Management -->
   <section aria-labelledby="section-iam" style="margin-bottom: 42px;">
     <h2 id="section-iam">Identity &amp; Access Management</h2>
-    <p>
-      Identity governance forms the perimeter of any SaaS architecture. In a high-volume campus setup, IAM is structured to prevent credential sprawl and unauthorized access:
-    </p>
     <ul>
-      <li><strong>User Lifecycle Governance:</strong> Analyzing departure lag, deprovisioning latency, and detailing operational workflows to de-authorize terminated accounts, rotate Shared Drive access keys, and transfer document ownership (Performed).</li>
-      <li><strong>Role-Based Access Control (RBAC):</strong> Directory users are structured into clean Organizational Units (OUs). Permissions, service access, and device policies are inherited based on role, avoiding ad-hoc permission updates (Performed).</li>
-      <li><strong>Account Hardening &amp; MFA:</strong> Securing high-risk staff profiles against credential theft. This includes mandatory 2-Step Verification, blocking local password recoveries, and restricting sessions to prevent cookie-hijacking persistence (Performed).</li>
+      <li><strong>User lifecycle:</strong> Auditing departure lag, deactivating credentials on termination dates, rotating access keys, and executing Drive document ownership transfers (Performed).</li>
+      <li><strong>Role-Based Access Control:</strong> Partitioning students and staff into isolated root OUs to govern separate email limits, service access, and marketplace permissions (Performed).</li>
+      <li><strong>2-Step Verification:</strong> Enforcing 2SV, blocking local recovery options for administrative accounts, and configuring session persistence timeouts (Performed).</li>
     </ul>
   </section>
 
   <!-- Security & Governance -->
   <section aria-labelledby="section-security" style="margin-bottom: 42px;">
     <h2 id="section-security">Security &amp; Governance</h2>
-    <p>
-      My administration model uses native Google Workspace enterprise tools to verify and enforce data confidentiality:
-    </p>
     <ul>
-      <li><strong>Audit Reviews &amp; Vault:</strong> Conducting search queries, maintaining litigation holds, and exporting audit data in Google Vault for internal investigations (Performed).</li>
-      <li><strong>OAuth Review:</strong> Analyzing third-party API tokens and restricting access to unverified applications (Performed).</li>
-      <li><strong>Data Protection &amp; Sharing Controls:</strong> Enforcing strict external sharing rules for Google Drive and Shared Drives. Sensitive units are logically isolated to prevent data leakage and public link generation (Performed).</li>
+      <li><strong>Google Vault:</strong> Configuring retention rules, executing search queries, and exporting audit logs to support internal security reviews (Performed).</li>
+      <li><strong>API controls:</strong> Whitelisting authorized third-party OAuth apps and blocking access scopes for unverified integrations (Performed).</li>
+      <li><strong>Sharing controls:</strong> Restricting Drive external link creation and blocking external access to sensitive administrative OUs (Performed).</li>
     </ul>
   </section>
 
   <!-- Automation & Scale -->
   <section aria-labelledby="section-automation" style="margin-bottom: 42px;">
     <h2 id="section-automation">Automation &amp; Scale</h2>
-    <p>
-      Using the graphical Admin Console is inefficient at scale. To manage thousands of directories, I utilize command-line administration via Google Apps Manager (GAM):
-    </p>
-    <blockquote>
-      "Reduced repetitive administrative effort through automation and bulk management tooling."
-    </blockquote>
-    <p>
-      By scripting complex operations, I handle bulk updates that would take hours to execute manually:
-    </p>
     <ul>
-      <li><strong>Bulk Directory Restructuring:</strong> Performing bulk user moves across Organizational Units (OUs) using GAM and CSV lists (Performed).</li>
-      <li><strong>Permissions Auditing:</strong> Querying Shared Drive sharing states to identify external shares and revoking unauthorized links via GAM (Performed).</li>
-      <li><strong>Reporting &amp; Logs:</strong> Generating CSV reports of user 2SV status, account inactivity, and OAuth authorizations using GAM to support administrative reviews (Performed).</li>
+      <li><strong>Bulk OU migrations:</strong> Moving user accounts across OUs via GAM script parsing of CSV data sheets (Performed).</li>
+      <li><strong>Drive access queries:</strong> Running GAM commands to output Shared Drive ACL states and strip unauthorized external shares (Performed).</li>
+      <li><strong>Directory audits:</strong> Generating CSV audits of user 2SV status, last login timestamps, and authorized third-party API tokens (Performed).</li>
     </ul>
   </section>
 
   <!-- Multi-Campus Standardization -->
   <section aria-labelledby="section-standardization" style="margin-bottom: 42px;">
     <h2 id="section-standardization">Multi-Campus Standardization</h2>
-    <p>
-      In a distributed network of 5 campuses, consistency is the prerequisite for security. My work focuses on establishing predictable, documented systems that prevent operational degradation:
-    </p>
     <ul>
-      <li><strong>Repeatable Systems:</strong> Designing clear, step-by-step Standard Operating Procedures (SOPs) for password resets, device enrollment, and basic hardware deprovisioning (Performed).</li>
-      <li><strong>Reducing Personnel Dependencies:</strong> Moving away from oral knowledge transfers. All administrative configurations, GAM scripts, and directory structures are thoroughly documented so that the IT department operates reliably regardless of individual staff changes (Performed).</li>
-      <li><strong>Policy Alignment:</strong> Ensuring that all campuses follow identical sharing and access controls, preventing "policy drift" where one campus maintains weaker security baselines than the others (Performed).</li>
+      <li><strong>Standard Operating Procedures (SOP):</strong> Authoring step-by-step procedures for password resets, Chromebook enrollment, and hardware decommissioning (Performed).</li>
+      <li><strong>Operations documentation:</strong> Documenting all directory configurations, custom GAM CLI scripts, and root OU structures to maintain continuity (Performed).</li>
+      <li><strong>Configuration alignment:</strong> Syncing sharing rules, marketplace apps, and device policies identically across all 5 campus locations (Performed).</li>
     </ul>
   </section>
 
   <!-- Operational Design Considerations -->
   <section aria-labelledby="section-considerations" style="margin-bottom: 42px;">
     <h2 id="section-considerations">Operational Design Considerations</h2>
-    <p>
-      When structuring the Google Workspace directory, my administrative choices are guided by structural stability and risk management rather than raw platform features:
-    </p>
     <ul>
-      <li><strong>Identity Separation:</strong> Separating student and staff identities into strict root OUs to guarantee that policy parameters (such as email limits, external Drive sharing, and marketplace permissions) can never accidentally bleed between roles (Performed).</li>
-      <li><strong>Delegated Administration:</strong> Recommending custom delegated administrator roles with specific, limited rights (e.g. Helpdesk Admin) to reduce the number of Super Admin profiles (Recommended).</li>
-      <li><strong>Consistency Over Convenience:</strong> Enforcing strict session timeouts and blocking unmanaged device synchronization, prioritizing institutional data security over frictionless convenience (Performed).</li>
+      <li><strong>Identity isolation:</strong> Separating staff and student accounts into strict root OUs to ensure email routing rules and Drive permissions never cross roles (Performed).</li>
+      <li><strong>Delegated roles:</strong> Recommending custom, scoped administrator permissions (e.g., Helpdesk role) to minimize active Super Admin profiles (Recommended).</li>
+      <li><strong>Device constraints:</strong> Restricting unmanaged hardware sync and enforcing session timeouts to prevent directory token persistence (Performed).</li>
     </ul>
   </section>
 
