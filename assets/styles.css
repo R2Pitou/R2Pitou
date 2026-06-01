@@ -386,18 +386,41 @@ h2 {
   justify-content: flex-end;
 }
 
+.article-content .repo-link,
 .repo-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 40px;
   background: var(--pink);
-  color: var(--black);
+  color: var(--black) !important;
+  border: 1px solid var(--pink);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
+.article-content .repo-link:hover,
+.repo-link:hover {
+  background: var(--black);
+  color: var(--white) !important;
+  border-color: var(--pink);
+  box-shadow: 0 0 12px rgba(236, 153, 185, 0.25);
+}
+
+.article-content .repo-link-secondary,
 .repo-link-secondary {
   background: var(--black);
-  color: var(--white);
+  color: var(--pink) !important;
+  border: 1px solid rgba(236, 153, 185, 0.25);
+}
+
+.article-content .repo-link-secondary:hover,
+.repo-link-secondary:hover {
+  background: var(--pink);
+  color: var(--black) !important;
+  border-color: var(--pink);
 }
 
 .repo-badge {
