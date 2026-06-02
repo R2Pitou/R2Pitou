@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "_articles/**"
+      - "articles/**"
       - "assets/images/**"
       - "scripts/normalize_articles.py"
   workflow_dispatch:

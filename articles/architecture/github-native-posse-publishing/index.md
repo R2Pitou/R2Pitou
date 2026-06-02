@@ -11,6 +11,9 @@ tags:
   - publishing
 image: hero.png
 image_alt: It's a bloody image.
+categories: architecture
+permalink: /architecture/github-native-posse-publishing/
+canonical_url: https://working-draft.org/architecture/github-native-posse-publishing/
 ---
 
 Working Draft is set up as a GitHub-native POSSE site: publish on the owned domain first, then syndicate outward.

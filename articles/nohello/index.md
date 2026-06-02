@@ -14,6 +14,7 @@ tags:
   - bilingual
 syndicate: true
 permalink: /nohello/
+canonical_url: https://working-draft.org/nohello/
 ---
 
 ### 🇰🇭 សូមកុំសរសេរ “Hello Bong” តែប៉ុណ្ណោះ

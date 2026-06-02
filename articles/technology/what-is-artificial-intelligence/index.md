@@ -15,7 +15,9 @@ tags:
   - ArtificialIntelligence
   - ChatGPT
 syndicate: true
-permalink:
+permalink: /technology/what-is-artificial-intelligence/
+canonical_url: https://working-draft.org/technology/what-is-artificial-intelligence/
+categories: technology
 ---
 _A Journey Through the Latest Paradigm Shift_
 
