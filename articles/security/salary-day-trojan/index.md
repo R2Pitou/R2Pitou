@@ -33,19 +33,55 @@ Because the file appeared to originate from a trusted, official channel, parents
 
 ## 2. Initial Detection & Rapid Verification
 
-Speed is the primary factor in containing propagation. Our response timeline moved from initial detection to active mitigation in exactly three minutes:
+Speed is the primary factor in containing propagation. Our response timeline moved from initial detection to active triage and formal broadcast:
 
-*   **16:47 | File Received**: A staff member noticed the suspicious `.exe` file distributed in a Telegram communication group. Recognizing that salary sheets are never distributed as Windows executable files, they immediately flagged it.
-*   **16:48 | Investigation and Triage**: The file’s cryptographic hash was extracted and submitted to VirusTotal for analysis. The hash returned immediate positive detections for malicious characteristics.
-*   **16:50 | Warning Issued**: A bilingual warning (Khmer and English) was drafted and broadcast across all main organizational channels, instructing users not to download or run the file, and providing immediate safety steps.
+*   **16:47 | Threat Discovery**: A staff member noticed the suspicious `.exe` file distributed in a Telegram communication group. Recognizing that salary sheets are never distributed as Windows executable files, they immediately flagged the threat.
+*   **16:48 | Technical Triage**: The file’s cryptographic hash was extracted and submitted to VirusTotal for analysis. The hash returned immediate positive detections for malicious characteristics.
+*   **16:50 | Mitigation Initiated**: Within three minutes of the file being received, we began active mitigation steps—tracing the compromised account's active sessions, identifying the target host, and drafting warning advisories.
+*   **17:08 | Bilingual Alert Broadcasted**: The first formal, bilingual warning was broadcasted to all staff, students, and parent communication channels.
 
-```text
-[16:47] Hostile file received in Telegram group.
-[16:48] Hash extracted & submitted to VirusTotal.
-[16:50] Bilingual emergency warnings broadcasted.
-```
+### The Emergency Broadcast
 
-This three-minute reaction window prevented widespread, automated execution on workstations across our offices. However, the virus had already begun its second phase: session hijacking.
+The alert was sent verbatim in both Khmer and English to ensure immediate visibility across all user demographics:
+
+> **[25/11/2025 17:08] Arttu Pitou At 🇰🇭អាតពិទូ:**  
+> Please check TTP Computers.  
+>   
+> ⚠️⚠️⚠️ ការជូនដំណឹងបន្ទាន់ពីផ្នែក IT៖ មេរោគកំពុងរីករាលដាល (Urgent Security Alert from IT) សូមប្រុងប្រយ័ត្ន!  
+> បច្ចុប្បន្នមានគណនីមួយចំនួនកំពុងបញ្ជូនឯកសារដែលមានផ្ទុកមេរោគ (Trojan) ចូលក្នុងគ្រុបការងារ និងការសន្ទនាឯកជន។  
+>   
+> **សញ្ញាសម្គាល់៖**  
+> *   ឈ្មោះឯកសារ៖ `"Lương tháng 11 + hoa hồng.exe"` (ឈ្មោះជាភាសាវៀតណាម)  
+> *   ប្រភេទឯកសារ៖ វាជាឯកសារ `.exe` (កម្មវិធី) មិនមែនជាឯកសារ Word ឬ PDF ទេ  
+>   
+> **ចំណាត់ការបន្ទាន់៖**  
+> 🚫 **ហាមចុចបើក ឬទាញយក (Download) ជាដាច់ខាត**។ ឯកសារនេះត្រូវបានរកឃើញថាជាមេរោគ (Malware/Trojan) ដែលអាចលួចទិន្នន័យ ឬបំផ្លាញកុំព្យូទ័ររបស់អ្នក។  
+> 🗑 ប្រសិនបើអ្នកទទួលបានសារនេះ សូមលុបវាចោលភ្លាមៗ។  
+>   
+> 🚨 **ប្រសិនបើអ្នកបានច្រឡំចុចបើកឯកសារនេះ៖**  
+> 1. **ផ្តាច់អ៊ីនធឺណិតភ្លាមៗ**៖ បិទ Wi-Fi ឬដកខ្សែ LAN ចេញពីកុំព្យូទ័ររបស់អ្នកជាបន្ទាន់។  
+> 2. **ទាក់ទងមកខ្ញុំជាបន្ទាន់**៖ សូមឆាតមកខ្ញុំតាមរយៈតំណភ្ជាប់នេះ ដើម្បីឱ្យខ្ញុំជួយដោះស្រាយ 👉 https://t.me/atpitou  
+> 3. **ប្តូរពាក្យសម្ងាត់ (Passwords)**៖ ប្រើប្រាស់ទូរស័ព្ទដៃដើម្បីប្តូរលេខសម្ងាត់ Telegram និង Email របស់អ្នក (ហាមប្តូរនៅលើកុំព្យូទ័រដែលឆ្លងមេរោគ)។  
+>   
+> ***  
+>   
+> ⚠️ **URGENT IT SECURITY ALERT: Trojan Virus Circulating**  
+> Please be extremely careful. There is a malicious file currently being forwarded in Telegram groups and private chats.  
+>   
+> **How to identify it:**  
+> *   Filename: `"Lương tháng 11 + hoa hồng.exe"`  
+> *   File Type: Note that it ends in `.exe`. This is an executable program, NOT a document.  
+>   
+> **What you must do:**  
+> 🚫 **DO NOT CLICK, OPEN, or DOWNLOAD this file**. Security scans confirm this is a Trojan/Malware. Opening it will infect your computer and compromise your data.  
+> 🗑 If you see this message, delete it immediately.  
+>   
+> 🚨 **IF YOU ACCIDENTALLY OPENED THE FILE:**  
+> 1. **Disconnect from the Internet IMMEDIATELY**: Turn off Wi-Fi or unplug your Ethernet cable.  
+> 2. **Contact IT Support Immediately**: Message me directly at this link for assistance 👉 https://t.me/atpitou  
+> 3. **Change Your Passwords**: Using your PHONE (not the computer), change your Telegram and Email passwords immediately.
+
+This rapid reaction window prevented widespread, automated execution on workstations across our offices. However, the virus had already begun its second phase: session hijacking.
 
 ![Initial Telegram distribution showing the malicious payload sent from a trusted parent communication channel](/articles/security/salary-day-trojan/telegram-outbreak.png)
 
