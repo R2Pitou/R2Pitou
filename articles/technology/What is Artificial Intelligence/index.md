@@ -1,6 +1,6 @@
 ---
 title: What is Artificial Intelligence (AI)?
-date: 2023-11-22 09:00 +0700
+date: 2023-11-22 09:00:00 +0700
 layout: article
 featured: false
 summary: |-
