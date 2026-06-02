@@ -329,7 +329,7 @@ permalink: /security/salary-day-trojan/
   <p>
     The complete advisory is reproduced below as originally distributed.
   </p>
-  
+
     <blockquote>
       <p><strong>[25/11/2025 17:08] Arttu Pitou At 🇰🇭អាតពិទូ:</strong><br></p>
       
@@ -379,12 +379,21 @@ permalink: /security/salary-day-trojan/
 
   <hr>
 
-  <section>
-    <h2>Understanding the Threat Vector</h2>
-    <p>Standard security training teaches users to watch for external email addresses, lookalike domains, and generic greetings. This campaign bypassed those filters by exploiting trusted relationships.</p>
-    <p>When the malware is executed on a Windows machine, it gains access to active Telegram session data. It then hijacks the user's account to automatically forward the malicious executable to their recent contacts, active conversations, and work groups.</p>
-    <p>Because recipients received the file from colleagues, friends, and school administrative accounts, their default suspicion was lowered. Users did not click the file out of foolishness; they clicked it because they trusted the sender. This highlighted a key operational truth: <strong>trust is the most exploitable vector in modern organizational security.</strong></p>
-  </section>
+<section>
+  <h2>Understanding the Threat Vector</h2>
+  <p>
+    Standard security training teaches users to watch for external email addresses, lookalike domains, and generic greetings. This campaign bypassed those filters by exploiting trusted relationships.
+  </p>
+  <p>
+    The malicious file was distributed from a compromised Telegram account used for front-desk and parent communications. Because that account was a member of numerous campus groups, a single compromised account was able to reach a large audience in a very short period of time.
+  </p>
+  <p>
+    During the incident, users reported both receiving the file and observing unauthorized activity from compromised Telegram accounts. Some users also executed the malware on Windows systems. However, the investigation did not establish a direct relationship between malware execution and the compromise of additional Telegram accounts, and the original method by which the distributing account was compromised remains unknown.
+  </p>
+  <p>
+    Because recipients received the file from a trusted and familiar source, their default suspicion was naturally lower. Users did not click the file because they were careless. They clicked it because the message appeared to originate from a legitimate school communication channel. The incident reinforced a practical security lesson: <strong>trust is often a more effective attack vector than technical sophistication.</strong>
+  </p>
+</section>
 
   <hr>
 
