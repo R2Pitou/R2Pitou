@@ -18,42 +18,43 @@ permalink: /security/salary-day-trojan/
 <style>
   /* Custom Timeline Component styling */
   .incident-timeline-section {
-    margin: 40px 0;
-    padding: 30px;
+    margin: 24px 0;
+    padding: 20px 24px;
     background: var(--panel-strong);
     border: 1px solid rgba(236, 153, 185, 0.12);
     border-radius: 8px;
   }
 
-  .incident-timeline-section h2 {
+  .incident-timeline-section h3 {
     margin-top: 0;
-    margin-bottom: 30px;
-    border-left: 3px solid var(--pink);
-    padding-left: 12px;
-    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    color: var(--white);
+    border-left: 2px solid var(--pink);
+    padding-left: 10px;
   }
 
   .incident-timeline {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   }
 
   /* Vertical line */
   .incident-timeline::before {
     content: "";
     position: absolute;
-    top: 15px;
-    bottom: 15px;
-    left: 95px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--pink) 0%, rgba(236, 153, 185, 0.1) 100%);
+    top: 8px;
+    bottom: 8px;
+    left: 65px;
+    width: 1px;
+    background: rgba(236, 153, 185, 0.2);
   }
 
   .timeline-item {
     display: grid;
-    grid-template-columns: 80px 32px 1fr;
+    grid-template-columns: 55px 20px 1fr;
     align-items: start;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
   }
 
   .timeline-item:last-child {
@@ -65,25 +66,24 @@ permalink: /security/salary-day-trojan/
     font-family: "Outfit", "Kantumruy Pro", sans-serif;
     font-weight: 600;
     color: var(--pink);
-    font-size: 1.1rem;
-    padding-top: 12px;
+    font-size: 0.9rem;
+    padding-top: 2px;
   }
 
   .timeline-marker-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 48px;
+    height: 20px;
   }
 
   .timeline-marker {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--black);
-    border: 2px solid var(--pink);
+    border: 1.5px solid var(--pink);
     z-index: 2;
-    box-shadow: 0 0 6px rgba(236, 153, 185, 0.6);
     transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   }
 
@@ -91,83 +91,81 @@ permalink: /security/salary-day-trojan/
     transform: scale(1.3);
     background: var(--pink-hot);
     border-color: var(--white);
-    box-shadow: 0 0 10px var(--pink-hot);
+    box-shadow: 0 0 8px var(--pink-hot);
   }
 
-  .timeline-card {
-    background: var(--panel);
-    border: 1px solid rgba(236, 153, 185, 0.12);
-    border-radius: 6px;
-    padding: 16px 20px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  .timeline-item.highlight .timeline-marker {
+    background: var(--pink-hot);
+    border-color: var(--pink-hot);
+    box-shadow: 0 0 6px var(--pink-hot);
   }
 
-  .timeline-card:hover {
-    border-color: rgba(236, 153, 185, 0.4);
-    box-shadow: 0 4px 15px rgba(236, 153, 185, 0.05);
-    transform: translateY(-1px);
-  }
-
-  .timeline-card-highlight {
-    background: #180d13;
-    border-color: rgba(236, 153, 185, 0.25);
-  }
-
-  .timeline-card-highlight:hover {
-    border-color: var(--pink);
+  .timeline-content {
+    padding-top: 1px;
   }
 
   .timeline-title {
-    margin: 0 0 8px 0;
-    font-size: 1.15rem;
+    margin: 0 0 2px 0;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--white);
   }
 
-  .timeline-detail {
-    margin: 0 0 6px 0;
-    font-size: 0.95rem;
-    color: var(--muted);
+  .timeline-title .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 1px 6px;
+    background: rgba(255, 79, 168, 0.12);
+    color: var(--pink-hot);
+    border: 1px solid rgba(255, 79, 168, 0.25);
+    border-radius: 4px;
+    margin-left: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    vertical-align: middle;
   }
 
   .timeline-desc {
     margin: 0;
-    font-size: 0.95rem;
-    color: rgba(248, 248, 248, 0.85);
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.4;
   }
 
   /* Metrics Callout Panel */
   .timeline-metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    border-top: 1px solid rgba(236, 153, 185, 0.15);
-    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid rgba(236, 153, 185, 0.1);
+    padding-top: 16px;
   }
 
   .metric-card {
+    flex: 1;
     background: var(--panel);
-    border: 1px solid rgba(236, 153, 185, 0.1);
-    border-radius: 6px;
-    padding: 16px;
-    text-align: center;
+    border: 1px solid rgba(236, 153, 185, 0.08);
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-align: left;
     transition: border-color 0.2s ease;
   }
 
   .metric-card:hover {
-    border-color: rgba(236, 153, 185, 0.25);
+    border-color: rgba(236, 153, 185, 0.2);
   }
 
   .metric-val {
-    font-family: "Outfit", "Kantumruy Pro", sans-serif;
-    font-size: 1.6rem;
+    font-family: "Outfit", sans-serif;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--pink-hot);
-    margin-bottom: 4px;
+    line-height: 1.1;
+    margin-bottom: 2px;
   }
 
   .metric-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -175,51 +173,19 @@ permalink: /security/salary-day-trojan/
   }
 
   /* Responsive styles */
-  @media (max-width: 768px) {
-    .incident-timeline-section {
-      padding: 20px 16px;
-    }
-    
-    .incident-timeline::before {
-      left: 15px;
-    }
-    
-    .timeline-item {
-      grid-template-columns: 32px 1fr;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    
-    .timeline-time {
-      grid-column: 2;
-      text-align: left;
-      padding-top: 0;
-      margin-bottom: 4px;
-      font-size: 1rem;
-    }
-    
-    .timeline-marker-container {
-      grid-column: 1;
-      grid-row: 1 / 3;
-      height: 32px;
-      justify-content: flex-start;
-      padding-left: 9px;
-    }
-    
-    .timeline-card {
-      grid-column: 2;
-      padding: 12px 16px;
-    }
-    
+  @media (max-width: 600px) {
     .timeline-metrics {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .metric-card {
+      flex: 1 1 calc(50% - 8px);
     }
   }
 
-  @media (max-width: 480px) {
-    .timeline-metrics {
-      grid-template-columns: 1fr;
+  @media (max-width: 400px) {
+    .metric-card {
+      flex: 1 1 100%;
     }
   }
 </style>
@@ -228,6 +194,132 @@ permalink: /security/salary-day-trojan/
   <p>On November 25, 2025, an active malware outbreak disrupted the multi-campus educational environment. Within a three-minute window, the event escalated from a single suspicious file receipt to a coordinated investigation. However, as the evening unfolded, the technical challenge of analyzing code was quickly overshadowed by a far larger task: managing human panic, coordinating recovery across five campuses, and supporting parents, students, and staff late into the night.</p>
 
   <p>This postmortem documents the timeline, technical findings, and—most importantly—the human side of incident response.</p>
+
+  <section class="incident-timeline-section">
+    <h3>Incident Response Timeline</h3>
+    
+    <div class="incident-timeline">
+      
+      <div class="timeline-item">
+        <div class="timeline-time">16:47</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Threat Discovery</h4>
+          <p class="timeline-desc">Received: <code>"Lương tháng 11 + hoa hồng.exe"</code> &mdash; One of the first recipients of the Telegram malware blast.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">16:48</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Technical Triage</h4>
+          <p class="timeline-desc">Hash extracted and submitted to VirusTotal. Immediate malicious detections returned.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">16:50</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Investigation Begins</h4>
+          <p class="timeline-desc">Compromised account traced and initial containment planning started.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item highlight">
+        <div class="timeline-time">17:08</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Organization-Wide Alert <span class="badge">Critical</span></h4>
+          <p class="timeline-desc">First bilingual warning issued. Distributed across staff, student, and parent communication channels.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">17:40</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Session Recovery Guidance</h4>
+          <p class="timeline-desc">Published recovery procedures for compromised Telegram accounts.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">18:42</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">First User Click Reports</h4>
+          <p class="timeline-desc">Active user triage begins.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item highlight">
+        <div class="timeline-time">19:16</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Community Support Escalates <span class="badge">Escalation</span></h4>
+          <p class="timeline-desc">Parent exposure reports begin. Direct support workload increases significantly.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">21:04</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Containment Operations</h4>
+          <p class="timeline-desc">Campus-by-campus investigation and cleanup.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">01:00</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-content">
+          <h4 class="timeline-title">Support Operations Conclude</h4>
+          <p class="timeline-desc">Final user support interactions completed. Incident response transitions to recovery.</p>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="timeline-metrics">
+      <div class="metric-card">
+        <div class="metric-val">1 min</div>
+        <div class="metric-label">Detection &rarr; Analysis</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">3 min</div>
+        <div class="metric-label">Detection &rarr; Investigation</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">21 min</div>
+        <div class="metric-label">Detection &rarr; Warning</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">&approx; 8 hrs</div>
+        <div class="metric-label">Active Support Window</div>
+      </div>
+    </div>
+  </section>
 
   <hr>
 
@@ -305,138 +397,6 @@ permalink: /security/salary-day-trojan/
       <img src="/articles/security/salary-day-trojan/telegram-outbreak.png" alt="Initial Telegram distribution showing the malicious payload sent from a trusted parent communication channel">
       <figcaption>Figure 1: The malicious payload "Lương tháng 11 + hoa hồng.exe" as distributed via a hijacked campus Telegram account.</figcaption>
     </figure>
-  </section>
-
-  <section class="incident-timeline-section">
-    <h2>Incident Response Timeline</h2>
-    
-    <div class="incident-timeline">
-      
-      <div class="timeline-item">
-        <div class="timeline-time">16:47</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card">
-          <h3 class="timeline-title">Threat Discovery</h3>
-          <p class="timeline-detail"><strong>Received:</strong> <code>"Lương tháng 11 + hoa hồng.exe"</code></p>
-          <p class="timeline-desc">One of the first recipients of the Telegram malware blast.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">16:48</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card">
-          <h3 class="timeline-title">Technical Triage</h3>
-          <p class="timeline-detail"><strong>Hash extracted.</strong> Submitted to VirusTotal.</p>
-          <p class="timeline-desc">Immediate malicious detections returned.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">16:50</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card">
-          <h3 class="timeline-title">Investigation Begins</h3>
-          <p class="timeline-detail"><strong>Compromised account traced.</strong></p>
-          <p class="timeline-desc">Initial containment planning started.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">17:08</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card timeline-card-highlight">
-          <h3 class="timeline-title">Organization-Wide Alert</h3>
-          <p class="timeline-detail"><strong>First bilingual warning issued.</strong></p>
-          <p class="timeline-desc">Distributed across staff, student, and parent communication channels.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">17:40</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card">
-          <h3 class="timeline-title">Session Recovery Guidance</h3>
-          <p class="timeline-desc">Published recovery procedures for compromised Telegram accounts.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">18:42</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card">
-          <h3 class="timeline-title">First User Click Reports</h3>
-          <p class="timeline-desc">Active user triage begins.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">19:16</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card timeline-card-highlight">
-          <h3 class="timeline-title">Community Support Escalates</h3>
-          <p class="timeline-detail"><strong>Parent exposure reports begin.</strong></p>
-          <p class="timeline-desc">Direct support workload increases significantly.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">21:04</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card">
-          <h3 class="timeline-title">Containment Operations</h3>
-          <p class="timeline-desc">Campus-by-campus investigation and cleanup.</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">01:00</div>
-        <div class="timeline-marker-container">
-          <div class="timeline-marker"></div>
-        </div>
-        <div class="timeline-card">
-          <h3 class="timeline-title">Support Operations Conclude</h3>
-          <p class="timeline-detail"><strong>Final user support interactions completed.</strong></p>
-          <p class="timeline-desc">Incident response transitions to recovery.</p>
-        </div>
-      </div>
-      
-    </div>
-    
-    <div class="timeline-metrics">
-      <div class="metric-card">
-        <div class="metric-val">1 min</div>
-        <div class="metric-label">Detection &rarr; Analysis</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">3 min</div>
-        <div class="metric-label">Detection &rarr; Investigation</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">21 min</div>
-        <div class="metric-label">Detection &rarr; Warning</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">&approx; 8 hrs</div>
-        <div class="metric-label">Active Support Window</div>
-      </div>
-    </div>
   </section>
 
   <hr>
