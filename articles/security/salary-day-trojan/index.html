@@ -1,0 +1,260 @@
+---
+layout: article
+title: "The Salary Day Trojan: Responding to an Active Telegram Malware Outbreak Across Five Campuses"
+date: 2026-06-02 09:00:00 +0700
+featured: true
+summary: "A human-centric operational postmortem of a multi-campus incident response effort, pivoting from rapid technical analysis to supporting parents, students, and staff until 1:00 AM."
+tags:
+  - security
+  - incident-response
+  - malware
+  - telegram
+  - governance
+image: /articles/security/salary-day-trojan/hero.png
+image_alt: "VirusTotal Graph illustrating file connections and behaviors of the Salary Day Trojan"
+permalink: /security/salary-day-trojan/
+---
+
+<article>
+  <p>On November 25, 2025, an active malware outbreak disrupted the multi-campus educational environment. Within a three-minute window, the event escalated from a single suspicious file receipt to a coordinated investigation. However, as the evening unfolded, the technical challenge of analyzing code was quickly overshadowed by a far larger task: managing human panic, coordinating recovery across five campuses, and supporting parents, students, and staff late into the night.</p>
+
+  <p>This postmortem documents the timeline, technical findings, and—most importantly—the human side of incident response.</p>
+
+  <hr>
+
+  <section>
+    <h2>1. Why This Incident Mattered</h2>
+    <p>A compromised workstation or a random malware infection is a routine IT problem, managed with standard isolation and recovery procedures. This incident was different because it targeted organizational trust.</p>
+    <p>The outbreak began when a compromised Telegram account belonging to one of the campuses—a channel specifically designated for parent communication—began distributing a malicious executable file named <strong>"Lương tháng 11 + hoa hồng.exe"</strong> (translated from Vietnamese: <em>November Salary + Commission.exe</em>).</p>
+    <p>Because the file appeared to originate from a trusted, official channel, parents, staff, and students had every reason to believe it was a legitimate communication. In any community, when a primary communication line is subverted, a technical vulnerability immediately becomes an organizational trust crisis.</p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>2. Initial Detection &amp; Verification</h2>
+    <p>Speed is the primary factor in containing propagation. The response timeline moved from initial detection to active triage and formal broadcast:</p>
+    <ul>
+      <li><strong>16:47 | Threat Discovery</strong>: I received the file <code>"Lương tháng 11 + hoa hồng.exe"</code> directly as one of the first recipients of the automated Telegram blast. Questioning the message, I immediately prepared to submit it for analysis, deducing that it was a hijacked broadcast rather than a legitimate upload from the campus front desk.</li>
+      <li><strong>16:48 | Technical Triage</strong>: The file’s cryptographic hash was extracted and submitted to VirusTotal for analysis. The hash returned immediate positive detections for malicious characteristics.</li>
+      <li><strong>16:50 | Mitigation Initiated</strong>: Within three minutes of the file being received, I began active mitigation steps—tracing the compromised account's active sessions, identifying the target host, and drafting warning advisories.</li>
+      <li><strong>17:08 | Bilingual Alert Broadcasted</strong>: The first formal, bilingual warning was broadcasted to all staff, students, and parent communication channels.</li>
+    </ul>
+
+    <h3>The Emergency Broadcast</h3>
+    <p>The alert was sent verbatim in both Khmer and English to ensure immediate visibility across all user demographics:</p>
+    
+    <blockquote>
+      <p><strong>[25/11/2025 17:08] Arttu Pitou At 🇰🇭អាតពិទូ:</strong><br>
+      Please check TTP Computers.</p>
+      
+      <p>⚠️⚠️⚠️ ការជូនដំណឹងបន្ទាន់ពីផ្នែក IT៖ មេរោគកំពុងរីករាលដាល (Urgent Security Alert from IT) សូមប្រុងប្រយ័ត្ន!<br>
+      បច្ចុប្បន្នមានគណនីមួយចំនួនកំពុងបញ្ជូនឯកសារដែលមានផ្ទុកមេរោគ (Trojan) ចូលក្នុងគ្រុបការងារ និងការសន្ទនាឯកជន។</p>
+      
+      <p><strong>សញ្ញាសម្គាល់៖</strong></p>
+      <ul>
+        <li>ឈ្មោះឯកសារ៖ <code>"Lương tháng 11 + hoa hồng.exe"</code> (ឈ្មោះជាភាសាវៀតណាម)</li>
+        <li>ប្រភេទឯកសារ៖ វាជាឯកសារ <code>.exe</code> (កម្មវិធី) មិនមែនជាឯកសារ Word ឬ PDF ទេ</li>
+      </ul>
+      
+      <p><strong>ចំណាត់ការបន្ទាន់៖</strong></p>
+      <p>🚫 <strong>ហាមចុចបើក ឬទាញយក (Download) ជាដាច់ខាត</strong>។ ឯកសារនេះត្រូវបានរកឃើញថាជាមេរោគ (Malware/Trojan) ដែលអាចលួចទិន្នន័យ ឬបំផ្លាញកុំព្យូទ័ររបស់អ្នក。<br>
+      🗑 ប្រសិនបើអ្នកទទួលបានសារនេះ សូមលុបវាចោលភ្លាមៗ។</p>
+      
+      <p>🚨 <strong>ប្រសិនបើអ្នកបានច្រឡំចុចបើកឯកសារនេះ៖</strong></p>
+      <ol>
+        <li><strong>ផ្តាច់អ៊ីនធឺណិតភ្លាមៗ</strong>៖ បិទ Wi-Fi ឬដកខ្សែ LAN ចេញពីកុំព្យូទ័ររបស់អ្នកជាបន្ទាន់។</li>
+        <li><strong>ទាក់ទងមកខ្ញុំជាបន្ទាន់</strong>៖ សូមឆាតមកខ្ញុំតាមរយៈតំណភ្ជាប់នេះ ដើម្បីឱ្យខ្ញុំជួយដោះស្រាយ 👉 <a href="https://t.me/atpitou">https://t.me/atpitou</a></li>
+        <li><strong>ប្តូរពាក្យសម្ងាត់ (Passwords)</strong>៖ ប្រើប្រាស់ទូរស័ព្ទដៃដើម្បីប្តូរលេខសម្ងាត់ Telegram និង Email របស់អ្នក (ហាមប្តូរនៅលើកុំព្យូទ័រដែលឆ្លងមេរោគ)។</li>
+      </ol>
+      
+      <hr>
+      
+      <p>⚠️ <strong>URGENT IT SECURITY ALERT: Trojan Virus Circulating</strong><br>
+      Please be extremely careful. There is a malicious file currently being forwarded in Telegram groups and private chats.</p>
+      
+      <p><strong>How to identify it:</strong></p>
+      <ul>
+        <li>Filename: <code>"Lương tháng 11 + hoa hồng.exe"</code></li>
+        <li>File Type: Note that it ends in <code>.exe</code>. This is an executable program, NOT a document.</li>
+      </ul>
+      
+      <p><strong>What you must do:</strong></p>
+      <p>🚫 <strong>DO NOT CLICK, OPEN, or DOWNLOAD this file</strong>. Security scans confirm this is a Trojan/Malware. Opening it will infect your computer and compromise your data.<br>
+      🗑 If you see this message, delete it immediately.</p>
+      
+      <p>🚨 <strong>IF YOU ACCIDENTALLY OPENED THE FILE:</strong></p>
+      <ol>
+        <li><strong>Disconnect from the Internet IMMEDIATELY</strong>: Turn off Wi-Fi or unplug your Ethernet cable.</li>
+        <li><strong>Contact IT Support Immediately</strong>: Message me directly at this link for assistance 👉 <a href="https://t.me/atpitou">https://t.me/atpitou</a></li>
+        <li><strong>Change Your Passwords</strong>: Using your PHONE (not the computer), change your Telegram and Email passwords immediately.</li>
+      </ol>
+    </blockquote>
+
+    <p>The rapid warning reduced the opportunity for further execution. However, the virus had already begun its second phase: session hijacking.</p>
+
+    <figure>
+      <img src="/articles/security/salary-day-trojan/telegram-outbreak.png" alt="Initial Telegram distribution showing the malicious payload sent from a trusted parent communication channel">
+      <figcaption>Figure 1: The malicious payload "Lương tháng 11 + hoa hồng.exe" as distributed via a hijacked campus Telegram account.</figcaption>
+    </figure>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>3. Understanding the Threat Vector</h2>
+    <p>Standard security training teaches users to watch for external email addresses, lookalike domains, and generic greetings. This campaign bypassed those filters by exploiting trusted relationships.</p>
+    <p>When the malware is executed on a Windows machine, it gains access to active Telegram session data. It then hijacks the user's account to automatically forward the malicious executable to their recent contacts, active conversations, and work groups.</p>
+    <p>Because recipients received the file from colleagues, friends, and school administrative accounts, their default suspicion was lowered. Users did not click the file out of foolishness; they clicked it because they trusted the sender. This highlighted a key operational truth: <strong>trust is the most exploitable vector in modern organizational security.</strong></p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>4. Operational Response &amp; Triage Under Uncertainty</h2>
+    <p>Coordinating a response across five distinct campuses, each with its own local staff and user populations, required immediate centralization. I established a direct triage line, but quickly realized that technical logs did not match the reality of user reports.</p>
+    <p>In incident response theory, systems report clean status codes. In practice, users do not report "I executed a Trojan." They report: <em>"Something weird happened to my Telegram,"</em> or <em>"My account is sending messages by itself, but I didn't write them."</em></p>
+    <p>I had to establish a rapid diagnostic workflow to triage users under intense uncertainty. I systematically asked:</p>
+    <ol>
+      <li><strong>Did you download the file?</strong></li>
+      <li><strong>On what device did you open it?</strong> (Windows PC, macOS, Android phone, or iPhone?)</li>
+      <li><strong>Is your account currently sending messages automatically?</strong></li>
+      <li><strong>Do you still have access to your account?</strong></li>
+      <li><strong>Can you see your active sessions list?</strong></li>
+    </ol>
+
+    <h3>Distinguishing Phone Exposure from PC Execution</h3>
+    <p>A significant portion of the evening was spent performing device-specific triage. Because the malicious file was a Windows executable (<code>.exe</code>), it could not execute on mobile operating systems (iOS and Android) or macOS.</p>
+    <p>Many panicked parents and staff reported opening the message on their mobile phones. I was able to reassure them that while they had viewed the message, their mobile devices were not infected by the executable. I instructed them to simply delete the message from their logs.</p>
+    <p>For users who had downloaded and run the file on Windows PCs, I immediately coordinated device isolation, helping them disconnect from the network to prevent further lateral movement.</p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>5. When the Incident Stopped Being About Malware</h2>
+    <p>Most technical postmortems focus on code blocks and Indicators of Compromise (IOCs). However, by 19:00, my technical investigation had shifted entirely into a high-intensity support operation.</p>
+    <p>This was no longer a malware analysis problem; it was a human crisis.</p>
+    <ul>
+      <li><strong>Frightened People</strong>: Parents contacted me directly, anxious about their family's data and privacy.</li>
+      <li><strong>Anxious Students</strong>: Students worried they had broken school devices or would face disciplinary action for clicking a link.</li>
+      <li><strong>Guilt-Ridden Staff</strong>: Teachers and administrative staff were deeply concerned that their hijacked accounts were responsible for spreading the infection to colleagues.</li>
+    </ul>
+    <p>Most security articles talk about infected machines. This incident rapidly became about frightened people. These concerns required more time and effort than the technical investigation itself.</p>
+    <p>I treated every user with empathy. Many users made reasonable decisions based on the context they had at the time. Portraying them as careless would only discourage future transparent reporting.</p>
+
+    <h3>Grounding the Chaos: Triage Conversations</h3>
+    <p>To illustrate the nature of this front-line containment work, here is a representative log of the messages I was triaging simultaneously:</p>
+    
+    <blockquote>
+      <p><strong>[18:42] Staff Member:</strong> I clicked the salary file. What do I do?<br>
+      <strong>[18:43] I:</strong> On what device? Phone or computer?<br>
+      <strong>[18:43] Staff Member:</strong> Android phone.<br>
+      <strong>[18:44] I:</strong> You're okay. The virus is a Windows executable (.exe) and cannot run on Android. Just delete the file from your phone.</p>
+      
+      <p><strong>[19:16] Teacher:</strong> Help, my Telegram is sending the salary file to my contacts by itself! My mom just called me saying she got it.<br>
+      <strong>[19:17] I:</strong> Your account session is hijacked. Open Telegram on your phone immediately. Go to Settings &gt; Devices. Tap "Terminate all other sessions." That will disconnect the attacker. Then enable Two-Step Verification immediately.</p>
+      
+      <p><strong>[21:04] I:</strong> Did you download or execute the file?<br>
+      <strong>[21:40] Staff Member:</strong> Nope. Sorry, my brain is on overdrive today. I deleted it immediately when I saw your warning.</p>
+    </blockquote>
+
+    <p>I set up an informal emergency support desk, translating complex recovery steps into plain Khmer and English. I repeated the same instructions—how to check active Telegram sessions, how to terminate unauthorized devices, and how to set up two-step verification—dozens of times. I remained online, answering individual messages and guiding users through account recovery, until approximately 1:00 AM.</p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>6. Technical Investigation (Observations)</h2>
+    <p>A sandbox review of the file <code>Lương tháng 11 + hoa hồng.exe</code> (SHA256: <code>6f43a429cd634a1a42a77909b512ec533b7f04da5172178939565de22bf40462</code>) revealed a series of system modifications and process relationships.</p>
+
+    <h3>Sandbox Observations</h3>
+    <p>Based on sandbox execution reports (CAPE/Zenbox), we observed the following technical characteristics upon execution:</p>
+    <ul>
+      <li><strong>Process Spawning &amp; Shell Manipulation</strong>:
+        <ul>
+          <li>The executable ran command-line instructions using a batch script: <code>cmd.exe /C ""C:\windows\MxgcIiXsde.bat""</code></li>
+          <li>It initiated process enumeration and searches via <code>tasklist /fi "PID eq 6684"</code> and <code>findstr</code>.</li>
+        </ul>
+      </li>
+      <li><strong>Library Dropping &amp; DLL Execution</strong>:
+        <ul>
+          <li>The program dropped several files into temporary directories, including <code>nsis_tauri_utils.dll</code>, <code>System.dll</code>, and a driver named <code>llama.sys</code>.</li>
+          <li>It placed a payload DLL named <code>goldendays.dll</code> under <code>C:\ProgramData\Roning\</code> and executed it silently via: <code>regsvr32.exe /S "C:\ProgramData\Roning\goldendays.dll"</code></li>
+          <li>It created a directory under <code>C:\Users\Public\Downloads\20251125115015\</code> containing multiple files: <code>1.bat</code>, <code>fhq.bat</code>, <code>hjk.txt</code>, <code>agg.txt</code>, <code>kill.txt</code>, and <code>1.dll</code>.</li>
+        </ul>
+      </li>
+      <li><strong>System Service Registration</strong>:
+        <ul>
+          <li>The malware registered and started a system service named `llama` pointing to the dropped driver (<code>llama.sys</code>).</li>
+          <li>It registered a service named <code>MicrosoftSoftware2ShadowCop4yProvider</code>. This attracted investigative attention because service creation is commonly associated with long-term system modification and persistence mechanisms.</li>
+        </ul>
+      </li>
+      <li><strong>Network Activity</strong>:
+        <ul>
+          <li>The system recorded attempt connections to a dead IP and local listening ports.</li>
+          <li>Connections to external hosts were initiated for data egress and payload delivery.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>The relationships and file dependencies are visualized in the interactive VirusTotal Graph below:</p>
+
+    <iframe
+      src="https://www.virustotal.com/graph/embed/g3267f71508ed4d83988c1655fdd833e42b093c72427d4dc79f4f4dd9fc51ef6c?theme=dark"
+      width="100%"
+      height="400"
+      style="border: 1px solid var(--line); border-radius: 8px; margin: 20px 0;">
+    </iframe>
+
+    <p>Detailed detection metrics and scanner signatures are documented on the <a href="https://www.virustotal.com/gui/file/6f43a429cd634a1a42a77909b512ec533b7f04da5172178939565de22bf40462/detection">VirusTotal Hash Page</a>.</p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>7. Recovery &amp; Containment Guidance</h2>
+    <p>To halt the propagation cycle and secure compromised accounts, I distributed a clear, sequential recovery checklist in both Khmer and English:</p>
+    <ol>
+      <li><strong>Terminate Active Sessions</strong>: Open Telegram, navigate to <em>Settings &gt; Devices</em>, and select <strong>Terminate all other sessions</strong> to force the attacker off the hijacked account.</li>
+      <li><strong>Enable Two-Step Verification (2FA)</strong>: Set up a secondary password in Telegram (<em>Settings &gt; Privacy and Security &gt; Two-Step Verification</em>). This ensures that even if a session is hijacked in the future, the account cannot be accessed without the master password.</li>
+      <li><strong>Delete Malicious Messages</strong>: Remove the forwarded malware file from chat logs and groups to prevent other users from clicking it.</li>
+      <li><strong>Isolate Affected Workstations</strong>: Disconnect infected Windows PCs from the local network immediately to prevent lateral propagation.</li>
+      <li><strong>Change Credentials</strong>: Reset passwords for all sensitive organizational systems, performing the changes from a trusted, clean device.</li>
+    </ol>
+    <p><em>Note: During containment discussions, I recommended blocking identified malicious infrastructure at the gateway level to limit the outbreak's spread.</em></p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>8. Lessons Learned</h2>
+    <p>Every active security incident offers critical lessons for future resilience:</p>
+    <ul>
+      <li><strong>Trusted Contacts Bypass Training</strong>: Traditional phishing awareness is insufficient when threats originate from compromised, authenticated accounts belonging to friends or colleagues. Containment depends on verification speed.</li>
+      <li><strong>Speed Over Perfection</strong>: During an active outbreak, broadcasting a clear, timely warning is more valuable than waiting to compile a complete technical analysis.</li>
+      <li><strong>Bilingual Emergency Response</strong>: In multi-cultural organizations, security alerts and recovery checklists must be published in both native and international languages (Khmer and English) simultaneously to prevent communication lag.</li>
+      <li><strong>User Support is the Real Work</strong>: Analyzing malware behavior takes minutes; supporting hundreds of anxious people, walking them through recovery, and restoring organizational trust takes hours of focused, empathetic labor.</li>
+      <li><strong>Clear Instructions Prevent Panic</strong>: Plain, numbered lists of recovery steps keep users focused on action rather than fear.</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>9. Reflections</h2>
+    <p>The hardest part of this incident was not extracting file hashes or reviewing sandbox execution paths. The hardest part was staying online until 1:00 AM, translating technical instructions, and providing a calm, reassuring voice to parents, students, and staff while the situation was still active.</p>
+    <p>The exhaustion of that night extended into the next day. I was expected at work at 9:00 AM the following morning after troubleshooting the outbreak until 1:00 AM and configuring deployment tablets until 8:30 AM. Security incidents do not respect operational calendars or provide sleep recovery windows; the next day still happens.</p>
+    <p>Practical incident response is not a laboratory exercise. It is a combination of rapid technical investigation, clear communication, cross-campus coordination, and hands-on user recovery. Ultimately, security operations are not just about protecting machines—they are about supporting the people who use them.</p>
+  </section>
+
+  <hr>
+
+  <footer>
+    <p><strong>Operational Links &amp; Artifacts:</strong></p>
+    <ul>
+      <li><a href="https://telegra.ph/%E1%9E%9C%E1%9E%92%E1%9E%93%E1%9E%80%E1%9E%9A%E1%9E%80%E1%9E%9A%E1%9E%96%E1%9E%9A%E1%9E%82--Security-Alert-How-to-handle-the-Salary-Trojan-Virus-11-25">Original Bilingual Security Alert (Telegra.ph)</a></li>
+      <li><a href="https://www.virustotal.com/gui/file/6f43a429cd634a1a42a77909b512ec533b7f04da5172178939565de22bf40462/detection">VirusTotal Analysis Directory</a></li>
+    </ul>
+  </footer>
+</article>
