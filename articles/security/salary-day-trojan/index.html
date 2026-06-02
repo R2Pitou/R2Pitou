@@ -294,26 +294,41 @@ permalink: /security/salary-day-trojan/
     </div>
   </section>
 
-  <hr>
+ <hr>
 
-  <section>
-    <h2>1. Why This Incident Mattered</h2>
-    <p>A compromised workstation or a random malware infection is a routine IT problem, managed with standard isolation and recovery procedures. This incident was different because it targeted organizational trust.</p>
-    <p>The outbreak began when a compromised Telegram account belonging to one of the campuses—a channel specifically designated for parent communication—began distributing a malicious executable file named <strong>"Lương tháng 11 + hoa hồng.exe"</strong> (translated from Vietnamese: <em>November Salary + Commission.exe</em>).</p>
-    <p>Because the file appeared to originate from a trusted, official channel, parents, staff, and students had every reason to believe it was a legitimate communication. In any community, when a primary communication line is subverted, a technical vulnerability immediately becomes an organizational trust crisis.</p>
-  </section>
+<section>
+  <h2>Why This Incident Mattered</h2>
 
-  <hr>
+  <p>
+    Most malware incidents are technical problems. This one became a trust problem.
+  </p>
 
-  <section>
-    <h2>Initial Detection &amp; Verification</h2>
-    <p>Speed is the primary factor in containing propagation. The response timeline moved from initial detection to active triage and formal broadcast:</p>
-    <ul>
-      <li><strong>16:47 | Threat Discovery</strong>: I received the file <code>"Lương tháng 11 + hoa hồng.exe"</code> directly as one of the first recipients of the automated Telegram blast. Questioning the message, I immediately prepared to submit it for analysis, deducing that it was a hijacked broadcast rather than a legitimate upload from the campus front desk.</li>
-      <li><strong>16:48 | Technical Triage</strong>: The file’s cryptographic hash was extracted and submitted to VirusTotal for analysis. The hash returned immediate positive detections for malicious characteristics.</li>
-      <li><strong>16:50 | Mitigation Initiated</strong>: Within three minutes of the file being received, I began active mitigation steps—tracing the compromised account's active sessions, identifying the target host, and drafting warning advisories.</li>
-      <li><strong>17:08 | Bilingual Alert Broadcasted</strong>: The first formal, bilingual warning was broadcasted to all staff, students, and parent communication channels.</li>
-    </ul>
+  <p>
+    The malicious file <strong>"Lương tháng 11 + hoa hồng.exe"</strong> was distributed through a compromised Telegram account used for parent communication. Because the message appeared to originate from a familiar and trusted source, recipients had little reason to immediately suspect malicious activity.
+  </p>
+
+  <p>
+    The challenge was not simply identifying the malware. It was restoring confidence in communication channels while simultaneously determining who had interacted with the file, who merely received it, and which accounts required recovery assistance.
+  </p>
+
+  <figure>
+    <img src="/articles/security/salary-day-trojan/telegram-outbreak.png" alt="Initial Telegram distribution showing the malicious payload sent from a trusted parent communication channel">
+    <figcaption>
+      Figure 1: The malicious payload <code>Lương tháng 11 + hoa hồng.exe</code> distributed through a compromised Telegram account.
+    </figcaption>
+  </figure>
+</section>
+
+<hr>
+
+<section>
+  <h2>Emergency Broadcast</h2>
+  <p>
+    Within 21 minutes of initial detection, a bilingual emergency advisory was distributed across staff, student, and parent communication channels. The message explained how to identify the malware, instructed users not to open the file, and provided immediate containment steps for anyone who had already interacted with it.
+  </p>
+  <p>
+    The complete advisory is reproduced below as originally distributed.
+  </p>
 
     <h3>The Emergency Broadcast</h3>
     <p>The alert was sent verbatim in both Khmer and English to ensure immediate visibility across all user demographics:</p>
