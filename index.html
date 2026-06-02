@@ -77,8 +77,10 @@ description: A public notebook, portfolio, and publishing hub for work that is s
   {% assign featured_articles_rendered = 0 %}
   {% assign regular_articles_rendered = 0 %}
 
+  {% assign sorted_articles = site.pages | sort: "date" | reverse %}
+
   <div class="post-grid featured-articles">
-    {% for article in site.pages %}
+    {% for article in sorted_articles %}
       {% if article.path contains 'articles/' %}
         {% if article.name == "index.md" or article.name == "index.html" %}
           {% if article.featured == true %}
@@ -94,7 +96,7 @@ description: A public notebook, portfolio, and publishing hub for work that is s
   </div>
 
   <div class="post-grid">
-    {% for article in site.pages %}
+    {% for article in sorted_articles %}
       {% if article.path contains 'articles/' %}
         {% if article.name == "index.md" or article.name == "index.html" %}
           {% unless article.featured == true %}
