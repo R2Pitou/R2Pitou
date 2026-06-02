@@ -978,13 +978,9 @@ h2 {
     var(--panel-strong);
 }
 
-.article-card.featured .article-card-image {
-  height: 220px;
-}
-
+/* media query for mobile/tablet */
 @media (max-width: 720px) {
-  .article-card-image,
-  .article-card.featured .article-card-image {
+  .article-card-image {
     height: 180px;
   }
 }
