@@ -15,7 +15,7 @@ image_alt: "VirusTotal Graph illustrating file connections and behaviors of the 
 permalink: /security/salary-day-trojan/
 ---
 
-On November 25, 2025, an active malware outbreak disrupted our multi-campus educational environment. Within a three-minute window, the event escalated from a single suspicious file receipt to a coordinated, multi-campus alert. However, as the evening unfolded, the technical challenge of analyzing code was quickly overshadowed by a far larger task: managing human panic, coordinating recovery across five campuses, and supporting parents, students, and staff late into the night. 
+On November 25, 2025, an active malware outbreak disrupted the multi-campus educational environment. Within a three-minute window, the event escalated from a single suspicious file receipt to a coordinated investigation. However, as the evening unfolded, the technical challenge of analyzing code was quickly overshadowed by a far larger task: managing human panic, coordinating recovery across five campuses, and supporting parents, students, and staff late into the night. 
 
 This postmortem documents the timeline, technical findings, and—most importantly—the human side of incident response.
 
@@ -23,21 +23,21 @@ This postmortem documents the timeline, technical findings, and—most important
 
 ## 1. Why This Incident Mattered
 
-A compromised workstation or a random malware infection is a routine IT problem, managed with standard isolation and recovery procedures. This incident was different because it targeted our organizational trust.
+A compromised workstation or a random malware infection is a routine IT problem, managed with standard isolation and recovery procedures. This incident was different because it targeted organizational trust.
 
-The outbreak began when a compromised Telegram account belonging to one of our campuses—a channel specifically designated for parent communication—began distributing a malicious executable file named **"Lương tháng 11 + hoa hồng.exe"** (translated from Vietnamese: *November Salary + Commission.exe*).
+The outbreak began when a compromised Telegram account belonging to one of the campuses—a channel specifically designated for parent communication—began distributing a malicious executable file named **"Lương tháng 11 + hoa hồng.exe"** (translated from Vietnamese: *November Salary + Commission.exe*).
 
 Because the file appeared to originate from a trusted, official channel, parents, staff, and students had every reason to believe it was a legitimate communication. In any community, when a primary communication line is subverted, a technical vulnerability immediately becomes an organizational trust crisis. 
 
 ---
 
-## 2. Initial Detection & Rapid Verification
+## 2. Initial Detection & Verification
 
-Speed is the primary factor in containing propagation. Our response timeline moved from initial detection to active triage and formal broadcast:
+Speed is the primary factor in containing propagation. The response timeline moved from initial detection to active triage and formal broadcast:
 
 *   **16:47 | Threat Discovery**: I received the file `"Lương tháng 11 + hoa hồng.exe"` directly as one of the first recipients of the automated Telegram blast. Questioning the message, I immediately prepared to submit it for analysis, deducing that it was a hijacked broadcast rather than a legitimate upload from the campus front desk.
 *   **16:48 | Technical Triage**: The file’s cryptographic hash was extracted and submitted to VirusTotal for analysis. The hash returned immediate positive detections for malicious characteristics.
-*   **16:50 | Mitigation Initiated**: Within three minutes of the file being received, we began active mitigation steps—tracing the compromised account's active sessions, identifying the target host, and drafting warning advisories.
+*   **16:50 | Mitigation Initiated**: Within three minutes of the file being received, I began active mitigation steps—tracing the compromised account's active sessions, identifying the target host, and drafting warning advisories.
 *   **17:08 | Bilingual Alert Broadcasted**: The first formal, bilingual warning was broadcasted to all staff, students, and parent communication channels.
 
 ### The Emergency Broadcast
@@ -81,7 +81,7 @@ The alert was sent verbatim in both Khmer and English to ensure immediate visibi
 > 2. **Contact IT Support Immediately**: Message me directly at this link for assistance 👉 https://t.me/atpitou  
 > 3. **Change Your Passwords**: Using your PHONE (not the computer), change your Telegram and Email passwords immediately.
 
-This rapid reaction window prevented widespread, automated execution on workstations across our offices. However, the virus had already begun its second phase: session hijacking.
+The rapid warning reduced the opportunity for further execution. However, the virus had already begun its second phase: session hijacking.
 
 ![Initial Telegram distribution showing the malicious payload sent from a trusted parent communication channel](/articles/security/salary-day-trojan/telegram-outbreak.png)
 
@@ -101,11 +101,11 @@ Because recipients received the file from colleagues, friends, and school admini
 
 ## 4. Operational Response & Triage Under Uncertainty
 
-Coordinating a response across five distinct campuses, each with its own local staff and user populations, required immediate centralization. We established a central command channel to coordinate triage, but we quickly realized that technical logs did not match the reality of user reports.
+Coordinating a response across five distinct campuses, each with its own local staff and user populations, required immediate centralization. I established a direct triage line, but quickly realized that technical logs did not match the reality of user reports.
 
 In incident response theory, systems report clean status codes. In practice, users do not report "I executed a Trojan." They report: *"Something weird happened to my Telegram,"* or *"My account is sending messages by itself, but I didn't write them."*
 
-We had to establish a rapid diagnostic workflow to triage users under intense uncertainty. We systematically asked:
+I had to establish a rapid diagnostic workflow to triage users under intense uncertainty. I systematically asked:
 
 1.  **Did you download the file?**
 2.  **On what device did you open it?** (Windows PC, macOS, Android phone, or iPhone?)
@@ -117,27 +117,42 @@ We had to establish a rapid diagnostic workflow to triage users under intense un
 
 A significant portion of the evening was spent performing device-specific triage. Because the malicious file was a Windows executable (`.exe`), it could not execute on mobile operating systems (iOS and Android) or macOS. 
 
-Many panicked parents and staff reported opening the message on their mobile phones. We were able to reassure them that while they had viewed the message, their mobile devices were not infected by the executable. We instructed them to simply delete the message from their logs. 
+Many panicked parents and staff reported opening the message on their mobile phones. I was able to reassure them that while they had viewed the message, their mobile devices were not infected by the executable. I instructed them to simply delete the message from their logs. 
 
-For users who had downloaded and run the file on Windows PCs, we immediately coordinated device isolation, helping them disconnect from the network to prevent further lateral movement.
+For users who had downloaded and run the file on Windows PCs, I immediately coordinated device isolation, helping them disconnect from the network to prevent further lateral movement.
 
 ---
 
-## 5. The Human Side of the Incident
+## 5. When the Incident Stopped Being About Malware
 
-Most technical postmortems focus on code blocks and Indicators of Compromise (IOCs). However, by 19:00, our technical investigation had shifted entirely into a high-intensity support operation. 
+Most technical postmortems focus on code blocks and Indicators of Compromise (IOCs). However, by 19:00, my technical investigation had shifted entirely into a high-intensity support operation. 
 
 This was no longer a malware analysis problem; it was a human crisis. 
 
-*   **Frightened People**: Parents contacted the IT department directly, anxious about their children's data and family privacy.
+*   **Frightened People**: Parents contacted me directly, anxious about their family's data and privacy.
 *   **Anxious Students**: Students worried they had broken school devices or would face disciplinary action for clicking a link.
-*   **Guilt-Ridden Staff**: Teachers and administrative staff were deeply concerned that their hijacked accounts were responsible for spreading the infection to their colleagues.
+*   **Guilt-Ridden Staff**: Teachers and administrative staff were deeply concerned that their hijacked accounts were responsible for spreading the infection to colleagues.
 
-Our team treated every user with empathy. Many users made reasonable decisions based on the context they had at the time. Portraying them as careless would only discourage future transparent reporting. 
+Most security articles talk about infected machines. This incident rapidly became about frightened people. These concerns required more time and effort than the technical investigation itself. 
 
-We set up an informal emergency support desk, translating complex recovery steps into plain Khmer and English. We repeated the same instructions—how to check active Telegram sessions, how to terminate unauthorized devices, and how to set up two-step verification—dozens of times. 
+I treated every user with empathy. Many users made reasonable decisions based on the context they had at the time. Portraying them as careless would only discourage future transparent reporting.
 
-We remained online, answering individual messages and guiding users through account recovery, until approximately 1:00 AM.
+### Grounding the Chaos: Triage Conversations
+
+To illustrate the nature of this front-line containment work, here is a representative log of the messages I was triaging simultaneously:
+
+> **[18:42] Staff Member:** I clicked the salary file. What do I do?  
+> **[18:43] I:** On what device? Phone or computer?  
+> **[18:43] Staff Member:** Android phone.  
+> **[18:44] I:** You're okay. The virus is a Windows executable (.exe) and cannot run on Android. Just delete the file from your phone.  
+>   
+> **[19:16] Teacher:** Help, my Telegram is sending the salary file to my contacts by itself! My mom just called me saying she got it.  
+> **[19:17] I:** Your account session is hijacked. Open Telegram on your phone immediately. Go to Settings > Devices. Tap "Terminate all other sessions." That will disconnect the attacker. Then enable Two-Step Verification immediately.
+>   
+> **[21:04] I:** Did you download or execute the file?  
+> **[21:40] Staff Member:** Nope. Sorry, my brain is on overdrive today. I deleted it immediately when I saw your warning.
+
+I set up an informal emergency support desk, translating complex recovery steps into plain Khmer and English. I repeated the same instructions—how to check active Telegram sessions, how to terminate unauthorized devices, and how to set up two-step verification—dozens of times. I remained online, answering individual messages and guiding users through account recovery, until approximately 1:00 AM.
 
 ---
 
@@ -160,7 +175,7 @@ Based on sandbox execution reports (CAPE/Zenbox), we observed the following tech
     *   It created a directory under `C:\Users\Public\Downloads\20251125115015\` containing multiple files: `1.bat`, `fhq.bat`, `hjk.txt`, `agg.txt`, `kill.txt`, and `1.dll`.
 *   **System Service Registration**:
     *   The malware registered and started a system service named `llama` pointing to the dropped driver (`llama.sys`).
-    *   It registered a service named `MicrosoftSoftware2ShadowCop4yProvider` to establish persistence.
+    *   It registered a service named `MicrosoftSoftware2ShadowCop4yProvider`. This attracted investigative attention because service creation is commonly associated with long-term system modification and persistence mechanisms.
 *   **Network Activity**:
     *   The system recorded attempt connections to a dead IP and local listening ports.
     *   Connections to external hosts were initiated for data egress and payload delivery.
@@ -180,7 +195,7 @@ Detailed detection metrics and scanner signatures are documented on the [VirusTo
 
 ## 7. Recovery & Containment Guidance
 
-To halt the propagation cycle and secure compromised accounts, we distributed a clear, sequential recovery checklist in both Khmer and English:
+To halt the propagation cycle and secure compromised accounts, I distributed a clear, sequential recovery checklist in both Khmer and English:
 
 1.  **Terminate Active Sessions**: Open Telegram, navigate to *Settings > Devices*, and select **Terminate all other sessions** to force the attacker off the hijacked account.
 2.  **Enable Two-Step Verification (2FA)**: Set up a secondary password in Telegram (*Settings > Privacy and Security > Two-Step Verification*). This ensures that even if a session is hijacked in the future, the account cannot be accessed without the master password.
@@ -188,7 +203,7 @@ To halt the propagation cycle and secure compromised accounts, we distributed a 
 4.  **Isolate Affected Workstations**: Disconnect infected Windows PCs from the local network immediately to prevent lateral propagation.
 5.  **Change Credentials**: Reset passwords for all sensitive organizational systems, performing the changes from a trusted, clean device.
 
-*Note: During containment discussions, our team recommended blocking identified malicious infrastructure at the gateway level to limit the outbreak's spread.*
+*Note: During containment discussions, I recommended blocking identified malicious infrastructure at the gateway level to limit the outbreak's spread.*
 
 ---
 
@@ -207,6 +222,8 @@ Every active security incident offers critical lessons for future resilience:
 ## 9. Reflections
 
 The hardest part of this incident was not extracting file hashes or reviewing sandbox execution paths. The hardest part was staying online until 1:00 AM, translating technical instructions, and providing a calm, reassuring voice to parents, students, and staff while the situation was still active.
+
+The exhaustion of that night extended into the next day. I was expected at work at 9:00 AM the following morning after troubleshooting the outbreak until 1:00 AM and configuring deployment tablets until 8:30 AM. Security incidents do not respect operational calendars or provide sleep recovery windows; the next day still happens.
 
 Practical incident response is not a laboratory exercise. It is a combination of rapid technical investigation, clear communication, cross-campus coordination, and hands-on user recovery. Ultimately, security operations are not just about protecting machines—they are about supporting the people who use them.
 
