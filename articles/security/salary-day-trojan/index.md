@@ -35,7 +35,7 @@ Because the file appeared to originate from a trusted, official channel, parents
 
 Speed is the primary factor in containing propagation. Our response timeline moved from initial detection to active triage and formal broadcast:
 
-*   **16:47 | Threat Discovery**: I noticed the suspicious `.exe` file distributed in a Telegram communication group. Recognizing that salary sheets are never distributed as Windows executable files, I immediately flagged the threat.
+*   **16:47 | Threat Discovery**: I received the file `"Lương tháng 11 + hoa hồng.exe"` directly as one of the first recipients of the automated Telegram blast. Questioning the message, I immediately prepared to submit it for analysis, deducing that it was a hijacked broadcast rather than a legitimate upload from the campus front desk.
 *   **16:48 | Technical Triage**: The file’s cryptographic hash was extracted and submitted to VirusTotal for analysis. The hash returned immediate positive detections for malicious characteristics.
 *   **16:50 | Mitigation Initiated**: Within three minutes of the file being received, we began active mitigation steps—tracing the compromised account's active sessions, identifying the target host, and drafting warning advisories.
 *   **17:08 | Bilingual Alert Broadcasted**: The first formal, bilingual warning was broadcasted to all staff, students, and parent communication channels.
