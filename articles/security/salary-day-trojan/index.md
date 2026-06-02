@@ -10,7 +10,7 @@ tags:
   - malware
   - telegram
   - governance
-image: hero.png
+image: /articles/security/salary-day-trojan/hero.png
 image_alt: "VirusTotal Graph illustrating file connections and behaviors of the Salary Day Trojan"
 permalink: /security/salary-day-trojan/
 ---
@@ -46,6 +46,10 @@ Speed is the primary factor in containing propagation. Our response timeline mov
 ```
 
 This three-minute reaction window prevented widespread, automated execution on workstations across our offices. However, the virus had already begun its second phase: session hijacking.
+
+![Initial Telegram distribution showing the malicious payload sent from a trusted parent communication channel](/articles/security/salary-day-trojan/telegram-outbreak.png)
+
+*Figure 1: The malicious payload "Lương tháng 11 + hoa hồng.exe" as distributed via a hijacked campus Telegram account.*
 
 ---
 
