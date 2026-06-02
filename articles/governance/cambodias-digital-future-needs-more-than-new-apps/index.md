@@ -20,8 +20,6 @@ image_alt: "Abstract digital illustration representing backend server infrastruc
 
 *Originally published in the [Phnom Penh Post](https://phnompenhpost.com/opinion/cambodias-digital-future-needs-more-than-new-apps/) on 16 May 2026.*
 
-**Original publication:** [Phnom Penh Post](https://phnompenhpost.com/opinion/cambodias-digital-future-needs-more-than-new-apps/)
-
 ---
 
 Cambodia is currently accelerating into its digital transformation, embracing the growth of coding, app development, AI experimentation in [Khmer-language tools](https://translatekh.mptc.gov.kh/), online public services and the Industrial Revolution 4.0 initiative. These platforms are no longer just exciting side projects. They are rapidly becoming the scaffolding for Khmer society of tomorrow.
