@@ -1,167 +1,93 @@
 # How To Post
 
-To post, create one Markdown file in `_articles/` and commit it.
+To publish a new article, you will create a standard Jekyll page inside the `articles/` directory instead of using `_posts/` or a Jekyll collection.
 
-This site uses a Jekyll collection instead of `_posts/` because article filenames should be title-based, not date-prefixed.
+## Directory and File Structure
 
-## Filename Format
-
-```text
-_articles/Post-slug-title.md
-```
-
-## Example Filename
+Each article should have its own folder named after the article slug, nested inside its corresponding category folder. Inside this folder, create an `index.md` (or `index.html` if you need custom HTML formatting/styles):
 
 ```text
-_articles/GitHub-native-POSSE-setup.md
+articles/<category>/<article-slug>/index.md
 ```
 
-## Copy-Paste Post Template
+### Example Structure
 
-```markdown
----
-layout: post
-title: "POST TITLE HERE"
-date: 2026-05-12 09:00:00 +0700
-categories: notes
-permalink: /notes/post-title-here/
-canonical_url: https://working-draft.org/notes/post-title-here/
-featured: false
-summary: "One or two sentence summary."
-tags:
-  - working-draft
-syndicate: false
-syndication:
-  mastodon: false
-  bluesky: false
-  linkedin: false
-  medium: false
-  devto: false
----
-
-Start writing here.
-```
-
-## What The Fields Do
-
-- `categories` controls the URL shelf.
-- The filename controls the post slug.
-- `permalink` must be lowercase and should match the category plus filename slug.
-- `canonical_url` must be the full `https://working-draft.org/.../` version of `permalink`.
-- `tags` are labels.
-- `featured: true` puts the article in the featured area.
-- `syndicate: true` allows future outward posting.
-
-Use exactly one category. Suggested categories:
+For a new article titled "Cambodia's Digital Future" under the category "governance", the path is:
 
 ```text
-architecture
-systems
-security
-governance
-writing
-identity
-notes
-portfolio
+articles/governance/cambodias-digital-future-needs-more-than-new-apps/index.md
 ```
 
-## URL Formula
+## Front Matter Template
 
-This file:
-
-```text
-_articles/GitHub-native-POSSE-setup.md
-```
-
-plus:
+Every article requires front matter metadata at the very beginning of the file. Copy and paste this template:
 
 ```yaml
-categories: architecture
+---
+layout: article
+title: "Your Article Title"
+date: 2026-06-02 09:00:00 +0700
+categories: governance
+permalink: /governance/cambodias-digital-future-needs-more-than-new-apps/
+canonical_url: https://working-draft.org/governance/cambodias-digital-future-needs-more-than-new-apps/
+featured: false
+summary: "One or two sentence summary of the article."
+tags:
+  - governance
+  - digital-maturity
+image: /assets/images/cambodias-digital-future-needs-more-than-new-apps-hero.png
+image_alt: "Alternative text description of the hero image for screen readers."
+---
 ```
 
-becomes:
+## Field Explanations
 
-```text
-https://working-draft.org/architecture/github-native-posse-setup/
-```
+- **`categories`**: Controls the URL shelf. Use exactly one lowercase category. Suggested categories:
+  - `architecture`
+  - `systems`
+  - `security`
+  - `governance`
+  - `writing`
+  - `identity`
+  - `notes`
+  - `portfolio`
+  - `technology`
+- **`permalink`**: Must be lowercase, matched to `/<category>/<article-slug>/`, and end with a trailing slash.
+- **`canonical_url`**: 
+  - For original posts: Must match the full `https://working-draft.org` permalink.
+  - For copies of external publications (e.g. Phnom Penh Post): Point to the original article's URL to preserve SEO attribution.
+- **`featured: true`**: Pins the article to the featured grid on the homepage (up to 3 featured articles).
+- **`image`**: Root-relative path to the hero image (usually in `/assets/images/...`).
 
-Use lowercase URLs. Filenames may use title case for readability, but canonical article URLs should be lowercase.
+## Image Guidelines
 
-Automatic GitHub checks fail if an article permalink is missing, mixed-case, or does not match:
+All article images must be flat and stored under one of two conventions:
 
-```text
-/<category>/<lowercase-filename-slug>/
-```
-
-## Drafting
-
-- Drafts can live in `_drafts/`.
-- Drafts do not publish by default.
-- To publish, move the draft into `_articles/` and make sure it has a `date`.
-
-## Images
-
-Use one flat image folder:
-
+### Option A: Flat Assets Directory (Preferred)
+Store images under:
 ```text
 assets/images/
 ```
-
-Do not create per-article image folders.
-
-Name article images with the article slug as the prefix:
-
+Keep the folder flat (do not create subfolders). Name the images using the article slug as a prefix, all lowercase kebab-case:
 ```text
-assets/images/article-slug-hero.webp
-assets/images/article-slug-01.webp
-assets/images/article-slug-02.webp
-assets/images/article-slug-og.webp
+assets/images/cambodias-digital-future-needs-more-than-new-apps-hero.png
+assets/images/cambodias-digital-future-needs-more-than-new-apps-01.png
 ```
 
-Use these meanings:
-
-- `article-slug-hero.webp` is the main hero image.
-- `article-slug-01.webp`, `article-slug-02.webp`, etc. are inline images.
-- `article-slug-og.webp` is an optional social preview image.
-
-Reference images with root-relative paths:
-
-```markdown
-![Image description](/assets/images/article-slug-hero.webp)
+### Option B: Local Article Folder
+Store images directly in the article's own folder (e.g. alongside `index.md`):
+```text
+articles/security/salary-day-trojan/virustotal.png
 ```
-
-Keep image filenames URL-safe:
-
-- lowercase letters
-- numbers
-- hyphens
-- normal file extensions such as `.webp`, `.jpg`, `.png`
-
-Do not use spaces, parentheses, punctuation, or mixed case in article or image filenames.
-
-Parentheses such as `(3)` can exist in URLs technically, but do not use them here. They are easy to encode incorrectly and make links uglier.
-
-If you are editing locally, you can auto-normalize article and image filenames:
-
-```powershell
-python scripts\normalize_articles.py
+You can reference local images using:
+```yaml
+image: /articles/security/salary-day-trojan/virustotal.png
 ```
-
-If you edit in the GitHub web browser, GitHub Actions runs the same script after you commit and pushes a follow-up normalization commit when needed.
 
 ## Checklist Before Committing
 
-- File ends with `.md`.
-- File is inside `_articles/`.
-- Filename is title-based, for example `Title-of-the-article.md`.
-- Front matter starts at line 1.
-- Front matter begins and ends with `---`.
-- `categories` has one value.
-- `permalink` is lowercase.
-- `canonical_url` starts with `https://working-draft.org`.
-- `title` is quoted if it contains punctuation.
-- `date` includes `+0700`.
-- `summary` exists.
-- Article images, if any, are in `assets/images/`.
-- Article image filenames start with the article slug.
-- Article and image filenames are lowercase kebab-case.
+1. **File Path**: The file is at `articles/<category>/<slug>/index.md` (or `index.html`).
+2. **Metadata**: Front matter starts on line 1, begins and ends with `---`, and variables are filled.
+3. **No Duplicate H1**: Do not start the markdown body with a `# Title` heading. The layout automatically renders the `title` front matter field as the page's single `<h1>`.
+4. **URL Consistency**: `permalink` and `canonical_url` match the category and slug and are completely lowercase.
+5. **No Spaces/Special Characters**: Ensure slug names and image file names contain only lowercase letters, numbers, and hyphens (no spaces, parentheses, or capitals).

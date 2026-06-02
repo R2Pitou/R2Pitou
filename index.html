@@ -77,19 +77,17 @@ description: A public notebook, portfolio, and publishing hub for work that is s
   {% assign featured_articles_rendered = 0 %}
   {% assign regular_articles_rendered = 0 %}
 
-  {% assign sorted_articles = site.pages | sort: "date" | reverse %}
+  {% assign articles_temp = site.pages | where_exp: "item", "item.path contains 'articles/'" %}
+  {% assign articles_filtered = articles_temp | where_exp: "item", "item.name == 'index.md' or item.name == 'index.html'" %}
+  {% assign sorted_articles = articles_filtered | sort: "date" | reverse %}
 
   <div class="post-grid featured-articles">
     {% for article in sorted_articles %}
-      {% if article.path contains 'articles/' %}
-        {% if article.name == "index.md" or article.name == "index.html" %}
-          {% if article.featured == true %}
-            {% if featured_articles_rendered < 3 %}
-              {% include article-card.html article=article %}
-              {% assign featured_articles_rendered = featured_articles_rendered | plus: 1 %}
-              {% assign total_articles_rendered = total_articles_rendered | plus: 1 %}
-            {% endif %}
-          {% endif %}
+      {% if article.featured == true %}
+        {% if featured_articles_rendered < 3 %}
+          {% include article-card.html article=article %}
+          {% assign featured_articles_rendered = featured_articles_rendered | plus: 1 %}
+          {% assign total_articles_rendered = total_articles_rendered | plus: 1 %}
         {% endif %}
       {% endif %}
     {% endfor %}
@@ -97,17 +95,13 @@ description: A public notebook, portfolio, and publishing hub for work that is s
 
   <div class="post-grid">
     {% for article in sorted_articles %}
-      {% if article.path contains 'articles/' %}
-        {% if article.name == "index.md" or article.name == "index.html" %}
-          {% unless article.featured == true %}
-            {% if regular_articles_rendered < 6 %}
-              {% include article-card.html article=article %}
-              {% assign regular_articles_rendered = regular_articles_rendered | plus: 1 %}
-              {% assign total_articles_rendered = total_articles_rendered | plus: 1 %}
-            {% endif %}
-          {% endunless %}
+      {% unless article.featured == true %}
+        {% if regular_articles_rendered < 6 %}
+          {% include article-card.html article=article %}
+          {% assign regular_articles_rendered = regular_articles_rendered | plus: 1 %}
+          {% assign total_articles_rendered = total_articles_rendered | plus: 1 %}
         {% endif %}
-      {% endif %}
+      {% endunless %}
     {% endfor %}
   </div>
 
