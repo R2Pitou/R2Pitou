@@ -78,7 +78,7 @@ description: A public notebook, portfolio, and publishing hub for work that is s
   {% assign regular_articles_rendered = 0 %}
 
   {% assign articles_temp = site.pages | where_exp: "item", "item.path contains 'articles/'" %}
-  {% assign articles_filtered = articles_temp | where_exp: "item", "item.name == 'index.md' or item.name == 'index.html'" %}
+  {% assign articles_filtered = articles_temp %}
   {% assign sorted_articles = articles_filtered | sort: "date" | reverse %}
 
   <div class="post-grid featured-articles">
