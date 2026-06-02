@@ -15,6 +15,215 @@ image_alt: "VirusTotal Graph illustrating file connections and behaviors of the 
 permalink: /security/salary-day-trojan/
 ---
 
+<style>
+  /* Custom Timeline Component styling */
+  .incident-timeline-section {
+    margin: 40px 0;
+    padding: 30px;
+    background: var(--panel-strong);
+    border: 1px solid rgba(236, 153, 185, 0.12);
+    border-radius: 8px;
+  }
+
+  .incident-timeline-section h2 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    border-left: 3px solid var(--pink);
+    padding-left: 12px;
+    font-size: 1.5rem;
+  }
+
+  .incident-timeline {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  /* Vertical line */
+  .incident-timeline::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    bottom: 15px;
+    left: 95px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--pink) 0%, rgba(236, 153, 185, 0.1) 100%);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 80px 32px 1fr;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-time {
+    text-align: right;
+    font-family: "Outfit", "Kantumruy Pro", sans-serif;
+    font-weight: 600;
+    color: var(--pink);
+    font-size: 1.1rem;
+    padding-top: 12px;
+  }
+
+  .timeline-marker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+  }
+
+  .timeline-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--black);
+    border: 2px solid var(--pink);
+    z-index: 2;
+    box-shadow: 0 0 6px rgba(236, 153, 185, 0.6);
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .timeline-item:hover .timeline-marker {
+    transform: scale(1.3);
+    background: var(--pink-hot);
+    border-color: var(--white);
+    box-shadow: 0 0 10px var(--pink-hot);
+  }
+
+  .timeline-card {
+    background: var(--panel);
+    border: 1px solid rgba(236, 153, 185, 0.12);
+    border-radius: 6px;
+    padding: 16px 20px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .timeline-card:hover {
+    border-color: rgba(236, 153, 185, 0.4);
+    box-shadow: 0 4px 15px rgba(236, 153, 185, 0.05);
+    transform: translateY(-1px);
+  }
+
+  .timeline-card-highlight {
+    background: #180d13;
+    border-color: rgba(236, 153, 185, 0.25);
+  }
+
+  .timeline-card-highlight:hover {
+    border-color: var(--pink);
+  }
+
+  .timeline-title {
+    margin: 0 0 8px 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .timeline-detail {
+    margin: 0 0 6px 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .timeline-desc {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(248, 248, 248, 0.85);
+  }
+
+  /* Metrics Callout Panel */
+  .timeline-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    border-top: 1px solid rgba(236, 153, 185, 0.15);
+    padding-top: 24px;
+  }
+
+  .metric-card {
+    background: var(--panel);
+    border: 1px solid rgba(236, 153, 185, 0.1);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    transition: border-color 0.2s ease;
+  }
+
+  .metric-card:hover {
+    border-color: rgba(236, 153, 185, 0.25);
+  }
+
+  .metric-val {
+    font-family: "Outfit", "Kantumruy Pro", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--pink-hot);
+    margin-bottom: 4px;
+  }
+
+  .metric-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .incident-timeline-section {
+      padding: 20px 16px;
+    }
+    
+    .incident-timeline::before {
+      left: 15px;
+    }
+    
+    .timeline-item {
+      grid-template-columns: 32px 1fr;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .timeline-time {
+      grid-column: 2;
+      text-align: left;
+      padding-top: 0;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+    
+    .timeline-marker-container {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      height: 32px;
+      justify-content: flex-start;
+      padding-left: 9px;
+    }
+    
+    .timeline-card {
+      grid-column: 2;
+      padding: 12px 16px;
+    }
+    
+    .timeline-metrics {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .timeline-metrics {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 <article>
   <p>On November 25, 2025, an active malware outbreak disrupted the multi-campus educational environment. Within a three-minute window, the event escalated from a single suspicious file receipt to a coordinated investigation. However, as the evening unfolded, the technical challenge of analyzing code was quickly overshadowed by a far larger task: managing human panic, coordinating recovery across five campuses, and supporting parents, students, and staff late into the night.</p>
 
@@ -32,7 +241,7 @@ permalink: /security/salary-day-trojan/
   <hr>
 
   <section>
-    <h2>2. Initial Detection &amp; Verification</h2>
+    <h2>Initial Detection &amp; Verification</h2>
     <p>Speed is the primary factor in containing propagation. The response timeline moved from initial detection to active triage and formal broadcast:</p>
     <ul>
       <li><strong>16:47 | Threat Discovery</strong>: I received the file <code>"Lương tháng 11 + hoa hồng.exe"</code> directly as one of the first recipients of the automated Telegram blast. Questioning the message, I immediately prepared to submit it for analysis, deducing that it was a hijacked broadcast rather than a legitimate upload from the campus front desk.</li>
@@ -45,8 +254,7 @@ permalink: /security/salary-day-trojan/
     <p>The alert was sent verbatim in both Khmer and English to ensure immediate visibility across all user demographics:</p>
     
     <blockquote>
-      <p><strong>[25/11/2025 17:08] Arttu Pitou At 🇰🇭អាតពិទូ:</strong><br>
-      Please check TTP Computers.</p>
+      <p><strong>[25/11/2025 17:08] Arttu Pitou At 🇰🇭អាតពិទូ:</strong><br></p>
       
       <p>⚠️⚠️⚠️ ការជូនដំណឹងបន្ទាន់ពីផ្នែក IT៖ មេរោគកំពុងរីករាលដាល (Urgent Security Alert from IT) សូមប្រុងប្រយ័ត្ន!<br>
       បច្ចុប្បន្នមានគណនីមួយចំនួនកំពុងបញ្ជូនឯកសារដែលមានផ្ទុកមេរោគ (Trojan) ចូលក្នុងគ្រុបការងារ និងការសន្ទនាឯកជន។</p>
@@ -99,10 +307,142 @@ permalink: /security/salary-day-trojan/
     </figure>
   </section>
 
+  <section class="incident-timeline-section">
+    <h2>Incident Response Timeline</h2>
+    
+    <div class="incident-timeline">
+      
+      <div class="timeline-item">
+        <div class="timeline-time">16:47</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-title">Threat Discovery</h3>
+          <p class="timeline-detail"><strong>Received:</strong> <code>"Lương tháng 11 + hoa hồng.exe"</code></p>
+          <p class="timeline-desc">One of the first recipients of the Telegram malware blast.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">16:48</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-title">Technical Triage</h3>
+          <p class="timeline-detail"><strong>Hash extracted.</strong> Submitted to VirusTotal.</p>
+          <p class="timeline-desc">Immediate malicious detections returned.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">16:50</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-title">Investigation Begins</h3>
+          <p class="timeline-detail"><strong>Compromised account traced.</strong></p>
+          <p class="timeline-desc">Initial containment planning started.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">17:08</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card timeline-card-highlight">
+          <h3 class="timeline-title">Organization-Wide Alert</h3>
+          <p class="timeline-detail"><strong>First bilingual warning issued.</strong></p>
+          <p class="timeline-desc">Distributed across staff, student, and parent communication channels.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">17:40</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-title">Session Recovery Guidance</h3>
+          <p class="timeline-desc">Published recovery procedures for compromised Telegram accounts.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">18:42</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-title">First User Click Reports</h3>
+          <p class="timeline-desc">Active user triage begins.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">19:16</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card timeline-card-highlight">
+          <h3 class="timeline-title">Community Support Escalates</h3>
+          <p class="timeline-detail"><strong>Parent exposure reports begin.</strong></p>
+          <p class="timeline-desc">Direct support workload increases significantly.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">21:04</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-title">Containment Operations</h3>
+          <p class="timeline-desc">Campus-by-campus investigation and cleanup.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">01:00</div>
+        <div class="timeline-marker-container">
+          <div class="timeline-marker"></div>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-title">Support Operations Conclude</h3>
+          <p class="timeline-detail"><strong>Final user support interactions completed.</strong></p>
+          <p class="timeline-desc">Incident response transitions to recovery.</p>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="timeline-metrics">
+      <div class="metric-card">
+        <div class="metric-val">1 min</div>
+        <div class="metric-label">Detection &rarr; Analysis</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">3 min</div>
+        <div class="metric-label">Detection &rarr; Investigation</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">21 min</div>
+        <div class="metric-label">Detection &rarr; Warning</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">&approx; 8 hrs</div>
+        <div class="metric-label">Active Support Window</div>
+      </div>
+    </div>
+  </section>
+
   <hr>
 
   <section>
-    <h2>3. Understanding the Threat Vector</h2>
+    <h2>Understanding the Threat Vector</h2>
     <p>Standard security training teaches users to watch for external email addresses, lookalike domains, and generic greetings. This campaign bypassed those filters by exploiting trusted relationships.</p>
     <p>When the malware is executed on a Windows machine, it gains access to active Telegram session data. It then hijacks the user's account to automatically forward the malicious executable to their recent contacts, active conversations, and work groups.</p>
     <p>Because recipients received the file from colleagues, friends, and school administrative accounts, their default suspicion was lowered. Users did not click the file out of foolishness; they clicked it because they trusted the sender. This highlighted a key operational truth: <strong>trust is the most exploitable vector in modern organizational security.</strong></p>
@@ -111,117 +451,87 @@ permalink: /security/salary-day-trojan/
   <hr>
 
   <section>
-    <h2>4. Operational Response &amp; Triage Under Uncertainty</h2>
-    <p>Coordinating a response across five distinct campuses, each with its own local staff and user populations, required immediate centralization. I established a direct triage line, but quickly realized that technical logs did not match the reality of user reports.</p>
-    <p>In incident response theory, systems report clean status codes. In practice, users do not report "I executed a Trojan." They report: <em>"Something weird happened to my Telegram,"</em> or <em>"My account is sending messages by itself, but I didn't write them."</em></p>
-    <p>I had to establish a rapid diagnostic workflow to triage users under intense uncertainty. I systematically asked:</p>
-    <ol>
-      <li><strong>Did you download the file?</strong></li>
-      <li><strong>On what device did you open it?</strong> (Windows PC, macOS, Android phone, or iPhone?)</li>
-      <li><strong>Is your account currently sending messages automatically?</strong></li>
-      <li><strong>Do you still have access to your account?</strong></li>
-      <li><strong>Can you see your active sessions list?</strong></li>
-    </ol>
+<h2>Grounding the Chaos: Real-Time Triage</h2>
 
-    <h3>Distinguishing Phone Exposure from PC Execution</h3>
-    <p>A significant portion of the evening was spent performing device-specific triage. Because the malicious file was a Windows executable (<code>.exe</code>), it could not execute on mobile operating systems (iOS and Android) or macOS.</p>
-    <p>Many panicked parents and staff reported opening the message on their mobile phones. I was able to reassure them that while they had viewed the message, their mobile devices were not infected by the executable. I instructed them to simply delete the message from their logs.</p>
-    <p>For users who had downloaded and run the file on Windows PCs, I immediately coordinated device isolation, helping them disconnect from the network to prevent further lateral movement.</p>
+<p>
+By 19:00 the investigation had become as much a support operation as a malware incident.
+While tracing indicators, validating reports, and coordinating with campuses,
+I was simultaneously handling a constant stream of direct messages from staff,
+students, and parents.
+</p>
+
+<blockquote>
+  <p>
+  <strong>[17:37] Campus Staff:</strong> School phone telegram<br>
+  <strong>[17:37] Arttu:</strong> Sure it is phone and not PC?<br>
+  <strong>[17:38] Campus Staff:</strong> PSIS Phone<br>
+  <strong>[17:38] Arttu:</strong> Android?<br>
+  <strong>[17:38] Campus Staff:</strong> Yes
+  </p>
+</blockquote>
+
+<p>
+One of the first challenges was determining whether a report involved a Windows infection,
+a compromised Telegram session, or a user who had simply downloaded the file onto a phone.
+The response path differed significantly in each case.
+</p>
+
+<blockquote>
+  <p>
+  <strong>[18:42] Staff Member:</strong> Hello b<br>
+  <strong>[18:42] Staff Member:</strong> I accidentally click on the link<br>
+  <strong>[18:43] Arttu:</strong> [canned emergency response]
+  </p>
+</blockquote>
+
+<p>
+As reports increased, I relied heavily on a prepared bilingual response guide so that
+users received consistent instructions while I continued investigating the outbreak.
+</p>
+
+<blockquote>
+  <p>
+  <strong>[19:16] Deleted Account:</strong> My mom tap on the virus link<br>
+  <strong>[19:16] Deleted Account:</strong> I told her to delete it<br>
+  <strong>[19:16] Arttu:</strong> On a computer or phone?<br>
+  <strong>[19:16] Deleted Account:</strong> Phone<br>
+  <strong>[19:17] Arttu:</strong> Ok.<br>
+  <strong>[19:17] Arttu:</strong> [canned emergency response]<br>
+  <strong>[19:22] Deleted Account:</strong> Thank teacher
+  </p>
+</blockquote>
+
+<p>
+Most security write-ups focus on infected devices. Much of this incident involved helping
+people understand what had happened, whether they were actually at risk, and what to do next.
+</p>
+
+<blockquote>
+  <p>
+  <strong>[21:04] Arttu:</strong> Internet will go down while I clean the computers.<br>
+  <strong>[21:04] Arttu:</strong> Did you click the file?<br>
+  <strong>[21:39] Staff Member:</strong> Nope<br>
+  <strong>[21:40] Arttu:</strong> Nope? 😂<br>
+  <strong>[21:40] Arttu:</strong> Ahhh. Ok. Answers the did you click the file. 🙏<br>
+  <strong>[21:40] Arttu:</strong> Sorry. My brain is on overdrive at the moment. 🥳<br>
+  <strong>[21:41] Staff Member:</strong> No I didn't
+  </p>
+</blockquote>
+
+<p>
+I remained online answering messages, helping users recover accounts, validating reports,
+and coordinating response actions until approximately 1:00 AM.
+</p>
   </section>
 
   <hr>
 
   <section>
-    <h2>5. When the Incident Stopped Being About Malware</h2>
-    <p>Most technical postmortems focus on code blocks and Indicators of Compromise (IOCs). However, by 19:00, my technical investigation had shifted entirely into a high-intensity support operation.</p>
-    <p>This was no longer a malware analysis problem; it was a human crisis.</p>
-    <ul>
-      <li><strong>Frightened People</strong>: Parents contacted me directly, anxious about their family's data and privacy.</li>
-      <li><strong>Anxious Students</strong>: Students worried they had broken school devices or would face disciplinary action for clicking a link.</li>
-      <li><strong>Guilt-Ridden Staff</strong>: Teachers and administrative staff were deeply concerned that their hijacked accounts were responsible for spreading the infection to colleagues.</li>
-    </ul>
-    <p>Most security articles talk about infected machines. This incident rapidly became about frightened people. These concerns required more time and effort than the technical investigation itself.</p>
-    <p>I treated every user with empathy. Many users made reasonable decisions based on the context they had at the time. Portraying them as careless would only discourage future transparent reporting.</p>
-
-    <h3>Grounding the Chaos: Triage Conversations</h3>
-    <p>To illustrate the nature of this front-line containment work, here is the log of the actual support conversations I was triaging simultaneously (with staff names anonymized):</p>
-    
-    <blockquote>
-      <p><strong>[25/11/2025 17:36] Campus Staff:</strong><br>
-      <strong>[25/11/2025 17:37] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> delete for all<br>
-      <strong>[25/11/2025 17:37] Campus Staff:</strong> School phone telegram<br>
-      <strong>[25/11/2025 17:37] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> and post my update<br>
-      <strong>[25/11/2025 17:37] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> Sure it is phone and not PC?<br>
-      <strong>[25/11/2025 17:38] Campus Staff:</strong> PSIS Phone<br>
-      <strong>[25/11/2025 17:38] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> Android?<br>
-      <strong>[25/11/2025 17:38] Campus Staff:</strong> Yes<br>
-      <strong>[25/11/2025 17:40] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> 🆘 ចំណាត់ការបន្ទាន់៖ សម្រាប់អ្នកដែលគណនីកំពុង "ផ្ញើឯកសារនេះដោយខ្លួនឯង" (URGENT: If your account is sending this file automatically)<br>
-      ប្រសិនបើគណនី Telegram របស់អ្នកកំពុងផ្ញើឯកសារមេរោគនេះទៅអ្នកដទៃដោយឯងៗ (ទោះបីជាអ្នកប្រើទូរស័ព្ទ Android/iPhone ក៏ដោយ) នោះមានន័យថា Telegram របស់អ្នកត្រូវបាន Hacker ចូលគ្រប់គ្រងហើយ (Account Compromised)។ សូមធ្វើតាមជំហានខាងក្រោមជាបន្ទាន់ ដើម្បីទាត់ Hacker ចេញ៖<br>
-      ១. បិទការភ្ជាប់របស់ Hacker (Kill the Session): ចូលទៅកាន់ Settings (ការកំណត់) ក្នុង Telegram។ ចូលទៅកាន់ Devices (ឧបករណ៍)។ ចុចលើពាក្យ "Terminate All Other Sessions" (បញ្ចប់ការភ្ជាប់ផ្សេងៗទៀត)។ ចំណុចនេះនឹងទាត់ Hacker ចេញពីគណនីរបស់អ្នកភ្លាមៗ។<br>
-      ២. ដាក់លេខកូដការពារ (Enable 2FA): ចូលទៅកាន់ Settings > Privacy and Security (ឯកជនភាព និងសុវត្ថិភាព)។ ជ្រើសរើស Two-Step Verification (ការផ្ទៀងផ្ទាត់ពីរជំហាន)។ បង្កើតលេខសម្ងាត់ការពារ ដើម្បីកុំឱ្យគេចូលគណនីអ្នកបានទៀត។<br>
-      ៣. លុបសារចោល (Delete Messages): សូមជួយលុបសារដែលមានឯកសារមេរោគនោះចេញពី គ្រុប ឬឆាតដែលវាបានផ្ញើចេញ ដើម្បីកុំឱ្យអ្នកផ្សេងច្រឡំចុច។<br>
-      🆘 URGENT: If your account is sending the file<br>
-      If your Telegram account is sending this file to others automatically (even if you are on an Android phone), it means your Telegram Session has been HIJACKED. The virus isn't necessarily "on" your phone, but a hacker has access to your account remotely.<br>
-      DO THIS IMMEDIATELY to kick them out:<br>
-      Kill the Hacker's Access: Go to Telegram Settings. Tap on Devices. Tap on "Terminate All Other Sessions". This will instantly disconnect the hacker/bot controlling your account.<br>
-      Lock your Account (2FA): Go to Settings > Privacy and Security. Turn on Two-Step Verification. Set a password. This prevents hackers from logging back in even if they have your SMS code.<br>
-      Clean Up: Please delete the malicious messages your account sent to groups/friends so others don't click them.<br>
-      👉 Need help doing this? Contact IT: <a href="https://t.me/atpitou">https://t.me/atpitou</a><br>
-      <strong>[25/11/2025 17:50] Campus Staff:</strong> Can’t because sign out already on school phone<br>
-      <strong>[25/11/2025 18:09] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> ok. If we can sign inn onn any macchine need to trminate other sssions.</p>
-
-      <p><strong>[25/11/2025 18:42] Staff Member A:</strong> Hello b<br>
-      <strong>[25/11/2025 18:42] Staff Member A:</strong> I accidentally click on the link<br>
-      <strong>[25/11/2025 18:43] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> ⚠️ វិធានការបន្ទាន់ចំពោះមេរោគ Trojan / URGENT ACTION REQUIRED<br>
-      យើងខ្ញុំបានរៀបចំសេចក្តីណែនាំលម្អិតអំពីរបៀបដោះស្រាយបញ្ហាមេរោគ "Lương tháng 11...exe" ដែលកំពុងរីករាលដាល។ សូមចុចអានដំណោះស្រាយលម្អិតនៅទីនេះ (Please read the full guide here):<br>
-      👉 <a href="https://បង្រៀន.ខ្ញុំ.com/virus">https://បង្រៀន.ខ្ញុំ.com/virus</a><br>
-      ---<br>
-      សង្ខេបចំណុចសំខាន់ (Quick Summary):<br>
-      📱 បើ Telegram អ្នកកំពុងផ្ញើឯកសារចេញ (If account is auto-sending): ចូលទៅកាន់ Settings ➡️ Devices ➡️ ចុច "Terminate All Other Sessions" ភ្លាម!<br>
-      💻 បើបានបើកលើកុំព្យូទ័រ (If opened on PC): ផ្តាច់ Internet ភ្លាម ហើយទាក់ទងមកខ្ញុំ 👉 <a href="https://t.me/m/WYVTYfvVNGZl">https://t.me/m/WYVTYfvVNGZl</a><br>
-      📂 បើបានបើកលើទូរស័ព្ទ (If opened on Phone): លោកអ្នកសុវត្ថិភាពទេ។ សូមចូលទៅលុបឯកសារនោះចោលពីក្នុង Downloads folder របស់អ្នក។<br>
-      ---<br>
-      English & Khmer Guide:<br>
-      👉<a href="https://បង្រៀន.ខ្ញុំ.com/virus">https://បង្រៀន.ខ្ញុំ.com/virus</a></p>
-
-      <p><strong>[25/11/2025 19:16] Deleted Account:</strong> My mom tap on the virus link<br>
-      <strong>[25/11/2025 19:16] Deleted Account:</strong> I told her to delete it<br>
-      <strong>[25/11/2025 19:16] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> On a computer or phone?<br>
-      <strong>[25/11/2025 19:16] Deleted Account:</strong> But she can delete only private chat but not in the group<br>
-      <strong>[25/11/2025 19:16] Deleted Account:</strong> Phone<br>
-      <strong>[25/11/2025 19:17] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> Ok.<br>
-      <strong>[25/11/2025 19:17] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> ⚠️ វិធានការបន្ទាន់ចំពោះមេរោគ Trojan / URGENT ACTION REQUIRED<br>
-      យើងខ្ញុំបានរៀបចំសេចក្តីណែនាំលម្អិតអំពីរបៀបដោះស្រាយបញ្ហាមេរោគ "Lương tháng 11...exe" ដែលកំពុងរីករាលដាល។ សូមចុចអានដំណោះស្រាយលម្អិតនៅទីនេះ (Please read the full guide here):<br>
-      👉 <a href="https://បង្រៀន.ខ្ញុំ.com/virus">https://បង្រៀន.ខ្ញុំ.com/virus</a><br>
-      ---<br>
-      សង្ខេបចំណុចសំខាន់ (Quick Summary):<br>
-      📱 បើ Telegram អ្នកកំពុងផ្ញើឯកសារចេញ (If account is auto-sending): ចូលទៅកាន់ Settings ➡️ Devices ➡️ ចុច "Terminate All Other Sessions" ភ្លាម!<br>
-      💻 បើបានបើកលើកុំព្យូទ័រ (If opened on PC): ផ្តាច់ Internet ភ្លាម ហើយទាក់ទងមកខ្ញុំ 👉 <a href="https://t.me/m/WYVTYfvVNGZl">https://t.me/m/WYVTYfvVNGZl</a><br>
-      📂 បើបានបើកលើទូរស័ព្ទ (If opened on Phone): លោកអ្នកសុវត្ថិភាពទេ។ សូមចូលទៅលុបឯកសារនោះចោលពីក្នុង Downloads folder របស់អ្នក។<br>
-      ---<br>
-      English & Khmer Guide:<br>
-      👉<a href="https://បង្រៀន.ខ្ញុំ.com/virus">https://បង្រៀន.ខ្ញុំ.com/virus</a><br>
-      <strong>[25/11/2025 19:22] Deleted Account:</strong> Thank teacher</p>
-
-      <p><strong>[25/11/2025 21:04] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> Internet will go down while I clean the computers. Did you click the file?<br>
-      <strong>[25/11/2025 21:12] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> <a href="https://telegra.ph/%E1%9E%9C%E1%9E%92%E1%9E%93%E1%9E%80%E1%9E%9A%E1%9E%80%E1%9E%9A%E1%9E%96%E1%9E%9A%E1%9E%82--Security-Alert-How-to-handle-the-Salary-Trojan-Virus-11-25">https://telegra.ph/%E1%9E%9C%E1%9E%92%E1%9E%93%E1%9E%80%E1%9E%9A%E1%9E%80%E1%9E%9A%E1%9E%96%E1%9E%9A%E1%9E%82--Security-Alert-How-to-handle-the-Salary-Trojan-Virus-11-25</a><br>
-      <strong>[25/11/2025 21:39] Event Coordinator:</strong> Nope<br>
-      <strong>[25/11/2025 21:40] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> Nope? 😂<br>
-      <strong>[25/11/2025 21:40] Arttu Pitou At 🇰🇭អាតពិទូ:</strong> Ahhh. Ok. Answers the did you click the file. 🙏 Sorry. My brain is on overdrive at the moment. 🥳<br>
-      <strong>[25/11/2025 21:41] Event Coordinator:</strong> No I didn’t</p>
-    </blockquote>
-
-    <p>I set up an informal emergency support desk, translating complex recovery steps into plain Khmer and English. I repeated the same instructions—how to check active Telegram sessions, how to terminate unauthorized devices, and how to set up two-step verification—dozens of times. I remained online, answering individual messages and guiding users through account recovery, until approximately 1:00 AM.</p>
-  </section>
-
-  <hr>
-
-  <section>
-    <h2>6. Technical Investigation (Observations)</h2>
-    <p>A sandbox review of the file <code>Lương tháng 11 + hoa hồng.exe</code> (SHA256: <code>6f43a429cd634a1a42a77909b512ec533b7f04da5172178939565de22bf40462</code>) revealed a series of system modifications and process relationships.</p>
+    <h2>Technical Investigation</h2>
+    <p>A sandbox review of the file <code>Lương tháng 11 + hoa hồng.exe</code> (<a href="https://www.virustotal.com/gui/file/6f43a429cd634a1a42a77909b512ec533b7f04da5172178939565de22bf40462/detection">SHA256: 6f43a429cd634a1a42a77909b512ec533b7f04da5172178939565de22bf40462</a>) revealed a series of system modifications and process relationships.</p>
 
     <h3>Sandbox Observations</h3>
-    <p>Based on sandbox execution reports (CAPE/Zenbox), we observed the following technical characteristics upon execution:</p>
+    <p>Based on sandbox execution reports (CAPE/Zenbox), I observed the following technical characteristics upon execution:</p>
     <ul>
       <li><strong>Process Spawning &amp; Shell Manipulation</strong>:
         <ul>
@@ -239,7 +549,7 @@ permalink: /security/salary-day-trojan/
       <li><strong>System Service Registration</strong>:
         <ul>
           <li>The malware registered and started a system service named `llama` pointing to the dropped driver (<code>llama.sys</code>).</li>
-          <li>It registered a service named <code>MicrosoftSoftware2ShadowCop4yProvider</code>. This attracted investigative attention because service creation is commonly associated with long-term system modification and persistence mechanisms.</li>
+          <li>It registered a service named <code>MicrosoftSoftware2ShadowCop4yProvider</code>.</li>
         </ul>
       </li>
       <li><strong>Network Activity</strong>:
@@ -265,8 +575,8 @@ permalink: /security/salary-day-trojan/
   <hr>
 
   <section>
-    <h2>7. Recovery &amp; Containment Guidance</h2>
-    <p>To halt the propagation cycle and secure compromised accounts, I distributed a clear, sequential recovery checklist in both Khmer and English:</p>
+    <h2>Recovery &amp; Containment Guidance</h2>
+    <p>To halt the propagation cycle and secure compromised accounts, <a href="https://telegra.ph/%E1%9E%9C%E1%9E%92%E1%9E%93%E1%9E%80%E1%9E%9A%E1%9E%80%E1%9E%9A%E1%9E%96%E1%9E%9A%E1%9E%98%E1%9E%9A%E1%9E%82--Security-Alert-How-to-handle-the-Salary-Trojan-Virus-11-25">I distributed a clear, sequential recovery checklist in both Khmer and English</a>:</p>
     <ol>
       <li><strong>Terminate Active Sessions</strong>: Open Telegram, navigate to <em>Settings &gt; Devices</em>, and select <strong>Terminate all other sessions</strong> to force the attacker off the hijacked account.</li>
       <li><strong>Enable Two-Step Verification (2FA)</strong>: Set up a secondary password in Telegram (<em>Settings &gt; Privacy and Security &gt; Two-Step Verification</em>). This ensures that even if a session is hijacked in the future, the account cannot be accessed without the master password.</li>
@@ -274,19 +584,18 @@ permalink: /security/salary-day-trojan/
       <li><strong>Isolate Affected Workstations</strong>: Disconnect infected Windows PCs from the local network immediately to prevent lateral propagation.</li>
       <li><strong>Change Credentials</strong>: Reset passwords for all sensitive organizational systems, performing the changes from a trusted, clean device.</li>
     </ol>
-    <p><em>Note: During containment discussions, I recommended blocking identified malicious infrastructure at the gateway level to limit the outbreak's spread.</em></p>
   </section>
 
   <hr>
 
   <section>
-    <h2>8. Lessons Learned</h2>
+    <h2>Lessons Learned</h2>
     <p>Every active security incident offers critical lessons for future resilience:</p>
     <ul>
-      <li><strong>Trusted Contacts Bypass Training</strong>: Traditional phishing awareness is insufficient when threats originate from compromised, authenticated accounts belonging to friends or colleagues. Containment depends on verification speed.</li>
+      <li><strong>Trusted Contacts Bypass Training</strong>: Traditional phishing awareness is insufficient when threats originate from compromised, authenticated accounts belonging to friends, colleagues or school administration. Containment depends on verification speed.</li>
       <li><strong>Speed Over Perfection</strong>: During an active outbreak, broadcasting a clear, timely warning is more valuable than waiting to compile a complete technical analysis.</li>
       <li><strong>Bilingual Emergency Response</strong>: In multi-cultural organizations, security alerts and recovery checklists must be published in both native and international languages (Khmer and English) simultaneously to prevent communication lag.</li>
-      <li><strong>User Support is the Real Work</strong>: Analyzing malware behavior takes minutes; supporting hundreds of anxious people, walking them through recovery, and restoring organizational trust takes hours of focused, empathetic labor.</li>
+      <li><strong>User Support is the Real Work</strong>: Analyzing malware behavior takes minutes; supporting hundreds of anxious people, triaging whether they are actually infected and walking them through recovery, and restoring organizational trust takes days of focused, empathetic labor.</li>
       <li><strong>Clear Instructions Prevent Panic</strong>: Plain, numbered lists of recovery steps keep users focused on action rather than fear.</li>
     </ul>
   </section>
@@ -294,10 +603,10 @@ permalink: /security/salary-day-trojan/
   <hr>
 
   <section>
-    <h2>9. Reflections</h2>
-    <p>The hardest part of this incident was not extracting file hashes or reviewing sandbox execution paths. The hardest part was staying online until 1:00 AM, translating technical instructions, and providing a calm, reassuring voice to parents, students, and staff while the situation was still active.</p>
-    <p>The exhaustion of that night extended into the next day. I was expected at work at 9:00 AM the following morning after troubleshooting the outbreak until 1:00 AM and configuring deployment tablets until 8:30 AM. Security incidents do not respect operational calendars or provide sleep recovery windows; the next day still happens.</p>
-    <p>Practical incident response is not a laboratory exercise. It is a combination of rapid technical investigation, clear communication, cross-campus coordination, and hands-on user recovery. Ultimately, security operations are not just about protecting machines—they are about supporting the people who use them.</p>
+    <h2>Reflections</h2>
+    <p>The hardest part of this incident was not extracting file hashes or reviewing sandbox execution paths. The hardest part was active blast radius mapping while staying online until 1:00 AM to support panicked users, translating technical instructions, and providing a calm, reassuring voice to parents, students, and staff while the situation was still active.</p>
+    <p>Funnily enough, I had a scheduled Tablet deployment demo the next morning at 9:00 AM after troubleshooting the outbreak until 1:00 AM. So naturally I spent the night configuring ADB scripts until 8:30 AM. Security incidents do not respect operational calendars or provide sleep recovery windows; the next day still happens.</p>
+    <p>Practical incident response is not a laboratory exercise. It is a combination of rapid technical investigation, best effort communication and cross-departmental coordination.</p>
   </section>
 
   <hr>
