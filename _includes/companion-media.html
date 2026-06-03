@@ -1,0 +1,18 @@
+{% if page.podcast %}
+  {% assign podcast_ext = page.podcast | split: '.' | last | downcase %}
+  {% assign podcast_type = "audio/mpeg" %}
+  {% if podcast_ext == "m4a" or podcast_ext == "mp4" %}
+    {% assign podcast_type = "audio/mp4" %}
+  {% endif %}
+<section class="companion-media" style="margin-bottom: 2rem; padding: 1.25rem 1.5rem; background: rgba(236, 153, 185, 0.04); border: 1px solid rgba(236, 153, 185, 0.15); border-radius: 8px;">
+  <h2 style="margin-top: 0; font-size: 1.25rem; font-family: 'Outfit', 'Kantumruy Pro', sans-serif;">🎧 Companion Podcast</h2>
+  <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--muted); line-height: 1.5;">
+    I tend to learn better by listening than reading. If you're the same, start here.
+  </p>
+
+  <audio controls preload="none" style="width: 100%;">
+    <source src="{{ page.podcast | relative_url }}" type="{{ podcast_type }}">
+    Your browser does not support the audio element.
+  </audio>
+</section>
+{% endif %}
