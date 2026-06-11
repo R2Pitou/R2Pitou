@@ -54,6 +54,13 @@ And if I'm standing awkwardly by myself afterwards, please come and say hello. I
 
 Thank you.
 
+<div class="info-callout" style="text-align: center; margin: 2.5rem 0;">
+  <p style="margin: 0; font-size: 1.1rem; font-family: 'Kantumruy Pro', sans-serif;">
+    Questions, ideas, opportunities, or disasters?<br>
+    <a href="/arttu/" style="color: var(--pink); text-decoration: underline;">working-draft.org/arttu</a>
+  </p>
+</div>
+
 <div class="video-container" style="margin: 2.5rem 0; padding: 1.25rem; background: rgba(236, 153, 185, 0.03); border: 1px solid rgba(236, 153, 185, 0.15); border-radius: 8px;">
   <h3 style="margin-top: 0; margin-bottom: 0.75rem; font-size: 1.15rem; font-family: 'Kantumruy Pro', sans-serif; text-align: center;">📹 Pitch Presentation Video</h3>
   <video controls poster="/assets/images/eurocham-standing-pitch-hero-2s.png" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.08);">
