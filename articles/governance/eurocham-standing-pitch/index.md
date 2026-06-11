@@ -54,11 +54,13 @@ And if I'm standing awkwardly by myself afterwards, please come and say hello. I
 
 Thank you.
 
-<div class="info-callout" style="text-align: center; margin: 2.5rem 0;">
-  <p style="margin: 0; font-size: 1.1rem; font-family: 'Kantumruy Pro', sans-serif;">
-    Questions, ideas, opportunities, or disasters?<br>
-    <a href="/arttu/" style="color: var(--pink); text-decoration: underline;">working-draft.org/arttu</a>
+<div class="info-callout" style="text-align: center; margin: 2.5rem 0; padding: 1.5rem 2rem;">
+  <p style="margin: 0 0 1.25rem; font-size: 1.15rem; font-family: 'Kantumruy Pro', sans-serif; color: var(--white);">
+    Questions, ideas, opportunities, or disasters?
   </p>
+  <a href="/arttu/" class="repo-link" style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 1rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
+    working-draft.org/arttu
+  </a>
 </div>
 
 <div class="video-container" style="margin: 2.5rem 0; padding: 1.25rem; background: rgba(236, 153, 185, 0.03); border: 1px solid rgba(236, 153, 185, 0.15); border-radius: 8px;">
