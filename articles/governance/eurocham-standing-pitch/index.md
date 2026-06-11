@@ -22,11 +22,11 @@ For the last several years I've worked in digital transformation, Google Workspa
 
 What I talk about today is not theoretical.
 
-I have seen [a former staff member download more than 20,000 paid curriculum materials two weeks after their last day of employment.](/artifacts/security/ir-2026-0108/)
+I have seen [a former staff member download more than 20,000 paid curriculum materials two weeks after their last day of employment.](/artifacts/security/ir-2026-0108/){:target="_blank"}
 
-I have mitigated [Telegram malware that was distributed through a school front desk into hundreds of parent and student groups.](/security/salary-day-trojan/)
+I have mitigated [Telegram malware that was distributed through a school front desk into hundreds of parent and student groups.](/security/salary-day-trojan/){:target="_blank"}
 
-I have discovered [students communicating on school platforms using custom emojis of Pol Pot and Hitler.](https://www.linkedin.com/posts/atp2kh_googleworkspace-k12education-datagovernance-share-7463167878385655809-x7V_/)
+I have discovered [students communicating on school platforms using custom emojis of Pol Pot and Hitler.](https://www.linkedin.com/posts/atp2kh_googleworkspace-k12education-datagovernance-share-7463167878385655809-x7V_/){:target="_blank"}
 
 And I have stood in front of a teacher drive encrypted by ransomware knowing there was no way to recover the files because it is not cryptographically possible at the time.
 
@@ -46,7 +46,7 @@ Today, school systems follow students home, and what happens at home enters the 
 
 Schools are now responsible for digital environments that didn't exist a generation ago.
 
-My work helps schools [identify governance gaps, understand their exposure, and implement practical improvements before issues become safeguarding, reputational, operational, or compliance risks.](/artifacts/working-draft-org-leadership-summary-sample.pdf)
+My work helps schools [identify governance gaps, understand their exposure, and implement practical improvements before issues become safeguarding, reputational, operational, or compliance risks.](/artifacts/working-draft-org-leadership-summary-sample.pdf){:target="_blank"}
 
 If you're involved with a school and would like to discuss digital governance, student safety, AI readiness, or platform risk, I'd be delighted to continue the conversation.
 
