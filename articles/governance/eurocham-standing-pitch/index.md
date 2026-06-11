@@ -12,8 +12,8 @@ tags:
   - school-security
   - platform-risk
   - cambodia
-image: /assets/images/eurocham-standing-pitch-hero.png
-image_alt: "First frame of the EuroCham Standing Pitch video."
+image: /assets/images/eurocham-standing-pitch-hero-2s.png
+image_alt: "Thumbnail frame at 2 seconds of the EuroCham Standing Pitch video."
 ---
 
 Hello everyone. My name is Arttu Pitou At.
@@ -56,7 +56,7 @@ Thank you.
 
 <div class="video-container" style="margin: 2.5rem 0; padding: 1.25rem; background: rgba(236, 153, 185, 0.03); border: 1px solid rgba(236, 153, 185, 0.15); border-radius: 8px;">
   <h3 style="margin-top: 0; margin-bottom: 0.75rem; font-size: 1.15rem; font-family: 'Kantumruy Pro', sans-serif; text-align: center;">📹 Pitch Presentation Video</h3>
-  <video controls poster="/assets/images/eurocham-standing-pitch-hero.png" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.08);">
+  <video controls poster="/assets/images/eurocham-standing-pitch-hero-2s.png" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.08);">
     <source src="/assets/images/eurocham-standing-pitch.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
