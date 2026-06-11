@@ -477,7 +477,6 @@ h2 {
 
 .post-content a {
   color: var(--pink);
-  font-weight: 600;
 }
 
 .site-footer {
@@ -612,7 +611,6 @@ h2 {
 
 .article-content a {
   color: var(--pink);
-  font-weight: 600;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.22em;
 }
