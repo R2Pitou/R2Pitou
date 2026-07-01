@@ -26,9 +26,9 @@ Not pipes.
 
 Infrastructure.
 
-![Infrastructure Planning Diagram](/assets/images/planning-the-plumbing-infrastructure-before-classrooms-hero.png)
+[![Infrastructure Planning Diagram](/assets/images/planning-the-plumbing-infrastructure-before-classrooms-hero.png)](/assets/images/planning-the-plumbing-infrastructure-before-classrooms-hero.png)
 
-*The planning diagram showing the relationship between identity, DNS, and internal systems.*
+*The planning diagram showing the relationship between identity, DNS, and internal systems. Click to view full-sized image.*
 
 The diagram below is one of the planning artefacts from that project. It isn't polished. It isn't marketing material. It was a working document that helped answer one question repeatedly throughout the design process:
 
