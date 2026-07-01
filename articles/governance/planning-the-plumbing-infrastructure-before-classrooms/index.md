@@ -66,11 +66,11 @@ Identity still sits above applications because applications come and go while us
 
 Because Trust flows downhill
 
-1. Every component in the infrastructure trusts something above it.
-2.1 The VPS trusts Tailscale to identify administrators.
-2.2 Tailscale trusts Google Workspace to authenticate users.
-2.3 Google Workspace trusts the institution's verified domain.
-2.4 The verified domain exists because the institution itself has been recognised by the relevant authority.
+>1. Every component in the infrastructure trusts something above it.
+>2.1 The VPS trusts Tailscale to identify administrators.
+>2.2 Tailscale trusts Google Workspace to authenticate users.
+>2.3 Google Workspace trusts the institution's verified domain.
+>2.4 The verified domain exists because the institution itself has been recognised by the relevant authority.
 
 By the time someone reaches a server, they have already passed through several independent layers of trust. None of the applications need to maintain their own administrator accounts because identity has already been established before they are even contacted.
 
