@@ -18,166 +18,60 @@ image_alt: "A system dependency planning diagram showing Google Workspace, DNS, 
 
 One of the more interesting projects I worked on never opened its doors.
 
-Before a single student could log into Moodle, before the first teacher account existed, and before the website served its first page, the academy needed something much less visible.
-
-It needed plumbing.
-
-Not pipes.
-
-Infrastructure.
+Before a single student could log into Moodle, before the first teacher account existed, and before the website served its first page, the academy needed something much less visible. It needed the plumbing required to manage identity, DNS, and internal systems. The diagram below shows the relationships between those components and the dependencies that had to be satisfied before the inauguration ceremony.
 
 [![Infrastructure Planning Diagram](/assets/images/planning-the-plumbing-infrastructure-before-classrooms-hero.png)](/assets/images/planning-the-plumbing-infrastructure-before-classrooms-hero.png)
 
 *The planning diagram showing the relationship between identity, DNS, and internal systems. Click to view full-sized image.*
 
-The diagram below is one of the planning artefacts from that project. It isn't polished. It isn't marketing material. It was a working document that helped answer one question repeatedly throughout the design process:
+The diagram above is one of the planning artefacts from that project. It isn't polished nor is it meant to be used as a brochure. It was my working document that helped answer one question repeatedly throughout the design process:
 
-*If I add this system, what else have I just made responsible for it?*
+*How does identity flow through the system and what access does it have?*
 
 When designing infrastructure from scratch, every new service creates dependencies. Good architecture isn't about choosing products. It's about understanding those dependencies before they become production outages.
 
 ## Starting from the outside
 
-The design begins with something that most people never think about.
+The design begins with something that most people never think about. Before a single server could be provisioned or DNS delegated, the institution first had to qualify for an educational domain. Educational domains aren't something you simply register. Whether it's `.edu.kh`, `.edu`, `.ac.uk`, or another education namespace, eligibility is generally tied to formal recognition by an appropriate authority. That administrative milestone becomes the root of the technical infrastructure because it establishes the institution's digital identity.
 
-The domain.
+From there, the institution can apply for services such as Google Workspace for Education Fundamentals and Microsoft Education A1, both of which have their own verification processes before educational licensing is granted. In this case, qualifying for educational licensing represented an estimated annual saving of approximately US$240,000 compared with an equivalent Google Workspace Flex deployment.
 
-Without a domain, nothing else exists.
-
-- Email doesn't exist.
-- Identity doesn't exist.
-- Certificates don't exist.
-- The website doesn't exist.
-
-The first dependency in the diagram is therefore not a server. It's the registrar issuing ownership of the school's official `.edu.kh` domain.
-
-Once delegated, authoritative DNS moves to Cloudflare. That immediately establishes a single point for DNS management, TLS termination, edge protection, and traffic routing.
-
-Everything else grows from there.
+Google's verification process introduced another unexpected dependency. The public website became part of the infrastructure plan rather than a marketing exercise. Google expects to see evidence that the institution exists and that the domain genuinely represents it, so even a simple landing page became a prerequisite for establishing the identity platform. Only after those requirements had been satisfied could DNS authority be delegated to Cloudflare, identity services configured, and the rest of the infrastructure begin to take shape.
 
 ## Two completely different kinds of traffic
 
-One design decision appears very early.
+One of the earliest design decisions was to separate public-facing services from internal operational systems. Although both are accessed through the same domain, they serve completely different purposes, operate under different trust assumptions, and have very different consequences if something goes wrong.
 
-Not all traffic deserves equal trust.
-
-The public website exists to be visited by everyone.
-
-The learning platform does not.
-
-Administrative systems certainly do not.
-
-Rather than putting everything behind one web server, the infrastructure deliberately separates public-facing services from internal operational systems.
-
-The public website can be compromised without immediately exposing project management, learning platforms, automation systems, or administrative tooling.
-
-Likewise, internal maintenance shouldn't affect the school's public presence.
-
-Those systems solve different problems and should fail independently.
+The public website is designed to be visited by anyone. The learning platform, project management tools, remote administration, and automation services are not. Putting everything behind the same web server would unnecessarily increase the attack surface and make maintenance riskier. By splitting public traffic from internal infrastructure, a compromise of the website doesn't automatically expose operational systems, and routine maintenance of internal services doesn't take the public presence offline. They solve different problems and should be able to fail independently.
 
 ## Identity before applications
 
-A common mistake is deploying applications first and worrying about user accounts later.
+With the network boundaries established, the next decision was identity. A common mistake in greenfield deployments is to build applications first and then let each one maintain its own users. That usually results in multiple password databases, and inconsistencies in the user lifecycle. Also, let's be honest. Students and staff have enough on their plates without having to remember a dozen different passwords for a dozen different systems. So SSO with Google as the identity provider was a requirement from the start.
 
-That usually ends with five different password databases and a helpdesk drowning in password resets.
-
-Instead, the diagram places Google Workspace near the top of the dependency tree.
-
-Not because it's email.
-
-Because it's identity.
-
-Once Google Workspace becomes the source of truth, applications stop managing users themselves.
-
-Instead they ask a much simpler question:
-
-*Has Google already authenticated this person?*
-
-That decision unlocks several things simultaneously:
-
-- Staff accounts
-- Student accounts
-- Groups
-- Shared Drives
-- Organisational Units
-- Single Sign-On
-- Lifecycle management
-
-The applications become consumers of identity rather than owners of it.
-
-That dramatically reduces operational complexity.
+That's why Google Workspace sits near the top of the dependency graph because it acts as the identity provider rather than simply an email platform. Applications authenticate against Google using standards such as OpenID Connect, while user lifecycle management, group membership, organisational units, and authentication policies remain centralised. The applications become consumers of identity instead of owners of it, reducing administrative overhead and making onboarding, offboarding, and permission changes consistent across the environment.
 
 ## Infrastructure is mostly relationships
 
-The green box at the bottom isn't intended to represent one server.
+The green section of the diagram isn't intended to represent a single server. It's a collection of services that each fulfil a specific operational role while depending on one another in predictable ways. The VPS provides the compute resources, Orchestrator manages containers, Moodle delivers the learning platform, OpenProject manages internal projects, n8n automates repetitive tasks, GitHub Actions handles deployments, RustDesk and Tactical RMM provide remote support, and Tailscale creates a private management network for administrative access.
 
-It's a collection of responsibilities:
+None of those individual products are particularly remarkable. The interesting part is how they relate to one another. Management interfaces remain on private networks, deployments originate from version control rather than manual uploads, automation runs internally, and services only communicate with the public Internet when there is a clear operational reason to do so. Most of the architectural work wasn't choosing software. It was deciding where each component belonged, what it should trust, and what should happen if any individual service failed.
 
-- **The VPS** provides compute.
-- **Coolify** orchestrates containers.
-- **Moodle** delivers learning.
-- **OpenProject** supports internal project management.
-- **n8n** automates repetitive workflows.
-- **GitHub Actions** deploys software.
-- **RustDesk** and **Tactical RMM** provide operational support.
-- **Tailscale** creates a private management network.
+## Infrastructure outlives infrastructure
 
-None of those products are particularly interesting on their own.
+The software shown in the diagram isn't the interesting part. If I were designing the same environment today, I'd almost certainly make different product choices. Coolify hopefully has matured, but in hindsight I can say it wasn't production ready at the time, Cloudflare's Zero Trust platform is far more capable than it was at the time, and AI-assisted operational tooling has become genuinely useful.
 
-What's interesting is why they exist together.
+What has changed far less is the dependency graph.
 
-The infrastructure deliberately avoids having applications communicate directly with the public Internet unless they need to.
+Identity still sits above applications because applications come and go while user identities persist. Public-facing services are still separated from operational systems because they have different trust models. Administrative access still belongs on private networks rather than the public Internet. Those relationships don't depend on a particular vendor or product.
 
-Management interfaces remain inside trusted paths.
+Because Trust flows downhill
 
-Automation happens internally.
+1. Every component in the infrastructure trusts something above it.
+2.1 The VPS trusts Tailscale to identify administrators.
+2.2 Tailscale trusts Google Workspace to authenticate users.
+2.3 Google Workspace trusts the institution's verified domain.
+2.4 The verified domain exists because the institution itself has been recognised by the relevant authority.
 
-Deployment comes from version control rather than manual uploads.
+By the time someone reaches a server, they have already passed through several independent layers of trust. None of the applications need to maintain their own administrator accounts because identity has already been established before they are even contacted.
 
-Support happens through authenticated private tunnels rather than exposed administration ports.
-
-Each decision removes another class of future problem.
-
-## Designing for the administrator who comes next
-
-Every box eventually needs patching.
-
-Monitoring.
-
-Documentation.
-
-Backups.
-
-Permission reviews.
-
-Someone inherits every design decision.
-
-Good infrastructure isn't measured by how clever it looks on launch day.
-
-It's measured by whether another administrator can understand it two years later without reverse engineering the entire environment.
-
-That's why the diagram spends more effort showing relationships than specifications.
-
-Products change.
-
-Dependencies last much longer.
-
-## Looking back
-
-The academy never reached deployment, so this design remained a planning artefact rather than a production system.
-
-I would build parts of it differently today.
-
-Coolify has matured.
-
-Google Workspace has gained additional capabilities.
-
-Cloudflare's Zero Trust platform has expanded significantly.
-
-AI-assisted operational tooling has become genuinely useful rather than experimental.
-
-The interesting part, however, isn't whether one box changes.
-
-It's that the dependency graph barely does.
-
-Good infrastructure planning ages surprisingly well because it's driven by principles rather than products.
+Good infrastructure planning isn't about predicting which products will still exist in five years. It's about designing an environment that can survive replacing them.
