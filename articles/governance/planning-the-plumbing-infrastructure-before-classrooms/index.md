@@ -6,7 +6,7 @@ categories: governance
 permalink: /governance/planning-the-plumbing-infrastructure-before-classrooms/
 canonical_url: https://working-draft.org/governance/planning-the-plumbing-infrastructure-before-classrooms/
 featured: false
-summary: "One of the more interesting projects I worked on never opened its doors. Before a single student could log into Moodle, the academy needed infrastructure plumbing."
+summary: "One of the more interesting projects I worked on that unfortunately never deployed past domain registration. Before a single student could log into Moodle, the academy needed infrastructure and identity plumbing."
 tags:
   - governance
   - infrastructure
@@ -16,8 +16,6 @@ image: /assets/images/planning-the-plumbing-infrastructure-before-classrooms-her
 image_alt: "A system dependency planning diagram showing Google Workspace, DNS, and internal school infrastructure."
 ---
 
-One of the more interesting projects I worked on never opened its doors.
-
 Before a single student could log into Moodle, before the first teacher account existed, and before the website served its first page, the academy needed something much less visible. It needed the plumbing required to manage identity, DNS, and internal systems. The diagram below shows the relationships between those components and the dependencies that had to be satisfied before the inauguration ceremony.
 
 [![Infrastructure Planning Diagram](/assets/images/planning-the-plumbing-infrastructure-before-classrooms-hero.png)](/assets/images/planning-the-plumbing-infrastructure-before-classrooms-hero.png)
@@ -26,7 +24,7 @@ Before a single student could log into Moodle, before the first teacher account 
 
 The diagram above is one of the planning artefacts from that project. It isn't polished nor is it meant to be used as a brochure. It was my working document that helped answer one question repeatedly throughout the design process:
 
-*How does identity flow through the system and what access does it have?*
+*How does identity flow through the system, and where does that trust begin and end?*
 
 When designing infrastructure from scratch, every new service creates dependencies. Good architecture isn't about choosing products. It's about understanding those dependencies before they become production outages.
 
@@ -46,9 +44,11 @@ The public website is designed to be visited by anyone. The learning platform, p
 
 ## Identity before applications
 
-With the network boundaries established, the next decision was identity. A common mistake in greenfield deployments is to build applications first and then let each one maintain its own users. That usually results in multiple password databases, and inconsistencies in the user lifecycle. Also, let's be honest. Students and staff have enough on their plates without having to remember a dozen different passwords for a dozen different systems. So SSO with Google as the identity provider was a requirement from the start.
+With the network boundaries established, the next architectural decision was identity. A common mistake in greenfield deployments is to build applications first and let each one maintain its own users. That usually results in multiple password databases, inconsistent user lifecycle management, and duplicated authentication policies. Students and staff already have enough on their plates without remembering a dozen different passwords for a dozen different systems, so Single Sign-On was a requirement from the start.
 
-That's why Google Workspace sits near the top of the dependency graph because it acts as the identity provider rather than simply an email platform. Applications authenticate against Google using standards such as OpenID Connect, while user lifecycle management, group membership, organisational units, and authentication policies remain centralised. The applications become consumers of identity instead of owners of it, reducing administrative overhead and making onboarding, offboarding, and permission changes consistent across the environment.
+The architecture deliberately separates identity from applications. Google Workspace becomes the authoritative identity provider for the environment, while applications become consumers of that identity through OpenID Connect and other federated authentication standards. User lifecycle management, group membership, organisational units, and authentication policies remain centralised instead of being reimplemented by every application.
+
+That decision means applications no longer need to answer the question, "Who is this user?" They only need to trust the answer provided by the identity platform. Onboarding, offboarding, permission changes, and MFA policies are managed once and immediately become consistent across the entire environment instead of being maintained separately by every application.
 
 ## Infrastructure is mostly relationships
 
