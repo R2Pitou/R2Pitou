@@ -64,14 +64,17 @@ What has changed far less is the dependency graph.
 
 Identity still sits above applications because applications come and go while user identities persist. Public-facing services are still separated from operational systems because they have different trust models. Administrative access still belongs on private networks rather than the public Internet. Those relationships don't depend on a particular vendor or product.
 
-Because Trust flows downhill
+### Trust flows downhill
 
->1. Every component in the infrastructure trusts something above it.
->2.1 The VPS trusts Tailscale to identify administrators.
->2.2 Tailscale trusts Google Workspace to authenticate users.
->2.3 Google Workspace trusts the institution's verified domain.
->2.4 The verified domain exists because the institution itself has been recognised by the relevant authority.
+Every component in the infrastructure inherits trust from something above it.
 
-By the time someone reaches a server, they have already passed through several independent layers of trust. None of the applications need to maintain their own administrator accounts because identity has already been established before they are even contacted.
+- The VPS trusts Tailscale to identify administrators.
+- Tailscale trusts Google Workspace to authenticate users.
+- Google Workspace trusts the institution's verified domain.
+- The verified domain exists because the institution satisfied the accreditation requirements needed to obtain it.
+
+By the time someone reaches a server, they have already passed through several independent trust decisions. None of the applications need to maintain privileged administrator accounts because identity has already been established before the connection reaches them.
+
+That's why I drew dependencies instead of servers. Servers get replaced, products come and go, but trust relationships tend to last much longer.
 
 Good infrastructure planning isn't about predicting which products will still exist in five years. It's about designing an environment that can survive replacing them.
