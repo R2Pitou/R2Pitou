@@ -6,18 +6,18 @@ categories: technology
 permalink: /technology/tools-for-use-dont-lose/
 canonical_url: https://working-draft.org/technology/tools-for-use-dont-lose/
 featured: false
-summary: "Personal bookmark index of web utilities, media downloaders, AI sandboxes, and media resources automatically populated from _data/tools.csv."
+summary: "Personal index of web utilities, media downloaders, AI sandboxes, and digital references."
 image: /assets/images/tools-for-use-dont-lose-hero.png
-image_alt: "A digital toolkit illustration."
+image_alt: "Technical illustration of a tool index dashboard."
 tags:
   - tools
   - index
   - resources
 ---
 
-Personal bookmark index of web utilities, media downloaders, creative archives, and AI sandboxes.
+Personal index of web utilities, media downloaders, digital archives, and AI sandboxes.
 
-*To add or edit tools, simply edit [`_data/tools.csv`](https://github.com/R2Pitou/R2Pitou/edit/main/_data/tools.csv).*
+Data source: [`_data/tools.csv`](https://github.com/R2Pitou/R2Pitou/edit/main/_data/tools.csv)
 
 ---
 
