@@ -6,7 +6,7 @@ categories: technology
 permalink: /technology/tools-for-use-dont-lose/
 canonical_url: https://working-draft.org/technology/tools-for-use-dont-lose/
 featured: false
-summary: "Personal bookmark index of essential web tools, downloaders, AI sandboxes, and media resources."
+summary: "Personal bookmark index of web utilities, media downloaders, AI sandboxes, and media resources automatically populated from _data/tools.csv."
 image: /assets/images/tools-for-use-dont-lose-hero.png
 image_alt: "A digital toolkit illustration."
 tags:
@@ -15,42 +15,34 @@ tags:
   - resources
 ---
 
-Personal bookmark index of web utilities, media downloaders, creative archives, and AI sandboxes kept for quick retrieval.
+Personal bookmark index of web utilities, media downloaders, creative archives, and AI sandboxes.
+
+*To add or edit tools, simply edit [`_data/tools.csv`](https://github.com/R2Pitou/R2Pitou/edit/main/_data/tools.csv).*
 
 ---
 
-### 🎨 Image & Media Utilities
+{% assign categories = site.data.tools | map: "category" | uniq %}
 
-| Tool | Link | Note |
-| :--- | :--- | :--- |
-| **SVGcode** | [svgco.de](https://svgco.de/) | Client-side PNG/JPG to SVG vector converter (Wasm PWA) |
-| **EZGIF** | [ezgif.com](https://ezgif.com/) | GIF maker, cropper, optimizer, and video-to-GIF converter |
+{% for cat in categories %}
+### {{ cat }}
 
----
-
-### 📥 Media Downloaders
-
-| Tool | Link | Note |
-| :--- | :--- | :--- |
-| **cobalt** | [cobalt.tools](https://cobalt.tools/) | Privacy-first, ad-free video & audio downloader |
-| **Twitter Video Downloader** | [twittervideodownloader.com](https://twittervideodownloader.com/) | Direct MP4/GIF downloader for Twitter/X links |
-
----
-
-### 🤖 AI Workspaces & Prototyping
-
-| Tool | Link | Note |
-| :--- | :--- | :--- |
-| **Teacher's Playground** | [teachers-playground.ai.studio](https://teachers-playground.ai.studio/) | Personal sandbox for educational AI tools & experiments |
-| **Google AI Studio** | [aistudio.google.com](https://aistudio.google.com/) | Gemini API developer IDE, prompt studio & key manager |
-| **goblin.tools** | [goblin.tools](https://goblin.tools/) | Micro-AI tools for task breakdown (Magic ToDo) and tone |
-
----
-
-### 📚 Reference & Media Assets
-
-| Tool | Link | Note |
-| :--- | :--- | :--- |
-| **r/Piracy Megathread** | [reddit.com/.../megathread](https://www.reddit.com/r/Piracy/wiki/megathread/) | Vetted index of open software, privacy tools & digital safety |
-| **Unsplash** | [unsplash.com](https://unsplash.com/) | High-resolution stock photo library |
-| **Freesound (ATP2-kh)** | [freesound.org/.../ATP2-kh](https://freesound.org/people/ATP2-kh/) | Personal repository of uploaded audio samples & sound clips |
+<table class="tools-index-table">
+  <thead>
+    <tr>
+      <th style="width: 25%;">Tool</th>
+      <th style="width: 25%;">Link</th>
+      <th style="width: 50%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% assign cat_tools = site.data.tools | where: "category", cat %}
+    {% for tool in cat_tools %}
+    <tr>
+      <td><strong>{{ tool.title }}</strong></td>
+      <td><a href="{{ tool.url }}" target="_blank" rel="noopener">{{ tool.url | remove: 'https://' | remove: 'http://' | split: '/' | first }}</a></td>
+      <td>{{ tool.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endfor %}

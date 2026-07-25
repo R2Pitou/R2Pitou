@@ -1054,3 +1054,28 @@ h2 {
 .tab-content.active {
   display: block;
 }
+
+.tools-index-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 2rem 0;
+  font-size: 0.95rem;
+}
+
+.tools-index-table th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--pink);
+  color: var(--pink);
+  font-weight: 600;
+}
+
+.tools-index-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  vertical-align: top;
+}
+
+.tools-index-table tr:hover {
+  background: var(--panel-strong);
+}
