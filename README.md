@@ -6,7 +6,7 @@ https://working-draft.org
 
 -   Digital Transformation Supervisor, serial tinkerer, part-time chaos wrangler.
 -   I mess with **JavaScript**, **Python**, Firebase, **serverless/headless/stateless** cloud deployments, and AI/ML projects that actually get used.
--   My former passion for the **WordPress + LAMP stack** has faded due to the avalanche of 0-days discovered by AI's. Also ChatGPT has lowered the barrier to dip my toes in proper CI/CD pipelines.
+-   My former passion for the WordPress + LAMP stack has faded under the avalanche of AI-assisted 0-day discoveries. Also ChatGPT has lowered the barrier to dip my toes in proper CI/CD pipelines.
 -   I dislike Google Cloud’s UI. It’s as intuitive as a Yamaha surround sound amp’s remote — a mishmash of rectangles in a random order, and one of them is orange just for fun.
 -   Currently learning **Nothing** properly thanks to vibing, building small SysOps tools with AI, and finding ways to make Google Workspace (and now, a LAMP stack) behave for entire schools without losing my sanity.
 -   Interested in collaborations where the tech is lean, the scope is realistic, and the end result isn’t a white elephant? (I'm not your guy.)
