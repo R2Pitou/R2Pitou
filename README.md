@@ -1,6 +1,8 @@
 # 👋 Hi, I’m @R2Pitou
 
-https://working-draft.org [Ar|Au]tistic nerd, Digital Transformation Supervisor, charity thespian, and an antijovial introvert.
+https://working-draft.org 
+
+{Ar|Au}tistic nerd, Digital Transformation Supervisor, charity thespian, and an antijovial introvert.
 
 -   Digital Transformation Supervisor, serial tinkerer, part-time chaos wrangler.
 -   I mess with **JavaScript**, **Python**, Firebase, **serverless/headless/stateless** cloud deployments, and AI/ML projects that actually get used.
