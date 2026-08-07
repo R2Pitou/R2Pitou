@@ -1146,7 +1146,7 @@ h2 {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 568 / 360;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-block: 1px solid rgba(236, 153, 185, 0.15);
   background: var(--black);
@@ -1228,7 +1228,7 @@ h2 {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 568 / 360;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 

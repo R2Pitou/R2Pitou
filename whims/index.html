@@ -16,10 +16,9 @@ permalink: /whims/
 
   <div class="whim-feed">
     {% for whim in public_whims %}
-      {% assign whim_card_image = whim.thumbnail_image | default: whim.image %}
       <article class="whim-feed-item">
         <a href="{{ whim.url | relative_url }}" class="whim-feed-image-link" aria-label="Read {{ whim.title | escape }}">
-          <img src="{{ whim_card_image | relative_url }}" alt="{{ whim.image_alt | default: whim.title | escape }}" loading="lazy">
+          <img src="{{ whim.image | relative_url }}" alt="{{ whim.image_alt | default: whim.title | escape }}" loading="lazy">
         </a>
         <div class="whim-feed-meta">
           <h2><a href="{{ whim.url | relative_url }}">{{ whim.title }}</a></h2>

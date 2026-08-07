@@ -56,10 +56,9 @@ description: A public notebook, portfolio, and publishing hub for work that is s
     </div>
 
     {% if latest_whim %}
-      {% assign latest_whim_image = latest_whim.thumbnail_image | default: latest_whim.image %}
       <a href="{{ '/whims/' | relative_url }}" class="technical-panel latest-whim-panel" aria-label="Browse Whim Du Jour, starting with {{ latest_whim.title | escape }}">
         <span class="latest-whim-kicker">Latest Whim</span>
-        <img src="{{ latest_whim_image | relative_url }}" alt="{{ latest_whim.image_alt | default: latest_whim.title | escape }}">
+        <img src="{{ latest_whim.image | relative_url }}" alt="{{ latest_whim.image_alt | default: latest_whim.title | escape }}">
         <span class="latest-whim-footer">
           <span>
             <strong>{{ latest_whim.title }}</strong>
