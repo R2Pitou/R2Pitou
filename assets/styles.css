@@ -1079,3 +1079,252 @@ h2 {
 .tools-index-table tr:hover {
   background: var(--panel-strong);
 }
+
+/* Homepage portfolio and latest Whim panels */
+
+.portfolio-combined-panel .eyebrow {
+  margin-bottom: 10px;
+}
+
+.portfolio-compact-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.portfolio-compact-link {
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgba(236, 153, 185, 0.16);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.portfolio-compact-link:hover {
+  border-color: var(--pink);
+  background: #180d13;
+  transform: translateX(2px);
+}
+
+.portfolio-compact-link strong {
+  color: var(--pink);
+  font-family: "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+  font-size: 0.98rem;
+}
+
+.portfolio-compact-link span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.technical-panel.latest-whim-panel {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.latest-whim-kicker {
+  padding: 12px 16px;
+  color: var(--pink);
+  font-family: "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.latest-whim-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 568 / 360;
+  object-fit: cover;
+  border-block: 1px solid rgba(236, 153, 185, 0.15);
+  background: var(--black);
+}
+
+.latest-whim-footer {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px 14px;
+  color: var(--pink);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.latest-whim-footer > span:first-child {
+  display: grid;
+  gap: 2px;
+}
+
+.latest-whim-footer strong {
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.latest-whim-footer time {
+  color: var(--muted);
+}
+
+/* Whim Du Jour */
+
+.whim-feed-page,
+.whim-page {
+  padding-top: 34px;
+}
+
+.whim-feed-heading {
+  max-width: 760px;
+  margin-bottom: 30px;
+}
+
+.whim-feed-heading h1,
+.whim-page-header h1 {
+  color: var(--pink);
+}
+
+.whim-feed-heading > p:last-child {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.whim-feed {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.whim-feed-item {
+  overflow: hidden;
+  border: 1px solid rgba(236, 153, 185, 0.15);
+  border-radius: 8px;
+  background: var(--panel);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.whim-feed-item:hover {
+  border-color: rgba(236, 153, 185, 0.42);
+  box-shadow: 0 4px 20px rgba(236, 153, 185, 0.08);
+  transform: translateY(-2px);
+}
+
+.whim-feed-image-link {
+  display: block;
+  background: var(--black);
+}
+
+.whim-feed-image-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 568 / 360;
+  object-fit: cover;
+}
+
+.whim-feed-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px 16px;
+}
+
+.whim-feed-meta h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.whim-feed-meta h2 a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.whim-feed-meta time {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.whim-page {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.whim-page-header {
+  margin-bottom: 26px;
+}
+
+.whim-page-header h1 {
+  margin-bottom: 8px;
+}
+
+.whim-hero {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(236, 153, 185, 0.2);
+  border-radius: 8px;
+  background: var(--black);
+}
+
+.whim-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.whim-transcript {
+  max-width: 760px;
+  margin: 38px auto 0;
+}
+
+.whim-transcript h2 {
+  margin-bottom: 14px;
+}
+
+.whim-content {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.whim-content p {
+  white-space: pre-line;
+}
+
+.whim-content code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #f0a3bc;
+  font: inherit;
+}
+
+.whim-page-actions {
+  display: flex;
+  gap: 10px;
+  max-width: 760px;
+  margin: 28px auto 0;
+}
+
+@media (max-width: 720px) {
+  .whim-feed {
+    grid-template-columns: 1fr;
+  }
+
+  .latest-whim-footer {
+    align-items: start;
+    flex-direction: column;
+    gap: 6px;
+  }
+}

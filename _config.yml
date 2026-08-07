@@ -18,11 +18,21 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
+collections:
+  whims:
+    output: true
+    permalink: /whims/:slug/
+
 defaults:
   - scope:
       path: "articles"
     values:
       layout: article
+  - scope:
+      path: ""
+      type: whims
+    values:
+      layout: whim
 
 exclude:
   - Gemfile

@@ -27,43 +27,53 @@ description: A public notebook, portfolio, and publishing hub for work that is s
 
 <section class="section showcase-section" aria-labelledby="showcase-title" style="padding-top: 38px;">
   <div class="section-heading">
-    <h2 id="showcase-title">Technical Portfolios</h2>
+    <h2 id="showcase-title">Technical Portfolios &amp; Whim Du Jour</h2>
   </div>
-  
+
+  {% assign public_whims = site.whims | where: "visibility", "public" | sort: "date" %}
+  {% assign latest_whim = public_whims | last %}
+
   <div class="technical-panel-grid">
-    <!-- Security Panel -->
-    <div class="technical-panel">
+    <div class="technical-panel portfolio-combined-panel">
       <div>
-        <p class="eyebrow" style="margin-bottom: 10px;">Security, Governance &amp; IR</p>
-        <h3>Security &amp; Incident Response</h3>
+        <p class="eyebrow">Security &amp; Workspace</p>
+        <h3>Systems Administration &amp; Access Governance</h3>
         <p>
-          Directory access audits, audit log tracing, incident containment, and ISO 27001-aligned access control mapping.
+          Two connected portfolios covering incident response, access governance, directory administration, and automation at organisational scale.
         </p>
-        <ul style="padding-left: 18px; margin: 12px 0 20px; font-size: 0.94rem; color: var(--muted); line-height: 1.6;">
-          <li>Incident investigations &amp; containment logs</li>
-          <li>Employee offboarding lifecycle analysis</li>
-          <li>AI governance &amp; acceptable use policies</li>
-        </ul>
+
+        <div class="portfolio-compact-list">
+          <a href="{{ '/security/' | relative_url }}" class="portfolio-compact-link">
+            <strong>Security &amp; Incident Response</strong>
+            <span>Investigations, containment logs, audits, and policy controls.</span>
+          </a>
+          <a href="{{ '/googleworkspaceadmin/' | relative_url }}" class="portfolio-compact-link">
+            <strong>Google Workspace Admin</strong>
+            <span>Directory governance, GAM automation, RBAC, and MFA rollouts.</span>
+          </a>
+        </div>
       </div>
-      <a href="{{ '/security/' | relative_url }}" class="repo-link" style="align-self: flex-start;">Explore Security &rarr;</a>
     </div>
 
-    <!-- Workspace Panel -->
-    <div class="technical-panel">
-      <div>
-        <p class="eyebrow" style="margin-bottom: 10px;">Enterprise Directory Scale</p>
-        <h3>Google Workspace Admin</h3>
-        <p>
-          Directory administration for a 3,000-user directory across 5 distributed campuses, automating bulk configuration updates via custom GAM script pipelines.
-        </p>
-        <ul style="padding-left: 18px; margin: 12px 0 20px; font-size: 0.94rem; color: var(--muted); line-height: 1.6;">
-          <li>3,000+ active user directory governance</li>
-          <li>GAM command-line automation script pipelines</li>
-          <li>Role-Based Access Control (RBAC) &amp; MFA rollouts</li>
-        </ul>
+    {% if latest_whim %}
+      {% assign latest_whim_image = latest_whim.thumbnail_image | default: latest_whim.image %}
+      <a href="{{ '/whims/' | relative_url }}" class="technical-panel latest-whim-panel" aria-label="Browse Whim Du Jour, starting with {{ latest_whim.title | escape }}">
+        <span class="latest-whim-kicker">Latest Whim</span>
+        <img src="{{ latest_whim_image | relative_url }}" alt="{{ latest_whim.image_alt | default: latest_whim.title | escape }}">
+        <span class="latest-whim-footer">
+          <span>
+            <strong>{{ latest_whim.title }}</strong>
+            <time datetime="{{ latest_whim.date | date_to_xmlschema }}">{{ latest_whim.date | date: "%Y-%m-%d" }}</time>
+          </span>
+          <span aria-hidden="true">Browse the feed &rarr;</span>
+        </span>
+      </a>
+    {% else %}
+      <div class="technical-panel latest-whim-empty">
+        <p class="eyebrow">Whim Du Jour</p>
+        <h3>The first Whim is being drafted.</h3>
       </div>
-      <a href="{{ '/googleworkspaceadmin/' | relative_url }}" class="repo-link" style="align-self: flex-start;">Explore Workspace &rarr;</a>
-    </div>
+    {% endif %}
   </div>
 </section>
 

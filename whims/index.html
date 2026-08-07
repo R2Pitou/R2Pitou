@@ -1,0 +1,35 @@
+---
+layout: default
+title: Whim Du Jour
+description: Short observations, passing thoughts, and working fragments from Working-Draft.org.
+permalink: /whims/
+---
+
+<section class="section whim-feed-page" aria-labelledby="whim-feed-title">
+  <div class="whim-feed-heading">
+    <p class="eyebrow">Working-Draft.org</p>
+    <h1 id="whim-feed-title">Whim Du Jour</h1>
+    <p>Short observations, passing thoughts, and working fragments—in reverse chronological order.</p>
+  </div>
+
+  {% assign public_whims = site.whims | where: "visibility", "public" | sort: "date" | reverse %}
+
+  <div class="whim-feed">
+    {% for whim in public_whims %}
+      {% assign whim_card_image = whim.thumbnail_image | default: whim.image %}
+      <article class="whim-feed-item">
+        <a href="{{ whim.url | relative_url }}" class="whim-feed-image-link" aria-label="Read {{ whim.title | escape }}">
+          <img src="{{ whim_card_image | relative_url }}" alt="{{ whim.image_alt | default: whim.title | escape }}" loading="lazy">
+        </a>
+        <div class="whim-feed-meta">
+          <h2><a href="{{ whim.url | relative_url }}">{{ whim.title }}</a></h2>
+          <time datetime="{{ whim.date | date_to_xmlschema }}">{{ whim.date | date: "%Y-%m-%d" }}</time>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if public_whims.size == 0 %}
+    <p class="empty">No Whims published yet.</p>
+  {% endif %}
+</section>
