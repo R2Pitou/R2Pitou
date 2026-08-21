@@ -39,7 +39,18 @@ Data source: [`_data/tools.csv`](https://github.com/R2Pitou/R2Pitou/edit/main/_d
     {% for tool in cat_tools %}
     <tr>
       <td><strong>{{ tool.title }}</strong></td>
-      <td><a href="{{ tool.url }}" target="_blank" rel="noopener">{{ tool.url | remove: 'https://' | remove: 'http://' | split: '/' | first }}</a></td>
+      {% assign utm_separator = '?' %}
+      {% if tool.url contains '?' %}
+        {% assign utm_separator = '&amp;' %}
+      {% endif %}
+
+      <td>
+        <a href="{{ tool.url }}{{ utm_separator }}utm_source=working-draft.org"
+          target="_blank"
+          rel="noopener">
+          {{ tool.url | remove: 'https://' | remove: 'http://' | split: '/' | first }}
+        </a>
+      </td>
       <td>{{ tool.description }}</td>
     </tr>
     {% endfor %}
