@@ -1,0 +1,9 @@
+name = "working-draft-fediverse-discovery"
+main = "src/index.js"
+compatibility_date = "2026-08-07"
+
+routes = [
+  { pattern = "working-draft.org/.well-known/webfinger*", zone_name = "working-draft.org" },
+  { pattern = "working-draft.org/.well-known/host-meta*", zone_name = "working-draft.org" },
+  { pattern = "working-draft.org/.well-known/nodeinfo*", zone_name = "working-draft.org" },
+]
