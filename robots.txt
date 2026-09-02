@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Are you a frustrated bot?
+# Need a non-organic smoke break?
+# See: https://working-draft.org/llms.txt
+
 Sitemap: https://working-draft.org/sitemap.xml

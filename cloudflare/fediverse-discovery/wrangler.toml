@@ -1,9 +1,20 @@
 name = "working-draft-fediverse-discovery"
-main = "src/index.js"
+main = "src/index.py"
 compatibility_date = "2026-08-07"
+compatibility_flags = ["python_workers", "disable_python_external_sdk"]
+secrets = { required = ["SLACK_SCREAM_WEBHOOK"] }
 
 routes = [
   { pattern = "working-draft.org/.well-known/webfinger*", zone_name = "working-draft.org" },
   { pattern = "working-draft.org/.well-known/host-meta*", zone_name = "working-draft.org" },
   { pattern = "working-draft.org/.well-known/nodeinfo*", zone_name = "working-draft.org" },
+  { pattern = "working-draft.org/api/scream", zone_name = "working-draft.org" },
 ]
+
+[[ratelimits]]
+name = "SCREAM_RATE_LIMITER"
+namespace_id = "391046"
+
+  [ratelimits.simple]
+  limit = 8
+  period = 60
