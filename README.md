@@ -6,16 +6,16 @@
 
 I work where IT operations, identity and security, automation, education technology, and practical AI collide. Most recently, I was the sole technical lead for a 3,000-user, 400-staff education organisation across five campuses.
 
-The accidental upside of extended unemployment is that I have become extremely busy with passion projects. I am building, breaking, documenting, and learning more than I have in years.
+The accidental upside of extended unemployment is that I have become extremely busy with passion projects. I am building (aka yelling to Codex/Jules/Gemini), breaking (by assuming agents can read minds), documenting (all the glorious spaghetti), and learning more than I have in years (or at least pretending to).
 
-- I mess with **JavaScript**, **Python**, **Go**, Firebase, Google Workspace, Cloudflare, Docker, and **serverless/headless/stateless** deployments.
-- I build small SysOps, JobOps, governance, and automation tools with AI assistance, usually because an irritating manual process has survived longer than it deserves.
-- I am particularly interested in identity and access management, security, infrastructure, data governance, systems integration, and turning technical debris into usable operations.
-- I am learning loads, just not in the polite linear order a curriculum would have chosen.
+- I mess with **JavaScript**, **Python**, **Go**, **SQLite**, Google Workspace, Cloudflare, Docker, and **serverless/headless/stateless** deployments.
+- I build small SysOps, AIOps, OpsOps, governance, and automation tools using predictive matrix multiplier as my co-conspirator, often to cope with my own Roomba brain, sometimes for pure whimsy.
+- I am particularly interested in identity and access management, security, infrastructure, data governance, systems integration, and turning technical debris into usable operations (Im the guy who reads Terms of Service and kind of enjoys it)
 - My former passion for the WordPress + LAMP stack has faded under the avalanche of AI-assisted vulnerability discoveries, although I still know how to make one behave when required.
-- AI-assisted development lowered the barrier to proper CI/CD pipelines and gave me access to several exciting new categories of mistake.
-- I dislike Google Cloud’s UI. It is as intuitive as a Yamaha surround-sound amp remote: a mishmash of rectangles in a random order, with one orange button for decorative menace.
-- Interested in work or collaborations where the tech is lean and the scope is realistic? Excellent. If you specifically want a white elephant, I’m not your guy.
+- AI-assisted development lowered the barrier to proper CI/CD pipelines and gave me access to several exciting new ways to fail spectacularly. Who said building a simple static site has to be easy or fun?
+- I dislike Google Cloud’s UI. It makes no sense. Then I met Cloudflare. I owe Google an apology. 
+- CF Wrangler is awesome, but the web dashboard is like falling down a rabbit hole. It's all very sleek, and you know you're seeing English words, but as your comprehension leaves your body it all just turns curiouser and curiouser until you question the life, the universe and the turnstile. Why is Raven like a Writing Desk?
+- Interested in work or collaborations where the tech is lean and the scope is realistic? Excellent, try fiverr.
 - Reach me at [arttu+github@working-draft.org](mailto:arttu+github@working-draft.org).
 
 [![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
@@ -24,9 +24,10 @@ The accidental upside of extended unemployment is that I have become extremely b
 
 I got my first-ever PR merged in December 2025, and it felt like a milestone. I was not contributing code, unless hex code counts, but I followed the process and made a compelling enough case to become the proud father of [Alien Conspiracy Pink (`#f023bc`)](https://github.com/meodai/color-names/pull/234).
 
-## I also make noise using AI tools
-
+## I also make noise using AI tools, Reaper and Traktor
+[YouTube](https://www.youtube.com/@ATP2-Music)
 [Bandcamp](https://atp2.bandcamp.com/follow_me)
+[Butthurt Splits Media](https://bhs-media.cc)
 
 https://github.com/user-attachments/assets/51e948a8-dae7-49c1-b401-95c3e3ed6696
 
