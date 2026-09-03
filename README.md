@@ -4,7 +4,7 @@
 
 {Ar|Au}tistic systems nerd, digital transformation generalist, charity thespian, and antijovial introvert.
 
-I work where IT operations, identity and security, automation, education technology, and practical AI collide. Most recently, I was the sole technical lead for a 3,000-user, 400-staff education organisation across five campuses.
+I work where IT operations, identity and security, automation, education technology, and practical AI collide. I've got years of experience in Hospitality, Education, and now I'm dreaming of becoming Milton from The office space.
 
 The accidental upside of extended unemployment is that I have become extremely busy with passion projects. I am building (aka yelling to Codex/Jules/Gemini), breaking (by assuming agents can read minds), documenting (all the glorious spaghetti), and learning more than I have in years (or at least pretending to).
 
