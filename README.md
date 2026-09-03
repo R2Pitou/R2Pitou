@@ -10,11 +10,11 @@ The accidental upside of extended unemployment is that I have become extremely b
 
 - I mess with **JavaScript**, **Python**, **Go**, **SQLite**, Google Workspace, Cloudflare, Docker, and **serverless/headless/stateless** deployments.
 - I build small SysOps, AIOps, OpsOps, governance, and automation tools using predictive matrix multiplier as my co-conspirator, often to cope with my own Roomba brain, sometimes for pure whimsy.
-- I am particularly interested in identity and access management, security, infrastructure, data governance, systems integration, and turning technical debris into usable operations (Im the guy who reads Terms of Service and kind of enjoys it)
+- I am particularly interested in identity and access management, security, infrastructure, data governance, systems integration, and turning technical debris into usable operations (I'm the guy who reads Terms of Service and kind of enjoys it)
 - My former passion for the WordPress + LAMP stack has faded under the avalanche of AI-assisted vulnerability discoveries, although I still know how to make one behave when required.
 - AI-assisted development lowered the barrier to proper CI/CD pipelines and gave me access to several exciting new ways to fail spectacularly. Who said building a simple static site has to be easy or fun?
 - I dislike Google Cloud’s UI. It makes no sense. Then I met Cloudflare. I owe Google an apology. 
-- CF Wrangler is awesome, but the web dashboard is like falling down a rabbit hole. It's all very sleek, and you know you're seeing English words, but as your comprehension leaves your body it all just turns curiouser and curiouser until you question the life, the universe and the turnstile. Why is Raven like a Writing Desk?
+- CF Wrangler is awesome, but the web dashboard is like falling down a rabbit hole. It's all very sleek, and you know you're seeing English words, but as your comprehension leaves your body it all just turns curiouser and curiouser until you question the life, the universe and the turnstile. Why is raven like a writing desk?
 - Interested in work or collaborations where the tech is lean and the scope is realistic? Excellent, try fiverr.
 - Reach me at [arttu+github@working-draft.org](mailto:arttu+github@working-draft.org).
 
