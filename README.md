@@ -15,7 +15,7 @@ The accidental upside of extended unemployment is that I have become extremely b
 - My former passion for the WordPress + LAMP stack has faded under the avalanche of AI-assisted vulnerability discoveries, although I still know how to make one behave when required.
 - AI-assisted development lowered the barrier to proper CI/CD pipelines and gave me access to several exciting new categories of mistake.
 - I dislike Google Cloud’s UI. It is as intuitive as a Yamaha surround-sound amp remote: a mishmash of rectangles in a random order, with one orange button for decorative menace.
-- Interested in work or collaborations where the tech is lean, the scope is realistic, and the result is not a white elephant? I may be your guy.
+- Interested in work or collaborations where the tech is lean and the scope is realistic? Excellent. If you specifically want a white elephant, I’m not your guy.
 - Reach me at [arttu+github@working-draft.org](mailto:arttu+github@working-draft.org).
 
 [![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
