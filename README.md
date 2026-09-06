@@ -1,29 +1,36 @@
-# 👋 Hi, I’m @R2Pitou
+# 👋 Hi, I’m Arttu Pitou At
 
-https://working-draft.org 
+[working-draft.org](https://working-draft.org)
 
-{Ar|Au}tistic nerd, Digital Transformation Supervisor, charity thespian, and an antijovial introvert.
+{Ar|Au}tistic systems nerd, digital transformation generalist, charity thespian, and antijovial introvert.
 
--   Digital Transformation Supervisor, serial tinkerer, part-time chaos wrangler.
--   I mess with **JavaScript**, **Python**, Firebase, **serverless/headless/stateless** cloud deployments, and AI/ML projects that actually get used.
--   My former passion for the WordPress + LAMP stack has faded under the avalanche of AI-assisted 0-day discoveries. Also ChatGPT has lowered the barrier to dip my toes in proper CI/CD pipelines.
--   I dislike Google Cloud’s UI. It’s as intuitive as a Yamaha surround sound amp’s remote — a mishmash of rectangles in a random order, and one of them is orange just for fun.
--   Currently learning **Nothing** properly thanks to vibing, building small SysOps tools with AI, and finding ways to make Google Workspace (and now, a LAMP stack) behave for entire schools without losing my sanity.
--   Interested in collaborations where the tech is lean, the scope is realistic, and the end result isn’t a white elephant? (I'm not your guy.)
--   Reach me: [arttu@working-draft.org](mailto:arttu+github@working-draft.org). (I fail to see why you would)
+I work where IT operations, identity and security, automation, education technology, and practical AI collide. I've got years of experience in Hospitality, Education, and now I'm dreaming of becoming Milton from The office space.
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
+The accidental upside of extended unemployment is that I have become extremely busy with passion projects. I am building (aka yelling to Codex/Jules/Gemini), breaking (by assuming agents can read minds), documenting (all the glorious spaghetti), and learning more than I have in years (or at least pretending to).
 
-I got my first ever PR merge in Dec 2025 and it felt like a milestone! I know I wasn't contributing any code (Unless we count hex code), but I managed to follow the steps, and gave a compelling enough reason for it, that made me the proud father of [Alien Conspiracy Pink (#f023bc)!](https://github.com/meodai/color-names/pull/234)
+- I mess with **JavaScript**, **Python**, **Go**, **SQLite**, Google Workspace, Cloudflare, Docker, and **serverless/headless/stateless** deployments.
+- I build small SysOps, AIOps, OpsOps, governance, and automation tools using predictive matrix multiplier as my co-conspirator, often to cope with my own Roomba brain, sometimes for pure whimsy.
+- I am particularly interested in identity and access management, security, infrastructure, data governance, systems integration, and turning technical debris into usable operations (I'm the guy who reads Terms of Service and kind of enjoys it)
+- My former passion for the WordPress + LAMP stack has faded under the avalanche of AI-assisted vulnerability discoveries, although I still know how to make one behave when required.
+- AI-assisted development lowered the barrier to proper CI/CD pipelines and gave me access to several exciting new ways to fail spectacularly. Who said building a simple static site has to be easy or fun?
+- I dislike Google Cloud’s UI. It makes no sense. Then I met Cloudflare. I owe Google an apology. 
+- CF Wrangler is awesome, but the web dashboard is like falling down a rabbit hole. It's all very sleek, and you know you're seeing English words, but as your comprehension leaves your body it all just turns curiouser and curiouser until you question the life, the universe and the turnstile. Why is raven like a writing desk?
+- Interested in work or collaborations where the tech is lean and the scope is realistic? Excellent, try fiverr.
+- Reach me at [arttu+github@working-draft.org](mailto:arttu+github@working-draft.org).
 
-I make noise using AI tools:
+[![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
+
+## My first merged PR
+
+I got my first-ever PR merged in December 2025, and it felt like a milestone. I was not contributing code, unless hex code counts, but I followed the process and made a compelling enough case to become the proud father of [Alien Conspiracy Pink (`#f023bc`)](https://github.com/meodai/color-names/pull/234).
+
+## I also make noise using AI tools, Reaper and Traktor
+[YouTube](https://www.youtube.com/@ATP2-Music)
 [Bandcamp](https://atp2.bandcamp.com/follow_me)
+[Butthurt Splits Media](https://bhs-media.cc)
 
 https://github.com/user-attachments/assets/51e948a8-dae7-49c1-b401-95c3e3ed6696
 
-
-
 <!---
-R2Pitou/R2Pitou is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
+R2Pitou/R2Pitou is a ✨ special ✨ repository because its README.md appears on your GitHub profile.
 --->
