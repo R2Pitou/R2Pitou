@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /raffle2026/
 Allow: /
 
 # Are you a frustrated bot?
