@@ -264,34 +264,7 @@ sitemap: false
     }
   }
 
-  @page {
-    size: A4;
-    margin: 14mm;
-  }
-
   @media print {
-    body {
-      background: #ffffff;
-      color: #111111;
-      print-color-adjust: exact;
-      -webkit-print-color-adjust: exact;
-    }
-
-    .site-header,
-    main,
-    .site-footer {
-      width: 100%;
-    }
-
-    .site-header {
-      margin-bottom: 7mm;
-    }
-
-    .site-header nav,
-    .page-signoff {
-      display: none;
-    }
-
     .raffle-hero,
     .raffle-focus,
     .raffle-service,
@@ -301,69 +274,6 @@ sitemap: false
     .raffle-about {
       break-inside: avoid-page;
       page-break-inside: avoid;
-      box-shadow: none;
-    }
-
-    .raffle-hero,
-    .raffle-services,
-    .raffle-steps,
-    .raffle-scope ul {
-      grid-template-columns: 1fr;
-    }
-
-    .raffle-hero,
-    .raffle-service,
-    .raffle-step,
-    .raffle-scope,
-    .raffle-winner {
-      background: #ffffff;
-      border-color: #a61d55;
-    }
-
-    .raffle-focus {
-      background: #fff3f7;
-      border-color: #a61d55;
-    }
-
-    .raffle-hero h1,
-    .raffle-section-header h2,
-    .raffle-service h3,
-    .raffle-step h3,
-    .raffle-scope h2,
-    .raffle-about h2,
-    .raffle-winner h2,
-    .raffle-intro,
-    .raffle-focus li,
-    .raffle-contact-note {
-      color: #111111 !important;
-    }
-
-    .raffle-intro,
-    .raffle-service p,
-    .raffle-service ul,
-    .raffle-step p,
-    .raffle-scope p,
-    .raffle-scope ul,
-    .raffle-about p,
-    .raffle-winner p,
-    .raffle-section-header p,
-    .raffle-supporting-copy,
-    .raffle-secondary-link {
-      color: #333333;
-    }
-
-    .raffle-section {
-      padding-top: 8mm;
-    }
-
-    .hero-actions a {
-      background: #ffffff;
-      border-color: #a61d55;
-      color: #111111;
-    }
-
-    .site-footer {
-      color: #333333;
     }
   }
 </style>
