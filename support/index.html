@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Support Working-Draft.org
-summary: A candid request for one-time help with food and everyday essentials.
+summary: A candid request for one-time or monthly help with food and everyday essentials.
 ---
 
 <section class="section support-page" aria-labelledby="support-title">
@@ -20,13 +20,29 @@ summary: A candid request for one-time help with food and everyday essentials.
 
     <p>
       If something I've published has been useful to you and you're able to contribute, thank you.
-      Any support is appreciated. There's no subscription and no expectation to give again.
+      Any support is appreciated. A one-time gift is enough; monthly support is also available below
+      if that works better for you.
     </p>
 
     <div class="support-donation" aria-label="Make a one-time donation">
       <stripe-buy-button buy-button-id="buy_btn_1UPnIDHNAjgDLtdoTsKzi37N" publishable-key="pk_live_51NzgMwHNAjgDLtdoPl30n1nOxjUDacHK7lWIklQBsDJOmUIIfCdmmfT2mfIorTJ593RhbT2WKQXfKDIHlspirsjp00AYfzrUg6"></stripe-buy-button>
     </div>
+
+    <section class="support-monthly" aria-labelledby="support-monthly-title">
+      <h2 id="support-monthly-title">Or donate monthly</h2>
+      <p>Regular support helps make the basics a little more predictable.</p>
+
+      <div class="support-donation" aria-label="Make a monthly donation">
+        <stripe-buy-button buy-button-id="buy_btn_1UPoeDHNAjgDLtdoRTEHseKE" publishable-key="pk_live_51NzgMwHNAjgDLtdoPl30n1nOxjUDacHK7lWIklQBsDJOmUIIfCdmmfT2mfIorTJ593RhbT2WKQXfKDIHlspirsjp00AYfzrUg6"></stripe-buy-button>
+      </div>
+
+      <div class="support-pricing" aria-labelledby="support-pricing-title">
+        <h3 id="support-pricing-title">Choose a monthly amount</h3>
+        <stripe-pricing-table pricing-table-id="prctbl_1UPooQHNAjgDLtdoHnm53TEr" publishable-key="pk_live_51NzgMwHNAjgDLtdoPl30n1nOxjUDacHK7lWIklQBsDJOmUIIfCdmmfT2mfIorTJ593RhbT2WKQXfKDIHlspirsjp00AYfzrUg6"></stripe-pricing-table>
+      </div>
+    </section>
   </div>
 </section>
 
 <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
