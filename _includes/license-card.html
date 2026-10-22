@@ -1,0 +1,13 @@
+{% if page.license == 'cc-by' %}
+<aside class="license-card" aria-label="License">
+  <p>
+    <a href="{{ page.canonical_url | default: page.url | absolute_url }}">{{ page.title }}</a>
+    © {{ page.date | date: "%Y" }} by
+    <a href="{{ '/arttu/' | absolute_url }}">Arttu Pitou At</a>
+    is licensed under
+    <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener noreferrer">CC BY 4.0</a>
+    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" class="license-icon">
+    <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" class="license-icon">
+  </p>
+</aside>
+{% endif %}

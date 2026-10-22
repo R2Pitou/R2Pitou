@@ -6,6 +6,7 @@ categories: technology
 permalink: /technology/openais-pig-fattening-in-chatgpt/
 canonical_url: https://working-draft.org/technology/openais-pig-fattening-in-chatgpt/
 featured: false
+license: cc-by
 summary: "ChatGPT is learning to answer in pictures. OpenAI is learning to advertise in pictures. The timing, the commercial incentives, and the direction of the product deserve scrutiny."
 tags:
   - chatgpt
@@ -14,6 +15,7 @@ tags:
   - openai
 image: /assets/images/openais-pig-fattening-in-chatgpt-hero.webp
 image_alt: "A large ChatGPT logo centered over a blurred screenshot of a response about microphone placement. Hand-drawn arrows point to three small thumbnails in the blurred text, labeled with the questions 'AD?', 'Sponsored?', and 'Product Placement?"
+license: cc-by
 ---
 
 OpenAI presents Intelligent UI as a richer, more interactive way to answer questions. In practice, my experience so far has been considerably less ambitious: basic instructional prose, loosely relevant stock imagery and simple widgets. While Intelligent UI is marketed as an interactive leap forward, its current fallback state, littering chats with generic web-scraped stock images, serves a more long-tailed purpose: it conditions the user to a visual canvas where native ads can eventually seamlessly sit.
@@ -113,5 +115,3 @@ Disclosure is not a minor interface detail. It is what allows users to understan
 **The *Fattening* has begun. For now an unprompted “helpful visual” might look just silly and out of place, but it’s preparing us Go-tier gutter trash for something much more profitable.**
 
 *Sources:* [OpenAI, “Building advertising for the way people use AI” (October 5, 2026)](https://openai.com/index/new-chatgpt-ads-format-and-measurement/); [OpenAI, GPT-6 and Intelligent UI release notes (October 7, 2026)](https://help.openai.com/en/articles/6825453-chatgpt-release-notes); [OpenAI, “How we built ChatGPT’s novel ad stack for user trust and relevance” (October 21, 2026)](https://openai.com/index/building-chatgpt-ad-stack/); [OpenAI Help Center, “Ads in ChatGPT”](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)
-
-<div><a href="https://working-draft.org/technology/openais-pig-fattening-in-chatgpt/">OpenAI’s Pig Fattening in ChatGPT: Helpful Enrichment or Conditioning for Ads?</a> © 2026 by <a href="https://working-draft.org/arttu/">Arttu Pitou At</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></div>
