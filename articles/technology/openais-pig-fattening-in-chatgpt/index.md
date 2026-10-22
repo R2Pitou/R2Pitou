@@ -51,7 +51,7 @@ All three images and the WikiHow-style steps *were related to audio recording*. 
 
 The URLs also carried the referral parameter `?utm_source=`[chatgpt.com](http://chatgpt.com) which I’ve left in the original source links on purpose.
 
-My question is why the Intelligent UI considered these worthwhile additions to a response and what happens when the same interface increasingly accommodates commercial imagery.
+Why did Intelligent UI consider these worthwhile additions to a response? And what happens when the same interface increasingly accommodates commercial imagery?
 
 ## Two developments, one commercial opportunity
 
