@@ -13,7 +13,7 @@ tags:
   - intelligent-ui
   - openai
 image: /assets/images/openais-pig-fattening-in-chatgpt-hero.webp
-image_alt: "A blurred ChatGPT microphone-placement response with three recording-related images annotated with arrows labelled AD?, Sponsored?, and Product Placement?"
+image_alt: "A large ChatGPT logo centered over a blurred screenshot of a response about microphone placement. Hand-drawn arrows point to three small thumbnails in the blurred text, labeled with the questions 'AD?', 'Sponsored?', and 'Product Placement?"
 ---
 
 OpenAI presents Intelligent UI as a richer, more interactive way to answer questions. In practice, my experience so far has been considerably less ambitious: basic instructional prose, loosely relevant stock imagery and simple widgets. While Intelligent UI is marketed as an interactive leap forward, its current fallback state, littering chats with generic web-scraped stock images, serves a more long-tailed purpose: it conditions the user to a visual canvas where native ads can eventually seamlessly sit.
@@ -28,21 +28,21 @@ The text response offered practical advice on microphone distance, off-axis plac
 
 <figure>
   <a href="https://mojogear.eu/en-eu/blogs/blog/what-do-you-need-to-record-a-podcast?utm_source=chatgpt.com">
-    <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-mojogear.png" alt="Screenshot of a woman recording a podcast at a desk, shown as the MOJOGEAR source image in a ChatGPT response.">
+    <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-mojogear.png" alt="A smiling woman sitting at a desk, pointing her index finger at a desktop microphone equipped with a pop shield. She is wearing wired earphones and a dark polka-dot shirt, with a smartphone mounted on a stand directly in front of her. A footer bar attributes the image to mojogear.eu.">
   </a>
   <figcaption>Source: <a href="https://mojogear.eu/en-eu/blogs/blog/what-do-you-need-to-record-a-podcast?utm_source=chatgpt.com">MOJOGEAR's guide to podcast equipment</a>.</figcaption>
 </figure>
 
 <figure>
   <a href="https://catchwisdom.com/course/home-vocal-recording-masterclass?utm_source=chatgpt.com">
-    <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-catch-wisdom.png" alt="Screenshot of a singer recording in a studio, shown as the Catch Wisdom source image in a ChatGPT response.">
+    <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-catch-wisdom.png" alt="A man wearing headphones singing into a condenser microphone with a pop filter in a home studio environment. Acoustic panels, a laptop, and a desktop audio interface are visible in the background. A footer bar attributes the image to catchwisdom.com.">
   </a>
   <figcaption>Source: <a href="https://catchwisdom.com/course/home-vocal-recording-masterclass?utm_source=chatgpt.com">home vocal-recording course page at Catch Wisdom</a>.</figcaption>
 </figure>
 
 <figure>
   <a href="https://www.cined.com/rode-ai-micro-released-compact-dual-channel-interface-for-audio-recording/?utm_source=chatgpt.com">
-    <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-cined.png" alt="Screenshot of a mobile audio-recording setup with a phone on a tripod, shown as the CineD source image in a ChatGPT response.">
+    <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-cined.png" alt="A person wearing a yellow jacket sitting at a wooden desk, gesturing with one open hand toward a smartphone mounted on a mini tripod. The phone screen displays an active audio recording application, and a compact RØDE dual-channel audio interface is connected on the desk. A footer bar attributes the image to cined.com.">
   </a>
   <figcaption>Source: <a href="https://www.cined.com/rode-ai-micro-released-compact-dual-channel-interface-for-audio-recording/?utm_source=chatgpt.com">CineD's coverage of the RØDE AI-Micro</a>.</figcaption>
 </figure>
@@ -67,7 +67,7 @@ Synthetic testing elicited working examples across all three advertised Intellig
 
 <figure>
   <a href="https://www.reddit.com/r/ChatGPT/comments/1xc802l/comment/19rh4mnghdbad/?utm_source=working-draft.org">
-    <img src="/assets/images/openais-pig-fattening-in-chatgpt-baguette.png" alt="A baguette-shaped pun">
+    <img src="/assets/images/openais-pig-fattening-in-chatgpt-baguette.png" alt="A dark-mode UI depicting an alert of a successful insertion of a baguette pun with a central quote: 'More money begets better reasoning, but it doesn't baguette better critical reading skills.' Dated 22 October 2026, the Reddit post contains a 'Serious Replies Only' flair.">
   </a>
   <figcaption>a baguette-shaped pun</figcaption>
 </figure>
