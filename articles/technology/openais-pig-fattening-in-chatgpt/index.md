@@ -26,16 +26,12 @@ My prompt had been straightforward:
 
 The text response offered practical advice on microphone distance, off-axis placement, clipping, and recording technique. Then came three images.
 
-The first was a woman recording a podcast, sourced from [MOJOGEAR's guide to podcast equipment](https://mojogear.eu/en-eu/blogs/blog/what-do-you-need-to-record-a-podcast?utm_source=chatgpt.com).
-
 <figure>
   <a href="https://mojogear.eu/en-eu/blogs/blog/what-do-you-need-to-record-a-podcast?utm_source=chatgpt.com">
     <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-mojogear.png" alt="Screenshot of a woman recording a podcast at a desk, shown as the MOJOGEAR source image in a ChatGPT response.">
   </a>
   <figcaption>Source: <a href="https://mojogear.eu/en-eu/blogs/blog/what-do-you-need-to-record-a-podcast?utm_source=chatgpt.com">MOJOGEAR's guide to podcast equipment</a>.</figcaption>
 </figure>
-
-The second showed a singer in a studio, sourced from a [home vocal-recording course page at Catch Wisdom](https://catchwisdom.com/course/home-vocal-recording-masterclass?utm_source=chatgpt.com).
 
 <figure>
   <a href="https://catchwisdom.com/course/home-vocal-recording-masterclass?utm_source=chatgpt.com">
@@ -44,8 +40,6 @@ The second showed a singer in a studio, sourced from a [home vocal-recording cou
   <figcaption>Source: <a href="https://catchwisdom.com/course/home-vocal-recording-masterclass?utm_source=chatgpt.com">home vocal-recording course page at Catch Wisdom</a>.</figcaption>
 </figure>
 
-The third showed a mobile audio-recording setup, sourced from [CineD's coverage of the RØDE AI-Micro](https://www.cined.com/rode-ai-micro-released-compact-dual-channel-interface-for-audio-recording/?utm_source=chatgpt.com).
-
 <figure>
   <a href="https://www.cined.com/rode-ai-micro-released-compact-dual-channel-interface-for-audio-recording/?utm_source=chatgpt.com">
     <img src="/assets/images/openais-pig-fattening-in-chatgpt-evidence-cined.png" alt="Screenshot of a mobile audio-recording setup with a phone on a tripod, shown as the CineD source image in a ChatGPT response.">
@@ -53,7 +47,7 @@ The third showed a mobile audio-recording setup, sourced from [CineD's coverage 
   <figcaption>Source: <a href="https://www.cined.com/rode-ai-micro-released-compact-dual-channel-interface-for-audio-recording/?utm_source=chatgpt.com">CineD's coverage of the RØDE AI-Micro</a>.</figcaption>
 </figure>
 
-All three *were related to audio recording*. None of them demonstrated doing anything on a singular iPhone.
+All three images and the WikiHow-style steps *were related to audio recording*. None of them demonstrated doing anything on a singular iPhone.
 
 The URLs also carried the referral parameter `?utm_source=`[chatgpt.com](http://chatgpt.com) which I’ve left in the original source links on purpose.
 
