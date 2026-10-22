@@ -61,7 +61,7 @@ Two days later, OpenAI announced [GPT-6 and Intelligent UI](https://help.openai.
 
 One makes visual content a more ordinary part of the previously text-based ChatGPT experience. The second makes visual content a more useful format for advertising.
 
-My hypothesis is that the transition to a more visual conversational interface helps prepare users for a more visual advertising environment. If people become accustomed to ChatGPT producing images, diagrams, product comparisons, and illustrated instructions, visual commercial placements may feel less like a new intrusion and more like a familiar part of the experience.
+_My hypothesis_ is that the transition to a more visual conversational interface helps prepare users for a more visual advertising environment. If people become accustomed to ChatGPT responding using multimedia, the addition of commercial placements feels less like an intrusion.
 
 Synthetic testing elicited working examples across all three advertised Intelligent UI categories: visual planning, interactive explanations, and tools generated on request. When the desired functionality failed to materialise, however, responses fell back to a three-image, WikiHow-style format which, in my view, is particularly well suited to advertising placements. In organic threads my experience limited to that same three-image format and a single achievement-style graphic congratulating me on a baguette-shaped pun:
 
@@ -69,7 +69,7 @@ Synthetic testing elicited working examples across all three advertised Intellig
   <a href="https://www.reddit.com/r/ChatGPT/comments/1xc802l/comment/19rh4mnghdbad/?utm_source=working-draft.org">
     <img src="/assets/images/openais-pig-fattening-in-chatgpt-baguette.png" alt="A dark-mode UI depicting an alert of a successful insertion of a baguette pun with a central quote: 'More money begets better reasoning, but it doesn't baguette better critical reading skills.' Dated 22 October 2026, the Reddit post contains a 'Serious Replies Only' flair.">
   </a>
-  <figcaption>a baguette-shaped pun</figcaption>
+  <figcaption>ChatGPT's interactive [baguette-pun](https://www.reddit.com/r/ChatGPT/comments/1xc802l/comment/19rh4mnghdbad/?utm_source=working-draft.org)-counter. The strudel is real.</figcaption>
 </figure>
 
 ## From advertising beside an answer to advertising inside the task
@@ -82,13 +82,17 @@ The more interesting question is what happens when visual interfaces become more
 
 ## Conditioning does not require a conspiracy
 
-The word *conditioning* makes this argument sound sinister but hear me out.
+The word *conditioning* makes this argument sound sinister but hear me out. The progression works as such:
 
-First, users become accustomed to receiving visual responses. Then visual advertising becomes a familiar format within the same product. Eventually, the appearance of commercial imagery may feel less disruptive because the interaction has already trained users to expect images (however unrelated) as part of the experience. OpenAI's commercial incentives are explicit.
+- Users become accustomed to receiving visual responses.
+- Visual advertising becomes a familiar format within the same product.
+- The appearance of commercial imagery eventually feels less disruptive.
 
-In its October 21 engineering account, [OpenAI described how it built ChatGPT's advertising system](https://openai.com/index/building-chatgpt-ad-stack/). The company says its ad stack uses a specialised language model to interpret conversational context and underlying intent, retrieve and rank possible ads, assess relevance, and select placements. It also describes retaining information across turns and, where applicable, across conversations, while running ad selection separately from answer generation.
+The interaction has already trained users to expect images as part of the experience, and OpenAI's commercial incentives are explicit.
 
 OpenAI reported that ChatGPT Ads reached a $1 billion annualised revenue run rate in fewer than 200 days after launch, making their commercial stakes rather clear.
+
+In its October 21 engineering account, [OpenAI described how it built ChatGPT's advertising system](https://openai.com/index/building-chatgpt-ad-stack/). The company says its ad stack uses a specialised language model to interpret conversational context and underlying intent, retrieve and rank possible ads, assess relevance, and select placements. It also describes retaining information across turns and, where applicable, across conversations, while running ad selection separately from answer generation.
 
 The advertising business is not incidental to the interface. It is a substantial product in its own right, built around understanding what people are trying to accomplish and identifying opportunities to show relevant ads.
 
