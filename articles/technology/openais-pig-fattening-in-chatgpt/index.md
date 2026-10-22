@@ -6,6 +6,7 @@ categories: technology
 permalink: /technology/openais-pig-fattening-in-chatgpt/
 canonical_url: https://working-draft.org/technology/openais-pig-fattening-in-chatgpt/
 featured: false
+summary: "ChatGPT is learning to answer in pictures. OpenAI is learning to advertise in pictures. The timing, the commercial incentives, and the direction of the product deserve scrutiny."
 tags:
   - chatgpt
   - advertising
@@ -15,8 +16,6 @@ image: /assets/images/openais-pig-fattening-in-chatgpt-hero.webp
 image_alt: "Annotated ChatGPT response screenshot asking whether its embedded images are ads, sponsored placements, or product placement."
 image_caption: "Annotated ChatGPT response illustrating the article’s questions about visual advertising and product placement."
 ---
-
-*ChatGPT is learning to answer in pictures. OpenAI is learning to advertise in pictures. The timing, the commercial incentives, and the direction of the product deserve scrutiny.*
 
 OpenAI presents Intelligent UI as a richer, more interactive way to answer questions. In practice, my experience so far has been considerably less ambitious: basic instructional prose, loosely relevant stock imagery and simple widgets. While Intelligent UI is marketed as an interactive leap forward, its current fallback state, littering chats with generic web-scraped stock images, serves a more long-tailed purpose: it conditions the user to a visual canvas where native ads can eventually seamlessly sit.
 
