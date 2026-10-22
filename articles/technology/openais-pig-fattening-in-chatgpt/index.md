@@ -49,7 +49,7 @@ The text response offered practical advice on microphone distance, off-axis plac
 
 All three images and the WikiHow-style steps *were related to audio recording*. None of them demonstrated doing anything on a singular iPhone.
 
-The URLs also carried the referral parameter `?utm_source=`[chatgpt.com](http://chatgpt.com) which I’ve left in the original source links on purpose.
+The URLs also carried the referral parameter `?utm_source=chatgpt.com` which I’ve left in the original source links on purpose.
 
 Why did Intelligent UI consider these worthwhile additions to a response? And what happens when the same interface increasingly accommodates commercial imagery?
 
@@ -63,7 +63,14 @@ One makes visual content a more ordinary part of the previously text-based ChatG
 
 My hypothesis is that the transition to a more visual conversational interface helps prepare users for a more visual advertising environment. If people become accustomed to ChatGPT producing images, diagrams, product comparisons, and illustrated instructions, visual commercial placements may feel less like a new intrusion and more like a familiar part of the experience.
 
-Synthetic testing elicited working examples across all three advertised Intelligent UI categories: visual planning, interactive explanations, and tools generated on request. When the desired functionality failed to materialise, however, responses fell back to a three-image, WikiHow-style format which, in my view, is particularly well suited to advertising placements. In organic threads my experience limited to that same three-image format and a single achievement-style graphic congratulating me on a baguette-shaped pun.
+Synthetic testing elicited working examples across all three advertised Intelligent UI categories: visual planning, interactive explanations, and tools generated on request. When the desired functionality failed to materialise, however, responses fell back to a three-image, WikiHow-style format which, in my view, is particularly well suited to advertising placements. In organic threads my experience limited to that same three-image format and a single achievement-style graphic congratulating me on a baguette-shaped pun:
+
+<figure>
+  <a href="https://www.reddit.com/r/ChatGPT/comments/1xc802l/comment/19rh4mnghdbad/?utm_source=working-draft.org">
+    <img src="/assets/images/openais-pig-fattening-in-chatgpt-baguette.png" alt="A baguette-shaped pun">
+  </a>
+  <figcaption>a baguette-shaped pun</figcaption>
+</figure>
 
 ## From advertising beside an answer to advertising inside the task
 
