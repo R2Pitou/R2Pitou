@@ -137,8 +137,12 @@ As I was writing this piece, OpenAI helpfully sent me an update regarding their 
 > 1455 3rd Street  
 > San Francisco, CA 94158
 
-*Sources:*
-[OpenAI, “Building advertising for the way people use AI” (October 5, 2026)](https://openai.com/index/new-chatgpt-ads-format-and-measurement/); 
-[OpenAI, GPT-6 and Intelligent UI release notes (October 7, 2026)](https://help.openai.com/en/articles/6825453-chatgpt-release-notes); 
-[OpenAI, “How we built ChatGPT’s novel ad stack for user trust and relevance” (October 21, 2026)](https://openai.com/index/building-chatgpt-ad-stack/); 
+#### Sources:*
+
+[OpenAI, “Building advertising for the way people use AI” (October 5, 2026)](https://openai.com/index/new-chatgpt-ads-format-and-measurement/);
+
+[OpenAI, GPT-6 and Intelligent UI release notes (October 7, 2026)](https://help.openai.com/en/articles/6825453-chatgpt-release-notes);
+
+[OpenAI, “How we built ChatGPT’s novel ad stack for user trust and relevance” (October 21, 2026)](https://openai.com/index/building-chatgpt-ad-stack/);
+
 [OpenAI Help Center, “Ads in ChatGPT”](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)
