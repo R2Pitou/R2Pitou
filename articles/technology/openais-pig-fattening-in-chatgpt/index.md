@@ -114,4 +114,31 @@ Disclosure is not a minor interface detail. It is what allows users to understan
 
 **The *Fattening* has begun. For now an unprompted “helpful visual” might look just silly and out of place, but it’s preparing us Go-tier gutter trash for something much more profitable.**
 
-*Sources:* [OpenAI, “Building advertising for the way people use AI” (October 5, 2026)](https://openai.com/index/new-chatgpt-ads-format-and-measurement/); [OpenAI, GPT-6 and Intelligent UI release notes (October 7, 2026)](https://help.openai.com/en/articles/6825453-chatgpt-release-notes); [OpenAI, “How we built ChatGPT’s novel ad stack for user trust and relevance” (October 21, 2026)](https://openai.com/index/building-chatgpt-ad-stack/); [OpenAI Help Center, “Ads in ChatGPT”](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)
+---
+
+### Late Update
+
+As I was writing this piece, OpenAI helpfully sent me an update regarding their privacy policy:
+
+> Hi Arttu Pitou At,
+>
+> We’re updating our [Privacy Policy](https://openai.com/policies/services-communications-privacy-policy/?utm_campaign=privacy-policy-marketing-update-row-oct-2026-en&utm_medium=email&utm_source=sendgrid) to include information about ads in ChatGPT, including how they work and how you can control your experience.
+>
+> Ads may appear on Free and Go plans. Plus, Pro, Enterprise, Business and Education plans do not have ads. Ads do not influence the answers ChatGPT gives you. When you see an ad, it is always clearly labeled as sponsored and visually separated from the organic answer. You’ll get relevant and personalized ads using information that stays only on ChatGPT, such as ads you've interacted with, or context from your chats. You can manage ad personalization anytime in [settings](https://help.openai.com/articles/20001047-ads-in-chatgpt?utm_campaign=privacy-policy-marketing-update-row-oct-2026-en&utm_medium=email&utm_source=sendgrid#can-i-control-my-ads-experience).
+>
+> Your personal details and conversations with ChatGPT are private and are not shared with advertisers. Advertisers do not have access to your chats, chat history, memories, or personal details. Advertisers only receive overall information about how their ads perform, such as total views or clicks.
+>
+> Learn more about [ads in ChatGPT](https://openai.com/index/testing-ads-in-chatgpt/?utm_campaign=privacy-policy-marketing-update-row-oct-2026-en&utm_medium=email&utm_source=sendgrid) and our [privacy controls](https://openai.com/consumer-privacy/?utm_campaign=privacy-policy-marketing-update-row-oct-2026-en&utm_medium=email&utm_source=sendgrid), including how we protect your data.
+>
+> Thanks,  
+> The OpenAI Team
+>
+> OpenAI  
+> 1455 3rd Street  
+> San Francisco, CA 94158
+
+*Sources:*
+[OpenAI, “Building advertising for the way people use AI” (October 5, 2026)](https://openai.com/index/new-chatgpt-ads-format-and-measurement/); 
+[OpenAI, GPT-6 and Intelligent UI release notes (October 7, 2026)](https://help.openai.com/en/articles/6825453-chatgpt-release-notes); 
+[OpenAI, “How we built ChatGPT’s novel ad stack for user trust and relevance” (October 21, 2026)](https://openai.com/index/building-chatgpt-ad-stack/); 
+[OpenAI Help Center, “Ads in ChatGPT”](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)
