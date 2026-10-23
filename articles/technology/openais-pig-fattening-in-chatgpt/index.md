@@ -112,7 +112,7 @@ If an illustrated instruction shows a particular brand of microphone, is that be
 
 Disclosure is not a minor interface detail. It is what allows users to understand why they are seeing something and to decide how much weight to give it.
 
-**The *Fattening* has begun. For now an unprompted “helpful visual” might look just silly and out of place, but it’s preparing us Go-tier gutter trash for something much more profitable.**
+__**The *Fattening* has begun. For now an unprompted “helpful visual” might look just silly and out of place, but it’s preparing us Go-tier gutter trash for something much more profitable.**__
 
 ---
 
