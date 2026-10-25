@@ -19,7 +19,7 @@ image_alt: "ChatGPT's Read Aloud ruined YouTube explainer videos forever."
 
 I have listened to a frankly absurd number of ChatGPT responses.
 
-I rarely read the responses with my eyes. Partly because I suspect I have an underlying reading difficulty somewhere in the dyslexia department, that I've compensated for my entire life, and partly because my astigmatized eyeballs are aging and I'm in denial. The reason I'm able to partake in any form of learning is all thanks to -- *drummroll* -- _Microsoft Edge_ with Read aloud for PDFs and Wavenet for the rest [GitHub](https://github.com/pgmichael/wavenet-for-chrome). Where were we..?
+I rarely read the responses with my eyes. Partly because I suspect I have an underlying reading difficulty somewhere in the dyslexia department, that I've compensated for my entire life, and partly because my astigmatized eyeballs are aging and I'm in denial. The reason I'm able to partake in any form of learning is all thanks to -- *drummroll* -- _Microsoft Edge_ with Read aloud for PDFs and [Wavenet](https://github.com/pgmichael/wavenet-for-chrome) for the rest. Where were we..?
 
 Ahh, yes, so I press Read Aloud, every turn, every time, every day hundreds of times.
 
