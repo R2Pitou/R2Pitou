@@ -1,5 +1,9 @@
 # Migration Notes
 
+![Jekyll pluginns -used, so attemopted to shift from pages to actions.... WIsh me luck. I don't have Codex... Just Copilot.
+-2026/10/25
+
+
 ## Summary
 
 Converted the repository into a GitHub-native Jekyll POSSE publishing site for `working-draft.org`.
