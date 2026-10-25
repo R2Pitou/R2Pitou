@@ -19,6 +19,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-target-blank
   - jekyll-feed
+  - jekyll-admin
 
 # jekyll-target-blank: external links get target="_blank" rel="noopener noreferrer"
 target-blank:
