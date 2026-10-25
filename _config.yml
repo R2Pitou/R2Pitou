@@ -17,6 +17,7 @@ highlighter: rouge
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-feed
   - jekyll-target-blank
   - jekyll-feed
   - jekyll-admin
