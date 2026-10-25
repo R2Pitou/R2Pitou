@@ -50,8 +50,13 @@ jobs:
       - name: Normalize article and image filenames in build workspace
         run: python scripts/normalize_articles.py
 
-      - name: Build with GitHub Pages Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          source: .
-          destination: ./_site
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Build with Jekyll (custom plugins enabled)
+        run: bundle exec jekyll build --destination ./_site
+        env:
+          JEKYLL_ENV: production
