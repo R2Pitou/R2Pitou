@@ -15,7 +15,7 @@ tags:
   - openai
 image: /assets/images/openais-pig-fattening-in-chatgpt-hero.webp
 image_alt: "A large ChatGPT logo centered over a blurred screenshot of a response about microphone placement. Hand-drawn arrows point to three small thumbnails in the blurred text, labeled with the questions 'AD?', 'Sponsored?', and 'Product Placement?"
-license: cc-by
+
 ---
 
 OpenAI presents Intelligent UI as a richer, more interactive way to answer questions. In practice, my experience so far has been considerably less ambitious: basic instructional prose, loosely relevant stock imagery and simple widgets. While Intelligent UI is marketed as an interactive leap forward, its current fallback state, littering chats with generic web-scraped stock images, serves a more long-tailed purpose: it conditions the user to a visual canvas where native ads can eventually seamlessly sit.
