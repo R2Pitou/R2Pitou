@@ -18,6 +18,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-target-blank
+  - jekyll-feed
 
 # jekyll-target-blank: external links get target="_blank" rel="noopener noreferrer"
 target-blank:
