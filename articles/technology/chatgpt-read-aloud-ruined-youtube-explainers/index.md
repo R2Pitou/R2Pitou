@@ -79,7 +79,7 @@ I hope the influencers of the future are the ones who engage with a topic critic
 
 I've made essentially the same argument to teachers during an AI professional-development session for a multi-campus K–12 school in Cambodia:
 
-![Quote from the AI professional-development handout](/assets/images/ai+compass+pd+quote.png)
+![Quote from the AI professional-development handout](/assets/images/ai-compass-pd-quote.png)
 
 Quote from the professional-development session. [Download the handout here](/artifacts/Thinking-First%20AI%20Prompts%20for%20Educators.pdf).
 
