@@ -13,7 +13,7 @@ tags:
   - text-to-speech
   - talking-head
   - openai
-image: /assets/images/chatgpt-read-aloud-ruined-youtube-explainers.jpg
+image: /assets/images/chatgpt-read-aloud-youtube-explainers-hero.jpg
 image_alt: "ChatGPT's Read Aloud ruined YouTube explainer videos forever."
 ---
 
