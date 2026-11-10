@@ -205,7 +205,7 @@
       const gainNode = audioCtx.createGain();
 
       osc.type = 'sine'; 
-      osc.frequency.setValueAtTime(frequencies[index], audioCtx.currentTime);
+      osc.frequency.setValueAtTime(frequencies[frequencies.length - 1 - index], audioCtx.currentTime);
 
       gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
       gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
