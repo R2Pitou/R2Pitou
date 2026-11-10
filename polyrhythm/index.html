@@ -219,18 +219,20 @@
     };
 
     const handleSoundToggle = (enabled = !settings.soundEnabled) => {  
-      settings.soundEnabled = enabled;
-      toggles.sound.dataset.toggled = enabled;
-      
-      if (enabled) {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
+    settings.soundEnabled = enabled;
+    toggles.sound.dataset.toggled = enabled;
+    
+    if (enabled) {
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';
+
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
       }
     }
+    };
 
     document.onvisibilitychange = () => handleSoundToggle(false);
     paper.onclick = () => handleSoundToggle();
