@@ -1,6 +1,6 @@
 # Migration Notes
 
-![Jekyll pluginns -used, so attemopted to shift from pages to actions.... WIsh me luck. I don't have Codex... Just Copilot.
+Jekyll pluginns -used, so attemopted to shift from pages to actions.... WIsh me luck. I don't have Codex... Just Copilot.
 -2026/10/25
 
 
