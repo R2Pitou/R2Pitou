@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph / Facebook / Discord / Slack -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://working-draft.org/polyrhythm/">
+  <meta property="og:title" content="Polyrhythmic Spiral | Working Draft">
+  <meta property="og:description" content="An interactive, polyrhythmic audio-visualizer built with the Web Audio API and HTML5 canvas.">
+  <meta property="og:image" content="https://working-draft.org/assets/images/polyrhythm.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://working-draft.org/polyrhythm/">
+  <meta name="twitter:title" content="Polyrhythmic Spiral | Working Draft">
+  <meta name="twitter:description" content="An interactive, polyrhythmic audio-visualizer built with the Web Audio API and HTML5 canvas.">
+  <meta name="twitter:image" content="https://working-draft.org/assets/images/polyrhythm.png">
   <title>Polyrhythmic Spiral</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -323,12 +336,18 @@
         pen.globalAlpha = 1;
         pen.fillStyle = arc.color;
         
-        if(currentTime >= arc.nextImpactTime) {      
-          if(settings.soundEnabled) {
+        if(currentTime >= arc.nextImpactTime) {
+          const interval = (Math.PI / arc.velocity) * 1000;
+
+          // Jump past any impacts missed while the tab was hidden/throttled
+          const missed = Math.floor((currentTime - arc.nextImpactTime) / interval);
+          arc.lastImpactTime = arc.nextImpactTime + missed * interval;
+          arc.nextImpactTime = arc.lastImpactTime + interval;
+
+          // Only sound impacts that are happening now, not stale ones
+          if(settings.soundEnabled && currentTime - arc.lastImpactTime < 100) {
             playKey(index);
-            arc.lastImpactTime = arc.nextImpactTime;
           }
-          arc.nextImpactTime = calculateNextImpactTime(arc.nextImpactTime, arc.velocity);      
         }
         
         const distance = elapsedTime >= 0 ? (elapsedTime * arc.velocity) : 0,
