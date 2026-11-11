@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    Polyrhythmic Spiral (Night), Working-Draft.org
+    Based on the polyrhythmic spiral by codepen/Hyperplexed, inspired by @project_jdm.
+    Modified by Arttu Pitou At: Web Audio synth with a fixed D Lydian vibraphone voice,
+    iOS audio session handling, new presentation, tint non-pentatonic shifting degrees,
+    accounting for the inner-high mapping.
+    Night version: a clock. One-hour cycle locked to the wall clock (every ring lines up
+    at the top of the hour), drawing rotated so the line sits at 12 o'clock, impacts derived
+    from the clock and scheduled ahead on the audio clock, master volume with limiter.
+    No settings: the music is fixed so the pattern can be learned.
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph / Facebook / Discord / Slack -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://working-draft.org/polyrhythm/night/">
+  <meta property="og:title" content="Polyrhythmic Spiral (Night) | Working Draft">
+  <meta property="og:description" content="A one-hour polyrhythmic spiral locked to the real clock. Slow Lydian bells for winding down.">
+  <meta property="og:image" content="https://working-draft.org/assets/images/polyrhythm.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://working-draft.org/polyrhythm/night/">
+  <meta name="twitter:title" content="Polyrhythmic Spiral (Night) | Working Draft">
+  <meta name="twitter:description" content="A one-hour polyrhythmic spiral locked to the real clock. Slow Lydian bells for winding down.">
+  <meta name="twitter:image" content="https://working-draft.org/assets/images/polyrhythm.png">
+  <title>Polyrhythmic Spiral (Night)</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html, body {
+      height: 100vh;
+      height: 100dvh;
+      background-color: black;
+      overflow: hidden;
+      font-family: "Noto Sans", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      height: 100vh;
+      height: 100dvh;
+      width: 100vw;
+      position: relative;
+      z-index: 9;
+    }
+
+    #background-image,
+    #background-filter {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+    }
+
+    #background-image {
+      z-index: 1;
+      background-image: url("https://images.unsplash.com/photo-1505136026201-bbc1bc0949fa?auto=format&fit=crop&w=1920&q=80");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+      filter: blur(4px) grayscale(30%);
+    }
+
+    #background-filter {
+      z-index: 2;
+      background: radial-gradient(rgb(0 0 0 / 60%) 50%, transparent);
+    }
+
+    #logo {
+      display: flex;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    #logo > img {
+      height: 7.5vmin;
+      width: auto;
+    }
+
+    #clock {
+      position: fixed;
+      left: 50%;
+      top: 63%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      color: white;
+      opacity: 0.2;
+      font-family: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+      font-weight: 200;
+      font-size: clamp(1.5rem, 7vmin, 4rem);
+      letter-spacing: 0.18em;
+      padding-left: 0.18em; /* balances the trailing letter-spacing so it centres */
+      font-variant-numeric: tabular-nums;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #control-bar-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      z-index: 10;
+      padding: 0.5rem;
+    }
+
+    .toggle {
+      background-color: rgb(255 255 255 / 10%);
+      backdrop-filter: blur(5px);
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      height: 2rem;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .toggle:is(:hover, :focus-visible) {
+      background-color: rgb(255 255 255 / 15%);
+    }
+
+    .toggle > i {
+      color: white;
+      display: none;
+      height: 1rem;
+      width: 1rem;
+      font-size: 0.6rem;
+      line-height: 1rem;
+      text-align: center;
+    }
+
+    .toggle[data-toggled="true"] > i.on {
+      display: block;
+    }
+
+    .toggle[data-toggled="false"] > i.off {
+      display: block;
+    }
+
+    #sound-message {
+      position: fixed;
+      top: 36%;
+      left: 50%;
+      translate: -50% -50%;
+      z-index: 3;
+      padding: 0.75rem;
+      background-color: rgb(255 255 255 / 5%);
+      border-radius: 0.4rem;
+      transition: opacity 1000ms;
+      pointer-events: none;
+    }
+
+    body:has(#sound-toggle[data-toggled="true"]) #sound-message {
+      opacity: 0;
+    }
+
+    #sound-message > p {
+      color: white;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="control-bar-wrapper">
+    <button id="sound-toggle" class="toggle" type="button" data-toggled="false" onClick="handleSoundToggle()" title="Toggle Sound">
+      <i class="fa-solid fa-volume-xmark off"></i>
+      <i class="fa-solid fa-music on"></i>
+    </button>
+  </div>
+
+  <div id="background-image"></div>
+  <div id="background-filter"></div>
+
+  <div id="logo">
+    <img src="https://working-draft.org/assets/working-draft-flower.png" alt="Working Draft" />
+  </div>
+
+  <div id="clock" aria-hidden="true">00:00</div>
+
+  <div id="sound-message">
+    <p>Click anywhere to toggle sound</p>
+  </div>
+
+  <canvas id="paper"></canvas>
+
+  <script>
+    const paper = document.getElementById("paper"),
+          pen = paper.getContext("2d");
+
+    const get = selector => document.querySelector(selector);
+
+    const toggles = {
+      sound: get("#sound-toggle")
+    }
+
+    const colors = Array(21).fill("#A6C48A");
+
+    // Lock the cycle to the wall clock: it starts at the top of the current hour
+    // (device local time), so every full cycle ends exactly on an hour boundary.
+    const hourStart = new Date();
+    hourStart.setMinutes(0, 0, 0);
+
+    const settings = {
+      startTime: hourStart.getTime(),
+      duration: 3600,                 // seconds: one full cycle = one hour
+      maxCycles: Math.max(colors.length, 100),
+      soundEnabled: false,
+      pulseEnabled: true,
+      volume: 0.25                    // master volume, 0 to 1
+    }
+
+    // ---------- The music (fixed) ----------
+    const LYDIAN = [0, 2, 4, 6, 7, 9, 11];
+    const PENTATONIC = [0, 3, 5, 7, 10];
+    const BASE_NOTE = 146.83;         // D3
+    const OCTAVE_SHIFT = -1;
+
+    // Vibraphone voice. partials: [frequency ratio, level, decay seconds]
+    const PARTIALS = [[1, 1, 2.5], [4, 0.15, 0.6]];
+
+    // Scale degrees (0-based) that can differ between Dorian, Aeolian and Lydian
+    const SHIFTING_DEGREES = [2, 3, 5, 6]; // 3rd, 4th, 6th, 7th
+    const SHIFT_PINK = "#f0a3bc";          // Alien Conspiracy Pink
+
+    // The innermost ring (index 0) gets the highest note
+    const ringNote = index => {
+      const noteIndex = colors.length - 1 - index,
+            octave = Math.floor(noteIndex / LYDIAN.length),
+            degree = noteIndex % LYDIAN.length,
+            semitone = LYDIAN[degree];
+
+      return {
+        degree,
+        semitone,
+        freq: BASE_NOTE * Math.pow(2, octave + semitone / 12 + OCTAVE_SHIFT)
+      };
+    };
+
+    // ---------- Audio graph ----------
+    // voices -> master volume -> limiter -> speakers. All 21 rings strike together at
+    // the top of the hour, so the limiter keeps that pile-up from jumping out at you.
+    let audioCtx, master, limiter;
+
+    const buildMaster = () => {
+      master = audioCtx.createGain();
+      master.gain.value = settings.volume;
+
+      limiter = audioCtx.createDynamicsCompressor();
+      limiter.threshold.value = -18;
+      limiter.knee.value = 12;
+      limiter.ratio.value = 12;
+      limiter.attack.value = 0.003;
+      limiter.release.value = 0.25;
+
+      master.connect(limiter);
+      limiter.connect(audioCtx.destination);
+    };
+
+    // Plays one note at audio-clock time `when`
+    const playKey = (index, when) => {
+      const freq = arcs[index].freq;
+
+      PARTIALS.forEach(([ratio, level, decay]) => {
+        const osc = audioCtx.createOscillator(),
+              gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.value = freq * ratio;
+
+        gain.gain.setValueAtTime(0, when);
+        gain.gain.linearRampToValueAtTime(0.2 * level, when + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, when + decay);
+
+        osc.connect(gain);
+        gain.connect(master);
+        osc.start(when);
+        osc.stop(when + decay + 0.1);
+      });
+    };
+
+    // ---------- Scheduler ----------
+    // Impacts are a pure function of the wall clock, so notes are queued ahead on the
+    // audio clock. That keeps sound going when the tab is hidden or the screen dims,
+    // because it no longer depends on the animation loop running.
+    const LOOKAHEAD_MS = 90000;
+    const TICK_MS = 2000;
+
+    const syncSchedule = () => {
+      const now = Date.now();
+      arcs.forEach(arc => {
+        arc.nextSound = settings.startTime
+          + Math.ceil((now - settings.startTime) / arc.interval) * arc.interval;
+      });
+    };
+
+    const schedule = () => {
+      if (!settings.soundEnabled || !audioCtx || !master) return;
+
+      const now = Date.now(),
+            horizon = now + LOOKAHEAD_MS,
+            ctxNow = audioCtx.currentTime;
+
+      arcs.forEach((arc, index) => {
+        while (arc.nextSound < horizon) {
+          playKey(index, ctxNow + Math.max(0, (arc.nextSound - now) / 1000));
+          arc.nextSound += arc.interval;
+        }
+      });
+    };
+
+    const startSchedule = () => {
+      buildMaster();
+      syncSchedule();
+      schedule();
+    };
+
+    // Cutting the master off silences everything already queued
+    const stopSchedule = () => {
+      if (master) { master.disconnect(); master = null; }
+      if (limiter) { limiter.disconnect(); limiter = null; }
+    };
+
+    // Rebuild the queue, e.g. after the audio context was asleep
+    const flushQueue = () => {
+      if (!settings.soundEnabled || !audioCtx) return;
+      stopSchedule();
+      startSchedule();
+    };
+
+    setInterval(schedule, TICK_MS);
+
+    // ---------- Controls ----------
+    const handleSoundToggle = (enabled = !settings.soundEnabled) => {
+      settings.soundEnabled = enabled;
+      toggles.sound.dataset.toggled = enabled;
+
+      if (enabled) {
+        if (navigator.audioSession) navigator.audioSession.type = 'playback';
+
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        stopSchedule();
+        startSchedule();
+      } else {
+        stopSchedule();
+      }
+    };
+
+    // No auto-mute when the tab is hidden: this page is meant to keep playing.
+    // When it comes back, wake the audio context and resync the queue.
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && settings.soundEnabled && audioCtx) {
+        audioCtx.resume();
+        flushQueue();
+      }
+    });
+
+    paper.onclick = () => handleSoundToggle();
+
+    // ---------- Clock ----------
+    // Device local time, 24-hour, minutes only: the minute marks are what you listen for.
+    const clockEl = document.getElementById("clock");
+    const pad = n => String(n).padStart(2, "0");
+
+    const updateClock = () => {
+      const now = new Date(),
+            text = pad(now.getHours()) + ":" + pad(now.getMinutes());
+      if (clockEl.textContent !== text) clockEl.textContent = text;
+    };
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ---------- Animation ----------
+    let arcs = [];
+
+    const calculateVelocity = index => {
+      const numberOfCycles = settings.maxCycles - index,
+            distancePerCycle = 2 * Math.PI;
+      return (numberOfCycles * distancePerCycle) / settings.duration;
+    }
+
+    const calculateDynamicOpacity = (currentTime, lastImpactTime, baseOpacity, maxOpacity, duration) => {
+      const timeSinceImpact = currentTime - lastImpactTime,
+            percentage = Math.min(timeSinceImpact / duration, 1),
+            opacityDelta = maxOpacity - baseOpacity;
+
+      return maxOpacity - (opacityDelta * percentage);
+    }
+
+    const determineOpacity = (currentTime, lastImpactTime, baseOpacity, maxOpacity, duration) => {
+      if(!settings.pulseEnabled) return baseOpacity;
+      return calculateDynamicOpacity(currentTime, lastImpactTime, baseOpacity, maxOpacity, duration);
+    }
+
+    const calculatePositionOnArc = (center, radius, angle) => ({
+      x: center.x + radius * Math.cos(angle),
+      y: center.y + radius * Math.sin(angle)
+    });
+
+    const init = () => {
+      pen.lineCap = "round";
+
+      arcs = colors.map((baseColor, index) => {
+        const velocity = calculateVelocity(index),
+              interval = (Math.PI / velocity) * 1000, // ms between impacts
+              note = ringNote(index),
+              color = SHIFTING_DEGREES.includes(note.degree) && !PENTATONIC.includes(note.semitone)
+                ? SHIFT_PINK
+                : baseColor;
+
+        return { color, velocity, interval, freq: note.freq, nextSound: 0 }
+      });
+    }
+
+    // The most recent impact for a ring, derived from the clock
+    const lastImpactFor = (arc, now) =>
+      settings.startTime + Math.floor((now - settings.startTime) / arc.interval) * arc.interval;
+
+    const drawArc = (x, y, radius, start, end, action = "stroke") => {
+      pen.beginPath();
+      pen.arc(x, y, radius, start, end);
+      if(action === "stroke") pen.stroke();
+      else pen.fill();
+    }
+
+    const drawPointOnArc = (center, arcRadius, pointRadius, angle) => {
+      const position = calculatePositionOnArc(center, arcRadius, angle);
+      drawArc(position.x, position.y, pointRadius, 0, 2 * Math.PI, "fill");
+    }
+
+    const draw = () => {
+      paper.width = paper.clientWidth;
+      paper.height = paper.clientHeight;
+
+      const currentTime = Date.now(),
+            elapsedTime = (currentTime - settings.startTime) / 1000;
+
+      const length = Math.min(paper.width, paper.height) * 0.9,
+            offset = (paper.width - length) / 2;
+
+      const start = { x: offset, y: paper.height / 2 }
+      const end = { x: paper.width - offset, y: paper.height / 2 }
+      const center = { x: paper.width / 2, y: paper.height / 2 }
+
+      // Rotate the whole drawing 90 degrees clockwise: the line where every ring
+      // lines up moves from 9 o'clock to 12 o'clock, like a clock's long hand.
+      pen.translate(center.x, center.y);
+      pen.rotate(Math.PI / 2);
+      pen.translate(-center.x, -center.y);
+
+      const base = {
+        length: end.x - start.x,
+        minAngle: 0,
+        startAngle: 0,
+        maxAngle: 2 * Math.PI
+      }
+
+      base.initialRadius = base.length * 0.05;
+      base.circleRadius = base.length * 0.006;
+      base.clearance = base.length * 0.03;
+      base.spacing = (base.length - base.initialRadius - base.clearance) / 2 / colors.length;
+
+      arcs.forEach((arc, index) => {
+        const radius = base.initialRadius + (base.spacing * index),
+              lastImpactTime = lastImpactFor(arc, currentTime);
+
+        pen.globalAlpha = determineOpacity(currentTime, lastImpactTime, 0.15, 0.65, 1000);
+        pen.lineWidth = base.length * 0.002;
+        pen.strokeStyle = arc.color;
+
+        const offset = base.circleRadius * (5 / 3) / radius;
+
+        drawArc(center.x, center.y, radius, Math.PI + offset, (2 * Math.PI) - offset);
+        drawArc(center.x, center.y, radius, offset, Math.PI - offset);
+
+        pen.globalAlpha = determineOpacity(currentTime, lastImpactTime, 0.15, 0.85, 1000);
+        pen.fillStyle = arc.color;
+
+        drawPointOnArc(center, radius, base.circleRadius * 0.75, Math.PI);
+        drawPointOnArc(center, radius, base.circleRadius * 0.75, 2 * Math.PI);
+
+        pen.globalAlpha = 1;
+        pen.fillStyle = arc.color;
+
+        const distance = elapsedTime >= 0 ? (elapsedTime * arc.velocity) : 0,
+              angle = (Math.PI + distance) % base.maxAngle;
+
+        drawPointOnArc(center, radius, base.circleRadius, angle);
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    init();
+    draw();
+  </script>
+</body>
+</html>
