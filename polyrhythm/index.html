@@ -6,7 +6,8 @@
     Based on the polyrhythmic spiral by codepen/Hyperplexed, inspired by @project_jdm.
     Modified by Arttu Pitou At: Web Audio synth with selectable modal scales
     and synthesized instruments, switchable pitch direction, missed-impact fix,
-    iOS audio session handling, new presentation.
+    iOS audio session handling, new presentation, tint non-pentatonic shifting degrees 
+    in Dorian, Aeolian and Lydian scales, accounting for the inner-high setting.
   -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -420,6 +421,23 @@
       drawArc(position.x, position.y, pointRadius, 0, 2 * Math.PI, "fill");
     }
 
+    // Scale degrees (0-based) that can differ between Dorian, Aeolian and Lydian
+    const shiftingDegrees = [2, 3, 5, 6]; // 3rd, 4th, 6th, 7th
+    const SHIFT_PINK = "#f0a3bc";         // Alien Conspiracy Pink
+
+    const tintFor = index => {
+      if (settings.scale === "pentatonic") return colors[index];
+
+      const scale = scales[settings.scale],
+            noteIndex = settings.innerHigh ? colors.length - 1 - index : index,
+            degree = noteIndex % scale.length,
+            isPentatonicNote = scales.pentatonic.includes(scale[degree]);
+
+      return shiftingDegrees.includes(degree) && !isPentatonicNote
+        ? SHIFT_PINK
+        : colors[index];
+    };
+
     const draw = () => {
       paper.width = paper.clientWidth;
       paper.height = paper.clientHeight;
@@ -447,6 +465,8 @@
       base.spacing = (base.length - base.initialRadius - base.clearance) / 2 / colors.length;
 
       arcs.forEach((arc, index) => {
+        arc.color = tintFor(index); // NEW
+
         const radius = base.initialRadius + (base.spacing * index);
 
         pen.globalAlpha = determineOpacity(currentTime, arc.lastImpactTime, 0.15, 0.65, 1000);
