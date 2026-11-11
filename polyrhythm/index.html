@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--
+  <!--
     Polyrhythmic Spiral, Working-Draft.org
     Based on the polyrhythmic spiral by codepen/Hyperplexed, inspired by @project_jdm.
-    Modified by Arttu Pitou At: Web Audio synth with D minor pentatonic mapping,
-    inverted pitch order, missed-impact fix, iOS audio session handling, new presentation.
-    -->
+    Modified by Arttu Pitou At: Web Audio synth with selectable modal scales
+    and synthesized instruments, switchable pitch direction, missed-impact fix,
+    iOS audio session handling, new presentation.
+  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Open Graph / Facebook / Discord / Slack -->
@@ -26,6 +27,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     html, body {
+      height: 100vh;
       height: 100dvh;
       background-color: black;
       overflow: hidden;
@@ -39,6 +41,7 @@
     }
 
     canvas {
+      height: 100vh;
       height: 100dvh;
       width: 100vw;
       position: relative;
@@ -53,7 +56,7 @@
       top: 0px;
       left: 0px;
     }
-      
+
     #background-image {
       z-index: 1;
       background-image: url("https://images.unsplash.com/photo-1505136026201-bbc1bc0949fa?auto=format&fit=crop&w=1920&q=80");
@@ -76,11 +79,11 @@
       transform: translate(-50%, -50%);
       z-index: 4;
       opacity: 0.2;
-      pointer-events: none; 
+      pointer-events: none;
     }
 
     #logo > img {
-      height: 18vmin; 
+      height: 18vmin;
       width: auto;
     }
 
@@ -93,6 +96,34 @@
       left: 0px;
       z-index: 10;
       padding: 0.5rem;
+    }
+
+    #control-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    #octave-control {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    #octave-control .toggle {
+      color: white;
+      font-size: 1rem;
+      line-height: 1;
+      width: 2rem;
+      padding: 0;
+    }
+
+    #octave-display {
+      color: white;
+      font-size: 0.8rem;
+      min-width: 1.75rem;
+      text-align: center;
     }
 
     .toggle {
@@ -128,6 +159,17 @@
       display: block;
     }
 
+    select.toggle {
+      color: white;
+      font-family: inherit;
+      font-size: 0.8rem;
+      padding: 0 0.5rem;
+    }
+
+    select.toggle option {
+      color: black;
+    }
+
     #sound-message {
       position: fixed;
       top: 36%;
@@ -155,10 +197,30 @@
 <body>
   <div id="control-bar-wrapper">
     <div id="control-bar">
-      <button id="sound-toggle" class="toggle" type="button" data-toggled="false" onClick="handleSoundToggle()" title="Toggle Pulse">
-        <i class="fa-solid fa-music-slash off"></i>
+      <button id="sound-toggle" class="toggle" type="button" data-toggled="false" onClick="handleSoundToggle()" title="Toggle Sound">
+        <i class="fa-solid fa-volume-xmark off"></i>
         <i class="fa-solid fa-music on"></i>
       </button>
+      <select id="scale-select" class="toggle" title="Scale">
+        <option value="dorian">Dorian</option>
+        <option value="aeolian">Aeolian</option>
+        <option value="lydian">Lydian</option>
+        <option value="pentatonic">Pentatonic</option>
+      </select>
+      <select id="instrument-select" class="toggle" title="Instrument">
+        <option value="vibraphone">Vibraphone</option>
+        <option value="bell">Bell</option>
+        <option value="sine">Sine</option>
+      </select>
+      <select id="direction-select" class="toggle" title="Pitch direction">
+        <option value="high">Inner high</option>
+        <option value="low">Inner low</option>
+      </select>
+      <div id="octave-control" title="Octave">
+        <button id="octave-down" class="toggle" type="button">&minus;</button>
+        <span id="octave-display">0</span>
+        <button id="octave-up" class="toggle" type="button">+</button>
+      </div>
     </div>
   </div>
 
@@ -192,62 +254,123 @@
       duration: 900,
       maxCycles: Math.max(colors.length, 100),
       soundEnabled: false,
-      pulseEnabled: true
+      pulseEnabled: true,
+      scale: "dorian",
+      instrument: "vibraphone",
+      innerHigh: true,
+      octave: 0,
+      minOctave: -2,
+      maxOctave: 1
     }
 
+    // ---------- Scales and frequencies ----------
+    const scales = {
+      dorian:     [0, 2, 3, 5, 7, 9, 10],
+      aeolian:    [0, 2, 3, 5, 7, 8, 10],
+      lydian:     [0, 2, 4, 6, 7, 9, 11],
+      pentatonic: [0, 3, 5, 7, 10]
+    };
+
+    const buildFrequencies = () => {
+      const scale = scales[settings.scale],
+            baseNote = 146.83; // D3
+      return Array(colors.length).fill(0).map((_, i) => {
+        const octave = Math.floor(i / scale.length),
+              degree = i % scale.length;
+        return baseNote * Math.pow(2, octave + scale[degree] / 12);
+      });
+    };
+
+    let frequencies = buildFrequencies();
+
+    // ---------- Instruments ----------
+    // partials: [frequency ratio, level, decay seconds]
+    const voices = {
+      vibraphone: { type: 'sine', partials: [[1, 1, 2.5], [4, 0.15, 0.6]] },
+      bell: { type: 'sine', partials: [[1, 1, 2.5], [2.76, 0.25, 1.0], [5.4, 0.08, 0.4]] },
+      sine: { type: 'sine', partials: [[1, 1, 2.5]] }
+    };
+
+    const noteFor = index =>
+      frequencies[settings.innerHigh ? frequencies.length - 1 - index : index]
+        * Math.pow(2, settings.octave);
+
     let audioCtx;
-    const frequencies = Array(21).fill(0).map((_, i) => {
-      const baseNote = 146.83; 
-      const scale = [0, 3, 5, 7, 10]; 
-      const octave = Math.floor(i / 5);
-      const degree = i % 5;
-      return baseNote * Math.pow(2, octave + (scale[degree] / 12));
-    });
 
     const playKey = index => {
       if (!audioCtx) return;
 
-      const osc = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
+      const now = audioCtx.currentTime,
+            freq = noteFor(index),
+            voice = voices[settings.instrument];
 
-      osc.type = 'sine'; 
-      osc.frequency.setValueAtTime(frequencies[frequencies.length - 1 - index], audioCtx.currentTime);
+      let dest = audioCtx.destination;
+      if (voice.lowpass) {
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = voice.lowpass;
+        filter.connect(dest);
+        dest = filter;
+      }
 
-      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.5);
+      voice.partials.forEach(([ratio, level, decay]) => {
+        const osc = audioCtx.createOscillator(),
+              gain = audioCtx.createGain();
 
-      osc.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
+        osc.type = voice.type;
+        osc.frequency.value = freq * ratio;
 
-      osc.start();
-      osc.stop(audioCtx.currentTime + 2.6);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.2 * level, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + decay);
+
+        osc.connect(gain);
+        gain.connect(dest);
+        osc.start(now);
+        osc.stop(now + decay + 0.1);
+      });
     };
 
-    const handleSoundToggle = (enabled = !settings.soundEnabled) => {  
-    settings.soundEnabled = enabled;
-    toggles.sound.dataset.toggled = enabled;
-    
-    if (enabled) {
-      if (navigator.audioSession) navigator.audioSession.type = 'playback';
+    // ---------- Controls ----------
+    const handleSoundToggle = (enabled = !settings.soundEnabled) => {
+      settings.soundEnabled = enabled;
+      toggles.sound.dataset.toggled = enabled;
 
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (enabled) {
+        if (navigator.audioSession) navigator.audioSession.type = 'playback';
+
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
       }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-    }
     };
 
     document.onvisibilitychange = () => handleSoundToggle(false);
     paper.onclick = () => handleSoundToggle();
 
+    get("#scale-select").onchange = e => {
+      settings.scale = e.target.value;
+      frequencies = buildFrequencies();
+    };
+    get("#instrument-select").onchange = e => settings.instrument = e.target.value;
+    get("#direction-select").onchange = e => settings.innerHigh = e.target.value === "high";
+
+    const shiftOctave = delta => {
+      settings.octave = Math.max(settings.minOctave, Math.min(settings.maxOctave, settings.octave + delta));
+      get("#octave-display").textContent = settings.octave > 0 ? "+" + settings.octave : settings.octave;
+    };
+    get("#octave-down").onclick = () => shiftOctave(-1);
+    get("#octave-up").onclick = () => shiftOctave(1);
+
+    // ---------- Animation ----------
     let arcs = [];
 
-    const calculateVelocity = index => {  
-        const numberOfCycles = settings.maxCycles - index,
-              distancePerCycle = 2 * Math.PI;
+    const calculateVelocity = index => {
+      const numberOfCycles = settings.maxCycles - index,
+            distancePerCycle = 2 * Math.PI;
       return (numberOfCycles * distancePerCycle) / settings.duration;
     }
 
@@ -259,7 +382,7 @@
       const timeSinceImpact = currentTime - lastImpactTime,
             percentage = Math.min(timeSinceImpact / duration, 1),
             opacityDelta = maxOpacity - baseOpacity;
-      
+
       return maxOpacity - (opacityDelta * percentage);
     }
 
@@ -288,13 +411,13 @@
     const drawArc = (x, y, radius, start, end, action = "stroke") => {
       pen.beginPath();
       pen.arc(x, y, radius, start, end);
-      if(action === "stroke") pen.stroke();    
+      if(action === "stroke") pen.stroke();
       else pen.fill();
     }
 
     const drawPointOnArc = (center, arcRadius, pointRadius, angle) => {
       const position = calculatePositionOnArc(center, arcRadius, angle);
-      drawArc(position.x, position.y, pointRadius, 0, 2 * Math.PI, "fill");    
+      drawArc(position.x, position.y, pointRadius, 0, 2 * Math.PI, "fill");
     }
 
     const draw = () => {
@@ -303,10 +426,10 @@
 
       const currentTime = new Date().getTime(),
             elapsedTime = (currentTime - settings.startTime) / 1000;
-      
+
       const length = Math.min(paper.width, paper.height) * 0.9,
             offset = (paper.width - length) / 2;
-      
+
       const start = { x: offset, y: paper.height / 2 }
       const end = { x: paper.width - offset, y: paper.height / 2 }
       const center = { x: paper.width / 2, y: paper.height / 2 }
@@ -329,21 +452,21 @@
         pen.globalAlpha = determineOpacity(currentTime, arc.lastImpactTime, 0.15, 0.65, 1000);
         pen.lineWidth = base.length * 0.002;
         pen.strokeStyle = arc.color;
-        
+
         const offset = base.circleRadius * (5 / 3) / radius;
-        
+
         drawArc(center.x, center.y, radius, Math.PI + offset, (2 * Math.PI) - offset);
         drawArc(center.x, center.y, radius, offset, Math.PI - offset);
-        
+
         pen.globalAlpha = determineOpacity(currentTime, arc.lastImpactTime, 0.15, 0.85, 1000);
         pen.fillStyle = arc.color;
-        
+
         drawPointOnArc(center, radius, base.circleRadius * 0.75, Math.PI);
         drawPointOnArc(center, radius, base.circleRadius * 0.75, 2 * Math.PI);
-        
+
         pen.globalAlpha = 1;
         pen.fillStyle = arc.color;
-        
+
         if(currentTime >= arc.nextImpactTime) {
           const interval = (Math.PI / arc.velocity) * 1000;
 
@@ -357,13 +480,13 @@
             playKey(index);
           }
         }
-        
+
         const distance = elapsedTime >= 0 ? (elapsedTime * arc.velocity) : 0,
               angle = (Math.PI + distance) % base.maxAngle;
-        
+
         drawPointOnArc(center, radius, base.circleRadius, angle);
       });
-      
+
       requestAnimationFrame(draw);
     }
 
