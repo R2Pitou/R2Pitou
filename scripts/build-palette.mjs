@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Builds the "Colours I've named" palette card for the GitHub profile README.
 //
-// Reads profile/colours.json (hand-maintained: name, hex, PR url) and writes:
-//   profile/colours-dark.svg, profile/colours-light.svg
+// Reads profile/colours.json (hand-maintained: name, hex, PR url; array order
+// is the grid order, left to right then top to bottom) and writes:
+//   profile/colours.svg   a square grid of solid colour blocks, text on top
 // and regenerates the block between the palette markers in README.md.
 //
-// A local tool: add a colour to profile/colours.json, run
+// A local tool: edit profile/colours.json, run
 //   node scripts/build-palette.mjs
 // then review, commit and push the output yourself. No network, no token.
 // Plain Node, no dependencies.
@@ -14,42 +15,33 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const SOURCE = "meodai/color-names";
+const SOURCE_URL = "https://github.com/meodai/color-names";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT_DIR = join(ROOT, "profile");
 const DATA = join(OUT_DIR, "colours.json");
+const OUT_SVG = join(OUT_DIR, "colours.svg");
 const README = join(ROOT, "README.md");
 const MARK_START = "<!-- palette:start -->";
 const MARK_END = "<!-- palette:end -->";
 
-const THEMES = {
-  dark: {
-    ground: "#050505",
-    panel: "#111111",
-    border: "rgba(236,153,185,0.15)",
-    heading: "#f8f8f8",
-    secondary: "#d6c8cf",
-    accent: "#ec99b9",
-  },
-  light: {
-    ground: "#f7f3f5",
-    panel: "#ffffff",
-    border: "rgba(160,60,100,0.18)",
-    heading: "#151114",
-    secondary: "#5c4c55",
-    accent: "#a83d68",
-  },
+const SANS = `system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`;
+const LIGHT_TEXT = "#ffffff";
+const DARK_TEXT = "#111111";
+
+const L = {
+  tile: 250, // square block edge
+  pad: 12, // min space between text and block edge
+  nameSize: 20,
+  nameLine: 24,
+  hexSize: 14,
+  hexGap: 8, // space between name and hex
 };
 
-const SANS = `system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`;
-const MONO = `ui-monospace, SFMono-Regular, 'Cascadia Mono', Consolas, 'Liberation Mono', Menlo, monospace`;
-
 const log = (...a) => console.log("[palette]", ...a);
+const rel = (p) => relative(ROOT, p).split("\\").join("/");
 
 // ------------------------------------------------------------------- loading
-
-const rel = (p) => relative(ROOT, p).split("\\").join("/");
 
 async function loadColours() {
   log(`reading ${rel(DATA)}`);
@@ -80,7 +72,7 @@ async function loadColours() {
 // ------------------------------------------------------------------ SVG card
 
 const esc = (s) =>
-  String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
 
 function luminance(hex) {
   const [r, g, b] = [1, 3, 5].map((i) => {
@@ -89,68 +81,73 @@ function luminance(hex) {
   });
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
-const contrast = (a, b) => {
+function contrast(a, b) {
   const [x, y] = [luminance(a), luminance(b)].sort((p, q) => q - p);
   return (x + 0.05) / (y + 0.05);
-};
-
-// SVG in <img> can't measure text, so truncate by a conservative estimate.
-function fit(text, px, fontSize) {
-  const max = Math.floor(px / (fontSize * 0.58));
-  return text.length <= max ? text : text.slice(0, max - 1).trimEnd() + "…";
+}
+// White or near-black text, whichever reads better on the swatch.
+function textOn(hex) {
+  const w = contrast(hex, LIGHT_TEXT);
+  const d = contrast(hex, DARK_TEXT);
+  const pick = w >= d ? LIGHT_TEXT : DARK_TEXT;
+  log(`  text on ${hex}: ${pick} (white ${w.toFixed(2)}:1, dark ${d.toFixed(2)}:1)`);
+  return pick;
 }
 
-const L = {
-  margin: 8, // ground visible around the panel
-  pad: 24,
-  tileW: 192,
-  gap: 16,
-  swatchH: 88,
-  tileH: 88 + 46,
-  titleH: 44,
-  footerH: 36,
-  maxCols: 4,
-};
+// SVG in <img> can't measure text, so estimate (bold sans ~0.56em per char).
+const maxChars = (px, size) => Math.floor(px / (size * 0.56));
 
-function renderSvg(colours, theme, variant) {
-  const n = colours.length;
-  const cols = Math.max(1, Math.min(L.maxCols, n));
-  const rows = Math.max(1, Math.ceil(n / cols));
-  const panelW = L.pad * 2 + cols * L.tileW + (cols - 1) * L.gap;
-  const gridH = rows * L.tileH + (rows - 1) * L.gap;
-  const panelH = L.pad + L.titleH + gridH + L.footerH;
-  const W = panelW + L.margin * 2;
-  const H = panelH + L.margin * 2;
-  const x0 = L.margin + L.pad;
-  const y0 = L.margin + L.pad + L.titleH;
+// One line if it fits, else split at the space nearest the middle.
+function nameLines(name) {
+  const max = maxChars(L.tile - L.pad * 2, L.nameSize);
+  if (name.length <= max) return [name];
+  const spaces = [...name.matchAll(/ /g)].map((m) => m.index);
+  if (spaces.length === 0) {
+    log(`  WARNING: "${name}" is too long and has no space to wrap at, truncating`);
+    return [name.slice(0, max - 1) + "…"];
+  }
+  const mid = name.length / 2;
+  const at = spaces.reduce((best, s) => (Math.abs(s - mid) < Math.abs(best - mid) ? s : best));
+  const lines = [name.slice(0, at), name.slice(at + 1)];
+  return lines.map((ln) => {
+    if (ln.length <= max) return ln;
+    log(`  WARNING: line "${ln}" of "${name}" is too long even when wrapped, truncating`);
+    return ln.slice(0, max - 1).trimEnd() + "…";
+  });
+}
 
-  const tiles = colours.map((c, i) => {
-    const x = x0 + (i % cols) * (L.tileW + L.gap);
-    const y = y0 + Math.floor(i / cols) * (L.tileH + L.gap);
-    const needsEdge = contrast(c.hex, theme.panel) < 1.6;
-    const edge = needsEdge ? ` stroke="${theme.border}" stroke-width="1"` : "";
-    const prLabel = `#${c.pr}`;
-    return [
-      `  <g>`,
-      `    <title>${esc(`${c.name} ${c.hex} (PR #${c.pr})`)}</title>`,
-      `    <rect x="${x + 0.5}" y="${y + 0.5}" width="${L.tileW - 1}" height="${L.swatchH - 1}" rx="8" fill="${c.hex}"${edge}/>`,
-      `    <text x="${x}" y="${y + L.swatchH + 22}" font-family="${SANS}" font-size="14" font-weight="600" fill="${theme.heading}">${esc(fit(c.name, L.tileW, 14))}</text>`,
-      `    <text x="${x}" y="${y + L.swatchH + 41}" font-family="${MONO}" font-size="12" fill="${theme.secondary}">${esc(c.hex)}</text>`,
-      `    <text x="${x + L.tileW}" y="${y + L.swatchH + 41}" text-anchor="end" font-family="${MONO}" font-size="11" fill="${theme.accent}">${esc(prLabel)}</text>`,
-      `  </g>`,
-    ].join("\n");
+function renderSvg(colours) {
+  const cols = Math.ceil(Math.sqrt(colours.length));
+  const rows = Math.ceil(colours.length / cols);
+  const W = cols * L.tile;
+  const H = rows * L.tile;
+  log(`grid ${cols} x ${rows}, ${W} x ${H}px`);
+
+  const blocks = colours.map((c, i) => {
+    const x = (i % cols) * L.tile;
+    const y = Math.floor(i / cols) * L.tile;
+    const ink = textOn(c.hex);
+    const lines = nameLines(c.name);
+    // Vertically centre [name lines + gap + hex] in the block.
+    const total = lines.length * L.nameLine + L.hexGap + L.hexSize;
+    const top = y + (L.tile - total) / 2;
+    const cx = x + L.tile / 2;
+    const out = [`  <rect x="${x}" y="${y}" width="${L.tile}" height="${L.tile}" fill="${c.hex}"/>`];
+    lines.forEach((ln, k) => {
+      const baseline = Math.round(top + k * L.nameLine + L.nameSize);
+      out.push(`  <text x="${cx}" y="${baseline}" text-anchor="middle" font-family="${SANS}" font-size="${L.nameSize}" font-weight="700" fill="${ink}">${esc(ln)}</text>`);
+    });
+    const hexBase = Math.round(top + lines.length * L.nameLine + L.hexGap + L.hexSize - 2);
+    out.push(`  <text x="${cx}" y="${hexBase}" text-anchor="middle" font-family="${SANS}" font-size="${L.hexSize}" fill="${ink}">${esc(c.hex)}</text>`);
+    return out.join("\n");
   });
 
   const label = `Colours I've named: ${colours.map((c) => `${c.name} ${c.hex}`).join(", ")}`;
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="t">`,
     `  <title id="t">${esc(label)}</title>`,
-    `  <!-- generated by scripts/build-palette.mjs (${variant}); do not edit by hand -->`,
-    `  <rect width="${W}" height="${H}" rx="12" fill="${theme.ground}"/>`,
-    `  <rect x="${L.margin + 0.5}" y="${L.margin + 0.5}" width="${panelW - 1}" height="${panelH - 1}" rx="8" fill="${theme.panel}" stroke="${theme.border}" stroke-width="1"/>`,
-    `  <text x="${x0}" y="${L.margin + L.pad + 20}" font-family="${SANS}" font-size="20" font-weight="600" fill="${theme.heading}">Colours I&#39;ve named</text>`,
-    ...tiles,
-    `  <text x="${x0}" y="${L.margin + panelH - 16}" font-family="${SANS}" font-size="11" fill="${theme.secondary}">from ${esc(SOURCE)}</text>`,
+    `  <!-- generated by scripts/build-palette.mjs; do not edit by hand -->`,
+    ...blocks,
     `</svg>`,
     ``,
   ].join("\n");
@@ -158,22 +155,28 @@ function renderSvg(colours, theme, variant) {
 
 // -------------------------------------------------------------------- README
 
+// "Alien Conspiracy Pink ([#234](url)) · Berlin Pink, Teal Beak, ... ([#262](url))"
+// Groups colours by PR in order of first appearance; names sorted within a PR.
+function prLine(colours) {
+  const groups = new Map();
+  for (const c of colours) {
+    if (!groups.has(c.pr)) groups.set(c.pr, { url: c.prUrl, names: [] });
+    groups.get(c.pr).names.push(c.name);
+  }
+  return [...groups]
+    .map(([pr, g]) => `${g.names.sort((a, b) => a.localeCompare(b)).join(", ")} ([#${pr}](${g.url}))`)
+    .join(" · ");
+}
+
 function readmeBlock(colours, eol) {
   const alt = esc(`Colours I've named: ${colours.map((c) => `${c.name} ${c.hex}`).join(", ")}`);
-  const lines = [
+  return [
     MARK_START,
-    `<picture>`,
-    `  <source media="(prefers-color-scheme: dark)" srcset="profile/colours-dark.svg">`,
-    `  <source media="(prefers-color-scheme: light)" srcset="profile/colours-light.svg">`,
-    `  <img src="profile/colours-dark.svg" alt="${alt}">`,
-    `</picture>`,
+    `<a href="${SOURCE_URL}"><img src="${rel(OUT_SVG)}" width="${L.tile * Math.ceil(Math.sqrt(colours.length))}" alt="${alt}"></a>`,
     ``,
-    `| Colour | Hex | PR |`,
-    `|---|---|---|`,
-    ...colours.map((c) => `| ${c.name.replace(/\|/g, "\\|")} | \`${c.hex}\` | [#${c.pr}](${c.prUrl}) |`),
+    prLine(colours),
     MARK_END,
-  ];
-  return lines.join(eol);
+  ].join(eol);
 }
 
 async function updateReadme(colours) {
@@ -192,7 +195,7 @@ async function updateReadme(colours) {
     log(`README.md unchanged`);
   } else {
     await writeFile(README, next, "utf8");
-    log(`wrote README.md (palette block, ${colours.length} rows)`);
+    log(`wrote README.md (palette block, ${colours.length} colours)`);
   }
 }
 
@@ -203,12 +206,10 @@ async function main() {
   log(`${colours.length} colour(s)`);
 
   await mkdir(OUT_DIR, { recursive: true });
-  for (const [file, theme] of [["colours-dark.svg", "dark"], ["colours-light.svg", "light"]]) {
-    const content = renderSvg(colours, THEMES[theme], theme);
-    const path = join(OUT_DIR, file);
-    await writeFile(path, content, "utf8");
-    log(`wrote ${rel(path)} (${Buffer.byteLength(content)} bytes)`);
-  }
+  const content = renderSvg(colours);
+  await writeFile(OUT_SVG, content, "utf8");
+  log(`wrote ${rel(OUT_SVG)} (${Buffer.byteLength(content)} bytes)`);
+
   await updateReadme(colours);
   log("done");
 }

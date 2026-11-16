@@ -22,21 +22,12 @@ The accidental upside of extended unemployment is that I have become extremely b
 
 ## Colours I've named
 
-It started with Alien Conspiracy Pink in December 2025.
+I got my first-ever PR merged in December 2025, and it felt like a milestone. I was not contributing code, unless hex code counts, but I followed the process and made a compelling enough case to become the proud father of [Alien Conspiracy Pink (`#f0a3bc`)](https://github.com/meodai/color-names/pull/234).
 
 <!-- palette:start -->
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="profile/colours-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="profile/colours-light.svg">
-  <img src="profile/colours-dark.svg" alt="Colours I&#39;ve named: Alien Conspiracy Pink #f0a3bc, Berlin Pink #ff6989, Teal Beak #006767, Thistleberry Green #bfd8bf">
-</picture>
+<a href="https://github.com/meodai/color-names"><img src="profile/colours.svg" width="500" alt="Colours I&#39;ve named: Alien Conspiracy Pink #f0a3bc, Teal Beak #006767, Thistleberry Green #bfd8bf, Berlin Pink #ff6989"></a>
 
-| Colour | Hex | PR |
-|---|---|---|
-| Alien Conspiracy Pink | `#f0a3bc` | [#234](https://github.com/meodai/color-names/pull/234) |
-| Berlin Pink | `#ff6989` | [#262](https://github.com/meodai/color-names/pull/262) |
-| Teal Beak | `#006767` | [#262](https://github.com/meodai/color-names/pull/262) |
-| Thistleberry Green | `#bfd8bf` | [#262](https://github.com/meodai/color-names/pull/262) |
+Alien Conspiracy Pink ([#234](https://github.com/meodai/color-names/pull/234)) · Berlin Pink, Teal Beak, Thistleberry Green ([#262](https://github.com/meodai/color-names/pull/262))
 <!-- palette:end -->
 
 ## I also make noise using AI tools, Reaper and Traktor
