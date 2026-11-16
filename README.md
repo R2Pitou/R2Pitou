@@ -20,9 +20,24 @@ The accidental upside of extended unemployment is that I have become extremely b
 
 [![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D6JN3KA)
 
-## My first merged PR
+## Colours I've named
 
-I got my first-ever PR merged in December 2025, and it felt like a milestone. I was not contributing code, unless hex code counts, but I followed the process and made a compelling enough case to become the proud father of [Alien Conspiracy Pink](https://github.com/meodai/color-names/pull/234)  <img src="alien-conspiracy-pink.svg" width="14" height="14" alt=""> `#f0a3bc`.
+It started with Alien Conspiracy Pink in December 2025.
+
+<!-- palette:start -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="profile/colours-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="profile/colours-light.svg">
+  <img src="profile/colours-dark.svg" alt="Colours I&#39;ve named: Alien Conspiracy Pink #f0a3bc, Berlin Pink #ff6989, Teal Beak #006767, Thistleberry Green #bfd8bf">
+</picture>
+
+| Colour | Hex | PR |
+|---|---|---|
+| Alien Conspiracy Pink | `#f0a3bc` | [#234](https://github.com/meodai/color-names/pull/234) |
+| Berlin Pink | `#ff6989` | [#262](https://github.com/meodai/color-names/pull/262) |
+| Teal Beak | `#006767` | [#262](https://github.com/meodai/color-names/pull/262) |
+| Thistleberry Green | `#bfd8bf` | [#262](https://github.com/meodai/color-names/pull/262) |
+<!-- palette:end -->
 
 ## I also make noise using AI tools, Reaper and Traktor
 [YouTube](https://www.youtube.com/@ATP2-Music)

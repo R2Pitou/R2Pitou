@@ -52,3 +52,4 @@ exclude:
   - _site
   - .jekyll-cache
   - .jekyll-metadata
+  - profile
