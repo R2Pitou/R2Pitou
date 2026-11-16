@@ -22,7 +22,7 @@ The accidental upside of extended unemployment is that I have become extremely b
 
 ## My first merged PR
 
-I got my first-ever PR merged in December 2025, and it felt like a milestone. I was not contributing code, unless hex code counts, but I followed the process and made a compelling enough case to become the proud father of [Alien Conspiracy Pink (`#f023bc`)](https://github.com/meodai/color-names/pull/234).
+I got my first-ever PR merged in December 2025, and it felt like a milestone. I was not contributing code, unless hex code counts, but I followed the process and made a compelling enough case to become the proud father of [Alien Conspiracy Pink (`#f0a3bc`)](https://github.com/meodai/color-names/pull/234).
 
 ## I also make noise using AI tools, Reaper and Traktor
 [YouTube](https://www.youtube.com/@ATP2-Music)
