@@ -1,11 +1,13 @@
 #!/usr/bin/env node
-// Proves the maths of /polyrhythm/clock/ by running the page's real <script> in node against a fake canvas
+// Proves the maths of the one-hour polyrhythm clock (website /polyrhythm/clock/ and the stream page) by running the page's real <script> in node against a fake canvas
 // (which applies the page's own translate/rotate, so "top" means the top of the screen) and a fake AudioContext.
 // Based on polyrhythmic-world-clock tests/ring_sync.js (archived 2026-11-16, commit 54de416 there).
 //
-//   node tests/clock_math.js [clock.html] [old-21-ring-clock.html]
+//   node tests/clock_math.js [page.html] [--query=?stream&offset=7.5&lookahead=5] [--control=old-21-ring-clock.html]
 //
-// The second page is optional: give the earlier 21-ring clock to also run the control (it DOES repeat at 30 min).
+// Default page: page/index.html (stream repo) or polyrhythm/clock/index.html (website repo).
+// --query runs the page with URL parameters (stream mode, offset, lookahead); times are compared in the page's own
+// time (real + offset). --control also runs the earlier 21-ring clock, which DOES repeat at 30 min.
 //
 // Checks:
 //   1. every ring strikes only at the top: one fixed marker per ring at the top, one gap per ring at the top,
@@ -34,7 +36,7 @@ function extractScript(html) {
 }
 
 // Loads a page with a fake clock starting at startIso. Returns hooks to advance time and sample frames.
-function load(file, startIso) {
+function load(file, startIso, query = "") {
   const code = extractScript(fs.readFileSync(file, "utf8"));
   let fake = Date.parse(startIso);
   const RealDate = Date;
@@ -49,6 +51,7 @@ function load(file, startIso) {
   let pending = null;
   const pen = new Proxy({}, {
     get(t, k) {
+      if (k === "setTransform") return (a, b, c, d, e, f) => { m = [a, b, c, d, e, f]; rot = Math.atan2(b, a); };
       if (k === "translate") return (x, y) => { m = [m[0], m[1], m[2], m[3], m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]]; };
       if (k === "rotate") return a => { const c = Math.cos(a), s = Math.sin(a); m = [m[0] * c + m[2] * s, m[1] * c + m[3] * s, -m[0] * s + m[2] * c, -m[1] * s + m[3] * c, m[4], m[5]]; rot += a; };
       if (k === "beginPath") return () => { pending = null; };
@@ -88,25 +91,27 @@ function load(file, startIso) {
     BASE_NOTE, OCTAVE_SHIFT, SHIFT_PINK, TOP_TURNS: ${opt("TOP_TURNS")}, strikeTime: ${opt("strikeTime")} };`;
   const factory = new Function("Date", "document", "window", "location", "navigator", "setInterval",
     "requestAnimationFrame", "URLSearchParams", "Intl", code + exportsSrc);
-  const page = factory(FakeDate, document, window, { search: "" }, {}, setInterval, () => 0, URLSearchParams, Intl);
+  const page = factory(FakeDate, document, window, { search: query }, {}, setInterval, () => 0, URLSearchParams, Intl);
+  // Pages with ?offset=<s> run ahead of real time; every time below is in the page's own time (real + offset)
+  const offsetMs = (parseFloat(new URLSearchParams(query).get("offset")) || 0) * 1000;
   if (!page.settings.soundEnabled) page.handleSoundToggle(true);
 
   return {
     page,
-    now: () => fake,
+    now: () => fake + offsetMs,
     advance: ms => { fake += ms; timers.forEach(tm => { while (tm.next <= fake) { tm.fn(); tm.next += tm.ms; } }); },
     sample: () => { frame = { fills: [], strokes: [] }; page.draw(); const f = frame; frame = null; return f; },
     notes: () => {
       const n = page.PARTIALS.length, out = [];
-      for (let i = 0; i < starts.length; i += n) out.push({ t: ctxEpoch + starts[i].when * 1000, freq: starts[i].freq });
+      for (let i = 0; i < starts.length; i += n) out.push({ t: ctxEpoch + starts[i].when * 1000 + offsetMs, freq: starts[i].freq });
       return out;
     }
   };
 }
 
 // Runs a page for `hours` from startIso and collects impacts (top and bottom crossings of the moving dot) and notes.
-function simulate(file, startIso, seconds) {
-  const L = load(file, startIso);
+function simulate(file, startIso, seconds, query = "") {
+  const L = load(file, startIso, query);
   const nRings = L.page.arcs().length;
   const cx = W / 2, cy = H / 2;
   const TOP = -Math.PI / 2, BOTTOM = Math.PI / 2;     // screen angles (y grows downwards)
@@ -178,11 +183,15 @@ const inWin = (notes, s, e) => notes.filter(n => n.t >= s - 0.5 && n.t < e - 0.5
 
 function main() {
   const root = path.join(__dirname, "..");
-  const file = process.argv[2] || path.join(root, "polyrhythm", "clock", "index.html");
-  const oldFile = process.argv[3];
+  const args = process.argv.slice(2);
+  const opt = name => (args.find(a => a.startsWith(`--${name}=`)) || "").slice(name.length + 3) || undefined;
+  const defaultPage = [path.join(root, "page", "index.html"), path.join(root, "polyrhythm", "clock", "index.html")].find(p => fs.existsSync(p));
+  const file = args.find(a => !a.startsWith("--")) || defaultPage;
+  const query = opt("query") || "";
+  const oldFile = opt("control");
   const START = "2026-11-16T10:00:07.300";        // local time, 7.3 s into an hour; simulate 3 hours
-  console.log(`Simulating ${path.relative(root, file)} for 3 h from ${START} (local), frames every ${FRAME_MS} ms ...`);
-  const r = simulate(file, START, 3 * 3600 + 5);
+  console.log(`Simulating ${path.relative(root, file)}${query} for 3 h from ${START} (local), frames every ${FRAME_MS} ms ...`);
+  const r = simulate(file, START, 3 * 3600 + 5, query);
   const A = r.page.settings.startTime;           // top of the starting hour
   const T = r.arcs.map(a => a.turns);
   console.log(`  ${r.nRings} rings, ${r.notes.length} notes, hour anchor ${new Date(A).toString()}`);
