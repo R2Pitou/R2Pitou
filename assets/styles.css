@@ -175,6 +175,88 @@ nav a:hover,
   box-shadow: 0 0 12px rgba(236, 153, 185, 0.35);
 }
 
+/* Hamburger: phones only (see the 720px media query) */
+.nav-toggle {
+  display: none;
+}
+
+/* Nav dropdown (Tools): the summary looks like the other nav pills */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > summary {
+  list-style: none;
+  cursor: pointer;
+  border: 1px solid rgba(236, 153, 185, 0.25);
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: var(--black);
+  color: var(--white);
+  font-family: "Kantumruy Pro", "Noto Sans Khmer", "Outfit", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.nav-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-dropdown > summary::after {
+  content: " \25BE";
+}
+
+.nav-dropdown > summary:hover,
+.nav-dropdown[open] > summary {
+  background: var(--pink);
+  color: var(--black);
+  border-color: var(--pink);
+  box-shadow: 0 0 12px rgba(236, 153, 185, 0.35);
+}
+
+.nav-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  display: grid;
+  gap: 6px;
+  min-width: 180px;
+  padding: 10px;
+  border: 1px solid rgba(236, 153, 185, 0.25);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.nav-dropdown-label {
+  color: var(--pink);
+  font-family: "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding: 0 4px;
+}
+
+.nav-dropdown-panel a {
+  display: block;
+  white-space: nowrap;
+}
+
+/* The article link sits apart from the Polyrhythms group */
+.nav-dropdown-more {
+  margin-top: 10px;
+  position: relative;
+}
+
+.nav-dropdown-more::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 4px;
+  right: 4px;
+  border-top: 1px solid rgba(236, 153, 185, 0.15);
+}
+
 main {
   padding: 18px 0 52px;
 }
@@ -912,6 +994,73 @@ h2 {
   nav a,
   .hero-actions a {
     text-align: center;
+  }
+
+  /* On phones the Tools menu opens in place instead of floating */
+  .nav-dropdown > summary {
+    text-align: center;
+  }
+
+  .nav-dropdown-panel {
+    position: static;
+    margin-top: 6px;
+  }
+
+  /* Phones with JS: a hamburger opens the nav full screen (without JS the pills wrap as before) */
+  .js-nav .site-header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .js-nav .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 101;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(236, 153, 185, 0.25);
+    border-radius: 8px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  .js-nav nav {
+    display: none;
+  }
+
+  .js-nav body.nav-open {
+    overflow: hidden;
+  }
+
+  .js-nav body.nav-open nav {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 76px 24px 24px;
+    overflow-y: auto;
+    background: var(--black);
+  }
+
+  .js-nav body.nav-open nav a,
+  .js-nav body.nav-open .nav-dropdown > summary {
+    padding: 14px;
+    font-size: 1.1rem;
+  }
+
+  .js-nav body.nav-open .nav-toggle {
+    position: fixed;
+    top: 14px;
+    right: 12px;
   }
 
   .hero {

@@ -146,3 +146,41 @@ async function loadRepos() {
 }
 
 loadRepos();
+
+// Nav dropdowns (<details class="nav-dropdown">): close on a click elsewhere or on Escape
+document.addEventListener("click", (event) => {
+  document.querySelectorAll(".nav-dropdown[open]").forEach((menu) => {
+    if (!menu.contains(event.target)) menu.removeAttribute("open");
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  document.querySelectorAll(".nav-dropdown[open]").forEach((menu) => {
+    menu.removeAttribute("open");
+    menu.querySelector("summary")?.focus();
+  });
+});
+
+// Phone hamburger: opens the primary nav full screen
+const navToggle = document.querySelector(".nav-toggle");
+
+function setNavOpen(open) {
+  if (!navToggle) return;
+  document.body.classList.toggle("nav-open", open);
+  navToggle.setAttribute("aria-expanded", String(open));
+  navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  navToggle.querySelector("span").textContent = open ? "✕" : "☰";
+}
+
+if (navToggle) {
+  navToggle.addEventListener("click", () => setNavOpen(!document.body.classList.contains("nav-open")));
+  document.querySelectorAll("#primary-nav a").forEach((link) => link.addEventListener("click", () => setNavOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && document.body.classList.contains("nav-open")) {
+      setNavOpen(false);
+      navToggle.focus();
+    }
+  });
+  window.matchMedia("(min-width: 721px)").addEventListener("change", (event) => { if (event.matches) setNavOpen(false); });
+}

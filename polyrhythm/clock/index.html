@@ -11,6 +11,10 @@
     at the top of the hour), drawing rotated so the line sits at 12 o'clock, impacts derived
     from the clock and scheduled ahead on the audio clock, master volume with limiter.
     No settings: the music is fixed so the pattern can be learned.
+    A true one-hour polyrhythm: 42 rings, each strikes once per turn at the top only;
+    ring i makes TOP_TURNS - i turns per hour (consecutive integers, so the pattern
+    repeats every 60 minutes, not 30). Pitches interleave D Lydian scale notes with their
+    diatonic fifths (steps k, k+4), walking the chain of fifths over 3.5 octaves.
   -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -213,7 +217,12 @@
       sound: get("#sound-toggle")
     }
 
-    const colors = Array(21).fill("#A6C48A");
+    const colors = Array(42).fill("#A6C48A");
+
+    // Turns per hour of the innermost ring; ring i makes TOP_TURNS - i turns.
+    // Consecutive integers share no common factor, so the full pattern only repeats on the hour.
+    const TOP_TURNS = 110;
+    const HOUR_MS = 3600 * 1000;
 
     // Lock the cycle to the wall clock: it starts at the top of the current hour
     // (device local time), so every full cycle ends exactly on an hour boundary.
@@ -223,7 +232,7 @@
     const settings = {
       startTime: hourStart.getTime(),
       duration: 3600,                 // seconds: one full cycle = one hour
-      maxCycles: Math.max(colors.length, 100),
+      maxCycles: TOP_TURNS,
       soundEnabled: false,
       pulseEnabled: true,
       volume: 0.25                    // master volume, 0 to 1
@@ -242,11 +251,14 @@
     const SHIFTING_DEGREES = [2, 3, 5, 6]; // 3rd, 4th, 6th, 7th
     const SHIFT_PINK = "#f0a3bc";          // Alien Conspiracy Pink
 
-    // The innermost ring (index 0) gets the highest note
+    // The innermost ring (index 0) gets the highest note. Counting from the outermost ring,
+    // rings alternate scale step k and its diatonic fifth k + 4: steps 0,4,1,5,2,6,...,20,24,
+    // i.e. D A E B F# C# G# ... up the chain of fifths, D2 to G#5 (3.5 octaves).
     const ringNote = index => {
       const noteIndex = colors.length - 1 - index,
-            octave = Math.floor(noteIndex / LYDIAN.length),
-            degree = noteIndex % LYDIAN.length,
+            step = Math.floor(noteIndex / 2) + (noteIndex % 2) * 4,
+            octave = Math.floor(step / LYDIAN.length),
+            degree = step % LYDIAN.length,
             semitone = LYDIAN[degree];
 
       return {
@@ -257,7 +269,7 @@
     };
 
     // ---------- Audio graph ----------
-    // voices -> master volume -> limiter -> speakers. All 21 rings strike together at
+    // voices -> master volume -> limiter -> speakers. All 42 rings strike together at
     // the top of the hour, so the limiter keeps that pile-up from jumping out at you.
     let audioCtx, master, limiter;
 
@@ -305,11 +317,15 @@
     const LOOKAHEAD_MS = 90000;
     const TICK_MS = 2000;
 
+    // Strike n of a ring is at startTime + n * HOUR / turns, computed from the integer n
+    // (no running sum), so strike n = turns lands exactly on the hour.
+    const strikeTime = (arc, n) => settings.startTime + (n * HOUR_MS) / arc.turns;
+
     const syncSchedule = () => {
       const now = Date.now();
       arcs.forEach(arc => {
-        arc.nextSound = settings.startTime
-          + Math.ceil((now - settings.startTime) / arc.interval) * arc.interval;
+        arc.nextStrike = Math.ceil((now - settings.startTime) * arc.turns / HOUR_MS);
+        arc.nextSound = strikeTime(arc, arc.nextStrike);
       });
     };
 
@@ -323,7 +339,8 @@
       arcs.forEach((arc, index) => {
         while (arc.nextSound < horizon) {
           playKey(index, ctxNow + Math.max(0, (arc.nextSound - now) / 1000));
-          arc.nextSound += arc.interval;
+          arc.nextStrike += 1;
+          arc.nextSound = strikeTime(arc, arc.nextStrike);
         }
       });
     };
@@ -426,20 +443,21 @@
       pen.lineCap = "round";
 
       arcs = colors.map((baseColor, index) => {
-        const velocity = calculateVelocity(index),
-              interval = (Math.PI / velocity) * 1000, // ms between impacts
+        const turns = settings.maxCycles - index,
+              velocity = calculateVelocity(index),
+              interval = HOUR_MS / turns,              // ms between impacts: one per turn, top only
               note = ringNote(index),
               color = SHIFTING_DEGREES.includes(note.degree) && !PENTATONIC.includes(note.semitone)
                 ? SHIFT_PINK
                 : baseColor;
 
-        return { color, velocity, interval, freq: note.freq, nextSound: 0 }
+        return { color, turns, velocity, interval, freq: note.freq, nextStrike: 0, nextSound: 0 }
       });
     }
 
     // The most recent impact for a ring, derived from the clock
     const lastImpactFor = (arc, now) =>
-      settings.startTime + Math.floor((now - settings.startTime) / arc.interval) * arc.interval;
+      strikeTime(arc, Math.floor((now - settings.startTime) * arc.turns / HOUR_MS));
 
     const drawArc = (x, y, radius, start, end, action = "stroke") => {
       pen.beginPath();
@@ -481,7 +499,7 @@
       }
 
       base.initialRadius = base.length * 0.05;
-      base.circleRadius = base.length * 0.006;
+      base.circleRadius = base.length * 0.003;
       base.clearance = base.length * 0.03;
       base.spacing = (base.length - base.initialRadius - base.clearance) / 2 / colors.length;
 
@@ -490,19 +508,18 @@
               lastImpactTime = lastImpactFor(arc, currentTime);
 
         pen.globalAlpha = determineOpacity(currentTime, lastImpactTime, 0.15, 0.65, 1000);
-        pen.lineWidth = base.length * 0.002;
+        pen.lineWidth = base.length * 0.001;
         pen.strokeStyle = arc.color;
 
         const offset = base.circleRadius * (5 / 3) / radius;
 
-        drawArc(center.x, center.y, radius, Math.PI + offset, (2 * Math.PI) - offset);
-        drawArc(center.x, center.y, radius, offset, Math.PI - offset);
+        // One arc per ring, open only at the top (angle PI before the 90-degree rotation)
+        drawArc(center.x, center.y, radius, Math.PI + offset, (3 * Math.PI) - offset);
 
         pen.globalAlpha = determineOpacity(currentTime, lastImpactTime, 0.15, 0.85, 1000);
         pen.fillStyle = arc.color;
 
         drawPointOnArc(center, radius, base.circleRadius * 0.75, Math.PI);
-        drawPointOnArc(center, radius, base.circleRadius * 0.75, 2 * Math.PI);
 
         pen.globalAlpha = 1;
         pen.fillStyle = arc.color;

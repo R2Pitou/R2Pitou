@@ -8,6 +8,10 @@
     and synthesized instruments, switchable pitch direction, octave shift, missed-impact fix,
     iOS audio session handling, new presentation, tint non-pentatonic shifting degrees
     in Dorian, Aeolian and Lydian scales, accounting for the inner-high setting.
+    Drawing rotated 90 degrees clockwise (line at 12 o'clock), top half of the line
+    only (one strike per turn), 42 rings at half the spacing, turns per cycle consecutive
+    110..69, pitches interleave scale notes with their diatonic fifths, and a speed box
+    (average ms between notes, default 300; crackle warning below 200).
   -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -191,6 +195,39 @@
       opacity: 0;
     }
 
+    #speed-control {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: white;
+      font-size: 0.8rem;
+    }
+
+    input.toggle {
+      color: white;
+      font-family: inherit;
+      font-size: 0.8rem;
+      width: 4.5rem;
+      padding: 0 0.5rem;
+      cursor: text;
+    }
+
+    #speed-warning {
+      position: fixed;
+      top: 3rem;
+      left: 50%;
+      translate: -50% 0;
+      z-index: 10;
+      color: #f0a3bc;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    #speed-warning[hidden] {
+      display: none;
+    }
+
     #sound-message > p {
       color: white;
       font-size: 0.9rem;
@@ -225,8 +262,13 @@
         <span id="octave-display">0</span>
         <button id="octave-up" class="toggle" type="button">+</button>
       </div>
+      <label id="speed-control" title="Average time between notes, all rings together (ms)">
+        <input id="speed-input" class="toggle" type="number" min="10" step="10" value="300" inputmode="numeric">
+        ms
+      </label>
     </div>
   </div>
+  <p id="speed-warning" hidden>Faster speeds might cause the audio to crackle.</p>
 
   <div id="background-image"></div>
   <div id="background-filter"></div>
@@ -251,20 +293,31 @@
       sound: get("#sound-toggle")
     }
 
-    const colors = Array(21).fill("#A6C48A");
+    const colors = Array(42).fill("#A6C48A");
+
+    // Turns per cycle of the innermost ring; ring i makes TOP_TURNS - i turns (110..69).
+    // Consecutive integers share no common factor, so the pattern only repeats once per cycle.
+    const TOP_TURNS = 110;
+    const DEFAULT_GAP_MS = 300;   // average time between notes, all rings together
+    const BUSY_GAP_MS = 200;      // below this, warn that the audio may crackle
+    const MIN_GAP_MS = 10;
+    const STRIKES_PER_CYCLE = colors.reduce((sum, _, i) => sum + TOP_TURNS - i, 0); // 3,759
+
+    // Cycle length in seconds for an average gap between notes
+    const durationFor = gapMs => STRIKES_PER_CYCLE * gapMs / 1000;
 
     const settings = {
       startTime: new Date().getTime(),
-      duration: 900,
-      maxCycles: Math.max(colors.length, 100),
+      duration: durationFor(DEFAULT_GAP_MS),
+      maxCycles: TOP_TURNS,
       soundEnabled: false,
       pulseEnabled: true,
       scale: "dorian",
       instrument: "vibraphone",
       innerHigh: true,
       octave: 0,
-      minOctave: -2,
-      maxOctave: 1
+      minOctave: -1,
+      maxOctave: 2
     }
 
     // ---------- Scales and frequencies ----------
@@ -275,12 +328,20 @@
       pentatonic: [0, 3, 5, 7, 10]
     };
 
+    // Fifths: counting from the lowest note, rings alternate scale step k and its fifth.
+    // In the 7-note scales the diatonic fifth is 4 steps up (steps 0,4,1,5,2,6,...,20,24);
+    // in the pentatonic it is 3 steps up.
+    const fifthSteps = scale => scale.length === 7 ? 4 : 3;
+    const stepFor = (noteIndex, scale) =>
+      Math.floor(noteIndex / 2) + (noteIndex % 2) * fifthSteps(scale);
+
     const buildFrequencies = () => {
       const scale = scales[settings.scale],
-            baseNote = 146.83; // D3
+            baseNote = 146.83 / 2; // D2: octave 0 here is the original page's -1
       return Array(colors.length).fill(0).map((_, i) => {
-        const octave = Math.floor(i / scale.length),
-              degree = i % scale.length;
+        const step = stepFor(i, scale),
+              octave = Math.floor(step / scale.length),
+              degree = step % scale.length;
         return baseNote * Math.pow(2, octave + scale[degree] / 12);
       });
     };
@@ -369,6 +430,42 @@
     get("#octave-down").onclick = () => shiftOctave(-1);
     get("#octave-up").onclick = () => shiftOctave(1);
 
+    // Speed: average ms between notes. Changing it keeps every ring where it is (the
+    // elapsed time is rescaled), so the pattern carries on at the new speed without a jump.
+    const speedInput = get("#speed-input"),
+          speedWarning = get("#speed-warning");
+
+    const setSpeed = gapMs => {
+      const now = new Date().getTime(),
+            oldDuration = settings.duration,
+            newDuration = durationFor(gapMs);
+
+      settings.startTime = now - (now - settings.startTime) * newDuration / oldDuration;
+      settings.duration = newDuration;
+
+      arcs.forEach((arc, index) => {
+        arc.velocity = calculateVelocity(index);
+        const interval = intervalFor(arc);
+        arc.nextImpactTime = settings.startTime
+          + Math.floor((now - settings.startTime) / interval + 1) * interval;
+      });
+
+      speedWarning.hidden = gapMs >= BUSY_GAP_MS;
+    };
+
+    speedInput.onchange = () => {
+      const value = Number(speedInput.value);
+      if (!Number.isFinite(value) || value < MIN_GAP_MS) {
+        speedInput.value = Math.round(settings.duration * 1000 / STRIKES_PER_CYCLE);
+        return;
+      }
+      setSpeed(value);
+    };
+    speedInput.oninput = () => {
+      const value = Number(speedInput.value);
+      speedWarning.hidden = !(value > 0 && value < BUSY_GAP_MS);
+    };
+
     // ---------- Animation ----------
     let arcs = [];
 
@@ -378,8 +475,11 @@
       return (numberOfCycles * distancePerCycle) / settings.duration;
     }
 
+    // One impact per full turn, at the top only
+    const intervalFor = arc => (2 * Math.PI / arc.velocity) * 1000;
+
     const calculateNextImpactTime = (currentImpactTime, velocity) => {
-      return currentImpactTime + (Math.PI / velocity) * 1000;
+      return currentImpactTime + (2 * Math.PI / velocity) * 1000;
     }
 
     const calculateDynamicOpacity = (currentTime, lastImpactTime, baseOpacity, maxOpacity, duration) => {
@@ -433,7 +533,7 @@
 
       const scale = scales[settings.scale],
             noteIndex = settings.innerHigh ? colors.length - 1 - index : index,
-            degree = noteIndex % scale.length,
+            degree = stepFor(noteIndex, scale) % scale.length,
             isPentatonicNote = scales.pentatonic.includes(scale[degree]);
 
       return shiftingDegrees.includes(degree) && !isPentatonicNote
@@ -455,6 +555,11 @@
       const end = { x: paper.width - offset, y: paper.height / 2 }
       const center = { x: paper.width / 2, y: paper.height / 2 }
 
+      // Rotate the whole drawing 90 degrees clockwise: the line moves from 9 o'clock to 12.
+      pen.translate(center.x, center.y);
+      pen.rotate(Math.PI / 2);
+      pen.translate(-center.x, -center.y);
+
       const base = {
         length: end.x - start.x,
         minAngle: 0,
@@ -463,7 +568,7 @@
       }
 
       base.initialRadius = base.length * 0.05;
-      base.circleRadius = base.length * 0.006;
+      base.circleRadius = base.length * 0.003;
       base.clearance = base.length * 0.03;
       base.spacing = (base.length - base.initialRadius - base.clearance) / 2 / colors.length;
 
@@ -473,25 +578,24 @@
         const radius = base.initialRadius + (base.spacing * index);
 
         pen.globalAlpha = determineOpacity(currentTime, arc.lastImpactTime, 0.15, 0.65, 1000);
-        pen.lineWidth = base.length * 0.002;
+        pen.lineWidth = base.length * 0.001;
         pen.strokeStyle = arc.color;
 
         const offset = base.circleRadius * (5 / 3) / radius;
 
-        drawArc(center.x, center.y, radius, Math.PI + offset, (2 * Math.PI) - offset);
-        drawArc(center.x, center.y, radius, offset, Math.PI - offset);
+        // One arc per ring, open only at the top (angle PI before the rotation)
+        drawArc(center.x, center.y, radius, Math.PI + offset, (3 * Math.PI) - offset);
 
         pen.globalAlpha = determineOpacity(currentTime, arc.lastImpactTime, 0.15, 0.85, 1000);
         pen.fillStyle = arc.color;
 
         drawPointOnArc(center, radius, base.circleRadius * 0.75, Math.PI);
-        drawPointOnArc(center, radius, base.circleRadius * 0.75, 2 * Math.PI);
 
         pen.globalAlpha = 1;
         pen.fillStyle = arc.color;
 
         if(currentTime >= arc.nextImpactTime) {
-          const interval = (Math.PI / arc.velocity) * 1000;
+          const interval = intervalFor(arc);
 
           // Jump past any impacts missed while the tab was hidden/throttled
           const missed = Math.floor((currentTime - arc.nextImpactTime) / interval);
