@@ -70,7 +70,8 @@
 
     #background-image {
       z-index: 1;
-      background-image: url("https://images.unsplash.com/photo-1505136026201-bbc1bc0949fa?auto=format&fit=crop&w=1920&q=80");
+      /* background-image: url("https://images.unsplash.com/photo-1505136026201-bbc1bc0949fa?auto=format&fit=crop&w=1920&q=80"); */
+      background-image: url("https://working-draft.org/assets/images/time-deity.jpg");
       background-size: cover;
       background-position: center;
       opacity: 0.6;
@@ -100,8 +101,8 @@
 
     #clock {
       position: fixed;
-      left: 50%;
-      top: 63%;
+      left: 55%;
+      top: 24%;
       transform: translate(-50%, -50%);
       z-index: 5;
       color: white;
@@ -217,7 +218,7 @@
       sound: get("#sound-toggle")
     }
 
-    const colors = Array(42).fill("#A6C48A");
+    const colors = Array(42).fill("#528491");
 
     // Turns per hour of the innermost ring; ring i makes TOP_TURNS - i turns.
     // Consecutive integers share no common factor, so the full pattern only repeats on the hour.
