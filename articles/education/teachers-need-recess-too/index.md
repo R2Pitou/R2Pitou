@@ -29,7 +29,7 @@ The difference between those two reactions is the whole difference between a col
 
 #### **The best ideas were handed to me sneakily**
 
-*When I think about the best ideas I’ve picked up as a teacher, almost none of them came from formal PD. They came from popping into a fellow teacher’s classroom and seeing what she was doing. They came from sitting in a coffee shop on a break, venting that I couldn’t get my kids to grasp a concept, and a teacher from another grade going, “Hey, have you tried this?”*
+> When I think about the best ideas I’ve picked up as a teacher, almost none of them came from formal PD. They came from popping into a fellow teacher’s classroom and seeing what she was doing. They came from sitting in a coffee shop on a break, venting that I couldn’t get my kids to grasp a concept, and a teacher from another grade going, “Hey, have you tried this?”*
 
 Nobody scheduled those moments. Nobody logged them. They happened because two people had nothing in their hands and time to be human beings with each other.
 
@@ -43,7 +43,7 @@ If the only reason a fellow teacher ever sits in your classroom is to satisfy KP
 
 The pressure doesn’t stay in the staffroom, either. It walks into the classroom with them.
 
-*“When a measure becomes a target, it ceases to be a good measure.” — Marilyn Strathern*
+> *“When a measure becomes a target, it ceases to be a good measure.” — Marilyn Strathern*
 
 ### **Practice what you preach**
 
