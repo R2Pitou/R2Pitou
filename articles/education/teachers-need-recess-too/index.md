@@ -13,7 +13,7 @@ tags:
   - professional development
   - teaching
   - leadership
-image: /articles/education/teachers-need-recess-too/teachers-need-recess-too-hero.jpg
+image: /articles/education/teachers-need-recess-too/teachers-need-recess-too-hero.png
 image_alt: "A split-panel comic illustration contrasting two classroom environments. On the left, rendered in warm yellow and orange tones, a teacher walks through an open doorway holding two steaming coffee mugs, smiling as he offers one to a relaxed female teacher and engaged students. On the right, rendered in cold blue-grey tones, an administrator in a blazer stands in the doorway checking her wristwatch while holding a clipboard, as students keep their heads down and a stressed male teacher looks back nervously from the whiteboard."
 ---
 
