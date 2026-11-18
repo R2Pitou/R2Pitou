@@ -4,7 +4,7 @@ title: "Teachers Need Recess Too"
 date: 2026-11-19 00:00:00 +0700
 categories: education
 permalink: /education/teachers-need-recess-too/
-canonical_url: https://working-draft.org/education/teachers-need-recess-too/
+canonical_url: https://medium.com/educreation/teachers-need-recess-too-25d4b3bb2077
 featured: false
 license: cc-by
 summary: "Why the most effective professional development happens when nobody is watching the clock."
